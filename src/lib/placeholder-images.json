@@ -3,73 +3,73 @@
     {
       "id": "hero-image",
       "description": "A modern desk with a laptop showing code and a smartphone next to it.",
-      "imageUrl": "/images/hero-image.jpg",
+      "imageUrl": "/images/hero-image.webp",
       "imageHint": "tech workspace"
     },
     {
       "id": "why-us-image",
       "description": "A person carefully repairing a circuit board.",
-      "imageUrl": "/images/why-us-image.jpg",
+      "imageUrl": "/images/why-us-image.webp",
       "imageHint": "electronics repair"
     },
     {
       "id": "repair-before-1",
       "description": "A smartphone with a completely shattered screen.",
-      "imageUrl": "/images/repair-before-1.jpg",
+      "imageUrl": "/images/repair-before-1.webp",
       "imageHint": "cracked phone"
     },
     {
       "id": "repair-after-1",
       "description": "The same smartphone with a new, pristine screen.",
-      "imageUrl": "/images/repair-after-1.jpg",
+      "imageUrl": "/images/repair-after-1.webp",
       "imageHint": "new phone"
     },
     {
       "id": "repair-before-2",
       "description": "A laptop with a dead battery icon on the screen.",
-      "imageUrl": "/images/repair-before-2.jpg",
+      "imageUrl": "/images/repair-before-2.webp",
       "imageHint": "dead laptop"
     },
     {
       "id": "repair-after-2",
       "description": "The same laptop now powered on and fully functional.",
-      "imageUrl": "/images/repair-after-2.jpg",
+      "imageUrl": "/images/repair-after-2.webp",
       "imageHint": "working laptop"
     },
     {
       "id": "dev-project-1",
       "description": "Screenshot of an AI-powered e-commerce dashboard.",
-      "imageUrl": "/images/dev-project-1.jpg",
+      "imageUrl": "/images/dev-project-1.webp",
       "imageHint": "dashboard ui"
     },
     {
       "id": "dev-project-2",
       "description": "Mobile app interface for a health and fitness tracker.",
-      "imageUrl": "/images/dev-project-2.jpg",
+      "imageUrl": "/images/dev-project-2.webp",
       "imageHint": "mobile app"
     },
     {
       "id": "dev-project-3",
       "description": "A complex data visualization dashboard.",
-      "imageUrl": "/images/dev-project-3.jpg",
+      "imageUrl": "/images/dev-project-3.webp",
       "imageHint": "data visualization"
     },
     {
       "id": "about-timeline-1",
       "description": "A small workshop with tools on the wall.",
-      "imageUrl": "/images/about-timeline-1.jpg",
+      "imageUrl": "/images/about-timeline-1.webp",
       "imageHint": "workshop tools"
     },
     {
       "id": "about-timeline-2",
       "description": "A computer screen with lines of code.",
-      "imageUrl": "/images/about-timeline-2.jpg",
+      "imageUrl": "/images/about-timeline-2.webp",
       "imageHint": "coding screen"
     },
     {
       "id": "about-timeline-3",
       "description": "An abstract visualization of a neural network.",
-      "imageUrl": "/images/about-timeline-3.jpg",
+      "imageUrl": "/images/about-timeline-3.webp",
       "imageHint": "neural network"
     }
   ]
