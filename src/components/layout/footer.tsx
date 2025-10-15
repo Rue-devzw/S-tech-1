@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Logo } from '../icons';
+import { Facebook, MessageCircle, Share2 } from 'lucide-react';
 
 export function Footer() {
   return (
@@ -43,6 +44,21 @@ export function Footer() {
               <h4 className="font-headline text-sm font-semibold">Connect</h4>
               <ul className="space-y-1">
                 <li><Link href="/contact" className="text-sm hover:underline">Contact</Link></li>
+                <li>
+                  <a href="https://www.facebook.com/Strivetechsol/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm hover:underline">
+                    <Facebook className="h-4 w-4" /> Facebook
+                  </a>
+                </li>
+                 <li>
+                  <a href="https://wa.me/263718704505" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm hover:underline">
+                    <MessageCircle className="h-4 w-4" /> WhatsApp
+                  </a>
+                </li>
+                 <li>
+                  <a href="https://share.google/B1Y7focCOHEl1s975" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm hover:underline">
+                    <Share2 className="h-4 w-4" /> Google
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
