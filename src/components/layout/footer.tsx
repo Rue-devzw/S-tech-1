@@ -64,7 +64,7 @@ export function Footer() {
           </div>
         </div>
         <div className="mt-8 border-t pt-8 text-center text-sm text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} S-Tech Services. All rights reserved. The S-Tech logo is a fictional design and does not represent a real company.</p>
+          <p>&copy; {new Date().getFullYear()} S-Tech Services. All rights reserved.</p>
         </div>
       </div>
     </footer>
