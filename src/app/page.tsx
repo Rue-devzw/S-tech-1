@@ -27,21 +27,6 @@ const testimonials = [
   },
 ];
 
-const services = [
-    {
-        icon: <Wrench className="h-10 w-10 text-primary" />,
-        title: 'Electronics & Mobile Repairs',
-        description: 'Fast, reliable, and high-quality repairs for all your devices. From screens to batteries, we handle it all with expert care.',
-        link: '/repairs'
-    },
-    {
-        icon: <Cpu className="h-10 w-10 text-primary" />,
-        title: 'AI-Powered Development',
-        description: 'Cutting-edge web and mobile app development, enhanced with AI to deliver smarter, more efficient solutions for your business.',
-        link: '/development'
-    }
-]
-
 export default function Home() {
   const heroImage = PlaceHolderImages.find(p => p.id === 'hero-image');
 
@@ -52,8 +37,8 @@ export default function Home() {
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid gap-8 lg:grid-cols-2 lg:gap-16">
             <div className="flex flex-col justify-center space-y-6">
-              <span className="rounded-full bg-accent/20 px-4 py-1 text-sm font-medium text-accent-foreground">
-                Established 2014: Hardware Expertise &amp; Software Innovation
+              <span className="rounded-full bg-accent/20 px-4 py-1 text-sm font-medium text-accent-foreground self-start">
+                Established 2014: Hardware Expertise & Software Innovation
               </span>
               <h1 className="font-headline text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl lg:text-7xl">
                 Expert Repairs.
@@ -63,9 +48,17 @@ export default function Home() {
               <p className="max-w-[600px] text-lg text-muted-foreground md:text-xl">
                 S-Tech Services bridges the gap between hands-on hardware repair and sophisticated, AI-driven software development.
               </p>
+              <div className="flex flex-col space-y-2 sm:flex-row sm:space-x-4 sm:space-y-0">
+                  <Button asChild size="lg">
+                    <Link href="/development">Explore Development</Link>
+                  </Button>
+                  <Button asChild variant="outline" size="lg">
+                     <Link href="/repairs">Request a Repair</Link>
+                  </Button>
+              </div>
             </div>
             {heroImage && (
-                <div className="relative h-64 w-full overflow-hidden rounded-xl shadow-2xl lg:h-auto">
+                <div className="relative h-80 w-full overflow-hidden rounded-xl shadow-2xl lg:h-auto">
                     <Image
                     src={heroImage.imageUrl}
                     alt={heroImage.description}
@@ -81,7 +74,7 @@ export default function Home() {
       </section>
 
       {/* Audience Splitter Section */}
-      <section id="services" className="w-full py-16 md:py-24 lg:py-32">
+      <section id="services" className="w-full bg-secondary/30 py-16 md:py-24 lg:py-32">
         <div className="container mx-auto px-4 md:px-6">
           <div className="mx-auto grid max-w-5xl items-center justify-center gap-8 text-center">
             <div className="space-y-4">
@@ -92,7 +85,7 @@ export default function Home() {
             </div>
             <div className="grid w-full gap-6 sm:grid-cols-2">
               <Link href="/repairs" className="group">
-                <Card className="h-full transform transition-transform duration-300 group-hover:-translate-y-2 group-hover:shadow-xl">
+                <Card className="flex flex-col justify-between h-full transform transition-transform duration-300 group-hover:-translate-y-2 group-hover:shadow-xl">
                   <CardHeader className="items-center space-y-4 text-center">
                     <Wrench className="h-12 w-12 text-primary" />
                     <CardTitle className="font-headline text-2xl">Local Repairs</CardTitle>
@@ -108,7 +101,7 @@ export default function Home() {
                 </Card>
               </Link>
               <Link href="/development" className="group">
-                <Card className="h-full transform transition-transform duration-300 group-hover:-translate-y-2 group-hover:shadow-xl">
+                <Card className="flex flex-col justify-between h-full transform transition-transform duration-300 group-hover:-translate-y-2 group-hover:shadow-xl">
                   <CardHeader className="items-center space-y-4 text-center">
                     <Cpu className="h-12 w-12 text-primary" />
                     <CardTitle className="font-headline text-2xl">Global Development</CardTitle>
@@ -129,7 +122,7 @@ export default function Home() {
       </section>
 
       {/* Why Choose Us Section */}
-      <section className="w-full bg-secondary/50 py-16 md:py-24 lg:py-32">
+      <section className="w-full bg-background py-16 md:py-24 lg:py-32">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-16">
             <div className="space-y-4">
@@ -165,7 +158,7 @@ export default function Home() {
               </Button>
             </div>
              {PlaceHolderImages.find(p => p.id === 'why-us-image') && (
-                <div className="relative h-80 w-full overflow-hidden rounded-xl shadow-lg">
+                <div className="relative h-80 w-full overflow-hidden rounded-xl shadow-lg lg:h-96">
                     <Image
                     src={PlaceHolderImages.find(p => p.id === 'why-us-image')!.imageUrl}
                     alt={PlaceHolderImages.find(p => p.id === 'why-us-image')!.description}
@@ -180,7 +173,7 @@ export default function Home() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="w-full py-16 md:py-24 lg:py-32">
+      <section className="w-full bg-secondary/30 py-16 md:py-24 lg:py-32">
         <div className="container mx-auto px-4 md:px-6">
           <div className="space-y-4 text-center">
             <h2 className="font-headline text-3xl font-bold tracking-tighter sm:text-4xl">Voices of Our Customers</h2>
