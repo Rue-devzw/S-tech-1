@@ -6,7 +6,7 @@ export function Logo(props: Omit<React.ComponentProps<typeof Image>, 'src' | 'al
   return (
     <Image
         src="/logo.svg"
-        alt="S-Tech Services Logo"
+        alt="S-Tech Solutions Logo"
         width={100}
         height={100}
         {...props}

@@ -46,7 +46,7 @@ export default function Home() {
                 Intelligent Solutions.
               </h1>
               <p className="max-w-[600px] text-lg text-muted-foreground md:text-xl">
-                S-Tech Services bridges the gap between hands-on hardware repair and sophisticated, AI-driven software development.
+                S-Tech Solutions bridges the gap between hands-on hardware repair and sophisticated, AI-driven software development.
               </p>
               <div className="flex flex-col space-y-2 sm:flex-row sm:space-x-4 sm:space-y-0">
                   <Button asChild size="lg">
@@ -126,7 +126,7 @@ export default function Home() {
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-16">
             <div className="space-y-4">
-              <span className="text-sm font-semibold uppercase tracking-wide text-primary">Why S-Tech Services</span>
+              <span className="text-sm font-semibold uppercase tracking-wide text-primary">Why S-Tech Solutions</span>
               <h2 className="font-headline text-3xl font-bold tracking-tight sm:text-4xl">Your Trusted Partner Since 2014</h2>
               <p className="text-muted-foreground md:text-lg">
                 For over a decade, we've built our reputation on trust, quality, and a unique ability to solve problems across the entire tech spectrum. Our foundation in hardware gives us a practical edge in our advanced software development.

@@ -10,7 +10,7 @@ export function Footer() {
           <div className="space-y-4">
             <Link href="/" className="flex items-center gap-2">
               <Logo className="h-8 w-8 text-primary" />
-              <span className="text-xl font-bold font-headline">S-Tech Services</span>
+              <span className="text-xl font-bold font-headline">S-Tech Solutions</span>
             </Link>
             <p className="text-sm text-muted-foreground">
               Expert Repairs &amp; AI-Powered Development.
@@ -64,7 +64,7 @@ export function Footer() {
           </div>
         </div>
         <div className="mt-8 border-t pt-8 text-center text-sm text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} S-Tech Services. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} S-Tech Solutions. All rights reserved.</p>
         </div>
       </div>
     </footer>

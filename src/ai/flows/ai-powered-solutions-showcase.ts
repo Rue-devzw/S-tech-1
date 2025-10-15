@@ -1,6 +1,6 @@
 'use server';
 /**
- * @fileOverview A flow to showcase AI-driven projects for S-Tech Services.
+ * @fileOverview A flow to showcase AI-driven projects for S-Tech Solutions.
  * 
  * - aiPoweredSolutionsShowcase - A function that retrieves and formats a showcase of AI-driven projects.
  * - AiPoweredSolutionsShowcaseOutput - The return type for the aiPoweredSolutionsShowcase function.
@@ -29,11 +29,11 @@ export async function aiPoweredSolutionsShowcase(): Promise<AiPoweredSolutionsSh
 const showcasePrompt = ai.definePrompt({
   name: 'showcasePrompt',
   output: {schema: AiPoweredSolutionsShowcaseOutputSchema},
-  prompt: `You are an expert AI assistant tasked with creating a showcase of AI-driven projects for S-Tech Services.
+  prompt: `You are an expert AI assistant tasked with creating a showcase of AI-driven projects for S-Tech Solutions.
 
-  S-Tech Services specializes in AI-powered full-stack web development and AI-enhanced cross-platform app design.
+  S-Tech Solutions specializes in AI-powered full-stack web development and AI-enhanced cross-platform app design.
 
-  Generate a showcase of AI-driven projects that highlights S-Tech Services\' capabilities and the benefits of AI integration. Each project should include a title, a brief description, the technologies used, and the outcome or result.
+  Generate a showcase of AI-driven projects that highlights S-Tech Solutions\' capabilities and the benefits of AI integration. Each project should include a title, a brief description, the technologies used, and the outcome or result.
 
   Ensure the showcase is diverse and representative of the company\'s expertise.
   Follow the schema.`,

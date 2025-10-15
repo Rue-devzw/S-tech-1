@@ -39,7 +39,7 @@ export default function LiveChatWidget() {
         // Greet the user when the chat opens for the first time
         if (messages.length === 0) {
             setTimeout(() => {
-                addMessage('bot', 'Welcome to S-Tech Services! How can I assist you today? You can ask about repairs, development, or pricing.');
+                addMessage('bot', 'Welcome to S-Tech Solutions! How can I assist you today? You can ask about repairs, development, or pricing.');
             }, 500);
         }
     }

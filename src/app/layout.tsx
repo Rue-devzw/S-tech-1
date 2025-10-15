@@ -9,7 +9,7 @@ import LiveChatWidget from '@/components/live-chat-widget';
 
 
 export const metadata: Metadata = {
-  title: 'S-Tech Services Hub',
+  title: 'S-Tech Solutions Hub',
   description: 'Expert Repairs & AI-Powered Development since 2014.',
   icons: {
     icon: '/logo.svg',

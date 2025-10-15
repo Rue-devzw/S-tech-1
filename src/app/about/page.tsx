@@ -37,7 +37,7 @@ export default function AboutPage() {
                 Bridging Hardware and Software
               </h1>
               <p className="mt-6 text-lg text-muted-foreground">
-                Founded in 2014, S-Tech Services started with a simple mission: to provide expert, trustworthy electronics repairs. Our deep understanding of hardware gave us a unique perspective as we evolved, leading us into the world of software development where we now build the intelligent systems of the future.
+                Founded in 2014, S-Tech Solutions started with a simple mission: to provide expert, trustworthy electronics repairs. Our deep understanding of hardware gave us a unique perspective as we evolved, leading us into the world of software development where we now build the intelligent systems of the future.
               </p>
             </div>
             {whyUsImage &&

@@ -11,8 +11,8 @@ const contactDetails = [
   {
     icon: <Mail className="h-6 w-6 text-primary" />,
     title: 'Email',
-    value: 'contact@stechservices.com',
-    href: 'mailto:contact@stechservices.com'
+    value: 'contact@stechsolutions.com',
+    href: 'mailto:contact@stechsolutions.com'
   },
   {
     icon: <Phone className="h-6 w-6 text-primary" />,

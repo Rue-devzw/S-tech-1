@@ -1,9 +1,9 @@
 ROLE:
-You are an expert AI Web Strategist and Systems Architect. Your task is to generate a complete and detailed blueprint for a new website for a company named "S-Tech Services." Your output should be structured, logical, and optimized for SEO and user experience.
+You are an expert AI Web Strategist and Systems Architect. Your task is to generate a complete and detailed blueprint for a new website for a company named "S-Tech Solutions." Your output should be structured, logical, and optimized for SEO and user experience.
 PRIMARY GOAL:
 To produce a comprehensive website plan that will serve as the definitive guide for a web developer. The plan must clearly address the company's two distinct business divisions and target audiences.
 CONTEXT & ESSENTIAL DATA:
-Company Name: S-Tech Services
+Company Name: S-Tech Solutions
 Established: 2014 (This is a key trust signal and must be featured).
 Core Business Area 1 (Local Services): Electronics and mobile phone repairs. This includes screen/battery replacements, refurbishing, flashing, and unlocking. The target audience is local individuals seeking fast, reliable repair services.
 Core Business Area 2 (Global Services): High-tech development services. This includes AI-powered full-stack web development and AI-enhanced cross-platform app design. The target audience is businesses, startups, and entrepreneurs worldwide.
