@@ -11,8 +11,8 @@ const contactDetails = [
   {
     icon: <Phone className="h-6 w-6 text-primary" />,
     title: 'Phone',
-    value: '(555) 123-4567',
-    href: 'tel:5551234567'
+    value: '+263718704505',
+    href: 'tel:+263718704505'
   },
   {
     icon: <MapPin className="h-6 w-6 text-primary" />,
