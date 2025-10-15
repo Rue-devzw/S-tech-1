@@ -4,42 +4,44 @@ export function Logo(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
       viewBox="0 0 100 100"
       {...props}
     >
-      <g transform="translate(0, -10)">
-        {/* S shape */}
-        <path
-          d="M63.6,26.9c-7.3-6.1-17.7-8.2-27.1-5.4c-9.5,2.8-17.2,10.2-20,19.7c-3.1,10.5,0.2,21.9,7.3,28 c7.3,6.1,17.7,8.2,27.1,5.4c9.5-2.8,17.2-10.2,20-19.7"
-          fill="none"
-          strokeWidth="12"
-        >
-          <animate attributeName="stroke" values="#F57C00; #1976D2; #F57C00" dur="4s" repeatCount="indefinite" />
-        </path>
-
-        {/* Wrench and Gear */}
-        <path
-          d="M23,73.5l-2.4,4.1c-0.9,1.5-3,2-4.5,1.1L3.9,71.8c-1.5-0.9-2-3-1.1-4.5l2.4-4.1"
-          stroke="#1976D2"
-          strokeWidth="5"
-          fill="none"
-          strokeLinecap="round"
-        />
-        <circle cx="27" cy="62" r="8" fill="#1976D2" />
-        <circle cx="27" cy="62" r="3" fill="white" />
-        <path d="M27,52 v-3 M27,72 v3 M17,62 h-3 M37,62 h3 M20,55 l-2,-2 M34,69 l2,2 M20,69 l-2,2 M34,55 l2,-2" stroke="white" strokeWidth="2" strokeLinecap="round"/>
-
-
-        {/* Digital pixels */}
-        <rect x="68" y="22" width="5" height="5" fill="#F57C00" />
-        <rect x="75" y="25" width="4" height="4" fill="#F57C00" />
-        <rect x="73" y="17" width="4" height="4" fill="#F57C00" />
-        <rect x="81" y="20" width="3" height="3" fill="#F57C00" />
-        <rect x="80" y="29" width="3" height="3" fill="#F57C00" />
-        <rect x="85" y="25" width="2" height="2" fill="#F57C00" />
-      </g>
+        <g transform="translate(5, 5) scale(0.9)">
+            {/* S-shape part 1 (orange) */}
+            <path
+                d="M 85,30 C 85,15 75,5 60,5 C 45,5 35,15 35,30 L 35,40 L 65,40 C 75,40 85,50 85,60 L 85,70 L 100,70 L 100,60 C 100,40 85,30 85,30 Z"
+                fill="#F57C00"
+            />
+            {/* S-shape part 2 (blue) */}
+            <path
+                d="M 15,70 C 15,85 25,95 40,95 C 55,95 65,85 65,70 L 65,60 L 35,60 C 25,60 15,50 15,40 L 15,30 L 0,30 L 0,40 C 0,60 15,70 15,70 Z"
+                fill="#1976D2"
+            />
+            {/* Gear */}
+            <g transform="translate(15, 55)">
+                <circle cx="0" cy="0" r="12" fill="#1976D2" />
+                <circle cx="0" cy="0" r="5" fill="white" />
+                <path
+                    d="M 0,-15 v -3 M 0,15 v 3 M -15,0 h -3 M 15,0 h 3 M -10.6,-10.6 l -2,-2 M 10.6,10.6 l 2,2 M -10.6,10.6 l -2,2 M 10.6,-10.6 l 2,-2"
+                    stroke="#1976D2" strokeWidth="2.5" strokeLinecap="round"
+                />
+            </g>
+            {/* Wrench */}
+            <path
+                d="M 20,80 L 60,80 C 65,80 68,82 70,85 L 75,90 C 72,88 68,88 65,90 L 60,95 C 65,100 75,100 80,95 L 85,90 C 88,88 85,85 80,82 L 75,80"
+                stroke="#1976D2"
+                strokeWidth="6"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin='round'
+            />
+            {/* Digital pixels */}
+            <rect x="75" y="10" width="8" height="8" fill="#F57C00" />
+            <rect x="85" y="18" width="6" height="6" fill="#F57C00" />
+            <rect x="88" y="5" width="5" height="5" fill="#F57C00" />
+            <rect x="95" y="12" width="4" height="4" fill="#F57C00" />
+        </g>
     </svg>
   );
 }
