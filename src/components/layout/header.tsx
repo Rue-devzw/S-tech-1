@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Logo } from '../icons';
 import { cn } from '@/lib/utils';
+import { ThemeToggle } from '../theme-toggle';
 
 const navLinks = [
   { href: '/repairs', label: 'Repairs', icon: <Wrench className="h-4 w-4" /> },
@@ -43,6 +44,7 @@ export function Header() {
         </nav>
 
         <div className="flex flex-1 items-center justify-end gap-4">
+          <ThemeToggle />
           <Button asChild>
             <Link href="/contact">
               Contact Us <Mail className="ml-2 h-4 w-4" />
