@@ -1,6 +1,7 @@
 'use client';
 
-import { useFormState, useFormStatus } from 'react-dom';
+import { useActionState } from 'react';
+import { useFormStatus } from 'react-dom';
 import { submitRepairQuote } from '../actions';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
@@ -34,7 +35,7 @@ function SubmitButton() {
 }
 
 export default function RepairQuoteForm() {
-  const [state, formAction] = useFormState(submitRepairQuote, initialState);
+  const [state, formAction] = useActionState(submitRepairQuote, initialState);
 
   return (
     <div className="space-y-6">
