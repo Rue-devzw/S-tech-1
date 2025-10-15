@@ -36,8 +36,7 @@ const showcasePrompt = ai.definePrompt({
   Generate a showcase of AI-driven projects that highlights S-Tech Services\' capabilities and the benefits of AI integration. Each project should include a title, a brief description, the technologies used, and the outcome or result.
 
   Ensure the showcase is diverse and representative of the company\'s expertise.
-  Follow the schema:
-  ${JSON.stringify(AiPoweredSolutionsShowcaseOutputSchema.shape, null, 2)}`,
+  Follow the schema.`,
 });
 
 const aiPoweredSolutionsShowcaseFlow = ai.defineFlow(
