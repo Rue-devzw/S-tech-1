@@ -107,7 +107,7 @@ export async function submitConsultationRequest(
         //
         // await resend.emails.send({
         //   from: 'onboarding@resend.dev',
-        //   to: 'service@stechsolutions.com',
+        //   to: 'info@s-techsolutions.org',
         //   subject: `New Consultation Request from ${name}`,
         //   html: `<p>Name: ${name}</p>
         //          <p>Email: ${email}</p>
