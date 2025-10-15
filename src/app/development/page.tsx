@@ -10,13 +10,14 @@ const technologies = [
 ];
 
 const processSteps = [
-    { title: 'Discovery &amp; Strategy', description: 'We start by understanding your goals and architecting an AI-driven solution.' },
-    { title: 'Design &amp; Prototyping', description: 'Crafting intuitive, user-centric designs for cross-platform applications.' },
+    { title: 'Discovery & Strategy', description: 'We start by understanding your goals and architecting an AI-driven solution.' },
+    { title: 'Design & Prototyping', description: 'Crafting intuitive, user-centric designs for cross-platform applications.' },
     { title: 'AI-Enhanced Development', description: 'Building your application with intelligent features at its core.' },
-    { title: 'Testing &amp; Deployment', description: 'Ensuring a robust, scalable, and secure launch on your chosen platform.' },
+    { title: 'Testing & Deployment', description: 'Ensuring a robust, scalable, and secure launch on your chosen platform.' },
 ];
 
 export default function DevelopmentPage() {
+    const devProjectImage = PlaceHolderImages.find(p => p.id === 'dev-project-3');
     return (
       <>
         <section className="bg-secondary/30 py-16 md:py-24">
@@ -105,12 +106,12 @@ export default function DevelopmentPage() {
                             ))}
                         </div>
                     </div>
-                    {PlaceHolderImages.find(p => p.id === 'dev-project-3') &amp;&amp;
+                    {devProjectImage &&
                         <div className="relative h-96 w-full overflow-hidden rounded-xl shadow-lg">
                             <Image
-                                src={PlaceHolderImages.find(p => p.id === 'dev-project-3')!.imageUrl}
-                                alt="Data visualization"
-                                data-ai-hint={PlaceHolderImages.find(p => p.id === 'dev-project-3')!.imageHint}
+                                src={devProjectImage.imageUrl}
+                                alt={devProjectImage.description}
+                                data-ai-hint={devProjectImage.imageHint}
                                 fill
                                 className="object-cover"
                             />
