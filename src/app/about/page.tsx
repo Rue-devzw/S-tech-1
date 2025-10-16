@@ -1,4 +1,3 @@
-import AboutTimeline from '@/components/about-timeline';
 import { Button } from '@/components/ui/button';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { Award, Lightbulb, Users } from 'lucide-react';
@@ -25,6 +24,7 @@ const values = [
 
 export default function AboutPage() {
   const whyUsImage = PlaceHolderImages.find(p => p.id === 'why-us-image');
+  const journeyImage = PlaceHolderImages.find(p => p.id === 'about-timeline-2');
 
   return (
     <>
@@ -34,10 +34,10 @@ export default function AboutPage() {
             <div>
               <span className="text-sm font-semibold uppercase tracking-wide text-primary">Our Story</span>
               <h1 className="font-headline mt-2 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
-                Bridging Hardware and Software
+                From Hardware to AI
               </h1>
               <p className="mt-6 text-lg text-muted-foreground">
-                Founded in 2014, S-Tech Solutions started with a simple mission: to provide expert, trustworthy electronics repairs. Our deep understanding of hardware gave us a unique perspective as we evolved, leading us into the world of software development where we now build the intelligent systems of the future.
+                Founded in 2014 as an expert electronics repair shop, our deep understanding of hardware naturally led us into software. Today, we are a global technology partner, building the intelligent systems of the future.
               </p>
             </div>
             {whyUsImage &&
@@ -57,13 +57,25 @@ export default function AboutPage() {
 
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="mx-auto max-w-3xl text-center">
-            <h2 className="font-headline text-3xl font-bold tracking-tight">Our Journey Since 2014</h2>
-            <p className="mt-4 text-muted-foreground md:text-lg">
-              A timeline of our evolution from a local repair shop to a global technology partner.
-            </p>
+          <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-16">
+            <div className="lg:order-2">
+                <h2 className="font-headline text-3xl font-bold tracking-tight">Our Journey Since 2014</h2>
+                <p className="mt-4 text-muted-foreground md:text-lg">
+                Our journey began in a local workshop focused on quality electronics repair. This hands-on experience gave us a unique perspective as we expanded into software development. By 2022, we fully embraced AI, integrating it into our services to offer intelligent web and app solutions to a global market. Today, we offer a rare blend of hardware expertise and sophisticated, AI-driven software development.
+                </p>
+            </div>
+            {journeyImage &&
+              <div className="relative h-80 w-full overflow-hidden rounded-xl shadow-lg lg:order-1 lg:h-96">
+                <Image
+                  src={journeyImage.imageUrl}
+                  alt={journeyImage.description}
+                  data-ai-hint={journeyImage.imageHint}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            }
           </div>
-          <AboutTimeline />
         </div>
       </section>
 
