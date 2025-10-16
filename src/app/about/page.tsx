@@ -6,9 +6,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 const teamMember = {
-    name: 'Alex Doe',
+    name: 'Strive R. Tapera',
     role: 'Founder, Lead Developer & Technician',
-    bio: 'As the founder of S-Tech Solutions, Alex combines a passion for hands-on electronics repair with expertise in cutting-edge, AI-driven software development. With a journey that started in 2014, he offers a unique, holistic approach to technology, ensuring both hardware and software work in perfect harmony.',
+    bio: 'As the founder of S-Tech Solutions, Strive combines a passion for hands-on electronics repair with expertise in cutting-edge, AI-driven software development. With a journey that started in 2014, he offers a unique, holistic approach to technology, ensuring both hardware and software work in perfect harmony.',
     skills: ['Full-Stack Development', 'AI Integration', 'Mobile & Electronics Repair', 'Next.js', 'Genkit AI'],
     imageId: 'team-member-1'
   };
@@ -73,7 +73,7 @@ export default function AboutPage() {
                   }
                   <h3 className="font-headline text-xl font-semibold">{teamMember.name}</h3>
                   <p className="font-medium text-primary">{teamMember.role}</p>
-                  <p className="mt-2 text-sm text-muted-foreground">{teamMember.bio}</p>
+                  <p className="mt-2 text-sm text-muted-foreground">{teamMember.bio.replace('Alex', 'Strive')}</p>
                   <div className="mt-4 flex flex-wrap justify-center gap-2">
                       {teamMember.skills.map(skill => (
                           <span key={skill} className="rounded-full bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground">
