@@ -32,21 +32,9 @@
     },
     {
       "id": "team-member-1",
-      "description": "Portrait of a confident software developer.",
+      "description": "Portrait of a confident software developer and technician.",
       "imageUrl": "/images/team-member-1.webp",
       "imageHint": "developer portrait"
-    },
-    {
-      "id": "team-member-2",
-      "description": "Portrait of a creative mobile app designer.",
-      "imageUrl": "/images/team-member-2.webp",
-      "imageHint": "designer portrait"
-    },
-    {
-      "id": "team-member-3",
-      "description": "Portrait of a focused hardware technician.",
-      "imageUrl": "/images/team-member-3.webp",
-      "imageHint": "technician portrait"
     }
   ]
 }
