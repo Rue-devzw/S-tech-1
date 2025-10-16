@@ -98,7 +98,7 @@ export async function submitConsultationRequest(prevState: ConsultationState, fo
     }
 
     const { name, email, company, projectDetails, preferredDate } = validatedFields.data;
-    const recipient = 'info@s-techsolutions.org';
+    const recipient = 'info@stechsolutions.com';
     const subject = `New Consultation Request from ${name}`;
     const body = `
         Name: ${name}
