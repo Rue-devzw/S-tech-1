@@ -31,22 +31,22 @@
       "imageHint": "data visualization"
     },
     {
-      "id": "about-timeline-1",
-      "description": "A small workshop with tools on the wall.",
-      "imageUrl": "/images/about-timeline-1.webp",
-      "imageHint": "workshop tools"
+      "id": "team-member-1",
+      "description": "Portrait of a confident software developer.",
+      "imageUrl": "/images/team-member-1.webp",
+      "imageHint": "developer portrait"
     },
     {
-      "id": "about-timeline-2",
-      "description": "A computer screen with lines of code.",
-      "imageUrl": "/images/about-timeline-2.webp",
-      "imageHint": "coding screen"
+      "id": "team-member-2",
+      "description": "Portrait of a creative mobile app designer.",
+      "imageUrl": "/images/team-member-2.webp",
+      "imageHint": "designer portrait"
     },
     {
-      "id": "about-timeline-3",
-      "description": "An abstract visualization of a neural network.",
-      "imageUrl": "/images/about-timeline-3.webp",
-      "imageHint": "neural network"
+      "id": "team-member-3",
+      "description": "Portrait of a focused hardware technician.",
+      "imageUrl": "/images/team-member-3.webp",
+      "imageHint": "technician portrait"
     }
   ]
 }
