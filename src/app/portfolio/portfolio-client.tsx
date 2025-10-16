@@ -1,7 +1,6 @@
 'use client';
 
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import Image from 'next/image';
 import type { AiPoweredSolutionsShowcaseOutput } from '@/ai/flows/ai-powered-solutions-showcase';
@@ -9,27 +8,14 @@ import type { ImagePlaceholder } from '@/lib/placeholder-images';
 
 type DevProject = AiPoweredSolutionsShowcaseOutput['showcaseItems'][0] & { image: ImagePlaceholder };
 
-export type RepairProject = {
-  device: string;
-  issue: string;
-  beforeImage: ImagePlaceholder;
-  afterImage: ImagePlaceholder;
-  testimonial: string;
-};
-
 type PortfolioClientProps = {
   developmentProjects: DevProject[];
-  repairProjects: RepairProject[];
 };
 
-export default function PortfolioClient({ developmentProjects, repairProjects }: PortfolioClientProps) {
+export default function PortfolioClient({ developmentProjects }: PortfolioClientProps) {
   return (
-    <Tabs defaultValue="development" className="w-full">
-      <TabsList className="grid w-full grid-cols-2 md:w-[400px] mx-auto">
-        <TabsTrigger value="development">Development Projects</TabsTrigger>
-        <TabsTrigger value="repairs">Repair Examples</TabsTrigger>
-      </TabsList>
-      <TabsContent value="development" className="mt-8">
+    <div>
+        <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl text-center mb-8 font-headline">Development Projects</h2>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {developmentProjects.map((project, index) => (
             <Card key={index} className="flex flex-col">
@@ -63,45 +49,6 @@ export default function PortfolioClient({ developmentProjects, repairProjects }:
             </Card>
           ))}
         </div>
-      </TabsContent>
-      <TabsContent value="repairs" className="mt-8">
-        <div className="grid gap-8 lg:grid-cols-2">
-          {repairProjects.map((project, index) => (
-            <Card key={index} className="overflow-hidden">
-                <div className="grid grid-cols-2">
-                    <div className="relative h-64 w-full">
-                        <Image
-                        src={project.beforeImage.imageUrl}
-                        alt={project.beforeImage.description}
-                        data-ai-hint={project.beforeImage.imageHint}
-                        fill
-                        className="object-cover"
-                        />
-                        <Badge className="absolute bottom-2 left-2" variant="destructive">Before</Badge>
-                    </div>
-                    <div className="relative h-64 w-full">
-                        <Image
-                        src={project.afterImage.imageUrl}
-                        alt={project.afterImage.description}
-                        data-ai-hint={project.afterImage.imageHint}
-                        fill
-                        className="object-cover"
-                        />
-                        <Badge variant="default" className="absolute bottom-2 left-2 border-transparent bg-chart-2 text-primary-foreground hover:bg-chart-2/90">After</Badge>
-                    </div>
-                </div>
-              <CardHeader>
-                <CardTitle className="font-headline">{project.device} - {project.issue}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <blockquote className="border-l-2 pl-4 italic text-muted-foreground">
-                  "{project.testimonial}"
-                </blockquote>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </TabsContent>
-    </Tabs>
+    </div>
   );
 }
