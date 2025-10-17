@@ -1,12 +1,18 @@
+
 'use client';
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import Image from 'next/image';
-import type { AiPoweredSolutionsShowcaseOutput } from '@/ai/flows/ai-powered-solutions-showcase';
 import type { ImagePlaceholder } from '@/lib/placeholder-images';
 
-type DevProject = AiPoweredSolutionsShowcaseOutput['showcaseItems'][0] & { image: ImagePlaceholder };
+type DevProject = {
+  title: string;
+  description: string;
+  technologies: string;
+  outcome: string;
+  image: ImagePlaceholder;
+};
 
 type PortfolioClientProps = {
   developmentProjects: DevProject[];

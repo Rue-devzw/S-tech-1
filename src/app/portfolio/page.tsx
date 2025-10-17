@@ -1,25 +1,32 @@
-import { aiPoweredSolutionsShowcase } from '@/ai/flows/ai-powered-solutions-showcase';
+
 import PortfolioClient from './portfolio-client';
 import { PlaceHolderImages } from '@/lib/placeholder-images';
 
-async function getDevelopmentProjects() {
-  try {
-    const showcase = await aiPoweredSolutionsShowcase();
-    // Assign placeholder images to the fetched projects
-    const devImages = PlaceHolderImages.filter(p => p.id.startsWith('dev-project'));
-    return showcase.showcaseItems.map((item, index) => ({
-      ...item,
-      image: devImages[index % devImages.length] || devImages[0]
-    }));
-  } catch (error) {
-    console.error("Failed to fetch AI-powered solutions:", error);
-    return [];
+const developmentProjects = [
+  {
+    title: "AI-Powered E-commerce Analytics",
+    description: "A dashboard that provides deep insights into customer behavior using machine learning.",
+    technologies: "Next.js, TypeScript, Tailwind CSS, Genkit AI, Recharts",
+    outcome: "Increased customer retention by 15% through personalized recommendations.",
+    image: PlaceHolderImages.find(p => p.id === 'dev-project-1')!
+  },
+  {
+    title: "Cross-Platform Fitness App",
+    description: "A mobile app for iOS and Android that tracks workouts and provides AI-driven fitness coaching.",
+    technologies: "React Native, Firebase, Genkit AI, Google Cloud",
+    outcome: "Achieved 100,000+ downloads within the first 3 months of launch.",
+    image: PlaceHolderImages.find(p => p.id === 'dev-project-2')!
+  },
+  {
+    title: "SaaS Platform for Logistics",
+    description: "A full-stack web application that optimizes delivery routes in real-time, reducing fuel costs.",
+    technologies: "Node.js, React, Google Maps API, Python, Genkit AI",
+    outcome: "Reduced operational costs by 20% for early adopters.",
+    image: PlaceHolderImages.find(p => p.id === 'dev-project-3')!
   }
-}
+];
 
 export default async function PortfolioPage() {
-  const developmentProjects = await getDevelopmentProjects();
-
   return (
     <>
       <section className="bg-secondary/30 py-16 md:py-24">
