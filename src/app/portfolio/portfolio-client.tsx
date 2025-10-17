@@ -1,10 +1,13 @@
 
 'use client';
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import Image from 'next/image';
 import type { ImagePlaceholder } from '@/lib/placeholder-images';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
+import { ArrowUpRight } from 'lucide-react';
 
 type DevProject = {
   title: string;
@@ -12,6 +15,7 @@ type DevProject = {
   technologies: string;
   outcome: string;
   image: ImagePlaceholder;
+  link: string;
 };
 
 type PortfolioClientProps = {
@@ -52,6 +56,13 @@ export default function PortfolioClient({ developmentProjects }: PortfolioClient
                   </div>
                 </div>
               </CardContent>
+              <CardFooter>
+                <Button asChild variant="outline" className="w-full">
+                  <Link href={project.link} target="_blank" rel="noopener noreferrer">
+                    View Project <ArrowUpRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+              </CardFooter>
             </Card>
           ))}
         </div>

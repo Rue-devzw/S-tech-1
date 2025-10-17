@@ -4,25 +4,28 @@ import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 const developmentProjects = [
   {
-    title: "AI-Powered E-commerce Analytics",
-    description: "A dashboard that provides deep insights into customer behavior using machine learning.",
-    technologies: "Next.js, TypeScript, Tailwind CSS, Genkit AI, Recharts",
-    outcome: "Increased customer retention by 15% through personalized recommendations.",
-    image: PlaceHolderImages.find(p => p.id === 'dev-project-1')!
+    title: "Mussy Consultancy",
+    description: "A professional corporate website designed to enhance online presence and client engagement for a business consultancy firm.",
+    technologies: "Next.js, TypeScript, Tailwind CSS, ShadCN UI",
+    outcome: "Successfully established a strong digital footprint, leading to a 25% increase in client inquiries.",
+    image: PlaceHolderImages.find(p => p.id === 'dev-project-1')!,
+    link: "https://www.mussyconsultancy.org"
   },
   {
-    title: "Cross-Platform Fitness App",
-    description: "A mobile app for iOS and Android that tracks workouts and provides AI-driven fitness coaching.",
-    technologies: "React Native, Firebase, Genkit AI, Google Cloud",
-    outcome: "Achieved 100,000+ downloads within the first 3 months of launch.",
-    image: PlaceHolderImages.find(p => p.id === 'dev-project-2')!
+    title: "Valley Farm Secrets",
+    description: "An e-commerce platform for a farm-to-table business, featuring product listings, online ordering, and a blog for recipes.",
+    technologies: "React, Firebase, Node.js, Stripe Integration",
+    outcome: "Streamlined the sales process and expanded customer reach, resulting in a 40% growth in online sales.",
+    image: PlaceHolderImages.find(p => p.id === 'dev-project-2')!,
+    link: "https://www.valleyfarmsecrets.com"
   },
   {
-    title: "SaaS Platform for Logistics",
-    description: "A full-stack web application that optimizes delivery routes in real-time, reducing fuel costs.",
-    technologies: "Node.js, React, Google Maps API, Python, Genkit AI",
-    outcome: "Reduced operational costs by 20% for early adopters.",
-    image: PlaceHolderImages.find(p => p.id === 'dev-project-3')!
+    title: "S-Tech Solutions Official",
+    description: "The official website for S-Tech Solutions, showcasing services in AI-powered development and local electronics repair.",
+    technologies: "Next.js, Genkit AI, Tailwind CSS, Vercel",
+    outcome: "Created a comprehensive platform that clearly segments services and has improved lead generation by 30%.",
+    image: PlaceHolderImages.find(p => p.id === 'dev-project-3')!,
+    link: "https://www.s-techsolutions.org"
   }
 ];
 
