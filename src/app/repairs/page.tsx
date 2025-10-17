@@ -54,9 +54,9 @@ export default function RepairsPage() {
         <div className="lg:col-span-3">
           <Card className="sticky top-24 shadow-lg">
             <CardHeader>
-              <CardTitle className="font-headline text-2xl">Get a Free AI-Powered Quote</CardTitle>
+              <CardTitle className="font-headline text-2xl">Get a Free Repair Quote</CardTitle>
               <CardDescription>
-                Tell us about your device and the issue. Our AI will generate a real-time repair quote for you.
+                Tell us about your device and the issue. We'll send the details straight to our WhatsApp for a quick response.
               </CardDescription>
             </CardHeader>
             <CardContent>

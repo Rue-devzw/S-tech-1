@@ -1,106 +1,62 @@
 'use client';
 
-import { useActionState } from 'react';
-import { useFormStatus } from 'react-dom';
-import { submitRepairQuote } from '../actions';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { useState } from 'react';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { Bot, CheckCircle, Clock, Cpu, FileText, Loader2, ServerCrash } from 'lucide-react';
+import { MessageCircle } from 'lucide-react';
 
-const initialState = {
-  message: '',
-  errors: {},
-  success: false,
-};
+const WhatsAppIcon = (props: React.SVGProps<SVGSVGElement>) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" {...props}>
+        <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.413-.003 6.557-5.338 11.892-11.894 11.892-1.99 0-3.903-.5-5.604-1.438l-6.26-1.673zm6.715-4.82a9.376 9.376 0 005.132 1.431c5.176.001 9.38-4.203 9.382-9.379.002-5.176-4.204-9.38-9.38-9.38-5.175 0-9.378 4.204-9.38 9.38 0 2.021.653 3.934 1.838 5.542l-1.155 4.226 4.354-1.156zM13.255 12.427l-.462-.233c-.958-.484-1.564-.73-1.564-1.565 0-.835.63-1.428 1.383-1.428.106 0 .21.01.312.031.543.111 1.225.594 1.336 1.562l.062.533-.462.232c-.958.484-1.565.73-1.565 1.565 0 .835.63 1.428 1.384 1.428.105 0 .21-.01.31-.031.543-.111 1.225-.594 1.337-1.562l.062-.533z"/>
+    </svg>
+);
 
-function SubmitButton() {
-  const { pending } = useFormStatus();
-  return (
-    <Button type="submit" disabled={pending} className="w-full">
-      {pending ? (
-        <>
-          <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Generating Quote...
-        </>
-      ) : (
-        <>
-          <Bot className="mr-2 h-4 w-4" /> Get AI Quote
-        </>
-      )}
-    </Button>
-  );
-}
 
 export default function RepairQuoteForm() {
-  const [state, formAction] = useActionState(submitRepairQuote, initialState);
+    const [device, setDevice] = useState('');
+    const [issue, setIssue] = useState('');
+  
+    const handleSubmit = (e: React.FormEvent) => {
+      e.preventDefault();
+      const phoneNumber = '263718704505';
+      const message = `Hello, I would like a repair quote.\n\n*Device:* ${device}\n*Issue:* ${issue}`;
+      const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+      
+      // Open WhatsApp in a new tab
+      window.open(whatsappUrl, '_blank');
+    };
 
   return (
     <div className="space-y-6">
-      <form action={formAction} className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <Label htmlFor="device">Device Type</Label>
-          <Input id="device" name="device" placeholder="e.g., iPhone 13, Samsung Galaxy S21" required />
-          {state.errors?.device && (
-            <p className="mt-1 text-sm text-destructive">{state.errors.device[0]}</p>
-          )}
+          <Input 
+            id="device" 
+            name="device" 
+            placeholder="e.g., iPhone 13, Samsung Galaxy S21" 
+            required 
+            value={device}
+            onChange={(e) => setDevice(e.target.value)}
+          />
         </div>
         <div>
           <Label htmlFor="issue">Describe the Issue</Label>
-          <Textarea id="issue" name="issue" placeholder="e.g., Cracked screen, battery not charging" required />
-          {state.errors?.issue && (
-            <p className="mt-1 text-sm text-destructive">{state.errors.issue[0]}</p>
-          )}
+          <Textarea 
+            id="issue" 
+            name="issue" 
+            placeholder="e.g., Cracked screen, battery not charging" 
+            required 
+            value={issue}
+            onChange={(e) => setIssue(e.target.value)}
+            />
         </div>
-        <SubmitButton />
+        <Button type="submit" className="w-full">
+            <WhatsAppIcon className="mr-2 h-4 w-4" /> Send Quote via WhatsApp
+        </Button>
       </form>
-
-      {state.success && state.data ? (
-        <Card className="bg-primary/5 border-primary/20">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-primary">
-              <FileText className="h-6 w-6" />
-              <span>Your Repair Quote</span>
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <p className="text-4xl font-bold">{state.data.quote}</p>
-            <div className="grid gap-3 text-sm">
-              <div className="flex items-center gap-2">
-                <Clock className="h-4 w-4 text-muted-foreground" />
-                <strong>Estimated Time:</strong>
-                <span>{state.data.estimatedCompletionTime}</span>
-              </div>
-              <div className="flex items-start gap-2">
-                <Cpu className="h-4 w-4 flex-shrink-0 text-muted-foreground" />
-                <strong>Likely Parts Needed:</strong>
-                <ul className="flex flex-wrap gap-2">
-                  {state.data.likelyParts.map((part, i) => (
-                    <li key={i} className="rounded-full bg-secondary px-2 py-0.5 text-xs text-secondary-foreground">
-                      {part}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-            <Alert className="bg-background">
-              <CheckCircle className="h-4 w-4" />
-              <AlertTitle>Note</AlertTitle>
-              <AlertDescription>
-                This is an AI-generated estimate. Final price may vary after in-person inspection.
-              </AlertDescription>
-            </Alert>
-          </CardContent>
-        </Card>
-      ) : !state.success && state.message && !state.errors && (
-        <Alert variant="destructive">
-          <ServerCrash className="h-4 w-4" />
-          <AlertTitle>Error</AlertTitle>
-          <AlertDescription>{state.message}</AlertDescription>
-        </Alert>
-      )}
     </div>
   );
 }
