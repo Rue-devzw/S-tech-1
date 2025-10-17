@@ -1,3 +1,4 @@
+
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
@@ -8,21 +9,21 @@ import Link from 'next/link';
 
 const testimonials = [
   {
-    name: 'Jane Doe, Local Customer',
-    title: 'Flawless Screen Repair',
-    quote: 'My iPhone screen was shattered. S-Tech fixed it in under an hour, and it looks brand new. The "since 2014" sign gave me confidence, and they delivered!',
+    name: 'Tafadzwa M., Avondale',
+    title: 'Screen Rangu Ragadzirwa Zvakanaka!',
+    quote: 'Foni yangu yanga yaputsika screen, but S-Tech vakagadzirisa fast-fast. Basa riri professional and the price was fair. Ndatenda!',
     rating: 5,
   },
   {
-    name: 'John Smith, CEO of InnovateCorp',
-    title: 'Game-Changing AI Integration',
-    quote: 'S-Tech\'s AI-powered web solution revolutionized our e-commerce platform. Their expertise in both development and AI is a rare and valuable combination.',
+    name: 'Brenda K., Small Business Owner',
+    title: 'Website Yakarongeka!',
+    quote: 'S-Tech created a beautiful website for my business. I\'m now getting more customers online. Vanogona basa, I highly recommend them!',
     rating: 5,
   },
   {
-    name: 'Emily White, Startup Founder',
-    title: 'From Idea to App Store',
-    quote: 'The team at S-Tech turned our app idea into a reality. Their AI-enhanced approach to cross-platform development was efficient and incredibly effective.',
+    name: 'David C., Harare',
+    title: 'Reliable and Trustworthy',
+    quote: 'I\'ve been going to Strive for repairs since 2014. He\'s the only person I trust with my gadgets. Always honest and does great work.',
     rating: 5,
   },
 ];
@@ -191,17 +192,18 @@ export default function Home() {
                   <div className="p-4">
                     <Card className="h-full">
                       <CardHeader>
-                        <div className="flex items-center gap-2">
-                          <div className="flex">
-                            {[...Array(testimonial.rating)].map((_, i) => (
-                              <Star key={i} className="h-5 w-5 fill-accent text-accent" />
-                            ))}
-                          </div>
-                        </div>
+                         <div className="flex items-center gap-4">
+                            <div className="flex">
+                                {[...Array(testimonial.rating)].map((_, i) => (
+                                <Star key={i} className="h-5 w-5 fill-accent text-accent" />
+                                ))}
+                            </div>
+                         </div>
+                         <CardTitle className="font-semibold pt-2">{testimonial.title}</CardTitle>
                       </CardHeader>
                       <CardContent className="flex flex-grow flex-col">
-                        <p className="flex-grow font-semibold">"{testimonial.quote}"</p>
-                        <p className="mt-4 text-sm text-muted-foreground">&mdash; {testimonial.name}</p>
+                        <p className="flex-grow">"{testimonial.quote}"</p>
+                        <p className="mt-4 text-sm font-medium text-muted-foreground">&mdash; {testimonial.name}</p>
                       </CardContent>
                     </Card>
                   </div>
@@ -217,3 +219,5 @@ export default function Home() {
     </div>
   );
 }
+
+    
