@@ -1,3 +1,4 @@
+
 import { Mail, MapPin, Phone } from 'lucide-react';
 import ConsultationForm from './consultation-form';
 
@@ -29,7 +30,7 @@ const contactDetails = [
   {
     icon: <MapPin className="h-6 w-6 text-primary" />,
     title: 'Address',
-    value: '123 Tech Street, Silicon Valley, CA 94000',
+    value: 'Harare, Zimbabwe',
   }
 ];
 
