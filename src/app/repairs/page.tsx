@@ -1,5 +1,6 @@
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { BatteryCharging, ScreenShare, Smartphone, ToyBrick } from 'lucide-react';
+import { BatteryCharging, ScreenShare, Smartphone, ToyBrick, Laptop } from 'lucide-react';
 import RepairQuoteForm from './repair-quote-form';
 
 const repairServices = [
@@ -12,6 +13,11 @@ const repairServices = [
     icon: <BatteryCharging className="h-8 w-8 text-primary" />,
     title: 'Battery Replacement',
     description: 'If your device isn\'t holding a charge, we can swap in a new, high-quality battery to restore its life.'
+  },
+  {
+    icon: <Laptop className="h-8 w-8 text-primary" />,
+    title: 'Computer Repair & Servicing',
+    description: 'From software troubleshooting to hardware upgrades, we service laptops and desktops.'
   },
   {
     icon: <Smartphone className="h-8 w-8 text-primary" />,
