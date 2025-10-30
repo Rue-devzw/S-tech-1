@@ -45,7 +45,7 @@ export function Footer() {
               <ul className="space-y-1">
                 <li><Link href="/contact" className="text-sm hover:underline">Contact</Link></li>
                 <li>
-                  <a href="https://www.facebook.com/Strivetechsol/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm hover:underline">
+                  <a href="https://www.facebook.com/Stechsolutions/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm hover:underline">
                     <Facebook className="h-4 w-4" /> Facebook
                   </a>
                 </li>
