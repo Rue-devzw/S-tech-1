@@ -1,124 +1,71 @@
+'use client';
 
+import { motion } from 'framer-motion';
+import { Shield, Target, Award, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
-import { Award, Lightbulb, Users } from 'lucide-react';
-import Image from 'next/image';
 import Link from 'next/link';
 
-const teamMember = {
-    name: 'Strive R. Tapera',
-    role: 'Founder, Lead Developer & Technician',
-    bio: 'As the founder of S-Tech Solutions, Strive combines a passion for hands-on electronics repair with expertise in cutting-edge, AI-driven software development. With a journey that started in 2014, he offers a unique, holistic approach to technology, ensuring both hardware and software work in perfect harmony.',
-    skills: ['Full-Stack Development', 'AI Integration', 'Mobile & Electronics Repair', 'Next.js', 'Genkit AI'],
-    imageId: 'team-member-1'
-  };
-
-const values = [
-  {
-    icon: <Award className="h-8 w-8 text-primary" />,
-    title: 'Quality Craftsmanship',
-    description: 'From the smallest solder point to the most complex algorithm, I pursue excellence in everything I build.',
-  },
-  {
-    icon: <Lightbulb className="h-8 w-8 text-primary" />,
-    title: 'Practical Innovation',
-    description: 'I believe in innovation that solves real-world problems, blending cutting-edge tech with tangible results.',
-  },
-  {
-    icon: <Users className="h-8 w-8 text-primary" />,
-    title: 'Client Partnership',
-    description: 'I work with you, not just for you. Your success is my ultimate metric, and I build lasting relationships.',
-  },
-];
-
 export default function AboutPage() {
-  const memberImage = PlaceHolderImages.find(p => p.id === teamMember.imageId);
-
   return (
-    <>
-      <section className="bg-secondary/30 py-16 md:py-24">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="mx-auto max-w-3xl text-center">
-            <span className="text-sm font-semibold uppercase tracking-wide text-primary">About S-Tech</span>
-            <h1 className="font-headline mt-2 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
-              The Expert Behind the Tech
-            </h1>
-            <p className="mt-6 text-lg text-muted-foreground">
-              Founded in 2014, S-Tech Solutions is driven by a passionate technologist who excels in both hardware and software. I bridge the gap between intricate electronics and intelligent, AI-driven applications.
-            </p>
-          </div>
+    <div className="min-h-screen bg-background pt-32 pb-48">
+      <div className="container mx-auto px-4">
+        {/* Narrative Header */}
+        <div className="max-w-5xl space-y-12 mb-32">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="inline-flex items-center gap-2 px-4 py-2 border border-primary/20 bg-primary/5 text-primary text-xs font-bold uppercase tracking-[0.2em]"
+          >
+            <span>The History of S-Tech</span>
+          </motion.div>
+          <h1 className="font-headline text-6xl md:text-9xl font-bold tracking-tighter leading-[0.85]">
+            PRECISION <br />
+            <span className="text-primary italic">SINCE 2014.</span>
+          </h1>
+          <p className="text-2xl text-muted-foreground font-medium leading-relaxed max-w-3xl">
+            Founded on the principles of unshakeable integrity and technical obsession, S-Tech Solutions has evolved from a specialist hardware lab into a global software and systems powerhouse.
+          </p>
         </div>
-      </section>
 
-      <section className="py-16 md:py-24">
-        <div className="container mx-auto px-4 md:px-6">
-           <div className="mx-auto max-w-3xl text-center">
-             <h2 className="font-headline text-3xl font-bold tracking-tight">Meet the Expert</h2>
-            <p className="mt-4 text-muted-foreground md:text-lg">
-              The mind turning your ideas into reality.
-            </p>
-           </div>
-           <div className="mt-12 flex justify-center">
-              <div className="flex max-w-md flex-col items-center text-center">
-                  {memberImage && 
-                      <div className="relative h-40 w-40 overflow-hidden rounded-full shadow-lg mb-4">
-                          <Image
-                          src={memberImage.imageUrl}
-                          alt={`Portrait of ${teamMember.name}`}
-                          data-ai-hint={memberImage.imageHint}
-                          fill
-                          className="object-cover"
-                          />
-                      </div>
-                  }
-                  <h3 className="font-headline text-xl font-semibold">{teamMember.name}</h3>
-                  <p className="font-medium text-primary">{teamMember.role}</p>
-                  <p className="mt-2 text-sm text-muted-foreground">{teamMember.bio.replace('Alex', 'Strive')}</p>
-                  <div className="mt-4 flex flex-wrap justify-center gap-2">
-                      {teamMember.skills.map(skill => (
-                          <span key={skill} className="rounded-full bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground">
-                              {skill}
-                          </span>
-                      ))}
-                  </div>
-              </div>
-           </div>
-        </div>
-      </section>
-      
-      <section className="bg-secondary/30 py-16 md:py-24">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="mx-auto max-w-3xl text-center">
-            <h2 className="font-headline text-3xl font-bold tracking-tight">My Core Values</h2>
-            <p className="mt-4 text-muted-foreground md:text-lg">
-              The principles that guide my work and my partnerships.
+        {/* The Evolution Grid */}
+        <div className="grid lg:grid-cols-2 gap-px bg-border/50 border border-border/50 mb-32">
+          <div className="bg-background p-12 md:p-16 space-y-8">
+            <h2 className="font-headline text-4xl font-bold uppercase tracking-tight">Our Philosophy</h2>
+            <p className="text-lg text-muted-foreground font-medium leading-relaxed">
+              We believe that modern software is only as good as the understanding of the hardware it runs on. Our foundational expertise in component-level repair gives us a unique advantage in complex systems engineering.
             </p>
           </div>
-          <div className="mt-12 grid gap-8 md:grid-cols-3">
-            {values.map((value) => (
-              <div key={value.title} className="text-center">
-                <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-background shadow-md">
-                  {value.icon}
-                </div>
-                <h3 className="font-headline text-xl font-semibold">{value.title}</h3>
-                <p className="mt-2 text-muted-foreground">{value.description}</p>
-              </div>
-            ))}
+          <div className="bg-background p-12 md:p-16 space-y-8 border-l border-border/50">
+            <h2 className="font-headline text-4xl font-bold uppercase tracking-tight">The Mission</h2>
+            <p className="text-lg text-muted-foreground font-medium leading-relaxed">
+              To empower visionary organizations with the technical leverage required to lead their industries. We don't just solve problems; we engineer superiority.
+            </p>
           </div>
         </div>
-      </section>
 
-      <section className="py-16 md:py-24">
-        <div className="container mx-auto px-4 md:px-6 text-center">
-            <h2 className="font-headline text-3xl font-bold tracking-tight">Let's Build Together</h2>
-            <p className="mt-4 max-w-2xl mx-auto text-muted-foreground md:text-lg">
-                Whether you need a device repaired or a custom AI solution built, I'm ready to help.
-            </p>
-            <Button asChild size="lg" className="mt-8">
-                <Link href="/contact">Get in Touch</Link>
-            </Button>
+        {/* Pillars of Authority */}
+        <div className="grid md:grid-cols-3 gap-12">
+          {[
+            { icon: Shield, title: 'Integrity', desc: 'A decade of service built on absolute transparency and technical honesty.' },
+            { icon: Target, title: 'Precision', desc: 'From microsoldering to high-scale cloud architecture; accuracy is our baseline.' },
+            { icon: Award, title: 'Excellence', desc: 'A relentless commitment to pushing the boundaries of what is technically possible.' }
+          ].map((pillar, i) => (
+            <div key={i} className="p-12 border border-border/50 bg-secondary/5 space-y-6 text-center">
+              <pillar.icon className="h-10 w-10 text-primary mx-auto" />
+              <h4 className="font-bold uppercase tracking-[0.3em]">{pillar.title}</h4>
+              <p className="text-sm text-muted-foreground font-medium leading-relaxed">{pillar.desc}</p>
+            </div>
+          ))}
         </div>
-      </section>
-    </>
+
+        {/* Secondary CTA */}
+        <div className="mt-32 text-center space-y-8">
+          <p className="text-xs font-bold uppercase tracking-[0.5em] text-primary">Ready to transcend?</p>
+          <Button asChild size="lg" className="h-20 px-16 text-xl font-bold uppercase tracking-tighter bg-primary">
+            <Link href="/contact">Direct Channel Access</Link>
+          </Button>
+        </div>
+      </div>
+    </div>
   );
 }

@@ -4,57 +4,54 @@
 
 @layer base {
   :root {
-    --background: 210 40% 98%; /* Light blue-gray */
-    --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 216 100% 59%; /* Deep, trustworthy blue (#2979FF) */
+    --background: 240 10% 2%; /* Modern Void */
+    --foreground: 210 40% 98%;
+    --card: 240 10% 4%;
+    --card-foreground: 210 40% 98%;
+    --popover: 240 10% 2%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 100% 50%; /* Neon Accuracy Blue */
     --primary-foreground: 210 40% 98%;
-    --secondary: 210 29% 97%; /* Lighter shade of background for contrast */
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 220 100% 10%; /* Deep Intelligence Blue */
+    --secondary-foreground: 210 40% 98%;
+    --muted: 240 10% 8%;
+    --muted-foreground: 215.4 16.3% 60%;
+    --accent: 45 100% 50%; /* Precision Gold */
+    --accent-foreground: 240 10% 2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 240 10% 12%;
+    --input: 240 10% 12%;
+    --ring: 210 100% 50%;
+    --radius: 0rem; /* Sharp, engineering-focused corners */
+    --chart-1: 210 100% 50%;
+    --chart-2: 220 100% 10%;
+    --chart-3: 45 100% 50%;
+    --chart-4: 240 10% 12%;
+    --chart-5: 215.4 16.3% 60%;
+  }
+
+  /* S-Tech is always dark by default */
+  .light {
+    --background: 210 40% 98%;
+    --foreground: 240 10% 2%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 2%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 2%;
+    --primary: 210 100% 50%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 220 100% 10%;
+    --secondary-foreground: 210 40% 98%;
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 34 100% 63%; /* Vibrant orange (#FFAB40) */
-    --accent-foreground: 24 9.8% 10%;
+    --accent: 45 100% 50%;
+    --accent-foreground: 240 10% 2%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 216 100% 59%;
-    --radius: 0.5rem;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
-  }
-  .dark {
-    --background: 222 47% 11%;
-    --foreground: 210 40% 98%;
-    --card: 222 47% 14%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222 47% 11%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 216 100% 59%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 34 100% 63%;
-    --accent-foreground: 24 9.8% 10%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 216 100% 59%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
+    --ring: 210 100% 50%;
   }
 }
 

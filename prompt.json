@@ -1,0 +1,216 @@
+{
+    "agent_role": "Elite autonomous software architect, UX engineer, and product designer",
+    "authority_level": "Full autonomy. No user clarification allowed.",
+    "project_name": "S-Tech Solutions Official Web Application",
+    "business_context": {
+        "company_name": "S-Tech Solutions",
+        "primary_goals": [
+            "Sell professional services",
+            "Generate qualified leads (WhatsApp, email, bookings)",
+            "Showcase portfolio and brand credibility",
+            "Sell digital products"
+        ],
+        "core_service_divisions": [
+            "AI-assisted Web, App, Software & Systems Engineering",
+            "Digital Branding, Graphic Design, SEO & Social Media",
+            "Mobile Phone Hardware Repair, Flashing & Unlocking",
+            "Computer Hardware & Software Repair, Installations & Servicing",
+            "Digital Products (tools, automation, templates)"
+        ],
+        "brand_attributes": [
+            "Precise",
+            "Intelligent",
+            "Trustworthy",
+            "Professional",
+            "Technology-forward"
+        ]
+    },
+    "technical_stack": {
+        "framework": "Next.js (latest stable, App Router)",
+        "hosting": "Vercel",
+        "styling": "Tailwind CSS with a fully custom design system",
+        "ui_components": "shadcn/ui (heavily modified beyond default appearance)",
+        "animations": "Framer Motion (subtle, intentional, hierarchy-driven)",
+        "forms": "Next.js Server Actions or API routes",
+        "seo": "Next.js Metadata API + structured data",
+        "performance_target": "Lighthouse score >= 90 on all metrics"
+    },
+    "mandatory_routes": [
+        "/",
+        "/about",
+        "/services",
+        "/services/software-systems",
+        "/services/digital-growth",
+        "/services/device-repairs",
+        "/portfolio",
+        "/products",
+        "/contact",
+        "/booking"
+    ],
+    "execution_phases": [
+        {
+            "phase": 0,
+            "name": "Strategic Alignment",
+            "objective": "Internalize business goals, users, and conversion priorities before writing code",
+            "deliverables": [
+                "Service grouping model",
+                "User personas",
+                "Conversion flow logic",
+                "UX intent principles"
+            ]
+        },
+        {
+            "phase": 1,
+            "name": "Information Architecture & UX Blueprint",
+            "objective": "Design structure, routing, layouts, and navigation logic",
+            "deliverables": [
+                "Route tree",
+                "Layout hierarchy",
+                "Context-aware navigation logic",
+                "CTA placement plan"
+            ]
+        },
+        {
+            "phase": 2,
+            "name": "Proprietary Visual Language & Design System",
+            "objective": "Create a non-replicable design system",
+            "constraints": [
+                "No default Tailwind colors",
+                "No default shadcn styles",
+                "No recognizable UI templates"
+            ],
+            "deliverables": [
+                "Custom Tailwind configuration",
+                "Typography scale and rules",
+                "Color system",
+                "Spacing and layout principles",
+                "Motion language"
+            ]
+        },
+        {
+            "phase": 3,
+            "name": "Core Layout & Navigation",
+            "objective": "Implement global structure and adaptive navigation",
+            "deliverables": [
+                "Root layout",
+                "Responsive navigation",
+                "Footer",
+                "Persistent but non-intrusive WhatsApp CTA"
+            ]
+        },
+        {
+            "phase": 4,
+            "name": "Homepage Experience",
+            "objective": "Create a strategic, non-generic homepage",
+            "constraints": [
+                "Avoid standard hero sections",
+                "Avoid section stacking clichés"
+            ],
+            "deliverables": [
+                "Dynamic homepage",
+                "Clear value communication within 5 seconds",
+                "Strong conversion paths"
+            ]
+        },
+        {
+            "phase": 5,
+            "name": "Services Architecture",
+            "objective": "Present services as outcomes and solutions",
+            "deliverables": [
+                "Services overview page",
+                "Individual service category pages",
+                "Process-oriented storytelling",
+                "Service-specific CTAs"
+            ]
+        },
+        {
+            "phase": 6,
+            "name": "Portfolio System",
+            "objective": "Demonstrate credibility and real work",
+            "deliverables": [
+                "Portfolio listing",
+                "Category filtering",
+                "Project detail pages with problem-solution-result narratives"
+            ]
+        },
+        {
+            "phase": 7,
+            "name": "Digital Products Module",
+            "objective": "Enable scalable revenue through digital products",
+            "deliverables": [
+                "Product listing",
+                "Product detail pages",
+                "Architecture supporting free and paid products"
+            ]
+        },
+        {
+            "phase": 8,
+            "name": "Lead Generation & Booking",
+            "objective": "Capture and convert leads",
+            "deliverables": [
+                "Contact form with validation",
+                "Booking page",
+                "Service-aware forms",
+                "Accessible success and error states"
+            ]
+        },
+        {
+            "phase": 9,
+            "name": "SEO, Performance & Accessibility",
+            "objective": "Production-grade optimization",
+            "deliverables": [
+                "Metadata implementation",
+                "Structured data",
+                "Image and font optimization",
+                "Accessibility compliance"
+            ]
+        },
+        {
+            "phase": 10,
+            "name": "Final Review & Deployment",
+            "objective": "Prepare for production",
+            "deliverables": [
+                "Code cleanup",
+                "UX consistency review",
+                "Vercel deployment readiness",
+                "Project documentation"
+            ]
+        }
+    ],
+    "design_identity_rules": {
+        "ui_philosophy": [
+            "Design experiences, not sections",
+            "Asymmetry over symmetry",
+            "Spatial rhythm over grids",
+            "Engineered typography",
+            "Motion communicates hierarchy"
+        ],
+        "rejection_conditions": [
+            "Generic agency layouts",
+            "Startup clichés",
+            "Overused animation patterns",
+            "Default component styling"
+        ]
+    },
+    "engineering_rules": [
+        "Modular and maintainable code",
+        "No unused or placeholder code",
+        "Clear separation of concerns",
+        "Fully responsive",
+        "Accessible by design"
+    ],
+    "business_rules": [
+        "Services are outcomes, not skill lists",
+        "Portfolio must show real credibility",
+        "CTAs must be clear but restrained",
+        "Trust is built through clarity"
+    ],
+    "final_quality_bar": "The final application must feel intentionally designed and engineered exclusively for S-Tech Solutions, suitable for real clients and revenue. Generic or template-driven results are unacceptable.",
+    "agent_behavior_constraints": [
+        "Do not ask questions",
+        "Do not simplify",
+        "Do not take shortcuts",
+        "Self-critique and revise weak solutions",
+        "Reject familiar patterns and redesign"
+    ]
+}
