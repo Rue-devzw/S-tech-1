@@ -22,91 +22,82 @@ const stagger = {
 
 export default function Home() {
   return (
-    <div className="flex flex-col overflow-hidden">
-      {/* Strategic Hero - Asymmetric & Motion Driven */}
-      <section className="relative min-h-[90vh] flex items-center pt-20">
-        <div className="container mx-auto px-4 grid lg:grid-cols-12 gap-12 items-center">
+    <div className="flex flex-col overflow-hidden font-primary selection:bg-primary/20">
+      {/* Strategic Hero - Asymmetric Architecture */}
+      <section className="relative min-h-[85vh] flex items-center pt-v-4 border-b border-border">
+        <div className="container mx-auto px-v-1 grid lg:grid-cols-12 gap-v-3 items-end">
           <motion.div
-            className="lg:col-span-7 space-y-8 z-10"
-            variants={stagger}
-            initial="initial"
-            animate="animate"
+            className="lg:col-span-8 space-y-v-2 pb-v-3"
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
           >
-            <motion.div variants={fadeUp} className="inline-flex items-center gap-2 px-4 py-2 border border-primary/20 bg-primary/5 text-primary text-xs font-bold uppercase tracking-[0.2em]">
-              <Zap className="h-3 w-3 fill-primary" />
-              <span>Engineered to Lead Since 2014</span>
-            </motion.div>
+            <div className="inline-flex items-center gap-2 px-3 py-1 border border-primary/20 bg-primary/5 text-primary text-[10px] font-bold uppercase tracking-[0.3em]">
+              <span className="h-1.5 w-1.5 bg-accent animate-pulse" />
+              Operational Since 2014
+            </div>
 
-            <motion.h1 variants={fadeUp} className="font-headline text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter leading-[0.9]">
-              ELITE <br />
-              <span className="text-primary italic">ENGINEERING.</span>
-            </motion.h1>
+            <h1 className="text-scale-4 md:text-scale-5 font-bold tracking-tight leading-[0.95] max-w-4xl">
+              Systems Engineering <br />
+              <span className="text-secondary italic font-secondary tracking-normal">for the Digital Age.</span>
+            </h1>
 
-            <motion.p variants={fadeUp} className="max-w-xl text-lg md:text-xl text-muted-foreground font-medium leading-relaxed">
-              We bridge the gap between microscopic hardware precision and macroscopic software intelligence. Global software. Local hardware. Infinite solutions.
-            </motion.p>
+            <p className="max-w-2xl text-scale-2 md:text-scale-3 text-muted-foreground font-medium leading-relaxed font-secondary">
+              We architect high-availability digital infrastructures. From component-level hardware diagnostics to macroscopic AI integration, our methodology is inherently precise and chromatically neutral.
+            </p>
 
-            <motion.div variants={fadeUp} className="flex flex-col sm:flex-row gap-6 pt-4">
-              <Button asChild size="lg" className="h-16 px-10 text-lg font-bold uppercase tracking-widest bg-primary hover:bg-primary/90">
+            <div className="flex flex-col sm:flex-row gap-v-2 pt-v-1">
+              <Button asChild size="lg" className="h-14 px-8 text-scale-1 font-bold uppercase tracking-widest bg-primary hover:bg-primary/90 rounded-none transition-all duration-500">
                 <Link href="/services">
-                  Explore Services <ArrowRight className="ml-2 h-5 w-5" />
+                  Review Capabilities <ArrowRight className="ml-3 h-4 w-4" />
                 </Link>
               </Button>
-              <Button asChild variant="outline" size="lg" className="h-16 px-10 text-lg font-bold uppercase tracking-widest border-2">
-                <Link href="/portfolio">View Portfolio</Link>
+              <Button asChild variant="ghost" size="lg" className="h-14 px-8 text-scale-1 font-bold uppercase tracking-widest border border-border/50 hover:bg-secondary/5 rounded-none transition-all duration-500">
+                <Link href="/portfolio">Review Proof</Link>
               </Button>
-            </motion.div>
-          </motion.div>
-
-          <motion.div
-            className="lg:col-span-5 relative"
-            initial={{ opacity: 0, scale: 0.8, x: 50 }}
-            animate={{ opacity: 1, scale: 1, x: 0 }}
-            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <div className="relative aspect-square">
-              <div className="absolute inset-0 bg-primary/20 blur-[120px] rounded-full animate-pulse" />
-              <div className="relative h-full w-full border border-white/10 bg-white/5 backdrop-blur-3xl overflow-hidden p-8 flex flex-col justify-end">
-                <div className="absolute top-0 right-0 p-12 opacity-20">
-                  <Cpu className="h-48 w-48 text-primary" />
-                </div>
-                <div className="space-y-4">
-                  <div className="h-1 w-24 bg-primary" />
-                  <h3 className="font-headline text-4xl font-bold tracking-tight">PRECISION <br />HARDWARE.</h3>
-                  <p className="text-sm font-bold uppercase tracking-[0.2em] text-muted-foreground">Component-Level Mastery</p>
-                </div>
-              </div>
             </div>
           </motion.div>
-        </div>
 
-        {/* Background Visual elements */}
-        <div className="absolute top-1/4 right-0 w-1/3 h-1/2 bg-primary/5 blur-[150px] -z-10" />
-        <div className="absolute -bottom-1/2 -left-1/4 w-1/2 h-full bg-secondary/5 blur-[150px] -z-10" />
+          {/* Asymmetric Offset Element */}
+          <div className="hidden lg:block lg:col-span-4 self-start pt-v-3 translate-x-12">
+            <div className="aspect-[3/4] border-l border-t border-border bg-card p-10 space-y-12">
+              <div className="h-px w-12 bg-primary" />
+              <div className="space-y-4">
+                <h3 className="text-scale-3 font-bold uppercase tracking-tight">Mission Intent</h3>
+                <p className="text-scale-1 font-medium text-muted-foreground font-secondary italic">
+                  "Precision is not an act, but a habit. We bridge the gap between microscopic failure and macroscopic success."
+                </p>
+              </div>
+              <div className="pt-8">
+                <Shield className="h-12 w-12 text-primary opacity-20" />
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
-      {/* Outcome-Oriented Splits */}
-      <section className="py-32 border-y border-border/50">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-3 gap-px bg-border/50 border border-border/50 leading-none">
+      {/* Outcome-Oriented Service Splits - Asymmetric Grid */}
+      <section className="py-v-4">
+        <div className="container mx-auto px-v-1">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-border leading-none">
             {[
               {
-                title: "Software & AI",
-                desc: "High-performance systems built for conversion and scale.",
+                title: "Software & Systems",
+                desc: "Deterministic architectures for sensitive operations and high-scale intelligence.",
                 icon: Globe,
                 href: "/services/software-systems",
                 label: "Systems"
               },
               {
                 title: "Digital Growth",
-                desc: "Strategic branding and SEO that captures market share.",
+                desc: "Strategic lead acquisition through precision SEO and brand authority.",
                 icon: Zap,
                 href: "/services/digital-growth",
                 label: "Brands"
               },
               {
-                title: "Device Repairs",
-                desc: "Expert hardware servicing with industrial-grade precision.",
+                title: "Hardware Lifecycle",
+                desc: "Industrial restoration and component-level analysis for mission-critical gadgets.",
                 icon: Wrench,
                 href: "/services/device-repairs",
                 label: "Hardware"
@@ -115,18 +106,18 @@ export default function Home() {
               <Link
                 key={i}
                 href={service.href}
-                className="group relative bg-background p-12 md:p-16 space-y-8 transition-colors hover:bg-primary"
+                className="group relative bg-background p-12 md:p-16 space-y-v-2 transition-colors hover:bg-card border-b border-border md:border-b-0"
               >
                 <div className="flex justify-between items-start">
-                  <service.icon className="h-12 w-12 text-primary group-hover:text-background transition-colors" />
-                  <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-muted-foreground group-hover:text-background/60">0{i + 1}</span>
+                  <service.icon className="h-10 w-10 text-primary group-hover:text-accent transition-colors duration-700" />
+                  <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-muted-foreground/30">0{i + 1}</span>
                 </div>
                 <div className="space-y-4">
-                  <h2 className="font-headline text-3xl font-bold tracking-tight group-hover:text-background">{service.title}</h2>
-                  <p className="text-muted-foreground group-hover:text-background/80 font-medium leading-relaxed">{service.desc}</p>
+                  <h2 className="text-scale-3 font-bold tracking-tight uppercase">{service.title}</h2>
+                  <p className="text-scale-1 text-muted-foreground font-medium leading-relaxed font-secondary italic">{service.desc}</p>
                 </div>
-                <div className="flex items-center gap-4 text-xs font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity text-background">
-                  Explore {service.label} <ArrowRight className="h-4 w-4" />
+                <div className="flex items-center gap-4 text-[10px] font-bold uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-all duration-700 text-primary">
+                  Access {service.label} Module <ArrowRight className="h-3 w-3" />
                 </div>
               </Link>
             ))}
@@ -134,72 +125,62 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Trust & Credibility - Non-Generic */}
-      <section className="py-32 bg-secondary/10">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col lg:flex-row gap-24 items-end">
-            <div className="lg:w-1/2 space-y-12">
-              <div className="space-y-4">
-                <h2 className="font-headline text-5xl md:text-7xl font-bold tracking-tighter leading-none">
-                  OVER A DECADE OF <br />
-                  <span className="text-primary italic">ACCURACY.</span>
-                </h2>
+      {/* Credibility Layer - Long Form Serif Focus */}
+      <section className="py-v-4 bg-muted/10 border-t border-border">
+        <div className="container mx-auto px-v-1">
+          <div className="flex flex-col lg:flex-row gap-v-4 items-center">
+            <div className="lg:w-7/12 space-y-v-2">
+              <h2 className="text-scale-4 font-bold tracking-tight leading-none uppercase">
+                Over a Decade of <br />
+                <span className="text-primary italic font-secondary tracking-normal">Technical Honesty.</span>
+              </h2>
+              <p className="text-scale-2 font-secondary font-medium text-muted-foreground leading-relaxed max-w-2xl">
+                Since October 2014, S-Tech Solutions has occupied the narrow intersection between hardware repair and software innovation. Our methodology is not trendy; it is proven. We serve the local Harare market with physical precision and the global market with architectural intelligence.
+              </p>
+              <div className="pt-v-1">
+                <Button asChild variant="outline" className="h-14 px-8 text-[10px] font-bold uppercase tracking-[0.3em] rounded-none">
+                  <Link href="/about">Access History</Link>
+                </Button>
               </div>
-
-              <div className="grid sm:grid-cols-2 gap-12">
-                <div className="space-y-4">
-                  <Shield className="h-8 w-8 text-primary" />
-                  <h4 className="font-bold uppercase tracking-wider">Trusted Authority</h4>
-                  <p className="text-muted-foreground font-medium">Serving Harare and the global market since October 2014 with unshakeable integrity.</p>
-                </div>
-                <div className="space-y-4">
-                  <Star className="h-8 w-8 text-primary" />
-                  <h4 className="font-bold uppercase tracking-wider">Elite Execution</h4>
-                  <p className="text-muted-foreground font-medium">We don't just solve problems; we engineer outcomes that drive revenue.</p>
-                </div>
-              </div>
-
-              <Button asChild variant="link" className="text-primary p-0 text-xl font-bold uppercase tracking-widest h-auto">
-                <Link href="/about" className="flex items-center">
-                  Learn Our Story <ArrowRight className="ml-4 h-6 w-6" />
-                </Link>
-              </Button>
             </div>
 
-            <div className="lg:w-1/2 relative">
-              <div className="aspect-[4/5] bg-border/20 border border-border/50 relative overflow-hidden group">
-                <div className="absolute inset-0 bg-gradient-to-t from-background to-transparent z-10" />
-                <div className="absolute bottom-12 left-12 right-12 z-20 space-y-4 translate-y-8 group-hover:translate-y-0 transition-transform duration-700">
-                  <p className="font-headline text-3xl font-bold leading-tight uppercase">
-                    "Reliable and trustworthy. Strive is the only person I trust with my gadgets."
+            <div className="lg:w-5/12 relative group">
+              <div className="aspect-square bg-card border border-border p-12 flex flex-col justify-between">
+                <Star className="h-10 w-10 text-accent opacity-20 group-hover:opacity-100 transition-opacity duration-1000" />
+                <div className="space-y-6">
+                  <p className="text-scale-2 font-secondary italic font-medium leading-relaxed">
+                    "Unmatched combined expertise. Detailed, honest, and technically superior in both gadget restoration and system design."
                   </p>
-                  <p className="text-xs font-bold uppercase tracking-[0.5em] text-primary">David C., Harare</p>
+                  <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-primary">Core Testimony: David C.</p>
                 </div>
               </div>
-              <div className="absolute -top-12 -right-12 h-64 w-64 border border-primary/20 -z-10" />
+              <div className="absolute -inset-4 border border-primary/10 -z-10 group-hover:scale-105 transition-transform duration-1000" />
             </div>
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-48 bg-primary">
-        <div className="container mx-auto px-4 text-center space-y-12">
-          <h2 className="font-headline text-6xl md:text-9xl font-bold tracking-tighter text-background leading-none">
-            READY TO <br />
-            UPGRADE?
+      {/* Final Transmission CTA */}
+      <section className="py-v-5 bg-background border-t border-border relative overflow-hidden">
+        <div className="container mx-auto px-v-1 text-center space-y-v-3 relative z-10">
+          <h2 className="text-scale-5 font-bold tracking-tighter leading-[0.85] uppercase">
+            Initiate <br />
+            <span className="text-primary italic font-secondary tracking-normal">Upgrade.</span>
           </h2>
-          <div className="flex flex-col sm:flex-row justify-center gap-8">
-            <Button asChild size="lg" className="bg-background text-primary hover:bg-background/90 h-20 px-12 text-2xl font-bold uppercase tracking-tighter">
-              <Link href="/booking">Book a Strategy Call</Link>
+          <div className="flex flex-col sm:flex-row justify-center gap-v-2">
+            <Button asChild size="lg" className="h-20 px-12 text-scale-2 font-bold uppercase tracking-widest bg-primary rounded-none hover:bg-primary/90 transition-all duration-700">
+              <Link href="/booking">Book Strategy Session</Link>
             </Button>
-            <Button asChild variant="outline" size="lg" className="border-background text-background hover:bg-background hover:text-primary h-20 px-12 text-2xl font-bold uppercase tracking-tighter">
+            <Button asChild variant="outline" size="lg" className="h-20 px-12 text-scale-2 font-bold uppercase tracking-widest border-border hover:bg-muted/10 rounded-none transition-all duration-700">
               <Link href="/contact">Message Support</Link>
             </Button>
           </div>
         </div>
+
+        {/* Background Bias Circles */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] border border-primary/5 rounded-full -z-10" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] border border-primary/5 rounded-full -z-10 animate-pulse" />
       </section>
     </div>
   );
 }
-

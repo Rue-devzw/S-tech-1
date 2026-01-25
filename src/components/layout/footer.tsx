@@ -4,18 +4,18 @@ import { Facebook, MessageCircle, Share2, ArrowUpRight } from 'lucide-react';
 
 export function Footer() {
   return (
-    <footer className="w-full border-t border-border/50 bg-background pt-24 pb-12">
-      <div className="container mx-auto px-4 md:px-6">
-        <div className="grid gap-16 md:grid-cols-4 lg:grid-cols-6">
-          <div className="col-span-2 space-y-8">
+    <footer className="w-full border-t border-border bg-background pt-v-4 pb-v-2 font-primary">
+      <div className="container mx-auto px-v-1">
+        <div className="grid gap-v-3 md:grid-cols-12 items-start">
+          <div className="md:col-span-12 lg:col-span-5 space-y-8">
             <Link href="/" className="flex items-center gap-3">
-              <Logo className="h-10 w-10 text-primary" />
-              <span className="font-headline text-2xl font-bold tracking-tight">S-TECH SOLUTIONS</span>
+              <Logo className="h-5 w-5 text-primary" />
+              <span className="text-[10px] font-bold uppercase tracking-[0.5em]">S-TECH SOLUTIONS</span>
             </Link>
-            <p className="max-w-xs text-lg font-medium leading-relaxed text-muted-foreground">
-              Elite engineering for the digital age. Bridging hardware precision with software intelligence since 2014.
+            <p className="max-w-md text-scale-2 font-secondary font-medium italic text-muted-foreground leading-relaxed">
+              Engineered for the digital age. We bridge the gap between microscopic hardware diagnostics and macroscopic software intelligence.
             </p>
-            <div className="flex gap-4">
+            <div className="flex gap-6">
               {[
                 { icon: Facebook, href: "https://www.facebook.com/Stechsolutions/" },
                 { icon: MessageCircle, href: "https://wa.me/263718704505" },
@@ -26,68 +26,66 @@ export function Footer() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex h-12 w-12 items-center justify-center border border-border/50 hover:bg-primary hover:text-background transition-colors"
+                  className="flex h-10 w-10 items-center justify-center border border-border/50 hover:border-primary hover:text-primary transition-all duration-700"
                 >
-                  <social.icon className="h-5 w-5" />
+                  <social.icon className="h-4 w-4" />
                 </a>
               ))}
             </div>
           </div>
 
-          <div className="space-y-6">
-            <h4 className="font-headline text-xs font-bold uppercase tracking-[0.2em] text-primary">Services</h4>
+          <div className="md:col-span-4 lg:col-span-2 space-y-8">
+            <h4 className="text-[10px] font-bold uppercase tracking-[0.4em] text-primary">Capabilities</h4>
             <ul className="space-y-4">
               {[
                 { label: 'Software & Systems', href: '/services/software-systems' },
                 { label: 'Digital Growth', href: '/services/digital-growth' },
-                { label: 'Device Repairs', href: '/services/device-repairs' },
+                { label: 'Hardware Lifecycle', href: '/services/device-repairs' },
               ].map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="group flex items-center text-sm font-bold uppercase tracking-wider text-foreground/60 hover:text-foreground">
+                  <Link href={link.href} className="group flex items-center text-[10px] font-bold uppercase tracking-wider text-muted-foreground hover:text-primary transition-colors duration-500">
                     {link.label}
-                    <ArrowUpRight className="ml-1 h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity" />
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          <div className="space-y-6">
-            <h4 className="font-headline text-xs font-bold uppercase tracking-[0.2em] text-primary">Exploration</h4>
+          <div className="md:col-span-4 lg:col-span-2 space-y-8">
+            <h4 className="text-[10px] font-bold uppercase tracking-[0.4em] text-primary">Intelligence</h4>
             <ul className="space-y-4">
               {[
                 { label: 'Portfolio', href: '/portfolio' },
                 { label: 'Products', href: '/products' },
                 { label: 'About', href: '/about' },
-                { label: 'Booking', href: '/booking' },
+                { label: 'Consultation', href: '/booking' },
               ].map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="group flex items-center text-sm font-bold uppercase tracking-wider text-foreground/60 hover:text-foreground">
+                  <Link href={link.href} className="group flex items-center text-[10px] font-bold uppercase tracking-wider text-muted-foreground hover:text-primary transition-colors duration-500">
                     {link.label}
-                    <ArrowUpRight className="ml-1 h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity" />
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          <div className="col-span-2 space-y-6 lg:col-span-2">
-            <h4 className="font-headline text-xs font-bold uppercase tracking-[0.2em] text-primary">HQ</h4>
-            <div className="space-y-2 text-sm font-medium text-muted-foreground">
-              <p>Harate, Zimbabwe</p>
-              <p>Established October 2014</p>
-              <p className="pt-4 text-foreground font-bold tracking-widest text-lg">+263 718 704 505</p>
+          <div className="md:col-span-4 lg:col-span-3 space-y-8 border-l border-border pl-8 hidden lg:block">
+            <h4 className="text-[10px] font-bold uppercase tracking-[0.4em] text-primary">Infrastructure</h4>
+            <div className="space-y-4">
+              <p className="text-scale-1 font-medium text-muted-foreground uppercase tracking-widest">Harare, Zimbabwe</p>
+              <p className="text-scale-1 font-medium text-muted-foreground uppercase tracking-widest">Operational Since 2014</p>
+              <p className="pt-4 text-scale-2 font-bold tracking-[0.2em] text-foreground">+263 718 704 505</p>
             </div>
           </div>
         </div>
 
-        <div className="mt-24 flex flex-col items-center justify-between border-t border-border/50 pt-12 md:flex-row gap-8">
-          <p className="text-[10px] uppercase font-bold tracking-[0.3em] text-muted-foreground">
+        <div className="mt-v-3 flex flex-col items-center justify-between border-t border-border pt-12 md:flex-row gap-8">
+          <p className="text-[8px] uppercase font-bold tracking-[0.5em] text-muted-foreground/30">
             &copy; {new Date().getFullYear()} S-Tech Solutions | Engineered to Lead.
           </p>
-          <div className="flex gap-12 text-[10px] uppercase font-bold tracking-[0.3em]">
-            <Link href="#" className="hover:text-primary transition-colors">Privacy</Link>
-            <Link href="#" className="hover:text-primary transition-colors">Terms</Link>
+          <div className="flex gap-12 text-[8px] uppercase font-bold tracking-[0.5em] text-muted-foreground/30">
+            <Link href="#" className="hover:text-primary transition-colors">Privacy Protocal</Link>
+            <Link href="#" className="hover:text-primary transition-colors">Terms of Engagement</Link>
           </div>
         </div>
       </div>

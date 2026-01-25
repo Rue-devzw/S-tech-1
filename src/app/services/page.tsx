@@ -37,55 +37,57 @@ const services = [
 
 export default function ServicesPage() {
     return (
-        <div className="min-h-screen bg-background pt-32 pb-48">
-            <div className="container mx-auto px-4">
+        <div className="min-h-screen bg-background pt-v-4 pb-v-4 font-primary">
+            <div className="container mx-auto px-v-1">
                 {/* Header Section */}
-                <div className="max-w-4xl space-y-8 mb-32">
+                <div className="max-w-4xl space-y-8 mb-v-4">
                     <motion.div
-                        initial={{ opacity: 0, x: -20 }}
+                        initial={{ opacity: 0, x: -15 }}
                         animate={{ opacity: 1, x: 0 }}
-                        className="inline-flex items-center gap-2 px-4 py-2 border border-primary/20 bg-primary/5 text-primary text-xs font-bold uppercase tracking-[0.2em]"
+                        transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+                        className="inline-flex items-center gap-2 px-3 py-1 border border-primary/20 bg-primary/5 text-primary text-[10px] font-bold uppercase tracking-[0.3em]"
                     >
-                        <span>The Outcome Catalog</span>
+                        <span>The Efficiency Catalog</span>
                     </motion.div>
                     <motion.h1
-                        initial={{ opacity: 0, y: 20 }}
+                        initial={{ opacity: 0, y: 15 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="font-headline text-6xl md:text-8xl font-bold tracking-tighter leading-none"
+                        transition={{ duration: 1.2, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+                        className="text-scale-4 md:text-scale-5 font-bold tracking-tighter leading-none uppercase"
                     >
-                        SERVICES AS <br />
-                        <span className="text-primary italic">SOLUTIONS.</span>
+                        Services as <br />
+                        <span className="text-primary italic font-secondary tracking-normal">Engineering.</span>
                     </motion.h1>
                     <motion.p
-                        initial={{ opacity: 0, y: 20 }}
+                        initial={{ opacity: 0, y: 15 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.1 }}
-                        className="text-xl text-muted-foreground font-medium max-w-2xl leading-relaxed"
+                        transition={{ duration: 1.2, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                        className="text-scale-2 text-muted-foreground font-medium max-w-2xl leading-relaxed font-secondary italic"
                     >
-                        We don't sell hours; we sell outcomes. Our service architecture is designed to address specific business and technical challenges with absolute precision.
+                        We don't sell hours; we sell architectural certainty. Our services are stratified into three primary engineering modules.
                     </motion.p>
                 </div>
 
-                {/* Services List */}
-                <div className="space-y-12">
+                {/* Services List - Asymmetric Stack */}
+                <div className="space-y-v-3">
                     {services.map((service, i) => (
                         <motion.div
                             key={service.id}
-                            initial={{ opacity: 0, y: 40 }}
+                            initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            transition={{ duration: 0.8, delay: i * 0.1 }}
-                            className="group relative grid lg:grid-cols-12 gap-px bg-border/50 border border-border/50 overflow-hidden"
+                            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+                            className="group relative grid lg:grid-cols-12 gap-px bg-border overflow-hidden"
                         >
-                            <div className="lg:col-span-1 p-8 md:p-12 flex justify-center items-start bg-background border-r border-border/50">
-                                <span className="text-sm font-bold tracking-[0.4em] text-muted-foreground vertical-text">0{i + 1}</span>
+                            <div className="lg:col-span-1 p-8 md:p-12 flex justify-center items-start bg-background border-r border-border">
+                                <span className="text-[10px] font-bold tracking-[0.4em] text-muted-foreground/30 vertical-text">0{i + 1}</span>
                             </div>
 
                             <div className="lg:col-span-7 p-12 md:p-16 bg-background space-y-12">
                                 <div className="space-y-4">
-                                    <div className="text-xs font-bold uppercase tracking-[0.4em] text-primary">{service.subtitle}</div>
-                                    <h2 className="font-headline text-4xl md:text-6xl font-bold tracking-tight">{service.title}</h2>
-                                    <p className="text-lg text-muted-foreground font-medium leading-relaxed max-w-xl">
+                                    <div className="text-[10px] font-bold uppercase tracking-[0.4em] text-secondary">{service.subtitle}</div>
+                                    <h2 className="text-scale-3 md:text-scale-4 font-bold tracking-tight uppercase leading-none">{service.title}</h2>
+                                    <p className="text-scale-2 text-muted-foreground font-medium leading-relaxed max-w-xl font-secondary italic">
                                         {service.description}
                                     </p>
                                 </div>
@@ -93,28 +95,28 @@ export default function ServicesPage() {
                                 <div className="grid sm:grid-cols-2 gap-8">
                                     <ul className="space-y-4">
                                         {service.outcomes.map((outcome, j) => (
-                                            <li key={j} className="flex items-center gap-3 text-sm font-bold uppercase tracking-widest text-foreground/80">
-                                                <ChevronRight className="h-4 w-4 text-primary" />
+                                            <li key={j} className="flex items-center gap-3 text-[10px] font-bold uppercase tracking-widest text-foreground/70">
+                                                <span className="h-1 w-1 bg-accent" />
                                                 {outcome}
                                             </li>
                                         ))}
                                     </ul>
                                     <div className="flex items-end justify-end">
-                                        <Button asChild size="lg" className="h-16 px-10 text-xs font-bold uppercase tracking-widest bg-primary hover:bg-primary/90">
-                                            <Link href={`/services/${service.id}`}>
-                                                Deep Dive <ArrowRight className="ml-2 h-4 w-4" />
+                                        <Button asChild className="h-12 px-8 text-[10px] font-bold uppercase tracking-widest bg-primary hover:bg-primary/90 rounded-none transition-all duration-700 group">
+                                            <Link href={`/services/${service.id}`} className="flex items-center">
+                                                Deep Dive <ArrowRight className="ml-3 h-3 w-3 transition-transform group-hover:translate-x-1" />
                                             </Link>
                                         </Button>
                                     </div>
                                 </div>
                             </div>
 
-                            <div className="lg:col-span-4 bg-secondary/5 relative overflow-hidden hidden lg:block">
-                                <div className="absolute inset-0 flex items-center justify-center opacity-10 group-hover:opacity-20 transition-opacity duration-700">
+                            <div className="lg:col-span-4 bg-muted/5 relative overflow-hidden hidden lg:block">
+                                <div className="absolute inset-0 flex items-center justify-center opacity-5 group-hover:opacity-15 transition-opacity duration-1000">
                                     <service.icon className="h-64 w-64" />
                                 </div>
                                 <div className="absolute bottom-12 right-12">
-                                    <service.icon className="h-24 w-24 text-primary/40" />
+                                    <service.icon className="h-20 w-20 text-primary/10" />
                                 </div>
                             </div>
                         </motion.div>

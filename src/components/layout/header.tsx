@@ -21,33 +21,33 @@ export function Header() {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-background/80 backdrop-blur-xl">
-      <div className="container flex h-20 items-center justify-between">
-        <div className="flex items-center gap-12">
+    <header className="fixed top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-md font-primary">
+      <div className="container mx-auto px-v-1 flex h-20 items-center justify-between">
+        <div className="flex items-center gap-16">
           <Link href="/" className="flex items-center gap-3 group">
             <div className="relative">
-              <Logo className="h-8 w-8 text-primary transition-transform duration-500 group-hover:rotate-90" />
-              <div className="absolute -inset-1 bg-primary/20 blur-lg opacity-0 group-hover:opacity-100 transition-opacity" />
+              <Logo className="h-6 w-6 text-primary transition-transform duration-700 group-hover:rotate-180" />
             </div>
-            <span className="font-headline text-xl font-bold tracking-tight uppercase">S-Tech</span>
+            <span className="text-[10px] font-bold uppercase tracking-[0.5em]">S-Tech</span>
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden items-center gap-8 text-xs font-bold tracking-[0.2em] uppercase md:flex">
+          <nav className="hidden items-center gap-10 text-[10px] font-bold uppercase tracking-[0.3em] md:flex">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 className={cn(
-                  "relative py-2 transition-colors hover:text-primary",
-                  pathname === link.href ? "text-primary" : "text-foreground/60"
+                  "relative py-2 transition-colors duration-500 hover:text-primary",
+                  pathname === link.href ? "text-primary" : "text-muted-foreground"
                 )}
               >
                 {link.label}
                 {pathname === link.href && (
                   <motion.div
                     layoutId="nav-underline"
-                    className="absolute bottom-0 left-0 h-[2px] w-full bg-primary"
+                    className="absolute bottom-0 left-0 h-px w-full bg-primary"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
                   />
                 )}
               </Link>
@@ -55,47 +55,48 @@ export function Header() {
           </nav>
         </div>
 
-        <div className="flex items-center gap-6">
-          <div className="hidden sm:block">
-            <ThemeToggle />
-          </div>
-          <Button asChild className="hidden md:flex group relative overflow-hidden bg-primary px-8 hover:bg-primary/90">
-            <Link href="/booking" className="flex items-center">
-              <span>Book Now</span>
-              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </Link>
+        <div className="flex items-center gap-8">
+          <Button asChild className="hidden md:flex bg-primary hover:bg-primary/90 text-[10px] font-bold uppercase tracking-[0.3em] h-12 px-8 rounded-none transition-all duration-700">
+            <Link href="/booking">Initiate Strategy</Link>
           </Button>
 
           {/* Mobile Navigation */}
           <Sheet>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="md:hidden">
-                <Menu className="h-6 w-6" />
+              <Button variant="ghost" size="icon" className="md:hidden hover:bg-primary/5 rounded-none">
+                <Menu className="h-5 w-5 text-muted-foreground" />
                 <span className="sr-only">Toggle Menu</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-full bg-background/95 backdrop-blur-2xl border-l border-border/50">
-              <div className="mt-12 flex flex-col space-y-8">
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className={cn(
-                      "font-headline text-4xl font-bold tracking-tighter hover:text-primary transition-colors",
-                      pathname === link.href ? "text-primary" : "text-foreground/40"
-                    )}
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-                <div className="pt-8 flex flex-col gap-4">
-                  <Button asChild size="lg" className="h-16 text-xl font-bold">
-                    <Link href="/booking">Book Now</Link>
-                  </Button>
-                  <div className="flex items-center justify-between pt-4 border-t border-border/50">
-                    <span className="text-sm font-medium text-muted-foreground">Appearance</span>
-                    <ThemeToggle />
-                  </div>
+            <SheetContent side="right" className="w-full sm:w-[400px] bg-background border-l border-border p-v-3 flex flex-col justify-between">
+              <div className="space-y-v-3">
+                <div className="flex items-center gap-3 pb-v-2 border-b border-border">
+                  <Logo className="h-5 w-5 text-primary" />
+                  <span className="text-[10px] font-bold uppercase tracking-[0.5em]">S-Tech</span>
+                </div>
+                <nav className="flex flex-col space-y-8">
+                  {navLinks.map((link, i) => (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      className={cn(
+                        "text-scale-3 font-bold tracking-tighter uppercase hover:text-primary transition-colors duration-700",
+                        pathname === link.href ? "text-primary" : "text-muted-foreground/40"
+                      )}
+                    >
+                      <span className="text-[10px] mr-4 opacity-40 font-secondary italic">0{i + 1}</span>
+                      {link.label}
+                    </Link>
+                  ))}
+                </nav>
+              </div>
+              <div className="space-y-6 pt-v-2 border-t border-border">
+                <Button asChild size="lg" className="w-full h-16 bg-primary text-scale-1 font-bold uppercase tracking-widest rounded-none">
+                  <Link href="/booking">Book Strategy Session</Link>
+                </Button>
+                <div className="flex justify-between items-center text-[8px] font-bold uppercase tracking-[0.4em] text-muted-foreground/40">
+                  <span>Harare, ZW</span>
+                  <span>Operational Status: Primary</span>
                 </div>
               </div>
             </SheetContent>
