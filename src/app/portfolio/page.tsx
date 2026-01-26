@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { ArrowRight, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
@@ -11,28 +12,28 @@ const categories = ['All', 'Web & Apps', 'Systems & Automation', 'Design', 'Repa
 
 const projects = [
   {
-    title: 'NexGen AI Dashboard',
-    category: 'Software',
-    slug: 'nexgen-ai-dashboard',
-    description: 'A predictive analytics engine for fintech operations.',
-    image: '/portfolio/nexgen.jpg',
-    tags: ['Next.js', 'AI', 'Tailwind']
+    title: 'Mussy Consultancy Agency',
+    category: 'Web & Apps',
+    slug: 'mussy-consultancy-agency',
+    description: 'A strategic digital gateway for global education consultancy, architected to facilitate seamless student journeys through complex international application landscapes.',
+    image: '/images/dev-project-1.webp',
+    tags: ['Next.js', 'Education', 'Strategy']
   },
   {
-    title: 'Pulse Brand Identity',
-    category: 'Branding',
-    slug: 'pulse-brand-identity',
-    description: 'Comprehensive visual overhaul for a modern logistics firm.',
-    image: '/portfolio/pulse.jpg',
-    tags: ['Design', 'Strategy']
+    title: 'Valley Farm Secrets',
+    category: 'Web & Apps',
+    slug: 'valley-farm-secrets',
+    description: 'An integrated farm-to-table digital marketplace optimizing sustainable supply chains and connecting local Zimbabwean producers directly to the consumer collective.',
+    image: '/images/dev-project-2.webp',
+    tags: ['E-commerce', 'Agriculture', 'Logistics']
   },
   {
-    title: 'Core System Recovery',
-    category: 'Hardware',
-    slug: 'core-system-recovery',
-    description: 'Board-level restoration of high-availability server clusters.',
-    image: '/portfolio/hardware.jpg',
-    tags: ['Repair', 'Logic Board']
+    title: 'S-Tech Solutions',
+    category: 'Web & Apps',
+    slug: 's-tech-solutions',
+    description: 'A high-precision engineering platform bridging the gap between hardware reliability and advanced AI-assisted software systems for mission-critical operations.',
+    image: '/images/dev-project-3.webp',
+    tags: ['Engineering', 'AI', 'Full-stack']
   }
 ];
 
@@ -89,9 +90,12 @@ export default function PortfolioPage() {
               className="group relative bg-background p-12 space-y-12 hover:bg-card transition-colors duration-700"
             >
               <div className="aspect-[4/3] bg-muted/5 border border-border/50 relative overflow-hidden">
-                <div className="absolute inset-0 flex items-center justify-center text-[8px] font-bold tracking-[0.5em] text-muted-foreground/20 italic font-secondary uppercase">
-                  Vault_Record_{i + 102}
-                </div>
+                <Image
+                  src={project.image}
+                  alt={project.title}
+                  fill
+                  className="object-cover transition-transform duration-1000 group-hover:scale-105"
+                />
                 <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/5 transition-colors duration-1000" />
               </div>
 
