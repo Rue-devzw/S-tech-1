@@ -17,8 +17,15 @@ export default {
     },
     extend: {
       fontFamily: {
-        body: ['Inter', 'sans-serif'],
-        headline: ['Space Grotesk', 'sans-serif'],
+        primary: ['Inter', 'sans-serif'], // Neo-grotesk/Humanist
+        secondary: ['"Source Serif 4"', 'serif'], // Text-optimized serif
+      },
+      fontSize: {
+        'scale-1': ['0.75rem', { lineHeight: '1.4' }],
+        'scale-2': ['1rem', { lineHeight: '1.5' }],
+        'scale-3': ['1.25rem', { lineHeight: '1.3' }],
+        'scale-4': ['2.5rem', { lineHeight: '1.1' }],
+        'scale-5': ['5rem', { lineHeight: '1' }],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -54,13 +61,6 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        chart: {
-          '1': 'hsl(var(--chart-1))',
-          '2': 'hsl(var(--chart-2))',
-          '3': 'hsl(var(--chart-3))',
-          '4': 'hsl(var(--chart-4))',
-          '5': 'hsl(var(--chart-5))',
-        },
       },
       borderRadius: {
         lg: '0px',
@@ -68,38 +68,21 @@ export default {
         sm: '0px',
       },
       spacing: {
-        's-1': '4px',
-        's-2': '12px',
-        's-3': '32px',
-        's-4': '80px',
-        's-5': '160px',
+        'nav': '80px',
+        'v-1': '8px',
+        'v-2': '24px',
+        'v-3': '64px',
+        'v-4': '128px',
+        'v-5': '256px',
       },
       keyframes: {
-        'accordion-down': {
-          from: {
-            height: '0',
-          },
-          to: {
-            height: 'var(--radix-accordion-content-height)',
-          },
-        },
-        'accordion-up': {
-          from: {
-            height: 'var(--radix-accordion-content-height)',
-          },
-          to: {
-            height: '0',
-          },
-        },
-        'fade-in-up': {
-          '0%': { opacity: '0', transform: 'translateY(20px)' },
+        'controlled-decure': {
+          '0%': { opacity: '0', transform: 'translateY(15px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
         }
       },
       animation: {
-        'accordion-down': 'accordion-down 0.2s ease-out',
-        'accordion-up': 'accordion-up 0.2s ease-out',
-        'fade-in-up': 'fade-in-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+        'enter': 'controlled-decure 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards',
       },
     },
   },

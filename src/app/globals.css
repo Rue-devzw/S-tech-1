@@ -4,54 +4,44 @@
 
 @layer base {
   :root {
-    --background: 240 10% 2%; /* Modern Void */
-    --foreground: 210 40% 98%;
-    --card: 240 10% 4%;
-    --card-foreground: 210 40% 98%;
-    --popover: 240 10% 2%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 210 100% 50%; /* Neon Accuracy Blue */
-    --primary-foreground: 210 40% 98%;
-    --secondary: 220 100% 10%; /* Deep Intelligence Blue */
-    --secondary-foreground: 210 40% 98%;
-    --muted: 240 10% 8%;
-    --muted-foreground: 215.4 16.3% 60%;
-    --accent: 45 100% 50%; /* Precision Gold */
-    --accent-foreground: 240 10% 2%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 240 10% 12%;
-    --input: 240 10% 12%;
-    --ring: 210 100% 50%;
-    --radius: 0rem; /* Sharp, engineering-focused corners */
-    --chart-1: 210 100% 50%;
-    --chart-2: 220 100% 10%;
-    --chart-3: 45 100% 50%;
-    --chart-4: 240 10% 12%;
-    --chart-5: 215.4 16.3% 60%;
-  }
+    /* Neutrals: Chromatic Bias (Indigo/Slate) */
+    --background: 232 15% 7%;
+    /* Carbon Mist: Deep neutral indigo bias */
+    --foreground: 232 10% 95%;
+    /* Ceramic Veil: Off-white ceramic */
 
-  /* S-Tech is always dark by default */
-  .light {
-    --background: 210 40% 98%;
-    --foreground: 240 10% 2%;
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 2%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 2%;
-    --primary: 210 100% 50%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 220 100% 10%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 45 100% 50%;
-    --accent-foreground: 240 10% 2%;
-    --destructive: 0 84.2% 60.2%;
+    --card: 232 15% 9%;
+    --card-foreground: 232 10% 95%;
+
+    --popover: 232 15% 7%;
+    --popover-foreground: 232 10% 95%;
+
+    /* Primary: Engineered Indigo (Subtle, professional) */
+    --primary: 232 30% 45%;
+    --primary-foreground: 232 10% 98%;
+
+    /* Secondary: Oxidized Teal (Competition rule: grayish bias) */
+    --secondary: 185 12% 35%;
+    --secondary-foreground: 232 10% 98%;
+
+    /* Neutrals: Middle Values */
+    --muted: 232 10% 20%;
+    /* Alloy Ash */
+    --muted-foreground: 232 10% 65%;
+
+    /* Accent: Controlled Amber (Usage limit: 3%, status only) */
+    --accent: 35 30% 50%;
+    --accent-foreground: 232 15% 7%;
+
+    --destructive: 0 50% 45%;
     --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 210 100% 50%;
+
+    --border: 232 10% 18%;
+    --input: 232 10% 18%;
+    --ring: 232 30% 45%;
+
+    --radius: 0rem;
+    /* Hard enforcement of sharp corners */
   }
 }
 
@@ -59,6 +49,7 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }

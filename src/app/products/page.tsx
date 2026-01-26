@@ -28,50 +28,51 @@ const products = [
 
 export default function ProductsPage() {
     return (
-        <div className="min-h-screen bg-background pt-32 pb-48">
-            <div className="container mx-auto px-4">
-                <div className="max-w-4xl space-y-8 mb-24">
+        <div className="min-h-screen bg-background pt-v-4 pb-v-4 font-primary">
+            <div className="container mx-auto px-v-1">
+                <div className="max-w-4xl space-y-8 mb-v-3">
                     <motion.div
-                        initial={{ opacity: 0, x: -20 }}
+                        initial={{ opacity: 0, x: -15 }}
                         animate={{ opacity: 1, x: 0 }}
-                        className="inline-flex items-center gap-2 px-4 py-2 border border-primary/20 bg-primary/5 text-primary text-xs font-bold uppercase tracking-[0.2em]"
+                        transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+                        className="inline-flex items-center gap-2 px-3 py-1 border border-primary/20 bg-primary/5 text-primary text-[10px] font-bold uppercase tracking-[0.3em]"
                     >
-                        <span>Scalable Value</span>
+                        <span>Strategic Assets</span>
                     </motion.div>
-                    <h1 className="font-headline text-6xl md:text-8xl font-bold tracking-tighter leading-none">
-                        DIGITAL <br />
-                        <span className="text-primary italic">ASSETS.</span>
+                    <h1 className="text-scale-4 md:text-scale-5 font-bold tracking-tighter leading-none uppercase">
+                        Digital <br />
+                        <span className="text-primary italic font-secondary tracking-normal">Proprietary.</span>
                     </h1>
-                    <p className="text-xl text-muted-foreground font-medium max-w-2xl leading-relaxed">
-                        Proprietary tools and frameworks engineered to accelerate digital transformation. From free automation templates to premium architectural kits.
+                    <p className="text-scale-2 text-muted-foreground font-medium max-w-2xl leading-relaxed font-secondary italic">
+                        Compressed engineering intelligence. Our internal frameworks and optimization protocols, available for deterministic integration.
                     </p>
                 </div>
 
-                {/* Product Grid */}
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-border/50 border border-border/50">
+                {/* Product Grid - Asymmetric Stack */}
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-border">
                     {products.map((product, i) => (
                         <motion.div
                             key={product.id}
-                            initial={{ opacity: 0, y: 20 }}
+                            initial={{ opacity: 0, y: 15 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5, delay: i * 0.1 }}
-                            className="group relative bg-background p-12 space-y-12 hover:bg-secondary/5 transition-colors"
+                            transition={{ duration: 1.2, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
+                            className="group relative bg-background p-12 space-y-12 hover:bg-card transition-colors duration-700"
                         >
                             <div className="flex justify-between items-start">
                                 <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-primary">{product.tag}</span>
-                                <span className="text-xl font-headline font-bold">{product.price}</span>
+                                <span className="text-scale-3 font-bold text-accent">{product.price}</span>
                             </div>
 
                             <div className="space-y-6">
-                                <h3 className="font-headline text-3xl font-bold tracking-tight leading-tight">{product.title}</h3>
-                                <p className="text-muted-foreground font-medium leading-relaxed">{product.description}</p>
+                                <h3 className="text-scale-3 font-bold tracking-tight leading-tight uppercase font-primary">{product.title}</h3>
+                                <p className="text-scale-1 text-muted-foreground font-medium leading-relaxed font-secondary italic">{product.description}</p>
                             </div>
 
                             <div className="pt-6">
-                                <Button asChild className="w-full h-16 text-xs font-bold uppercase tracking-[0.2em] group">
+                                <Button asChild className="w-full h-14 text-[10px] font-bold uppercase tracking-widest bg-primary hover:bg-primary/90 rounded-none transition-all duration-700 group">
                                     <Link href={`/products/${product.id}`} className="flex items-center justify-center">
-                                        {product.price === 'Free' ? 'Download for Free' : 'Secure Access'}
-                                        <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                                        {product.price === 'Free' ? 'Acquire Protocol' : 'Secure Integration'}
+                                        <ArrowRight className="ml-3 h-3 w-3 transition-transform group-hover:translate-x-2" />
                                     </Link>
                                 </Button>
                             </div>

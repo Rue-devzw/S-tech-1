@@ -44,31 +44,32 @@ export default function PortfolioPage() {
     : projects.filter(p => p.category === activeCategory);
 
   return (
-    <div className="min-h-screen bg-background pt-32 pb-48">
-      <div className="container mx-auto px-4">
-        <div className="max-w-4xl space-y-8 mb-24">
+    <div className="min-h-screen bg-background pt-v-4 pb-v-4 font-primary">
+      <div className="container mx-auto px-v-1">
+        <div className="max-w-4xl space-y-8 mb-v-3">
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
+            initial={{ opacity: 0, x: -15 }}
             animate={{ opacity: 1, x: 0 }}
-            className="inline-flex items-center gap-2 px-4 py-2 border border-primary/20 bg-primary/5 text-primary text-xs font-bold uppercase tracking-[0.2em]"
+            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+            className="inline-flex items-center gap-2 px-3 py-1 border border-primary/20 bg-primary/5 text-primary text-[10px] font-bold uppercase tracking-[0.3em]"
           >
-            <span>The Proof of Excellence</span>
+            <span>Proof of Competence</span>
           </motion.div>
-          <h1 className="font-headline text-6xl md:text-8xl font-bold tracking-tighter leading-none">
-            REAL WORK. <br />
-            <span className="text-primary italic">REAL RESULTS.</span>
+          <h1 className="text-scale-4 md:text-scale-5 font-bold tracking-tighter leading-none uppercase">
+            Proven <br />
+            <span className="text-primary italic font-secondary tracking-normal">Engineering.</span>
           </h1>
         </div>
 
-        {/* Category Filter */}
-        <div className="flex flex-wrap gap-4 mb-16 border-b border-border/50 pb-8">
+        {/* Category Filter - Asymmetric spacing */}
+        <div className="flex flex-wrap gap-4 mb-16 border-b border-border pb-8">
           {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
               className={cn(
-                "px-6 py-2 text-xs font-bold uppercase tracking-[0.2em] transition-all border border-transparent",
-                activeCategory === cat ? "bg-primary text-background" : "text-muted-foreground hover:text-foreground hover:border-border/50"
+                "px-6 py-2 text-[10px] font-bold uppercase tracking-[0.2em] transition-all duration-500",
+                activeCategory === cat ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-primary"
               )}
             >
               {cat}
@@ -76,36 +77,35 @@ export default function PortfolioPage() {
           ))}
         </div>
 
-        {/* Portfolio Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-border/50 border border-border/50">
+        {/* Portfolio Grid - Asymmetric Grid Patterns */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-border">
           {filteredProjects.map((project, i) => (
             <motion.div
               key={project.slug}
               layout
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: i * 0.05 }}
-              className="group relative bg-background p-12 space-y-12 hover:bg-secondary/5 transition-colors"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.2, delay: i * 0.05, ease: [0.22, 1, 0.36, 1] }}
+              className="group relative bg-background p-12 space-y-12 hover:bg-card transition-colors duration-700"
             >
-              <div className="aspect-[4/3] bg-secondary/10 relative overflow-hidden">
-                {/* Placeholder for real images */}
-                <div className="absolute inset-0 flex items-center justify-center text-[10px] font-bold tracking-[0.5em] text-muted-foreground italic">
-                  PREVIEW_SECURED
+              <div className="aspect-[4/3] bg-muted/5 border border-border/50 relative overflow-hidden">
+                <div className="absolute inset-0 flex items-center justify-center text-[8px] font-bold tracking-[0.5em] text-muted-foreground/20 italic font-secondary uppercase">
+                  Vault_Record_{i + 102}
                 </div>
-                <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/10 transition-colors" />
+                <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/5 transition-colors duration-1000" />
               </div>
 
               <div className="space-y-6">
                 <div className="flex justify-between items-start">
-                  <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-primary">{project.category}</span>
-                  <ArrowRight className="h-5 w-5 -rotate-45 opacity-0 group-hover:opacity-100 transition-all group-hover:rotate-0" />
+                  <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-primary">{project.category}</span>
+                  <ArrowRight className="h-5 w-5 -rotate-45 opacity-0 group-hover:opacity-100 transition-all duration-700 group-hover:rotate-0 text-accent" />
                 </div>
-                <h3 className="font-headline text-3xl font-bold tracking-tight leading-tight">{project.title}</h3>
-                <p className="text-muted-foreground font-medium line-clamp-2">{project.description}</p>
+                <h3 className="text-scale-3 font-bold tracking-tight leading-tight uppercase">{project.title}</h3>
+                <p className="text-scale-1 text-muted-foreground font-medium line-clamp-2 font-secondary italic">{project.description}</p>
               </div>
 
               <Link href={`/portfolio/${project.slug}`} className="absolute inset-0 z-20">
-                <span className="sr-only">View Case Study</span>
+                <span className="sr-only">Access Case Study</span>
               </Link>
             </motion.div>
           ))}
