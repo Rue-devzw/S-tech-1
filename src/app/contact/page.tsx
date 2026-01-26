@@ -27,8 +27,7 @@ export default function ContactPage() {
             transition={{ duration: 1.2, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
             className="text-scale-4 md:text-scale-5 font-bold tracking-tighter leading-none uppercase"
           >
-            Secure <br />
-            <span className="text-secondary italic font-secondary tracking-normal">Channel.</span>
+            Let’s Talk
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 15 }}
@@ -36,7 +35,7 @@ export default function ContactPage() {
             transition={{ duration: 1.2, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
             className="text-scale-2 text-muted-foreground font-medium max-w-2xl leading-relaxed font-secondary italic"
           >
-            Encryption active. Transmit your briefing or request industrial support.
+            Tell us what you need. We’ll respond with clarity and direction.
           </motion.p>
         </div>
 
@@ -46,7 +45,7 @@ export default function ContactPage() {
             {[
               { icon: MapPin, title: 'Operational HQ', value: 'Harare, Zimbabwe' },
               { icon: Phone, title: 'Direct Line', value: '+263 718 704 505' },
-              { icon: Mail, title: 'Encrypted Email', value: 'strive@s-tech.co.zw' }
+              { icon: Mail, title: 'Encrypted Email', value: 'strive@s-techsolutions.org' }
             ].map((item, i) => (
               <div key={i} className="space-y-4">
                 <div className="flex items-center gap-3 text-primary text-[10px] font-bold uppercase tracking-[0.4em]">
@@ -65,26 +64,37 @@ export default function ContactPage() {
             </div>
           </div>
 
-          {/* High-End Contact Form - Asymmetric Right */}
+          {/* Contact Form - Asymmetric Right */}
           <div className="lg:col-span-7 bg-card p-12 md:p-16 space-y-12 border-l border-border">
             <div className="grid md:grid-cols-2 gap-12">
               <div className="space-y-4">
-                <Label className="text-[10px] font-bold uppercase tracking-[0.3em] text-muted-foreground">Identification</Label>
-                <Input className="h-14 bg-background rounded-none border-border font-medium placeholder:opacity-20" placeholder="NAME / ORG" />
+                <Label htmlFor="name" className="text-[10px] font-bold uppercase tracking-[0.3em] text-muted-foreground">Name</Label>
+                <Input id="name" className="h-14 bg-background rounded-none border-border font-medium placeholder:opacity-20" placeholder="Your Name" />
               </div>
               <div className="space-y-4">
-                <Label className="text-[10px] font-bold uppercase tracking-[0.3em] text-muted-foreground">Routing</Label>
-                <Input className="h-14 bg-background rounded-none border-border font-medium placeholder:opacity-20" placeholder="EMAIL ADDRESS" />
+                <Label htmlFor="email" className="text-[10px] font-bold uppercase tracking-[0.3em] text-muted-foreground">Email</Label>
+                <Input id="email" type="email" className="h-14 bg-background rounded-none border-border font-medium placeholder:opacity-20" placeholder="Your Email" />
               </div>
             </div>
 
             <div className="space-y-4">
-              <Label className="text-[10px] font-bold uppercase tracking-[0.3em] text-muted-foreground">The Brief</Label>
-              <Textarea className="min-h-[200px] bg-background rounded-none border-border font-medium p-8 placeholder:opacity-20" placeholder="DESCRIBE MISSION" />
+              <Label htmlFor="service_type" className="text-[10px] font-bold uppercase tracking-[0.3em] text-muted-foreground">Service Type</Label>
+              <select id="service_type" className="w-full h-14 bg-background px-4 rounded-none border border-border font-medium text-sm appearance-none focus:outline-none focus:ring-1 focus:ring-primary">
+                <option value="">Select a Service</option>
+                <option value="development">Software & Systems</option>
+                <option value="growth">Digital Growth</option>
+                <option value="repairs">Device Repairs</option>
+                <option value="products">Digital Products</option>
+              </select>
+            </div>
+
+            <div className="space-y-4">
+              <Label htmlFor="message" className="text-[10px] font-bold uppercase tracking-[0.3em] text-muted-foreground">Message</Label>
+              <Textarea id="message" className="min-h-[200px] bg-background rounded-none border-border font-medium p-8 placeholder:opacity-20" placeholder="Tell us about your needs..." />
             </div>
 
             <Button className="w-full h-20 text-scale-2 font-bold uppercase tracking-[0.2em] bg-primary group rounded-none transition-all duration-700">
-              Transmit Briefing
+              Send Message
               <ArrowUpRight className="ml-4 h-6 w-6 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1 text-accent" />
             </Button>
           </div>

@@ -40,11 +40,10 @@ export default function ProductsPage() {
                         <span>Strategic Assets</span>
                     </motion.div>
                     <h1 className="text-scale-4 md:text-scale-5 font-bold tracking-tighter leading-none uppercase">
-                        Digital <br />
-                        <span className="text-primary italic font-secondary tracking-normal">Proprietary.</span>
+                        Digital Products
                     </h1>
                     <p className="text-scale-2 text-muted-foreground font-medium max-w-2xl leading-relaxed font-secondary italic">
-                        Compressed engineering intelligence. Our internal frameworks and optimization protocols, available for deterministic integration.
+                        Tools and utilities designed to improve efficiency and solve focused problems.
                     </p>
                 </div>
 
@@ -71,7 +70,7 @@ export default function ProductsPage() {
                             <div className="pt-6">
                                 <Button asChild className="w-full h-14 text-[10px] font-bold uppercase tracking-widest bg-primary hover:bg-primary/90 rounded-none transition-all duration-700 group">
                                     <Link href={`/products/${product.id}`} className="flex items-center justify-center">
-                                        {product.price === 'Free' ? 'Acquire Protocol' : 'Secure Integration'}
+                                        View Product
                                         <ArrowRight className="ml-3 h-3 w-3 transition-transform group-hover:translate-x-2" />
                                     </Link>
                                 </Button>

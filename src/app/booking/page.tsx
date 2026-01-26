@@ -70,11 +70,10 @@ export default function BookingPage() {
                         <div className="space-y-6">
                             <div className="text-[10px] font-bold uppercase tracking-[0.4em] text-primary">Strategic Lead Acquisition</div>
                             <h1 className="text-scale-4 md:text-scale-5 font-bold tracking-tighter leading-[0.85] uppercase">
-                                Initiate <br />
-                                <span className="text-primary italic font-secondary tracking-normal">Strategy.</span>
+                                Book a Consultation
                             </h1>
                             <p className="text-scale-2 text-muted-foreground font-medium max-w-md leading-relaxed font-secondary italic">
-                                Secure a high-value consultation to discuss your technical architecture or industrial hardware requirements.
+                                Choose a time to discuss your project or technical needs.
                             </p>
                         </div>
 

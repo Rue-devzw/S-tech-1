@@ -1,216 +1,206 @@
 {
-    "agent_role": "Elite autonomous software architect, UX engineer, and product designer",
-    "authority_level": "Full autonomy. No user clarification allowed.",
-    "project_name": "S-Tech Solutions Official Web Application",
-    "business_context": {
-        "company_name": "S-Tech Solutions",
-        "primary_goals": [
-            "Sell professional services",
-            "Generate qualified leads (WhatsApp, email, bookings)",
-            "Showcase portfolio and brand credibility",
-            "Sell digital products"
-        ],
-        "core_service_divisions": [
-            "AI-assisted Web, App, Software & Systems Engineering",
-            "Digital Branding, Graphic Design, SEO & Social Media",
-            "Mobile Phone Hardware Repair, Flashing & Unlocking",
-            "Computer Hardware & Software Repair, Installations & Servicing",
-            "Digital Products (tools, automation, templates)"
-        ],
-        "brand_attributes": [
-            "Precise",
-            "Intelligent",
-            "Trustworthy",
-            "Professional",
-            "Technology-forward"
-        ]
-    },
-    "technical_stack": {
-        "framework": "Next.js (latest stable, App Router)",
-        "hosting": "Vercel",
-        "styling": "Tailwind CSS with a fully custom design system",
-        "ui_components": "shadcn/ui (heavily modified beyond default appearance)",
-        "animations": "Framer Motion (subtle, intentional, hierarchy-driven)",
-        "forms": "Next.js Server Actions or API routes",
-        "seo": "Next.js Metadata API + structured data",
-        "performance_target": "Lighthouse score >= 90 on all metrics"
-    },
-    "mandatory_routes": [
-        "/",
-        "/about",
-        "/services",
-        "/services/software-systems",
-        "/services/digital-growth",
-        "/services/device-repairs",
-        "/portfolio",
-        "/products",
-        "/contact",
-        "/booking"
-    ],
-    "execution_phases": [
-        {
-            "phase": 0,
-            "name": "Strategic Alignment",
-            "objective": "Internalize business goals, users, and conversion priorities before writing code",
-            "deliverables": [
-                "Service grouping model",
-                "User personas",
-                "Conversion flow logic",
-                "UX intent principles"
-            ]
+    "spec_name": "S-Tech Solutions UX/UI + Copy Enforcement Spec",
+    "version": "1.0.0",
+    "enforcement_level": "hard",
+    "failure_policy": "Any deviation invalidates implementation",
+    "homepage": {
+        "hero": {
+            "required": true,
+            "headline": {
+                "text_exact": "Engineering Intelligent Digital Systems — and Keeping Your Technology Working",
+                "tag": "h1",
+                "max_time_to_visibility_seconds": 5
+            },
+            "subheadline": {
+                "text_exact": "S-Tech Solutions delivers AI-assisted software, web and app development alongside professional device and computer repair services for businesses and individuals."
+            },
+            "ctas": {
+                "primary": {
+                    "label_exact": "Book a Consultation",
+                    "route": "/booking",
+                    "query": {
+                        "service": "development"
+                    },
+                    "style": "solid"
+                },
+                "secondary": {
+                    "label_exact": "Request a Repair Quote",
+                    "route": "/contact",
+                    "query": {
+                        "service": "repairs"
+                    },
+                    "style": "outline"
+                }
+            },
+            "design_constraints": {
+                "full_width_banner": false,
+                "layout": "asymmetrical",
+                "stock_illustrations": false,
+                "motion": {
+                    "allowed": true,
+                    "type": [
+                        "fade",
+                        "vertical-translate"
+                    ],
+                    "trigger": "initial-load-only"
+                }
+            }
         },
-        {
-            "phase": 1,
-            "name": "Information Architecture & UX Blueprint",
-            "objective": "Design structure, routing, layouts, and navigation logic",
-            "deliverables": [
-                "Route tree",
-                "Layout hierarchy",
-                "Context-aware navigation logic",
-                "CTA placement plan"
-            ]
-        },
-        {
-            "phase": 2,
-            "name": "Proprietary Visual Language & Design System",
-            "objective": "Create a non-replicable design system",
-            "constraints": [
-                "No default Tailwind colors",
-                "No default shadcn styles",
-                "No recognizable UI templates"
+        "service_divisions": {
+            "section_title_exact": "What We Build, Maintain, and Improve",
+            "cards_required": 4,
+            "cards": [
+                {
+                    "title_exact": "Software & Digital Systems Engineering",
+                    "cta_label": "Explore Software Solutions →",
+                    "route": "/services/software-systems"
+                },
+                {
+                    "title_exact": "Digital Branding, Design & Growth",
+                    "cta_label": "View Digital Growth Services →",
+                    "route": "/services/digital-growth"
+                },
+                {
+                    "title_exact": "Device & Computer Repair Services",
+                    "cta_label": "Get Repair Support →",
+                    "route": "/services/device-repairs"
+                },
+                {
+                    "title_exact": "Digital Products & Tools",
+                    "cta_label": "Browse Products →",
+                    "route": "/products"
+                }
             ],
-            "deliverables": [
-                "Custom Tailwind configuration",
-                "Typography scale and rules",
-                "Color system",
-                "Spacing and layout principles",
-                "Motion language"
-            ]
+            "layout_rules": {
+                "equal_height_cards": false,
+                "default_icon_sets": false,
+                "hover_effects": [
+                    "subtle-elevation",
+                    "border-color-shift"
+                ]
+            }
         },
-        {
-            "phase": 3,
-            "name": "Core Layout & Navigation",
-            "objective": "Implement global structure and adaptive navigation",
-            "deliverables": [
-                "Root layout",
-                "Responsive navigation",
-                "Footer",
-                "Persistent but non-intrusive WhatsApp CTA"
-            ]
-        },
-        {
-            "phase": 4,
-            "name": "Homepage Experience",
-            "objective": "Create a strategic, non-generic homepage",
-            "constraints": [
-                "Avoid standard hero sections",
-                "Avoid section stacking clichés"
+        "why_section": {
+            "title_exact": "Why Clients Choose S-Tech Solutions",
+            "points_exact": [
+                "Engineering-First Thinking",
+                "AI-Assisted Development",
+                "Dual Expertise",
+                "Outcome-Driven Work"
             ],
-            "deliverables": [
-                "Dynamic homepage",
-                "Clear value communication within 5 seconds",
-                "Strong conversion paths"
-            ]
+            "design_rules": {
+                "icons": false,
+                "reveal": "staggered",
+                "accent_color_usage": "keywords-only"
+            }
         },
-        {
-            "phase": 5,
-            "name": "Services Architecture",
-            "objective": "Present services as outcomes and solutions",
-            "deliverables": [
-                "Services overview page",
-                "Individual service category pages",
-                "Process-oriented storytelling",
-                "Service-specific CTAs"
-            ]
-        },
-        {
-            "phase": 6,
-            "name": "Portfolio System",
-            "objective": "Demonstrate credibility and real work",
-            "deliverables": [
-                "Portfolio listing",
-                "Category filtering",
-                "Project detail pages with problem-solution-result narratives"
-            ]
-        },
-        {
-            "phase": 7,
-            "name": "Digital Products Module",
-            "objective": "Enable scalable revenue through digital products",
-            "deliverables": [
-                "Product listing",
-                "Product detail pages",
-                "Architecture supporting free and paid products"
-            ]
-        },
-        {
-            "phase": 8,
-            "name": "Lead Generation & Booking",
-            "objective": "Capture and convert leads",
-            "deliverables": [
-                "Contact form with validation",
-                "Booking page",
-                "Service-aware forms",
-                "Accessible success and error states"
-            ]
-        },
-        {
-            "phase": 9,
-            "name": "SEO, Performance & Accessibility",
-            "objective": "Production-grade optimization",
-            "deliverables": [
-                "Metadata implementation",
-                "Structured data",
-                "Image and font optimization",
-                "Accessibility compliance"
-            ]
-        },
-        {
-            "phase": 10,
-            "name": "Final Review & Deployment",
-            "objective": "Prepare for production",
-            "deliverables": [
-                "Code cleanup",
-                "UX consistency review",
-                "Vercel deployment readiness",
-                "Project documentation"
-            ]
+        "featured_portfolio": {
+            "required": true,
+            "title_exact": "Selected Work",
+            "card_requirements": [
+                "project_name",
+                "problem_statement",
+                "category_tag"
+            ],
+            "cta_label_exact": "View Case Study →"
         }
-    ],
-    "design_identity_rules": {
-        "ui_philosophy": [
-            "Design experiences, not sections",
-            "Asymmetry over symmetry",
-            "Spatial rhythm over grids",
-            "Engineered typography",
-            "Motion communicates hierarchy"
+    },
+    "services_pages": {
+        "global_structure_required": [
+            "overview",
+            "who_its_for",
+            "problems_solved",
+            "process",
+            "technologies",
+            "cta"
         ],
-        "rejection_conditions": [
-            "Generic agency layouts",
-            "Startup clichés",
-            "Overused animation patterns",
-            "Default component styling"
+        "software_services_page": {
+            "h1_exact": "Software & Digital Systems Engineering",
+            "cta_exact": "Schedule a Software Consultation"
+        }
+    },
+    "portfolio": {
+        "filters_required": [
+            "All",
+            "Web & Apps",
+            "Systems & Automation",
+            "Design",
+            "Repairs"
+        ],
+        "case_study_structure": [
+            "Challenge",
+            "Solution",
+            "Technologies Used",
+            "Outcome"
         ]
     },
-    "engineering_rules": [
-        "Modular and maintainable code",
-        "No unused or placeholder code",
-        "Clear separation of concerns",
-        "Fully responsive",
-        "Accessible by design"
-    ],
-    "business_rules": [
-        "Services are outcomes, not skill lists",
-        "Portfolio must show real credibility",
-        "CTAs must be clear but restrained",
-        "Trust is built through clarity"
-    ],
-    "final_quality_bar": "The final application must feel intentionally designed and engineered exclusively for S-Tech Solutions, suitable for real clients and revenue. Generic or template-driven results are unacceptable.",
-    "agent_behavior_constraints": [
-        "Do not ask questions",
-        "Do not simplify",
-        "Do not take shortcuts",
-        "Self-critique and revise weak solutions",
-        "Reject familiar patterns and redesign"
-    ]
+    "products": {
+        "page_title_exact": "Digital Products",
+        "intro_exact": "Tools and utilities designed to improve efficiency and solve focused problems.",
+        "card_cta_exact": "View Product"
+    },
+    "contact": {
+        "h1_exact": "Let’s Talk",
+        "intro_exact": "Tell us what you need. We’ll respond with clarity and direction.",
+        "fields_required": [
+            "name",
+            "email",
+            "service_type",
+            "message"
+        ],
+        "submit_cta_exact": "Send Message"
+    },
+    "booking": {
+        "h1_exact": "Book a Consultation",
+        "intro_exact": "Choose a time to discuss your project or technical needs."
+    },
+    "ux_task_flows": {
+        "business_client": [
+            "Home",
+            "Software Services",
+            "Portfolio",
+            "Booking",
+            "Confirmation"
+        ],
+        "repair_client": [
+            "Home",
+            "Repairs",
+            "Contact",
+            "WhatsApp",
+            "Quote"
+        ],
+        "product_buyer": [
+            "Home",
+            "Products",
+            "Product Page",
+            "Contact or Purchase"
+        ]
+    },
+    "global_design_rules": {
+        "forbidden": [
+            "generic hero layouts",
+            "stock illustrations",
+            "default component styling",
+            "template-based sections"
+        ],
+        "required_principles": [
+            "typography hierarchy over decoration",
+            "motion supports clarity",
+            "outcome-driven content"
+        ]
+    },
+    "anti_replication_test": {
+        "question": "Does the interface still communicate hierarchy and intent if color and typography are stripped?",
+        "required_answer": true,
+        "failure_action": "redesign"
+    },
+    "final_quality_gate": {
+        "criteria": [
+            "clear service routing within 5 seconds",
+            "no generic UI patterns",
+            "conversion paths are explicit",
+            "brand feels intentionally engineered"
+        ],
+        "approval_required": true
+    }
 }

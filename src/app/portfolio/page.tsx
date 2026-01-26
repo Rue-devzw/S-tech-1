@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
 
-const categories = ['All', 'Software', 'Systems', 'Branding', 'Hardware'];
+const categories = ['All', 'Web & Apps', 'Systems & Automation', 'Design', 'Repairs'];
 
 const projects = [
   {

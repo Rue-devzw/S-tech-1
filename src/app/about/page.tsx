@@ -32,11 +32,11 @@ export default function AboutPage() {
             <div className="grid sm:grid-cols-2 gap-12 pt-8 border-t border-border">
               <div className="space-y-4">
                 <h4 className="text-[10px] font-bold uppercase tracking-widest text-primary">The Methodology</h4>
-                <p className="text-scale-1 font-secondary italic text-muted-foreground leading-relaxed">We treat every gadget as a system and every system as an asset. Precision is our baseline protocol.</p>
+                <p className="text-scale-1 font-secondary italic text-muted-foreground leading-relaxed">We treat every project as a mission-critical system. Whether repairing hardware or building code, our protocol is rooted in precision and long-term reliability.</p>
               </div>
               <div className="space-y-4">
                 <h4 className="text-[10px] font-bold uppercase tracking-widest text-primary">The Vision</h4>
-                <p className="text-scale-1 font-secondary italic text-muted-foreground leading-relaxed">To remain the primary technical authority in Harare while scaling digital solutions globally.</p>
+                <p className="text-scale-1 font-secondary italic text-muted-foreground leading-relaxed">To be the primary technical partner for businesses in Zimbabwe and beyond, providing the "engineered" edge in a crowded digital landscape.</p>
               </div>
             </div>
           </motion.div>

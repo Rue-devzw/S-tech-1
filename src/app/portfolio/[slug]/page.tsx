@@ -44,19 +44,19 @@ export default function CaseStudyPage() {
                     {[
                         {
                             id: '01',
-                            title: 'The Friction',
+                            title: 'Challenge',
                             desc: 'Initial analysis revealed significant architectural drag and component-level entropy, preventing real-time mission execution.',
                             icon: Shield
                         },
                         {
                             id: '02',
-                            title: 'The Solution',
+                            title: 'Solution',
                             desc: 'We implemented a deterministic core using the S-Tech methodology, refactoring the data lifecycle for global scale.',
                             icon: Zap
                         },
                         {
                             id: '03',
-                            title: 'The Outcome',
+                            title: 'Outcome',
                             desc: '40% overhead reduction and a 200% increase in operational velocity within the first protocol phase.',
                             icon: Globe
                         }
@@ -75,6 +75,18 @@ export default function CaseStudyPage() {
                         </div>
                     ))}
                 </div>
+
+                {/* Technologies Used Section */}
+                <section className="py-v-3 border-y border-border my-v-3">
+                    <h2 className="text-scale-3 font-bold uppercase tracking-widest text-center mb-v-2">Technologies Used</h2>
+                    <div className="flex flex-wrap justify-center gap-4">
+                        {['Next.js', 'PostgreSQL', 'Python', 'AWS', 'TensorFlow'].map((tech, i) => (
+                            <span key={i} className="px-6 py-2 border border-border bg-card text-[10px] font-bold uppercase tracking-widest text-primary">
+                                {tech}
+                            </span>
+                        ))}
+                    </div>
+                </section>
 
                 {/* Final CTA - Asymmetric Spacing */}
                 <div className="mt-v-4 p-16 md:p-32 bg-card border border-border text-center space-y-12">
