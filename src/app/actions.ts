@@ -5,11 +5,11 @@ import { z } from 'zod';
 // --- Consultation Request Action ---
 
 const ConsultationRequestSchema = z.object({
-  name: z.string().min(2, 'Name is required.'),
-  email: z.string().email('Invalid email address.'),
-  company: z.string().optional(),
-  projectDetails: z.string().min(10, 'Please provide some project details.'),
-  preferredDate: z.string().min(1, 'Please select a date.'),
+    name: z.string().min(2, 'Name is required.'),
+    email: z.string().email('Invalid email address.'),
+    company: z.string().optional(),
+    projectDetails: z.string().min(10, 'Please provide some project details.'),
+    preferredDate: z.string().min(1, 'Please select a date.'),
 });
 
 type ConsultationState = {
@@ -20,10 +20,17 @@ type ConsultationState = {
         email?: string[];
         projectDetails?: string[];
         preferredDate?: string[];
-    }
+    };
+    data?: {
+        name: string;
+        email: string;
+        company?: string;
+        projectDetails: string;
+        preferredDate: string;
+    };
 }
 
-export async function submitConsultationRequest(prevState: ConsultationState, formData: FormData) : Promise<ConsultationState> {
+export async function submitConsultationRequest(prevState: ConsultationState, formData: FormData): Promise<ConsultationState> {
     const validatedFields = ConsultationRequestSchema.safeParse({
         name: formData.get('name'),
         email: formData.get('email'),
@@ -31,7 +38,7 @@ export async function submitConsultationRequest(prevState: ConsultationState, fo
         projectDetails: formData.get('projectDetails'),
         preferredDate: formData.get('preferredDate'),
     });
-    
+
     if (!validatedFields.success) {
         return {
             errors: validatedFields.error.flatten().fieldErrors,
@@ -41,48 +48,15 @@ export async function submitConsultationRequest(prevState: ConsultationState, fo
     }
 
     const { name, email, company, projectDetails, preferredDate } = validatedFields.data;
-    const recipient = 'info@stechsolutions.com';
-    const subject = `New Consultation Request from ${name}`;
-    const body = `
-        Name: ${name}
-        Email: ${email}
-        Company: ${company || 'N/A'}
-        Preferred Date: ${preferredDate}
-        Project Details:
-        ${projectDetails}
-    `;
 
+    // Server-side logging
     console.log('--- New Consultation Request ---');
-    console.log(`Recipient: ${recipient}`);
-    console.log(`Subject: ${subject}`);
-    console.log(`Body: ${body}`);
+    console.log(`Name: ${name}, Email: ${email}`);
     console.log('-----------------------------');
 
-    /*
-    // TODO: Integrate an email sending service like Resend, SendGrid, or Nodemailer here.
-    // Example using Resend:
-    //
-    // import { Resend } from 'resend';
-    // const resend = new Resend(process.env.RESEND_API_KEY);
-    //
-    // try {
-    //   await resend.emails.send({
-    //     from: 'onboarding@resend.dev', // Must be a verified domain on Resend
-    //     to: recipient,
-    //     subject: subject,
-    //     text: body,
-    //   });
-    // } catch (error) {
-    //   console.error('Failed to send email:', error);
-    //   return {
-    //      message: 'There was a problem sending your request. Please try again later.',
-    //      success: false,
-    //   }
-    // }
-    */
-
     return {
-        message: 'Your consultation request has been submitted successfully! We will get back to you shortly.',
+        message: 'Your consultation request has been submitted successfully!',
         success: true,
+        data: validatedFields.data
     }
 }

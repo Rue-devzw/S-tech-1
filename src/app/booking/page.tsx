@@ -22,7 +22,14 @@ type ConsultationState = {
         email?: string[];
         projectDetails?: string[];
         preferredDate?: string[];
-    }
+    };
+    data?: {
+        name: string;
+        email: string;
+        company?: string;
+        projectDetails: string;
+        preferredDate: string;
+    };
 }
 
 const initialState: ConsultationState = {
@@ -34,21 +41,52 @@ export default function BookingPage() {
     const [date, setDate] = useState<Date>();
     const [state, formAction, isPending] = useActionState(submitConsultationRequest, initialState);
 
-    if (state.success) {
+    if (state.success && state.data) {
+        const whatsappMessage = encodeURIComponent(
+            `*Consultation Request*\n\n` +
+            `*Name:* ${state.data.name}\n` +
+            `*Email:* ${state.data.email}\n` +
+            `*Date:* ${state.data.preferredDate}\n` +
+            `*Brief:* ${state.data.projectDetails}`
+        );
+
+        const emailBody = encodeURIComponent(
+            `Name: ${state.data.name}\n` +
+            `Email: ${state.data.email}\n` +
+            `Preferred Date: ${state.data.preferredDate}\n\n` +
+            `Brief:\n${state.data.projectDetails}`
+        );
+
         return (
             <div className="min-h-screen bg-background flex items-center justify-center p-4 font-primary">
                 <motion.div
                     initial={{ opacity: 0, y: 15 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-                    className="max-w-md w-full bg-card border border-border p-12 md:p-16 text-center space-y-8"
+                    className="max-w-md w-full bg-card border border-border p-12 md:p-16 text-center space-y-12"
                 >
                     <div className="h-px w-12 bg-primary mx-auto" />
-                    <h1 className="text-scale-3 font-bold tracking-tight uppercase">Mission Secured</h1>
-                    <p className="text-muted-foreground text-scale-1 font-medium leading-relaxed font-secondary italic">
-                        {state.message}
-                    </p>
-                    <Button asChild className="w-full h-14 bg-primary font-bold uppercase tracking-widest rounded-none">
+                    <div className="space-y-4">
+                        <h1 className="text-scale-3 font-bold tracking-tight uppercase">Mission Secured</h1>
+                        <p className="text-muted-foreground text-scale-1 font-medium leading-relaxed font-secondary italic">
+                            {state.message} Select your secure finalization channel.
+                        </p>
+                    </div>
+
+                    <div className="space-y-4">
+                        <Button asChild className="w-full h-16 bg-[#25D366] hover:bg-[#25D366]/90 text-white font-bold uppercase tracking-widest rounded-none border-none">
+                            <Link href={`https://wa.me/263718704505?text=${whatsappMessage}`} target="_blank">
+                                Finalize via WhatsApp
+                            </Link>
+                        </Button>
+                        <Button asChild variant="outline" className="w-full h-16 border-border font-bold uppercase tracking-widest rounded-none">
+                            <Link href={`mailto:strive@s-techsolutions.org?subject=Consultation Request: ${state.data.name}&body=${emailBody}`}>
+                                Finalize via Email
+                            </Link>
+                        </Button>
+                    </div>
+
+                    <Button asChild variant="link" className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
                         <Link href="/">Return to Base</Link>
                     </Button>
                 </motion.div>
