@@ -3,8 +3,7 @@
 import { useState } from "react"
 import { MainNav } from "@/components/layout/main-nav"
 import { ListingCard } from "@/components/marketplace/listing-card"
-import { CATEGORIES } from "@/lib/mock-data"
-import { useListings } from "@/lib/use-listings"
+import { LISTINGS, CATEGORIES } from "@/lib/mock-data"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Search, SlidersHorizontal, ArrowRight, Zap, Shield, Code, Globe } from "lucide-react"
@@ -13,9 +12,7 @@ export default function Home() {
   const [activeCategory, setActiveCategory] = useState("All")
   const [searchQuery, setSearchQuery] = useState("")
 
-  const { listings } = useListings();
-
-  const filteredListings = listings.filter(l => {
+  const filteredListings = LISTINGS.filter(l => {
     const matchesCategory = activeCategory === "All" || l.category === activeCategory
     const matchesSearch = l.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
                           l.description.toLowerCase().includes(searchQuery.toLowerCase())

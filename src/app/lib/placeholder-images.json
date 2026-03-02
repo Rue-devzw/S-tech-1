@@ -1,0 +1,40 @@
+{
+  "placeholderImages": [
+    {
+      "id": "hero-bg",
+      "description": "Tech hub workspace with glowing screens",
+      "imageUrl": "https://picsum.photos/seed/tech1/1200/600",
+      "imageHint": "technology workspace"
+    },
+    {
+      "id": "listing-web-app",
+      "description": "Modern web application interface",
+      "imageUrl": "https://picsum.photos/seed/webapp/600/400",
+      "imageHint": "web application"
+    },
+    {
+      "id": "listing-theme",
+      "description": "Clean website theme design",
+      "imageUrl": "https://picsum.photos/seed/theme/600/400",
+      "imageHint": "website theme"
+    },
+    {
+      "id": "listing-security",
+      "description": "Digital security lock with AI overlay",
+      "imageUrl": "https://picsum.photos/seed/security/600/400",
+      "imageHint": "cyber security"
+    },
+    {
+      "id": "listing-dev",
+      "description": "Developer coding on a laptop",
+      "imageUrl": "https://picsum.photos/seed/dev/600/400",
+      "imageHint": "software development"
+    },
+    {
+      "id": "listing-custom",
+      "description": "Abstract digital connectivity",
+      "imageUrl": "https://picsum.photos/seed/custom/600/400",
+      "imageHint": "digital innovation"
+    }
+  ]
+}
