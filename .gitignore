@@ -46,3 +46,6 @@ storybook-static/
 
 # Tailwind output
 public/.cache
+
+# TypeScript incremental build info
+tsconfig.tsbuildinfo

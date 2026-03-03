@@ -1,82 +1,95 @@
-"use client"
+"use client";
 
-import Image from "next/image"
-import Link from "next/link"
-import { useRouter } from "next/navigation"
-import { Star, Eye, ShoppingCart } from "lucide-react"
-import { Badge } from "@/components/ui/badge"
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Listing } from "@/lib/mock-data"
-import { useToast } from "@/hooks/use-toast"
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { ArrowUpRight, Clock3, ShoppingCart, Star } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
+import { useToast } from "@/hooks/use-toast";
+import { type Listing } from "@/lib/mock-data";
 
 export function ListingCard({ listing }: { listing: Listing }) {
-  const router = useRouter()
-  const { toast } = useToast()
+  const router = useRouter();
+  const { toast } = useToast();
 
-  function handleBuy() {
-    router.push(`/listing/${listing.id}`)
+  function onBuy() {
+    router.push(`/listing/${listing.id}`);
   }
 
-  function handlePreview() {
-    if (listing.previewUrl) {
-      window.open(listing.previewUrl, "_blank", "noopener,noreferrer")
-    }
-  }
-
-  function handleAddToCart() {
+  function onAddToCart() {
     toast({
-      title: "Added to Cart",
-      description: `${listing.name} has been added to your cart.`,
-    })
+      title: "Added to proposal basket",
+      description: `${listing.name} has been saved to your basket.`,
+    });
   }
 
   return (
-    <Card className="group overflow-hidden border-none shadow-md hover:shadow-xl transition-all duration-300 bg-white">
-      <div className="relative aspect-[3/2] overflow-hidden">
+    <Card className="group overflow-hidden border border-slate-200/80 bg-white/90 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-slate-900/10">
+      <div className="relative aspect-[4/3] overflow-hidden">
         <Image
           src={listing.imageUrl}
           alt={listing.name}
           fill
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
+          className="object-cover transition duration-500 group-hover:scale-105"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
         />
-        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3">
-          {listing.previewUrl && (
-            <Button size="sm" variant="secondary" className="rounded-full" onClick={handlePreview}>
-              <Eye className="w-4 h-4 mr-2" /> Preview
-            </Button>
-          )}
-          <Button size="sm" className="rounded-full bg-accent hover:bg-accent/90" onClick={handleBuy}>
-            <ShoppingCart className="w-4 h-4 mr-2" /> Buy
-          </Button>
+
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/75 via-slate-950/20 to-transparent" />
+
+        <div className="absolute left-3 top-3 flex items-center gap-2">
+          <Badge className="border-none bg-slate-950/85 text-slate-100">{listing.category}</Badge>
+          {listing.featured && <Badge className="border-none bg-cyan-400 text-slate-950">Featured</Badge>}
         </div>
-        <Badge className="absolute top-3 left-3 bg-primary text-white font-semibold">
-          {listing.category}
-        </Badge>
+
+        <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-xs text-slate-100">
+          <span className="inline-flex items-center gap-1 rounded-full bg-black/35 px-2.5 py-1">
+            <Clock3 className="h-3.5 w-3.5" />
+            {listing.deliveryTimeline}
+          </span>
+          <span className="rounded-full bg-black/35 px-2.5 py-1">{listing.industry}</span>
+        </div>
       </div>
-      <CardHeader className="p-4 pb-0">
-        <div className="flex justify-between items-start mb-1">
-          <h3 className="text-lg font-headline font-bold text-primary truncate max-w-[200px]">
-            {listing.name}
-          </h3>
-          <span className="text-lg font-bold text-accent">${listing.price}</span>
+
+      <CardHeader className="space-y-3 p-5 pb-2">
+        <div className="flex items-start justify-between gap-3">
+          <h3 className="line-clamp-2 text-lg font-headline font-semibold leading-tight text-slate-900">{listing.name}</h3>
+          <span className="shrink-0 text-base font-semibold text-cyan-700">${listing.price.toLocaleString()}</span>
         </div>
+        <p className="line-clamp-2 text-sm text-slate-600">{listing.shortDescription}</p>
       </CardHeader>
-      <CardContent className="p-4 pt-2">
-        <p className="text-sm text-muted-foreground line-clamp-2 min-h-[40px]">
-          {listing.description}
-        </p>
-      </CardContent>
-      <CardFooter className="p-4 pt-0 flex justify-between items-center text-xs text-muted-foreground border-t border-muted/30">
-        <div className="flex items-center gap-1">
-          <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
-          <span className="font-semibold text-foreground">{listing.rating}</span>
-          <span>({listing.salesCount} sales)</span>
+
+      <CardContent className="px-5 pb-4 pt-1">
+        <div className="flex flex-wrap gap-1.5">
+          {listing.technologies.slice(0, 3).map((tech) => (
+            <span key={tech} className="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-600">
+              {tech}
+            </span>
+          ))}
         </div>
-        <Link href={`/listing/${listing.id}`} className="text-accent font-semibold hover:underline">
-          View Details
-        </Link>
+      </CardContent>
+
+      <CardFooter className="flex items-center justify-between border-t border-slate-100 px-5 py-4">
+        <div className="flex items-center gap-1 text-xs text-slate-600">
+          <Star className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
+          <span className="font-semibold text-slate-800">{listing.rating.toFixed(1)}</span>
+          <span>({listing.salesCount} projects)</span>
+        </div>
+
+        <div className="flex items-center gap-2">
+          <Button variant="outline" size="sm" className="h-8" onClick={onAddToCart}>
+            <ShoppingCart className="mr-1.5 h-3.5 w-3.5" />
+            Save
+          </Button>
+          <Button size="sm" className="h-8 bg-slate-900 text-white hover:bg-slate-800" onClick={onBuy}>
+            View
+          </Button>
+          <Link href={`/listing/${listing.id}`} className="sr-only" aria-label={`Open ${listing.name}`}>
+            <ArrowUpRight className="h-4 w-4" />
+          </Link>
+        </div>
       </CardFooter>
     </Card>
-  )
+  );
 }
