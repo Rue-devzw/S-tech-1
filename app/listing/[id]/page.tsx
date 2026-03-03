@@ -1,203 +1,276 @@
-"use client"
+"use client";
 
-import { useParams, useRouter } from "next/navigation"
-import { LISTINGS } from "@/lib/mock-data"
-import { MainNav } from "@/components/layout/main-nav"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { 
-  Star, 
-  ShoppingCart, 
-  Eye, 
-  ShieldCheck, 
-  Clock, 
-  ArrowLeft,
-  CheckCircle2,
-  Globe,
-  Share2,
-  ExternalLink
-} from "lucide-react"
-import Link from "next/link"
-import { useState } from "react"
+import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
+import { useParams, useRouter } from "next/navigation";
+import { ArrowLeft, CheckCircle2, ExternalLink, ShieldCheck, Star } from "lucide-react";
+import { MainNav } from "@/components/layout/main-nav";
+import { SiteFooter } from "@/components/layout/site-footer";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { useToast } from "@/hooks/use-toast";
+import { useListings } from "@/lib/use-listings";
 
-export default function ListingDetail() {
-  const { id } = useParams()
-  const router = useRouter()
-  const listing = LISTINGS.find(l => l.id === id)
-  const [showPreview, setShowPreview] = useState(false)
+export default function ListingDetailPage() {
+  const params = useParams();
+  const router = useRouter();
+  const { toast } = useToast();
+  const id = Array.isArray(params.id) ? params.id[0] : params.id;
+  const { listings } = useListings();
+  const listing = listings.find((item) => item.id === id);
+  const [requestOpen, setRequestOpen] = useState(false);
+  const [requestForm, setRequestForm] = useState({
+    fullName: "",
+    workEmail: "",
+    timeline: "",
+    goals: "",
+  });
 
   if (!listing) {
     return (
-      <div className="min-h-screen flex flex-col bg-background">
+      <div className="min-h-screen bg-slate-50">
         <MainNav />
-        <div className="flex-1 flex flex-col items-center justify-center p-4">
-           <h1 className="text-2xl font-bold text-primary mb-4">Listing not found</h1>
-           <Button onClick={() => router.push('/')}>Back to Marketplace</Button>
-        </div>
+        <main className="container mx-auto px-4 py-24 text-center">
+          <h1 className="text-3xl font-headline font-semibold text-slate-900">Project not found</h1>
+          <p className="mt-3 text-slate-600">The listing you requested does not exist in the current catalog.</p>
+          <Button className="mt-6" onClick={() => router.push("/store")}>
+            Return to store
+          </Button>
+        </main>
+        <SiteFooter />
       </div>
-    )
+    );
+  }
+
+  function submitRequest(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setRequestOpen(false);
+    setRequestForm({
+      fullName: "",
+      workEmail: "",
+      timeline: "",
+      goals: "",
+    });
+    toast({
+      title: "Request sent",
+      description: "Our delivery team will contact you within one business day.",
+    });
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-background">
+    <div className="min-h-screen bg-slate-50 text-slate-900">
       <MainNav />
-      
-      <main className="flex-1 py-12">
-        <div className="container mx-auto px-4">
-          <Link href="/" className="inline-flex items-center text-sm font-medium text-muted-foreground hover:text-accent mb-8 transition-colors">
-            <ArrowLeft className="w-4 h-4 mr-2" /> Back to all listings
-          </Link>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-            {/* Left Column: Visuals */}
-            <div className="lg:col-span-7 space-y-6">
-              <div className="relative aspect-[16/9] bg-white rounded-3xl overflow-hidden shadow-xl border-4 border-white">
-                <img 
-                  src={listing.imageUrl} 
-                  alt={listing.name} 
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute top-4 left-4">
-                  <Badge className="bg-primary text-white shadow-lg">{listing.category}</Badge>
-                </div>
+      <main className="container mx-auto px-4 py-10">
+        <Link href="/store" className="mb-6 inline-flex items-center text-sm font-medium text-slate-600 transition hover:text-slate-900">
+          <ArrowLeft className="mr-2 h-4 w-4" /> Back to store
+        </Link>
+
+        <div className="grid gap-8 lg:grid-cols-12">
+          <section className="space-y-6 lg:col-span-8">
+            <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+              <div className="relative aspect-[16/9]">
+                <Image src={listing.imageUrl} alt={listing.name} fill className="object-cover" sizes="(max-width: 1024px) 100vw, 70vw" />
               </div>
-
-              {listing.previewUrl && (
-                <div className="p-6 bg-white rounded-3xl shadow-sm border border-accent/10 flex flex-col md:flex-row items-center justify-between gap-6">
-                  <div className="flex items-center gap-4 text-center md:text-left">
-                    <div className="w-12 h-12 bg-accent/10 text-accent rounded-2xl flex items-center justify-center shrink-0">
-                      <Eye className="w-6 h-6" />
-                    </div>
-                    <div>
-                      <h3 className="font-headline font-bold text-primary">Interactive Preview</h3>
-                      <p className="text-sm text-muted-foreground">See this service in action before you buy.</p>
-                    </div>
-                  </div>
-                  <Button 
-                    className="bg-accent hover:bg-accent/90 text-white rounded-full px-8 py-6 h-auto font-bold shadow-lg shadow-accent/20"
-                    onClick={() => setShowPreview(!showPreview)}
-                  >
-                    {showPreview ? "Hide Preview" : "Launch Live Demo"}
-                  </Button>
-                </div>
-              )}
-
-              {showPreview && listing.previewUrl && (
-                <div className="bg-white rounded-3xl shadow-xl overflow-hidden border-2 border-accent transition-all duration-500 animate-in fade-in slide-in-from-top-4">
-                   <div className="bg-accent/5 p-4 border-b flex items-center justify-between">
-                     <div className="flex items-center gap-2">
-                        <div className="flex gap-1.5 mr-2">
-                           <div className="w-3 h-3 rounded-full bg-red-400" />
-                           <div className="w-3 h-3 rounded-full bg-yellow-400" />
-                           <div className="w-3 h-3 rounded-full bg-green-400" />
-                        </div>
-                        <span className="text-xs font-medium text-accent truncate max-w-[200px]">{listing.previewUrl}</span>
-                     </div>
-                     <div className="flex gap-2">
-                        <Button variant="ghost" size="icon" className="h-8 w-8 text-accent">
-                          <Globe className="w-4 h-4" />
-                        </Button>
-                        <Button variant="ghost" size="icon" className="h-8 w-8 text-accent" asChild>
-                           <a href={listing.previewUrl} target="_blank" rel="noopener noreferrer">
-                             <ExternalLink className="w-4 h-4" />
-                           </a>
-                        </Button>
-                     </div>
-                   </div>
-                   <div className="aspect-[16/10] bg-muted relative">
-                      <iframe 
-                        src={listing.previewUrl} 
-                        className="absolute inset-0 w-full h-full border-none"
-                        title={`Preview of ${listing.name}`}
-                      />
-                   </div>
-                </div>
-              )}
-
-              <div className="bg-white p-8 rounded-3xl shadow-sm">
-                <h2 className="text-2xl font-headline font-bold text-primary mb-6">About this Service</h2>
-                <div className="prose prose-indigo max-w-none text-muted-foreground font-light leading-relaxed">
-                  <p className="mb-4">{listing.description}</p>
-                  <p>Developed by S-Tech Solutions' expert engineers, this solution is designed to integrate seamlessly into your existing digital infrastructure. Every aspect has been optimized for the unique performance and connectivity demands of the African digital landscape.</p>
-                </div>
+              <div className="absolute left-4 top-4 flex gap-2">
+                <Badge className="border-none bg-slate-900 text-white">{listing.category}</Badge>
+                {listing.featured && <Badge className="border-none bg-cyan-400 text-slate-950">Featured</Badge>}
               </div>
             </div>
 
-            {/* Right Column: CTA & Details */}
-            <div className="lg:col-span-5 space-y-8">
-              <Card className="border-none shadow-xl rounded-3xl overflow-hidden bg-white">
-                <div className="p-8 pb-0">
-                  <div className="flex items-center gap-2 mb-4">
-                    <div className="flex text-yellow-400">
-                      {[...Array(5)].map((_, i) => (
-                        <Star key={i} className={cn("w-4 h-4", i < Math.floor(listing.rating) ? "fill-current" : "opacity-30")} />
-                      ))}
-                    </div>
-                    <span className="text-sm font-bold text-primary">{listing.rating}</span>
-                    <span className="text-xs text-muted-foreground font-medium">({listing.salesCount} Verified Purchases)</span>
+            <Card className="border-slate-200">
+              <CardHeader>
+                <CardTitle className="text-2xl font-headline">Project overview</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4 text-slate-600">
+                <p>{listing.description}</p>
+                <div className="grid gap-4 md:grid-cols-2">
+                  <div className="rounded-xl bg-slate-100 p-4">
+                    <p className="text-xs uppercase tracking-wide text-slate-500">Client</p>
+                    <p className="mt-1 font-medium text-slate-900">{listing.client}</p>
                   </div>
-                  <h1 className="text-3xl md:text-4xl font-headline font-bold text-primary mb-2 leading-tight">
-                    {listing.name}
-                  </h1>
-                  <p className="text-accent text-3xl font-bold mb-6">${listing.price}</p>
-                  
-                  <div className="space-y-4 mb-8">
-                     {listing.features.map((feature, i) => (
-                       <div key={i} className="flex items-start gap-3">
-                         <CheckCircle2 className="w-5 h-5 text-accent shrink-0 mt-0.5" />
-                         <span className="text-sm text-muted-foreground font-medium">{feature}</span>
-                       </div>
-                     ))}
+                  <div className="rounded-xl bg-slate-100 p-4">
+                    <p className="text-xs uppercase tracking-wide text-slate-500">Industry</p>
+                    <p className="mt-1 font-medium text-slate-900">{listing.industry}</p>
                   </div>
+                  <div className="rounded-xl bg-slate-100 p-4">
+                    <p className="text-xs uppercase tracking-wide text-slate-500">Delivery timeline</p>
+                    <p className="mt-1 font-medium text-slate-900">{listing.deliveryTimeline}</p>
+                  </div>
+                  <div className="rounded-xl bg-slate-100 p-4">
+                    <p className="text-xs uppercase tracking-wide text-slate-500">Support window</p>
+                    <p className="mt-1 font-medium text-slate-900">{listing.supportWindow}</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
 
-                  <div className="grid grid-cols-2 gap-4 mb-8">
-                    <Button size="lg" className="bg-primary hover:bg-primary/90 text-white rounded-2xl h-14 font-bold text-lg">
-                      <ShoppingCart className="w-5 h-5 mr-2" /> Add to Cart
-                    </Button>
-                    <Button size="lg" variant="outline" className="border-primary text-primary hover:bg-primary/5 rounded-2xl h-14 font-bold">
-                      Hire S-Tech
-                    </Button>
-                  </div>
-                </div>
-                
-                <div className="p-8 bg-muted/30 border-t flex items-center justify-between">
-                   <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-white border shadow-sm flex items-center justify-center">
-                         <ShieldCheck className="w-5 h-5 text-accent" />
-                      </div>
-                      <div className="flex flex-col">
-                         <span className="text-xs font-bold text-primary uppercase">Guaranteed Security</span>
-                         <span className="text-[10px] text-muted-foreground">Verified by S-Tech Systems</span>
-                      </div>
-                   </div>
-                   <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-primary">
-                      <Share2 className="w-4 h-4 mr-2" /> Share
-                   </Button>
-                </div>
+            <div className="grid gap-6 md:grid-cols-2">
+              <Card className="border-slate-200">
+                <CardHeader>
+                  <CardTitle className="font-headline text-xl">Feature set</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3 text-sm text-slate-600">
+                  {listing.features.map((feature) => (
+                    <div key={feature} className="flex items-start gap-2">
+                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-cyan-700" />
+                      <span>{feature}</span>
+                    </div>
+                  ))}
+                </CardContent>
               </Card>
 
-              <div className="bg-primary p-8 rounded-3xl text-white relative overflow-hidden">
-                <div className="absolute -right-8 -bottom-8 w-32 h-32 bg-accent/20 rounded-full blur-2xl" />
-                <div className="relative z-10">
-                  <div className="flex items-center gap-4 mb-4">
-                    <Clock className="w-6 h-6 text-accent" />
-                    <h3 className="text-xl font-headline font-bold">Quick Delivery</h3>
-                  </div>
-                  <p className="text-sm text-primary-foreground/80 mb-6 font-light">
-                    Our digital products are available for immediate download or activation after purchase. For custom services, we guarantee initial deployment within 7 business days.
-                  </p>
-                  <Button variant="outline" className="w-full border-white/30 text-white hover:bg-white/10 rounded-xl">
-                    View Licensing Info
-                  </Button>
-                </div>
-              </div>
+              <Card className="border-slate-200">
+                <CardHeader>
+                  <CardTitle className="font-headline text-xl">Measured outcomes</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3 text-sm text-slate-600">
+                  {listing.outcomes.map((outcome) => (
+                    <div key={outcome} className="flex items-start gap-2">
+                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" />
+                      <span>{outcome}</span>
+                    </div>
+                  ))}
+                </CardContent>
+              </Card>
             </div>
-          </div>
+          </section>
+
+          <aside className="space-y-6 lg:col-span-4">
+            <Card className="border-slate-200 bg-white shadow-sm">
+              <CardHeader className="space-y-3">
+                <div className="flex items-center gap-2 text-sm text-slate-600">
+                  <Star className="h-4 w-4 fill-amber-400 text-amber-400" />
+                  <span className="font-semibold text-slate-900">{listing.rating.toFixed(1)}</span>
+                  <span>from {listing.salesCount} projects</span>
+                </div>
+                <CardTitle className="text-3xl font-headline">${listing.price.toLocaleString()}</CardTitle>
+                <p className="text-sm text-slate-600">{listing.shortDescription}</p>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <div className="rounded-xl border border-cyan-200 bg-cyan-50 p-3 text-xs text-slate-700">
+                  <p className="font-medium text-slate-900">Transparent pricing starts at ${listing.price.toLocaleString()}</p>
+                  <p className="mt-1">Final quote adjusts to integrations, security requirements, and rollout complexity.</p>
+                </div>
+                <Button className="w-full bg-slate-900 text-white hover:bg-slate-800" onClick={() => setRequestOpen(true)}>
+                  Request this project
+                </Button>
+                <Button variant="outline" className="w-full border-slate-300" asChild>
+                  <a href="mailto:hello@s-tech.africa?subject=Schedule%20a%20call%20with%20S-Tech">Schedule a call</a>
+                </Button>
+                {listing.previewUrl && (
+                  <Button variant="outline" className="w-full border-slate-300" asChild>
+                    <a href={listing.previewUrl} target="_blank" rel="noreferrer noopener">
+                      Live walkthrough
+                      <ExternalLink className="ml-2 h-4 w-4" />
+                    </a>
+                  </Button>
+                )}
+                <div className="rounded-xl bg-slate-100 p-3 text-xs text-slate-600">
+                  <p className="inline-flex items-center gap-2 font-medium text-slate-800">
+                    <ShieldCheck className="h-4 w-4 text-cyan-700" />
+                    Security and compliance review included
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="border-slate-200">
+              <CardHeader>
+                <CardTitle className="font-headline text-xl">Technology stack</CardTitle>
+              </CardHeader>
+              <CardContent className="flex flex-wrap gap-2">
+                {listing.technologies.map((tech) => (
+                  <span key={tech} className="rounded-full bg-slate-100 px-3 py-1 text-sm text-slate-700">
+                    {tech}
+                  </span>
+                ))}
+              </CardContent>
+            </Card>
+          </aside>
         </div>
       </main>
-    </div>
-  )
-}
 
-import { Card } from "@/components/ui/card"
-import { cn } from "@/lib/utils"
+      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-slate-200 bg-white/95 p-3 backdrop-blur lg:hidden">
+        <div className="mx-auto flex max-w-xl items-center justify-between gap-3">
+          <div>
+            <p className="text-xs text-slate-500">Starting from</p>
+            <p className="text-lg font-headline font-semibold text-slate-900">${listing.price.toLocaleString()}</p>
+          </div>
+          <Button className="bg-slate-900 text-white hover:bg-slate-800" onClick={() => setRequestOpen(true)}>
+            Request Proposal
+          </Button>
+        </div>
+      </div>
+
+      <Dialog open={requestOpen} onOpenChange={setRequestOpen}>
+        <DialogContent className="sm:max-w-lg">
+          <form onSubmit={submitRequest} className="space-y-4">
+            <DialogHeader>
+              <DialogTitle>Request proposal for {listing.name}</DialogTitle>
+              <DialogDescription>
+                Share your project context and we will send a recommended scope, timeline, and delivery estimate.
+              </DialogDescription>
+            </DialogHeader>
+            <div className="space-y-2">
+              <Label htmlFor="full-name">Full name</Label>
+              <Input
+                id="full-name"
+                required
+                value={requestForm.fullName}
+                onChange={(event) => setRequestForm((prev) => ({ ...prev, fullName: event.target.value }))}
+                placeholder="Your name"
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="work-email">Work email</Label>
+              <Input
+                id="work-email"
+                type="email"
+                required
+                value={requestForm.workEmail}
+                onChange={(event) => setRequestForm((prev) => ({ ...prev, workEmail: event.target.value }))}
+                placeholder="name@company.com"
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="timeline">Preferred timeline</Label>
+              <Input
+                id="timeline"
+                value={requestForm.timeline}
+                onChange={(event) => setRequestForm((prev) => ({ ...prev, timeline: event.target.value }))}
+                placeholder="e.g. Kickoff next month"
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="goals">Project goals</Label>
+              <Textarea
+                id="goals"
+                required
+                value={requestForm.goals}
+                onChange={(event) => setRequestForm((prev) => ({ ...prev, goals: event.target.value }))}
+                placeholder="What should this solution improve in your business?"
+              />
+            </div>
+            <DialogFooter>
+              <Button type="button" variant="outline" onClick={() => setRequestOpen(false)}>
+                Cancel
+              </Button>
+              <Button type="submit" className="bg-slate-900 text-white hover:bg-slate-800">
+                Submit Request
+              </Button>
+            </DialogFooter>
+          </form>
+        </DialogContent>
+      </Dialog>
+
+      <SiteFooter />
+    </div>
+  );
+}

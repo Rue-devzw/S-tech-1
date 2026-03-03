@@ -35,37 +35,35 @@ export function ListingForm({ listing: initial, onSave, trigger, open: controlle
     if (onOpenChange) onOpenChange(val)
   }
 
-  const [listing, setListing] = useState<Listing>(
-    initial || {
-      id: "",
-      name: "",
-      category: CATEGORIES.find(c => c !== "All") || "",
-      price: 0,
-      description: "",
-      features: [],
-      imageUrl: "",
-      previewUrl: "",
-      rating: 0,
-      salesCount: 0,
-    }
-  )
+  const createEmptyListing = (): Listing => ({
+    id: "",
+    slug: "",
+    name: "",
+    category: CATEGORIES.find(c => c !== "All") || "",
+    price: 0,
+    shortDescription: "",
+    description: "",
+    client: "Internal template",
+    industry: "General",
+    deliveryTimeline: "2 weeks",
+    supportWindow: "3 months",
+    featured: false,
+    technologies: [],
+    features: [],
+    outcomes: [],
+    imageUrl: "",
+    previewUrl: "",
+    rating: 0,
+    salesCount: 0,
+  })
+
+  const [listing, setListing] = useState<Listing>(initial || createEmptyListing())
 
   useEffect(() => {
     if (initial) {
       setListing(initial)
     } else {
-      setListing({
-        id: "",
-        name: "",
-        category: CATEGORIES.find(c => c !== "All") || "",
-        price: 0,
-        description: "",
-        features: [],
-        imageUrl: "",
-        previewUrl: "",
-        rating: 0,
-        salesCount: 0,
-      })
+      setListing(createEmptyListing())
     }
   }, [initial])
 
@@ -74,9 +72,30 @@ export function ListingForm({ listing: initial, onSave, trigger, open: controlle
   }
 
   function handleSubmit() {
+    const safeName = listing.name.trim() || "Untitled listing"
+    const safeDescription = listing.description.trim()
+    const safeShortDescription =
+      listing.shortDescription.trim() || safeDescription || "Project details will be updated soon."
+    const slug =
+      listing.slug.trim() ||
+      safeName
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "")
+
     const out: Listing = {
       ...listing,
       id: listing.id || Date.now().toString(),
+      slug,
+      name: safeName,
+      shortDescription: safeShortDescription,
+      description: safeDescription || safeShortDescription,
+      client: listing.client || "Internal template",
+      industry: listing.industry || "General",
+      deliveryTimeline: listing.deliveryTimeline || "2 weeks",
+      supportWindow: listing.supportWindow || "3 months",
+      technologies: listing.technologies.length ? listing.technologies : ["Next.js"],
+      outcomes: listing.outcomes.length ? listing.outcomes : ["Outcome tracking to be defined."],
     }
     onSave(out)
     setOpen(false)
@@ -151,12 +170,30 @@ export function ListingForm({ listing: initial, onSave, trigger, open: controlle
             />
           </div>
           <div>
+            <Label htmlFor="lf-shortDescription">Short Description</Label>
+            <Input
+              id="lf-shortDescription"
+              value={listing.shortDescription}
+              onChange={e => handleChange("shortDescription", e.target.value)}
+              placeholder="A concise one-line summary"
+            />
+          </div>
+          <div>
             <Label htmlFor="lf-description">Description</Label>
             <Textarea
               id="lf-description"
               value={listing.description}
               onChange={e => handleChange("description", e.target.value)}
               placeholder="Describe the key benefits..."
+            />
+          </div>
+          <div>
+            <Label htmlFor="lf-technologies">Technologies (comma separated)</Label>
+            <Input
+              id="lf-technologies"
+              value={listing.technologies.join(", ")}
+              onChange={e => handleChange("technologies", e.target.value.split(",").map(s => s.trim()).filter(Boolean))}
+              placeholder="Next.js, PostgreSQL, TypeScript"
             />
           </div>
           <div>

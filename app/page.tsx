@@ -1,203 +1,227 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { MainNav } from "@/components/layout/main-nav"
-import { ListingCard } from "@/components/marketplace/listing-card"
-import { LISTINGS, CATEGORIES } from "@/lib/mock-data"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Search, SlidersHorizontal, ArrowRight, Zap, Shield, Code, Globe } from "lucide-react"
+import { useMemo, useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { ArrowRight, CheckCircle2, Search, Shield, Sparkles, TrendingUp } from "lucide-react";
+import { MainNav } from "@/components/layout/main-nav";
+import { SiteFooter } from "@/components/layout/site-footer";
+import { ListingCard } from "@/components/marketplace/listing-card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { useListings } from "@/lib/use-listings";
 
-export default function Home() {
-  const [activeCategory, setActiveCategory] = useState("All")
-  const [searchQuery, setSearchQuery] = useState("")
+const VALUE_POINTS = [
+  {
+    icon: Shield,
+    title: "Security by default",
+    description: "Threat-aware architecture, clear auditability, and production hardening from day one.",
+  },
+  {
+    icon: TrendingUp,
+    title: "Business outcomes",
+    description: "Every build is tied to measurable KPI improvements, not just delivery milestones.",
+  },
+  {
+    icon: Sparkles,
+    title: "Premium execution",
+    description: "Modern interfaces, reliable performance, and high-quality engineering standards.",
+  },
+];
 
-  const filteredListings = LISTINGS.filter(l => {
-    const matchesCategory = activeCategory === "All" || l.category === activeCategory
-    const matchesSearch = l.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                          l.description.toLowerCase().includes(searchQuery.toLowerCase())
-    return matchesCategory && matchesSearch
-  })
+const PRICING_PLANS = [
+  {
+    name: "Starter Build",
+    price: "$1,200",
+    summary: "Best for small teams launching their first production workflow.",
+    cta: "Start Starter Plan",
+    bullets: ["2-week implementation", "Core dashboard + automation", "30-day post-launch support"],
+  },
+  {
+    name: "Growth Platform",
+    price: "$3,500",
+    summary: "For scaling teams that need stronger workflows, data, and integrations.",
+    cta: "Choose Growth Plan",
+    bullets: ["6-week implementation", "Advanced integrations", "Quarterly optimization advisory"],
+    featured: true,
+  },
+  {
+    name: "Enterprise Program",
+    price: "Custom",
+    summary: "For regulated, multi-team environments requiring security and governance.",
+    cta: "Book Enterprise Call",
+    bullets: ["Phased delivery roadmap", "Security architecture review", "Dedicated technical lead"],
+  },
+];
+
+export default function HomePage() {
+  const { listings } = useListings();
+  const router = useRouter();
+  const [query, setQuery] = useState("");
+
+  const featuredListings = useMemo(
+    () => listings.filter((item) => item.featured).slice(0, 4),
+    [listings]
+  );
+
+  function submitSearch(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const trimmed = query.trim();
+    if (!trimmed) {
+      router.push("/store");
+      return;
+    }
+    router.push(`/store?q=${encodeURIComponent(trimmed)}`);
+  }
 
   return (
-    <div className="min-h-screen flex flex-col bg-background">
+    <div className="min-h-screen bg-slate-50 text-slate-900">
       <MainNav />
 
-      <main className="flex-1">
-        {/* Hero Section */}
-        <section className="relative py-20 lg:py-32 overflow-hidden bg-primary text-white">
-          <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] pointer-events-none"></div>
-          <div className="container mx-auto px-4 relative z-10">
-            <div className="max-w-3xl">
-              <Badge className="mb-6 bg-accent text-white border-none py-1.5 px-4 rounded-full text-sm font-bold uppercase tracking-wider">
-                Digital Excellence in Zimbabwe
-              </Badge>
-              <h1 className="text-4xl md:text-6xl font-headline font-bold mb-6 leading-tight">
-                Empower Your Business with <span className="text-accent">Cutting-Edge</span> Digital Solutions
-              </h1>
-              <p className="text-lg md:text-xl text-primary-foreground/80 mb-10 max-w-2xl font-light">
-                Discover a curated marketplace of web applications, website themes, AI-assisted cybersecurity, and full-stack development services tailored for the modern digital era.
-              </p>
-              <div className="flex flex-wrap gap-4">
-                <Button size="lg" className="bg-accent hover:bg-accent/90 text-white rounded-full px-8 text-lg font-bold">
-                  Browse Solutions <ArrowRight className="ml-2 w-5 h-5" />
-                </Button>
-                <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10 rounded-full px-8 text-lg">
-                  Custom Development
-                </Button>
-              </div>
-            </div>
-          </div>
-          
-          <div className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 w-1/3 aspect-square bg-gradient-to-br from-accent/20 to-transparent rounded-full blur-3xl -mr-32 pointer-events-none"></div>
-        </section>
-
-        {/* Categories & Filter Section */}
-        <section className="py-12 bg-white border-b">
-          <div className="container mx-auto px-4">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-              <div className="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0 w-full md:w-auto scrollbar-hide">
-                <Button 
-                  variant={activeCategory === "All" ? "default" : "ghost"}
-                  onClick={() => setActiveCategory("All")}
-                  className={activeCategory === "All" ? "bg-primary" : "text-muted-foreground hover:text-primary"}
-                >
-                  All Items
-                </Button>
-                {CATEGORIES.map(cat => (
-                  <Button 
-                    key={cat}
-                    variant={activeCategory === cat ? "default" : "ghost"}
-                    onClick={() => setActiveCategory(cat)}
-                    className={activeCategory === cat ? "bg-primary" : "text-muted-foreground hover:text-primary"}
-                  >
-                    {cat}
-                  </Button>
-                ))}
-              </div>
-              <div className="flex items-center gap-4 w-full md:w-auto">
-                <div className="relative flex-1 md:w-64">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                  <Input 
-                    placeholder="Search market..." 
-                    className="pl-10 h-10 bg-muted/30 border-none focus-visible:ring-accent"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                  />
-                </div>
-                <Button variant="outline" size="icon" className="h-10 w-10 shrink-0">
-                  <SlidersHorizontal className="h-4 w-4" />
-                </Button>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Marketplace Grid */}
-        <section className="py-16">
-          <div className="container mx-auto px-4">
-            <div className="flex items-center justify-between mb-10">
+      <main>
+        <section className="relative isolate overflow-hidden bg-slate-950 pb-20 pt-16 text-white md:pb-28 md:pt-24">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(34,211,238,0.25),transparent_35%),radial-gradient(circle_at_85%_25%,rgba(56,189,248,0.2),transparent_40%)]" />
+          <div className="container relative mx-auto px-4">
+            <Badge className="mb-6 border-none bg-cyan-400/20 text-cyan-200">Boutique Digital Product Studio</Badge>
+            <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
               <div>
-                <h2 className="text-3xl font-headline font-bold text-primary mb-2">Featured Listings</h2>
-                <p className="text-muted-foreground">Expertly crafted tools and services for your next project.</p>
-              </div>
-              <div className="hidden sm:block">
-                <span className="text-sm text-muted-foreground">Showing <span className="font-bold text-foreground">{filteredListings.length}</span> results</span>
-              </div>
-            </div>
+                <h1 className="max-w-xl text-4xl font-headline font-semibold leading-tight md:text-6xl">
+                  Build market-leading digital products with premium delivery discipline.
+                </h1>
+                <p className="mt-6 max-w-lg text-slate-300">
+                  S-Tech designs and ships secure platforms, AI-powered systems, and polished product experiences for ambitious teams across Africa.
+                </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-              {filteredListings.map(listing => (
-                <ListingCard key={listing.id} listing={listing} />
-              ))}
-            </div>
+                <form onSubmit={submitSearch} className="mt-8 flex w-full max-w-xl flex-col gap-3 sm:flex-row">
+                  <div className="relative flex-1">
+                    <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+                    <Input
+                      value={query}
+                      onChange={(e) => setQuery(e.target.value)}
+                      placeholder="Search projects, platforms, and solutions"
+                      className="h-12 border-slate-700 bg-slate-900/80 pl-9 text-slate-100 placeholder:text-slate-400"
+                    />
+                  </div>
+                  <Button type="submit" className="h-12 bg-cyan-400 px-6 text-slate-950 hover:bg-cyan-300">
+                    Explore Store
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </form>
 
-            {filteredListings.length === 0 && (
-              <div className="py-20 text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-muted rounded-full mb-4">
-                  <Search className="w-8 h-8 text-muted-foreground" />
+                <div className="mt-6 flex flex-wrap gap-6 text-sm text-slate-300">
+                  <span className="inline-flex items-center gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-cyan-300" />
+                    Delivery-focused sprint cadence
+                  </span>
+                  <span className="inline-flex items-center gap-2">
+                    <CheckCircle2 className="h-4 w-4 text-cyan-300" />
+                    Enterprise security controls
+                  </span>
                 </div>
-                <h3 className="text-xl font-headline font-bold text-primary mb-2">No results found</h3>
-                <p className="text-muted-foreground">Try adjusting your filters or search keywords.</p>
               </div>
-            )}
+
+              <div className="rounded-3xl border border-white/10 bg-white/5 p-8 backdrop-blur">
+                <p className="text-sm uppercase tracking-[0.2em] text-slate-300">Current Performance</p>
+                <div className="mt-6 grid gap-4 sm:grid-cols-2">
+                  {[
+                    ["38", "Active engagements"],
+                    ["97%", "Client renewal rate"],
+                    ["11", "Countries served"],
+                    ["2.3x", "Avg. velocity boost"],
+                  ].map(([value, label]) => (
+                    <div key={label} className="rounded-2xl border border-white/10 bg-slate-900/70 p-4">
+                      <p className="text-2xl font-headline font-semibold text-cyan-300">{value}</p>
+                      <p className="mt-1 text-sm text-slate-300">{label}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
-        {/* Features / Why Us Section */}
-        <section className="py-24 bg-primary/5">
-          <div className="container mx-auto px-4">
-            <div className="text-center max-w-2xl mx-auto mb-16">
-              <h2 className="text-3xl font-headline font-bold text-primary mb-4">The S-Tech Advantage</h2>
-              <p className="text-muted-foreground">Why businesses across Zimbabwe and beyond trust S-Tech Digital Hub for their digital transformation.</p>
+        <section className="container mx-auto px-4 py-16 md:py-20">
+          <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
+            <div>
+              <p className="text-sm font-medium uppercase tracking-[0.18em] text-cyan-700">Curated Store</p>
+              <h2 className="mt-2 text-3xl font-headline font-semibold text-slate-900">Featured production-ready projects</h2>
             </div>
+            <Link href="/store">
+              <Button variant="outline" className="border-slate-300">
+                View full store
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </Link>
+          </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              <div className="p-8 bg-white rounded-2xl shadow-sm hover:shadow-md transition-all border-b-4 border-accent">
-                <div className="w-12 h-12 bg-accent/10 text-accent rounded-lg flex items-center justify-center mb-6">
-                  <Shield className="w-6 h-6" />
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4">
+            {featuredListings.map((listing) => (
+              <ListingCard key={listing.id} listing={listing} />
+            ))}
+          </div>
+        </section>
+
+        <section className="border-y border-slate-200 bg-white/70 py-16">
+          <div className="container mx-auto grid gap-6 px-4 md:grid-cols-3">
+            {VALUE_POINTS.map((point) => (
+              <div key={point.title} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-100 text-cyan-700">
+                  <point.icon className="h-5 w-5" />
                 </div>
-                <h3 className="text-xl font-headline font-bold text-primary mb-3">AI Security</h3>
-                <p className="text-sm text-muted-foreground">Next-generation threat protection powered by artificial intelligence.</p>
+                <h3 className="text-lg font-headline font-semibold text-slate-900">{point.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-slate-600">{point.description}</p>
               </div>
-              <div className="p-8 bg-white rounded-2xl shadow-sm hover:shadow-md transition-all border-b-4 border-primary">
-                <div className="w-12 h-12 bg-primary/10 text-primary rounded-lg flex items-center justify-center mb-6">
-                  <Code className="w-6 h-6" />
+            ))}
+          </div>
+        </section>
+
+        <section className="container mx-auto px-4 py-16 md:py-20">
+          <div className="mb-8 text-center">
+            <p className="text-sm font-medium uppercase tracking-[0.18em] text-cyan-700">Pricing</p>
+            <h2 className="mt-2 text-3xl font-headline font-semibold text-slate-900">Clear engagement tiers for faster decisions</h2>
+            <p className="mx-auto mt-3 max-w-2xl text-slate-600">
+              Pick a delivery model that matches your current stage. Every plan includes architecture review and a measurable launch target.
+            </p>
+          </div>
+          <div className="grid gap-6 md:grid-cols-3">
+            {PRICING_PLANS.map((plan) => (
+              <div
+                key={plan.name}
+                className={
+                  plan.featured
+                    ? "rounded-2xl border border-cyan-300 bg-cyan-50 p-6 shadow-lg shadow-cyan-900/10"
+                    : "rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
+                }
+              >
+                <h3 className="text-xl font-headline font-semibold text-slate-900">{plan.name}</h3>
+                <p className="mt-2 text-3xl font-headline font-semibold text-slate-900">{plan.price}</p>
+                <p className="mt-3 text-sm text-slate-600">{plan.summary}</p>
+                <div className="mt-5 space-y-2 text-sm text-slate-600">
+                  {plan.bullets.map((bullet) => (
+                    <p key={bullet} className="flex items-start gap-2">
+                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-cyan-700" />
+                      {bullet}
+                    </p>
+                  ))}
                 </div>
-                <h3 className="text-xl font-headline font-bold text-primary mb-3">Full-Stack Dev</h3>
-                <p className="text-sm text-muted-foreground">End-to-end web and mobile application development services.</p>
+                <Button
+                  className={
+                    plan.featured
+                      ? "mt-6 w-full bg-slate-900 text-white hover:bg-slate-800"
+                      : "mt-6 w-full bg-cyan-400 text-slate-950 hover:bg-cyan-300"
+                  }
+                  asChild
+                >
+                  <Link href={plan.name === "Enterprise Program" ? "/services" : "/store"}>{plan.cta}</Link>
+                </Button>
               </div>
-              <div className="p-8 bg-white rounded-2xl shadow-sm hover:shadow-md transition-all border-b-4 border-accent">
-                <div className="w-12 h-12 bg-accent/10 text-accent rounded-lg flex items-center justify-center mb-6">
-                  <Zap className="w-6 h-6" />
-                </div>
-                <h3 className="text-xl font-headline font-bold text-primary mb-3">Fast Delivery</h3>
-                <p className="text-sm text-muted-foreground">Optimized workflows ensuring rapid deployment of digital assets.</p>
-              </div>
-              <div className="p-8 bg-white rounded-2xl shadow-sm hover:shadow-md transition-all border-b-4 border-primary">
-                <div className="w-12 h-12 bg-primary/10 text-primary rounded-lg flex items-center justify-center mb-6">
-                  <Globe className="w-6 h-6" />
-                </div>
-                <h3 className="text-xl font-headline font-bold text-primary mb-3">Local Expertise</h3>
-                <p className="text-sm text-muted-foreground">Deep understanding of the Zimbabwean and regional digital landscape.</p>
-              </div>
-            </div>
+            ))}
           </div>
         </section>
       </main>
 
-      {/* Footer */}
-      <footer className="bg-white border-t py-12">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-8">
-            <div className="flex flex-col items-center md:items-start gap-4">
-              <Link href="/" className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                  <span className="text-white font-headline font-bold text-lg">S</span>
-                </div>
-                <span className="font-headline font-bold text-lg tracking-tight text-primary">
-                  S-Tech <span className="text-accent">Solutions</span>
-                </span>
-              </Link>
-              <p className="text-sm text-muted-foreground max-w-xs text-center md:text-left">
-                Empowering the digital landscape from Harare, Zimbabwe to the world.
-              </p>
-            </div>
-            <div className="flex gap-8 text-sm font-medium text-muted-foreground">
-              <Link href="#" className="hover:text-accent">Privacy Policy</Link>
-              <Link href="#" className="hover:text-accent">Terms of Service</Link>
-              <Link href="#" className="hover:text-accent">Support</Link>
-              <Link href="#" className="hover:text-accent">Contact</Link>
-            </div>
-            <div className="text-sm text-muted-foreground">
-              © {new Date().getFullYear()} S-Tech Solutions. All rights reserved.
-            </div>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
-  )
+  );
 }
-
-import { Badge } from "@/components/ui/badge"
-import Link from "next/link"
