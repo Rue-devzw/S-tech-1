@@ -1,15 +1,24 @@
 "use client"
 
 import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { ShoppingBag, Search, User, Menu, LayoutDashboard } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { cn } from "@/lib/utils"
+import { useState } from "react"
 
 export function MainNav() {
   const pathname = usePathname()
-  const isAdmin = pathname?.startsWith('/admin')
+  const router = useRouter()
+  const [searchQuery, setSearchQuery] = useState("")
+
+  function handleSearch(e: React.FormEvent) {
+    e.preventDefault()
+    if (searchQuery.trim()) {
+      router.push(`/store?q=${encodeURIComponent(searchQuery.trim())}`)
+    }
+  }
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -37,15 +46,17 @@ export function MainNav() {
         </div>
 
         <div className="flex items-center gap-4">
-          <div className="hidden lg:flex relative w-64">
+          <form onSubmit={handleSearch} className="hidden lg:flex relative w-64">
             <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
             <Input
               type="search"
               placeholder="Search services..."
               className="pl-9 h-9 bg-muted/50 focus-visible:ring-accent"
+              value={searchQuery}
+              onChange={e => setSearchQuery(e.target.value)}
             />
-          </div>
-          
+          </form>
+
           <div className="flex items-center gap-2">
             <Link href="/admin">
               <Button variant="ghost" size="icon" className="text-primary hover:text-accent">

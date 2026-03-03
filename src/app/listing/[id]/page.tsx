@@ -5,12 +5,13 @@ import { useListings } from "@/lib/use-listings"
 import { MainNav } from "@/components/layout/main-nav"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { 
-  Star, 
-  ShoppingCart, 
-  Eye, 
-  ShieldCheck, 
-  Clock, 
+import { Card } from "@/components/ui/card"
+import {
+  Star,
+  ShoppingCart,
+  Eye,
+  ShieldCheck,
+  Clock,
   ArrowLeft,
   CheckCircle2,
   Globe,
@@ -19,30 +20,61 @@ import {
 } from "lucide-react"
 import Link from "next/link"
 import { useState } from "react"
+import { cn } from "@/lib/utils"
+import { useToast } from "@/hooks/use-toast"
 
 export default function ListingDetail() {
   const { id } = useParams()
   const router = useRouter()
+  const { toast } = useToast()
   const { listings } = useListings()
   const listing = listings.find(l => l.id === id)
   const [showPreview, setShowPreview] = useState(false)
+  const [cartAdded, setCartAdded] = useState(false)
 
   if (!listing) {
     return (
       <div className="min-h-screen flex flex-col bg-background">
         <MainNav />
         <div className="flex-1 flex flex-col items-center justify-center p-4">
-           <h1 className="text-2xl font-bold text-primary mb-4">Listing not found</h1>
-           <Button onClick={() => router.push('/')}>Back to Marketplace</Button>
+          <h1 className="text-2xl font-bold text-primary mb-4">Listing not found</h1>
+          <Button onClick={() => router.push('/')}>Back to Marketplace</Button>
         </div>
       </div>
     )
   }
 
+  function handleAddToCart() {
+    setCartAdded(true)
+    toast({
+      title: "Added to Cart 🛒",
+      description: `${listing!.name} has been added to your cart.`,
+    })
+    setTimeout(() => setCartAdded(false), 3000)
+  }
+
+  function handleShare() {
+    const url = window.location.href
+    if (navigator.share) {
+      navigator.share({
+        title: listing!.name,
+        text: listing!.description,
+        url,
+      }).catch(() => null)
+    } else {
+      navigator.clipboard.writeText(url).then(() => {
+        toast({
+          title: "Link Copied",
+          description: "Listing URL has been copied to your clipboard.",
+        })
+      })
+    }
+  }
+
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <MainNav />
-      
+
       <main className="flex-1 py-12">
         <div className="container mx-auto px-4">
           <Link href="/" className="inline-flex items-center text-sm font-medium text-muted-foreground hover:text-accent mb-8 transition-colors">
@@ -53,9 +85,9 @@ export default function ListingDetail() {
             {/* Left Column: Visuals */}
             <div className="lg:col-span-7 space-y-6">
               <div className="relative aspect-[16/9] bg-white rounded-3xl overflow-hidden shadow-xl border-4 border-white">
-                <img 
-                  src={listing.imageUrl} 
-                  alt={listing.name} 
+                <img
+                  src={listing.imageUrl}
+                  alt={listing.name}
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute top-4 left-4">
@@ -74,7 +106,7 @@ export default function ListingDetail() {
                       <p className="text-sm text-muted-foreground">See this service in action before you buy.</p>
                     </div>
                   </div>
-                  <Button 
+                  <Button
                     className="bg-accent hover:bg-accent/90 text-white rounded-full px-8 py-6 h-auto font-bold shadow-lg shadow-accent/20"
                     onClick={() => setShowPreview(!showPreview)}
                   >
@@ -85,33 +117,33 @@ export default function ListingDetail() {
 
               {showPreview && listing.previewUrl && (
                 <div className="bg-white rounded-3xl shadow-xl overflow-hidden border-2 border-accent transition-all duration-500 animate-in fade-in slide-in-from-top-4">
-                   <div className="bg-accent/5 p-4 border-b flex items-center justify-between">
-                     <div className="flex items-center gap-2">
-                        <div className="flex gap-1.5 mr-2">
-                           <div className="w-3 h-3 rounded-full bg-red-400" />
-                           <div className="w-3 h-3 rounded-full bg-yellow-400" />
-                           <div className="w-3 h-3 rounded-full bg-green-400" />
-                        </div>
-                        <span className="text-xs font-medium text-accent truncate max-w-[200px]">{listing.previewUrl}</span>
-                     </div>
-                     <div className="flex gap-2">
-                        <Button variant="ghost" size="icon" className="h-8 w-8 text-accent">
-                          <Globe className="w-4 h-4" />
-                        </Button>
-                        <Button variant="ghost" size="icon" className="h-8 w-8 text-accent" asChild>
-                           <a href={listing.previewUrl} target="_blank" rel="noopener noreferrer">
-                             <ExternalLink className="w-4 h-4" />
-                           </a>
-                        </Button>
-                     </div>
-                   </div>
-                   <div className="aspect-[16/10] bg-muted relative">
-                      <iframe 
-                        src={listing.previewUrl} 
-                        className="absolute inset-0 w-full h-full border-none"
-                        title={`Preview of ${listing.name}`}
-                      />
-                   </div>
+                  <div className="bg-accent/5 p-4 border-b flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <div className="flex gap-1.5 mr-2">
+                        <div className="w-3 h-3 rounded-full bg-red-400" />
+                        <div className="w-3 h-3 rounded-full bg-yellow-400" />
+                        <div className="w-3 h-3 rounded-full bg-green-400" />
+                      </div>
+                      <span className="text-xs font-medium text-accent truncate max-w-[200px]">{listing.previewUrl}</span>
+                    </div>
+                    <div className="flex gap-2">
+                      <Button variant="ghost" size="icon" className="h-8 w-8 text-accent">
+                        <Globe className="w-4 h-4" />
+                      </Button>
+                      <Button variant="ghost" size="icon" className="h-8 w-8 text-accent" asChild>
+                        <a href={listing.previewUrl} target="_blank" rel="noopener noreferrer">
+                          <ExternalLink className="w-4 h-4" />
+                        </a>
+                      </Button>
+                    </div>
+                  </div>
+                  <div className="aspect-[16/10] bg-muted relative">
+                    <iframe
+                      src={listing.previewUrl}
+                      className="absolute inset-0 w-full h-full border-none"
+                      title={`Preview of ${listing.name}`}
+                    />
+                  </div>
                 </div>
               )}
 
@@ -141,39 +173,47 @@ export default function ListingDetail() {
                     {listing.name}
                   </h1>
                   <p className="text-accent text-3xl font-bold mb-6">${listing.price}</p>
-                  
+
                   <div className="space-y-4 mb-8">
-                     {listing.features.map((feature, i) => (
-                       <div key={i} className="flex items-start gap-3">
-                         <CheckCircle2 className="w-5 h-5 text-accent shrink-0 mt-0.5" />
-                         <span className="text-sm text-muted-foreground font-medium">{feature}</span>
-                       </div>
-                     ))}
+                    {listing.features.map((feature, i) => (
+                      <div key={i} className="flex items-start gap-3">
+                        <CheckCircle2 className="w-5 h-5 text-accent shrink-0 mt-0.5" />
+                        <span className="text-sm text-muted-foreground font-medium">{feature}</span>
+                      </div>
+                    ))}
                   </div>
 
                   <div className="grid grid-cols-2 gap-4 mb-8">
-                    <Button size="lg" className="bg-primary hover:bg-primary/90 text-white rounded-2xl h-14 font-bold text-lg">
-                      <ShoppingCart className="w-5 h-5 mr-2" /> Add to Cart
+                    <Button
+                      size="lg"
+                      className={cn(
+                        "text-white rounded-2xl h-14 font-bold text-lg transition-all",
+                        cartAdded ? "bg-green-600 hover:bg-green-600" : "bg-primary hover:bg-primary/90"
+                      )}
+                      onClick={handleAddToCart}
+                    >
+                      <ShoppingCart className="w-5 h-5 mr-2" />
+                      {cartAdded ? "Added!" : "Add to Cart"}
                     </Button>
-                    <Button size="lg" variant="outline" className="border-primary text-primary hover:bg-primary/5 rounded-2xl h-14 font-bold">
-                      Hire S-Tech
+                    <Button size="lg" variant="outline" className="border-primary text-primary hover:bg-primary/5 rounded-2xl h-14 font-bold" asChild>
+                      <Link href="/services">Hire S-Tech</Link>
                     </Button>
                   </div>
                 </div>
-                
+
                 <div className="p-8 bg-muted/30 border-t flex items-center justify-between">
-                   <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-white border shadow-sm flex items-center justify-center">
-                         <ShieldCheck className="w-5 h-5 text-accent" />
-                      </div>
-                      <div className="flex flex-col">
-                         <span className="text-xs font-bold text-primary uppercase">Guaranteed Security</span>
-                         <span className="text-[10px] text-muted-foreground">Verified by S-Tech Systems</span>
-                      </div>
-                   </div>
-                   <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-primary">
-                      <Share2 className="w-4 h-4 mr-2" /> Share
-                   </Button>
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-white border shadow-sm flex items-center justify-center">
+                      <ShieldCheck className="w-5 h-5 text-accent" />
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-xs font-bold text-primary uppercase">Guaranteed Security</span>
+                      <span className="text-[10px] text-muted-foreground">Verified by S-Tech Systems</span>
+                    </div>
+                  </div>
+                  <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-primary" onClick={handleShare}>
+                    <Share2 className="w-4 h-4 mr-2" /> Share
+                  </Button>
                 </div>
               </Card>
 
@@ -187,9 +227,11 @@ export default function ListingDetail() {
                   <p className="text-sm text-primary-foreground/80 mb-6 font-light">
                     Our digital products are available for immediate download or activation after purchase. For custom services, we guarantee initial deployment within 7 business days.
                   </p>
-                  <Button variant="outline" className="w-full border-white/30 text-white hover:bg-white/10 rounded-xl">
-                    View Licensing Info
-                  </Button>
+                  <Link href="/services">
+                    <Button variant="outline" className="w-full border-white/30 text-white hover:bg-white/10 rounded-xl">
+                      View Licensing Info
+                    </Button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -199,6 +241,3 @@ export default function ListingDetail() {
     </div>
   )
 }
-
-import { Card } from "@/components/ui/card"
-import { cn } from "@/lib/utils"
