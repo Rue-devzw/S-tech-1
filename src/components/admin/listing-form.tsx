@@ -1,6 +1,6 @@
 "use client"
 
-import { Dispatch, SetStateAction, useState, useEffect } from "react"
+import { useState, useEffect } from "react"
 import { Listing, CATEGORIES } from "@/lib/mock-data"
 import {
   Dialog,
@@ -10,7 +10,6 @@ import {
   DialogTitle,
   DialogDescription,
   DialogFooter,
-  DialogClose,
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -26,14 +25,16 @@ interface ListingFormProps {
   onOpenChange?: (open: boolean) => void
 }
 
-export function ListingForm({ listing: initial, onSave, trigger }: ListingFormProps) {
-  const [open, setOpen] = useState<boolean>(props.open ?? false)
+export function ListingForm({ listing: initial, onSave, trigger, open: controlledOpen, onOpenChange }: ListingFormProps) {
+  const [internalOpen, setInternalOpen] = useState(false)
+  const isControlled = controlledOpen !== undefined
+  const open = isControlled ? controlledOpen : internalOpen
 
-  useEffect(() => {
-    if (props.open !== undefined) {
-      setOpen(props.open)
-    }
-  }, [props.open])
+  const setOpen = (val: boolean) => {
+    if (!isControlled) setInternalOpen(val)
+    if (onOpenChange) onOpenChange(val)
+  }
+
   const [listing, setListing] = useState<Listing>(
     initial || {
       id: "",
@@ -52,6 +53,19 @@ export function ListingForm({ listing: initial, onSave, trigger }: ListingFormPr
   useEffect(() => {
     if (initial) {
       setListing(initial)
+    } else {
+      setListing({
+        id: "",
+        name: "",
+        category: CATEGORIES.find(c => c !== "All") || "",
+        price: 0,
+        description: "",
+        features: [],
+        imageUrl: "",
+        previewUrl: "",
+        rating: 0,
+        salesCount: 0,
+      })
     }
   }, [initial])
 
@@ -60,7 +74,6 @@ export function ListingForm({ listing: initial, onSave, trigger }: ListingFormPr
   }
 
   function handleSubmit() {
-    // ensure id exists for new items
     const out: Listing = {
       ...listing,
       id: listing.id || Date.now().toString(),
@@ -70,13 +83,7 @@ export function ListingForm({ listing: initial, onSave, trigger }: ListingFormPr
   }
 
   return (
-    <Dialog
-      open={open}
-      onOpenChange={(o) => {
-        if (props.onOpenChange) props.onOpenChange(o)
-        setOpen(o)
-      }}
-    >
+    <Dialog open={open} onOpenChange={setOpen}>
       {trigger ? <DialogTrigger asChild>{trigger}</DialogTrigger> : null}
       <DialogContent className="max-w-md">
         <DialogHeader>
@@ -90,20 +97,21 @@ export function ListingForm({ listing: initial, onSave, trigger }: ListingFormPr
         </DialogHeader>
         <div className="space-y-4">
           <div>
-            <Label htmlFor="name">Name</Label>
+            <Label htmlFor="lf-name">Name</Label>
             <Input
-              id="name"
+              id="lf-name"
               value={listing.name}
               onChange={e => handleChange("name", e.target.value)}
+              placeholder="e.g. Aura E-Commerce Theme"
             />
           </div>
           <div>
-            <Label htmlFor="category">Category</Label>
+            <Label htmlFor="lf-category">Category</Label>
             <Select
               value={listing.category}
               onValueChange={val => handleChange("category", val)}
             >
-              <SelectTrigger id="category" className="w-full">
+              <SelectTrigger id="lf-category" className="w-full">
                 <SelectValue placeholder="Select category" />
               </SelectTrigger>
               <SelectContent>
@@ -116,44 +124,48 @@ export function ListingForm({ listing: initial, onSave, trigger }: ListingFormPr
             </Select>
           </div>
           <div>
-            <Label htmlFor="price">Price ($)</Label>
+            <Label htmlFor="lf-price">Price ($)</Label>
             <Input
               type="number"
-              id="price"
+              id="lf-price"
               value={listing.price}
               onChange={e => handleChange("price", parseFloat(e.target.value) || 0)}
             />
           </div>
           <div>
-            <Label htmlFor="imageUrl">Image URL</Label>
+            <Label htmlFor="lf-imageUrl">Image URL</Label>
             <Input
-              id="imageUrl"
+              id="lf-imageUrl"
               value={listing.imageUrl}
               onChange={e => handleChange("imageUrl", e.target.value)}
+              placeholder="https://..."
             />
           </div>
           <div>
-            <Label htmlFor="previewUrl">Preview URL</Label>
+            <Label htmlFor="lf-previewUrl">Preview URL</Label>
             <Input
-              id="previewUrl"
+              id="lf-previewUrl"
               value={listing.previewUrl || ""}
               onChange={e => handleChange("previewUrl", e.target.value)}
+              placeholder="https://demo.s-tech.io/..."
             />
           </div>
           <div>
-            <Label htmlFor="description">Description</Label>
+            <Label htmlFor="lf-description">Description</Label>
             <Textarea
-              id="description"
+              id="lf-description"
               value={listing.description}
               onChange={e => handleChange("description", e.target.value)}
+              placeholder="Describe the key benefits..."
             />
           </div>
           <div>
-            <Label htmlFor="features">Features (comma separated)</Label>
+            <Label htmlFor="lf-features">Features (comma separated)</Label>
             <Input
-              id="features"
+              id="lf-features"
               value={listing.features.join(", ")}
-              onChange={e => handleChange("features", e.target.value.split(",").map(s => s.trim()))}
+              onChange={e => handleChange("features", e.target.value.split(",").map(s => s.trim()).filter(Boolean))}
+              placeholder="Feature 1, Feature 2, ..."
             />
           </div>
         </div>

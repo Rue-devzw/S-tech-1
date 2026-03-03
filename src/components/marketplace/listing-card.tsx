@@ -2,13 +2,35 @@
 
 import Image from "next/image"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { Star, Eye, ShoppingCart } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Listing } from "@/lib/mock-data"
+import { useToast } from "@/hooks/use-toast"
 
 export function ListingCard({ listing }: { listing: Listing }) {
+  const router = useRouter()
+  const { toast } = useToast()
+
+  function handleBuy() {
+    router.push(`/listing/${listing.id}`)
+  }
+
+  function handlePreview() {
+    if (listing.previewUrl) {
+      window.open(listing.previewUrl, "_blank", "noopener,noreferrer")
+    }
+  }
+
+  function handleAddToCart() {
+    toast({
+      title: "Added to Cart",
+      description: `${listing.name} has been added to your cart.`,
+    })
+  }
+
   return (
     <Card className="group overflow-hidden border-none shadow-md hover:shadow-xl transition-all duration-300 bg-white">
       <div className="relative aspect-[3/2] overflow-hidden">
@@ -20,11 +42,11 @@ export function ListingCard({ listing }: { listing: Listing }) {
         />
         <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3">
           {listing.previewUrl && (
-            <Button size="sm" variant="secondary" className="rounded-full">
+            <Button size="sm" variant="secondary" className="rounded-full" onClick={handlePreview}>
               <Eye className="w-4 h-4 mr-2" /> Preview
             </Button>
           )}
-          <Button size="sm" className="rounded-full bg-accent hover:bg-accent/90">
+          <Button size="sm" className="rounded-full bg-accent hover:bg-accent/90" onClick={handleBuy}>
             <ShoppingCart className="w-4 h-4 mr-2" /> Buy
           </Button>
         </div>

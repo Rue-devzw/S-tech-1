@@ -4,10 +4,10 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { INQUIRIES } from "@/lib/mock-data"
 import { useListings } from "@/lib/use-listings"
-import { 
-  TrendingUp, 
-  Users, 
-  ShoppingBag, 
+import {
+  TrendingUp,
+  Users,
+  ShoppingBag,
   MessageCircle,
   Clock,
   ArrowUpRight,
@@ -15,8 +15,11 @@ import {
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { cn } from "@/lib/utils"
 
 export default function AdminDashboard() {
+  const { listings } = useListings()
+
   return (
     <div className="space-y-8 max-w-7xl mx-auto">
       <div>
@@ -85,7 +88,7 @@ export default function AdminDashboard() {
                     </TableCell>
                     <TableCell className="font-medium text-muted-foreground">{inq.listingName}</TableCell>
                     <TableCell>
-                      <Badge 
+                      <Badge
                         variant={inq.status === 'pending' ? 'destructive' : inq.status === 'responded' ? 'secondary' : 'outline'}
                         className="rounded-full px-3 py-0.5 text-[10px] font-bold uppercase tracking-wider"
                       >
@@ -141,5 +144,3 @@ export default function AdminDashboard() {
     </div>
   )
 }
-
-import { cn } from "@/lib/utils"

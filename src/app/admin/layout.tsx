@@ -2,12 +2,12 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { 
-  LayoutDashboard, 
-  Package, 
-  MessageSquare, 
-  Users, 
-  Settings, 
+import {
+  LayoutDashboard,
+  Package,
+  MessageSquare,
+  Users,
+  Settings,
   BarChart3,
   LogOut,
   ChevronRight,
@@ -53,9 +53,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             </Button>
           </Link>
           <Button size="icon" variant="ghost" className="rounded-full overflow-hidden">
-            <img 
-              src="https://picsum.photos/seed/admin-avatar/100/100" 
-              alt="Admin" 
+            <img
+              src="https://picsum.photos/seed/admin-avatar/100/100"
+              alt="Admin"
               className="w-full h-full object-cover"
             />
           </Button>
@@ -66,20 +66,22 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         {/* Admin Sidebar */}
         <aside className="w-full md:w-64 bg-white border-r flex flex-col p-4 gap-2 sticky md:top-16 md:h-[calc(100vh-64px)] overflow-y-auto">
           <div className="mb-4">
-             <Button className="w-full bg-accent hover:bg-accent/90 text-white rounded-xl shadow-lg shadow-accent/20">
+            <Link href="/admin/listings">
+              <Button className="w-full bg-accent hover:bg-accent/90 text-white rounded-xl shadow-lg shadow-accent/20">
                 <Plus className="w-4 h-4 mr-2" /> New Listing
-             </Button>
+              </Button>
+            </Link>
           </div>
-          
+
           <div className="space-y-1">
             {navItems.map((item) => (
               <Link key={item.name} href={item.href}>
-                <Button 
-                  variant="ghost" 
+                <Button
+                  variant="ghost"
                   className={cn(
                     "w-full justify-start rounded-xl py-6",
-                    pathname === item.href 
-                      ? "bg-primary/5 text-primary font-bold hover:bg-primary/10" 
+                    pathname === item.href
+                      ? "bg-primary/5 text-primary font-bold hover:bg-primary/10"
                       : "text-muted-foreground hover:bg-muted/50"
                   )}
                 >
