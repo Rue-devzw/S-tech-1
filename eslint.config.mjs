@@ -6,6 +6,10 @@ const config = [
   {
     ignores: [
       ".next/**",
+      ".open-next/**",
+      ".wrangler/**",
+      "cloudflare-env.d.ts",
+      ".dev.vars",
       "node_modules/**",
       "package-lock.json",
       "public/**",
