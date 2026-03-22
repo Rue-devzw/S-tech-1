@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { Listing, CATEGORIES } from "@/lib/mock-data"
+import { useState } from "react";
+import { Listing, CATEGORIES } from "@/lib/mock-data";
 import {
   Dialog,
   DialogTrigger,
@@ -10,36 +10,48 @@ import {
   DialogTitle,
   DialogDescription,
   DialogFooter,
-} from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Button } from "@/components/ui/button"
-import { Label } from "@/components/ui/label"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface ListingFormProps {
-  listing?: Listing | null
-  onSave: (listing: Listing) => void
-  trigger?: React.ReactNode
-  open?: boolean
-  onOpenChange?: (open: boolean) => void
+  listing?: Listing | null;
+  onSave: (listing: Listing) => void;
+  trigger?: React.ReactNode;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
 }
 
-export function ListingForm({ listing: initial, onSave, trigger, open: controlledOpen, onOpenChange }: ListingFormProps) {
-  const [internalOpen, setInternalOpen] = useState(false)
-  const isControlled = controlledOpen !== undefined
-  const open = isControlled ? controlledOpen : internalOpen
+export function ListingForm({
+  listing: initial,
+  onSave,
+  trigger,
+  open: controlledOpen,
+  onOpenChange,
+}: ListingFormProps) {
+  const [internalOpen, setInternalOpen] = useState(false);
+  const isControlled = controlledOpen !== undefined;
+  const open = isControlled ? controlledOpen : internalOpen;
 
   const setOpen = (val: boolean) => {
-    if (!isControlled) setInternalOpen(val)
-    if (onOpenChange) onOpenChange(val)
-  }
+    if (!isControlled) setInternalOpen(val);
+    if (onOpenChange) onOpenChange(val);
+  };
 
   const createEmptyListing = (): Listing => ({
     id: "",
     slug: "",
     name: "",
-    category: CATEGORIES.find(c => c !== "All") || "",
+    category: CATEGORIES.find((c) => c !== "All") || "",
     price: 0,
     shortDescription: "",
     description: "",
@@ -55,33 +67,33 @@ export function ListingForm({ listing: initial, onSave, trigger, open: controlle
     previewUrl: "",
     rating: 0,
     salesCount: 0,
-  })
+  });
 
-  const [listing, setListing] = useState<Listing>(initial || createEmptyListing())
+  const [listing, setListing] = useState<Listing>(
+    initial || createEmptyListing()
+  );
 
-  useEffect(() => {
-    if (initial) {
-      setListing(initial)
-    } else {
-      setListing(createEmptyListing())
-    }
-  }, [initial])
+  const resetListing = () => {
+    setListing(initial || createEmptyListing());
+  };
 
   function handleChange<K extends keyof Listing>(key: K, value: Listing[K]) {
-    setListing(prev => ({ ...prev, [key]: value }))
+    setListing((prev) => ({ ...prev, [key]: value }));
   }
 
   function handleSubmit() {
-    const safeName = listing.name.trim() || "Untitled listing"
-    const safeDescription = listing.description.trim()
+    const safeName = listing.name.trim() || "Untitled listing";
+    const safeDescription = listing.description.trim();
     const safeShortDescription =
-      listing.shortDescription.trim() || safeDescription || "Project details will be updated soon."
+      listing.shortDescription.trim() ||
+      safeDescription ||
+      "Project details will be updated soon.";
     const slug =
       listing.slug.trim() ||
       safeName
         .toLowerCase()
         .replace(/[^a-z0-9]+/g, "-")
-        .replace(/^-+|-+$/g, "")
+        .replace(/^-+|-+$/g, "");
 
     const out: Listing = {
       ...listing,
@@ -94,24 +106,37 @@ export function ListingForm({ listing: initial, onSave, trigger, open: controlle
       industry: listing.industry || "General",
       deliveryTimeline: listing.deliveryTimeline || "2 weeks",
       supportWindow: listing.supportWindow || "3 months",
-      technologies: listing.technologies.length ? listing.technologies : ["Next.js"],
-      outcomes: listing.outcomes.length ? listing.outcomes : ["Outcome tracking to be defined."],
+      technologies: listing.technologies.length
+        ? listing.technologies
+        : ["Next.js"],
+      outcomes: listing.outcomes.length
+        ? listing.outcomes
+        : ["Outcome tracking to be defined."],
+    };
+    onSave(out);
+    setOpen(false);
+    resetListing();
+  }
+
+  function handleOpenChange(nextOpen: boolean) {
+    if (nextOpen) {
+      resetListing();
     }
-    onSave(out)
-    setOpen(false)
+    setOpen(nextOpen);
   }
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={handleOpenChange}>
       {trigger ? <DialogTrigger asChild>{trigger}</DialogTrigger> : null}
       <DialogContent className="max-w-md">
         <DialogHeader>
-          <DialogTitle>{initial ? "Edit Listing" : "Add New Listing"}</DialogTitle>
+          <DialogTitle>
+            {initial ? "Edit Listing" : "Add New Listing"}
+          </DialogTitle>
           <DialogDescription>
             {initial
               ? "Modify the details of your product or service."
-              : "Provide information about the new listing."
-            }
+              : "Provide information about the new listing."}
           </DialogDescription>
         </DialogHeader>
         <div className="space-y-4">
@@ -120,7 +145,7 @@ export function ListingForm({ listing: initial, onSave, trigger, open: controlle
             <Input
               id="lf-name"
               value={listing.name}
-              onChange={e => handleChange("name", e.target.value)}
+              onChange={(e) => handleChange("name", e.target.value)}
               placeholder="e.g. Aura E-Commerce Theme"
             />
           </div>
@@ -128,13 +153,13 @@ export function ListingForm({ listing: initial, onSave, trigger, open: controlle
             <Label htmlFor="lf-category">Category</Label>
             <Select
               value={listing.category}
-              onValueChange={val => handleChange("category", val)}
+              onValueChange={(val) => handleChange("category", val)}
             >
               <SelectTrigger id="lf-category" className="w-full">
                 <SelectValue placeholder="Select category" />
               </SelectTrigger>
               <SelectContent>
-                {CATEGORIES.filter(c => c !== "All").map(cat => (
+                {CATEGORIES.filter((c) => c !== "All").map((cat) => (
                   <SelectItem key={cat} value={cat}>
                     {cat}
                   </SelectItem>
@@ -148,7 +173,9 @@ export function ListingForm({ listing: initial, onSave, trigger, open: controlle
               type="number"
               id="lf-price"
               value={listing.price}
-              onChange={e => handleChange("price", parseFloat(e.target.value) || 0)}
+              onChange={(e) =>
+                handleChange("price", parseFloat(e.target.value) || 0)
+              }
             />
           </div>
           <div>
@@ -156,7 +183,7 @@ export function ListingForm({ listing: initial, onSave, trigger, open: controlle
             <Input
               id="lf-imageUrl"
               value={listing.imageUrl}
-              onChange={e => handleChange("imageUrl", e.target.value)}
+              onChange={(e) => handleChange("imageUrl", e.target.value)}
               placeholder="https://..."
             />
           </div>
@@ -165,7 +192,7 @@ export function ListingForm({ listing: initial, onSave, trigger, open: controlle
             <Input
               id="lf-previewUrl"
               value={listing.previewUrl || ""}
-              onChange={e => handleChange("previewUrl", e.target.value)}
+              onChange={(e) => handleChange("previewUrl", e.target.value)}
               placeholder="https://demo.s-tech.io/..."
             />
           </div>
@@ -174,7 +201,7 @@ export function ListingForm({ listing: initial, onSave, trigger, open: controlle
             <Input
               id="lf-shortDescription"
               value={listing.shortDescription}
-              onChange={e => handleChange("shortDescription", e.target.value)}
+              onChange={(e) => handleChange("shortDescription", e.target.value)}
               placeholder="A concise one-line summary"
             />
           </div>
@@ -183,16 +210,26 @@ export function ListingForm({ listing: initial, onSave, trigger, open: controlle
             <Textarea
               id="lf-description"
               value={listing.description}
-              onChange={e => handleChange("description", e.target.value)}
+              onChange={(e) => handleChange("description", e.target.value)}
               placeholder="Describe the key benefits..."
             />
           </div>
           <div>
-            <Label htmlFor="lf-technologies">Technologies (comma separated)</Label>
+            <Label htmlFor="lf-technologies">
+              Technologies (comma separated)
+            </Label>
             <Input
               id="lf-technologies"
               value={listing.technologies.join(", ")}
-              onChange={e => handleChange("technologies", e.target.value.split(",").map(s => s.trim()).filter(Boolean))}
+              onChange={(e) =>
+                handleChange(
+                  "technologies",
+                  e.target.value
+                    .split(",")
+                    .map((s) => s.trim())
+                    .filter(Boolean)
+                )
+              }
               placeholder="Next.js, PostgreSQL, TypeScript"
             />
           </div>
@@ -201,18 +238,32 @@ export function ListingForm({ listing: initial, onSave, trigger, open: controlle
             <Input
               id="lf-features"
               value={listing.features.join(", ")}
-              onChange={e => handleChange("features", e.target.value.split(",").map(s => s.trim()).filter(Boolean))}
+              onChange={(e) =>
+                handleChange(
+                  "features",
+                  e.target.value
+                    .split(",")
+                    .map((s) => s.trim())
+                    .filter(Boolean)
+                )
+              }
               placeholder="Feature 1, Feature 2, ..."
             />
           </div>
         </div>
         <DialogFooter>
-          <Button variant="outline" onClick={() => setOpen(false)} className="mr-2">
+          <Button
+            variant="outline"
+            onClick={() => setOpen(false)}
+            className="mr-2"
+          >
             Cancel
           </Button>
-          <Button onClick={handleSubmit}>{initial ? "Save Changes" : "Add Listing"}</Button>
+          <Button onClick={handleSubmit}>
+            {initial ? "Save Changes" : "Add Listing"}
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
-  )
+  );
 }

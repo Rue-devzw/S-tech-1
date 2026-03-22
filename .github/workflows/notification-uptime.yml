@@ -1,0 +1,48 @@
+name: Notification Uptime
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+
+jobs:
+  staging:
+    if: ${{ secrets.STAGING_CRON_HEALTHCHECK_URL != '' && secrets.STAGING_INTERNAL_CRON_SECRET != '' }}
+    runs-on: ubuntu-latest
+    environment: staging
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.13.0
+
+      - name: Run staging notification uptime check
+        env:
+          INTERNAL_CRON_SECRET: ${{ secrets.STAGING_INTERNAL_CRON_SECRET }}
+          NOTIFICATION_HEALTH_ALLOW_DEGRADED: "1"
+          NOTIFICATION_HEALTH_EXPECTED_ENV: staging
+        run: node scripts/check-notification-health.mjs "${{ secrets.STAGING_CRON_HEALTHCHECK_URL }}"
+
+  production:
+    if: ${{ secrets.PRODUCTION_CRON_HEALTHCHECK_URL != '' && secrets.PRODUCTION_INTERNAL_CRON_SECRET != '' }}
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.13.0
+
+      - name: Run production notification uptime check
+        env:
+          INTERNAL_CRON_SECRET: ${{ secrets.PRODUCTION_INTERNAL_CRON_SECRET }}
+          NOTIFICATION_HEALTH_EXPECTED_ENV: production
+        run: node scripts/check-notification-health.mjs "${{ secrets.PRODUCTION_CRON_HEALTHCHECK_URL }}"

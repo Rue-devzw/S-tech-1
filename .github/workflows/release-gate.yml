@@ -1,0 +1,71 @@
+name: Release Gate
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: Target environment to validate
+        required: true
+        type: choice
+        options:
+          - staging
+          - production
+      run_migrations:
+        description: Apply Postgres migrations during the gate
+        required: true
+        default: false
+        type: boolean
+
+jobs:
+  release-gate:
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+    env:
+      NODE_ENV: production
+      DEPLOYMENT_ENV: ${{ inputs.environment }}
+      NEXT_PUBLIC_SITE_URL: ${{ secrets.NEXT_PUBLIC_SITE_URL }}
+      ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+      ADMIN_SESSION_SECRET: ${{ secrets.ADMIN_SESSION_SECRET }}
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      INTERNAL_CRON_SECRET: ${{ secrets.INTERNAL_CRON_SECRET }}
+      RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+      RESEND_WEBHOOK_SECRET: ${{ secrets.RESEND_WEBHOOK_SECRET }}
+      NOTIFICATION_ALERT_WEBHOOK_URL: ${{ secrets.NOTIFICATION_ALERT_WEBHOOK_URL }}
+      SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.13.0
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run repository validation
+        run: npm run ci
+
+      - name: Install Playwright browser
+        run: npx playwright install --with-deps chromium
+
+      - name: Run local browser smoke suite
+        run: npm run test:e2e
+
+      - name: Run environment preflight
+        run: npm run ops:preflight -- --target=${{ inputs.environment }}
+
+      - name: Apply Postgres migrations
+        if: ${{ inputs.run_migrations }}
+        run: npm run db:postgres:migrate
+
+      - name: Smoke-check deployed surface
+        run: npm run deployment:smoke "${{ secrets.NEXT_PUBLIC_SITE_URL }}"
+
+      - name: Check deployed notification health
+        env:
+          NOTIFICATION_HEALTH_EXPECTED_ENV: ${{ inputs.environment }}
+        run: npm run notifications:health "${{ secrets.NEXT_PUBLIC_SITE_URL }}"

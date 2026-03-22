@@ -1,4 +1,4 @@
-'use server';
+"use server";
 /**
  * @fileOverview An AI agent for generating compelling and SEO-friendly service descriptions.
  *
@@ -7,29 +7,48 @@
  * - GenerateServiceDescriptionOutput - The return type for the generateServiceDescription function.
  */
 
-import { ai } from '@/ai/genkit';
-import { z } from 'genkit';
+import { ai } from "@/ai/genkit";
+import { assertGoogleAiConfig } from "@/lib/env";
+import { z } from "genkit";
 
 const GenerateServiceDescriptionInputSchema = z.object({
-  serviceName: z.string().describe('The name of the service to be described.'),
-  category: z.string().describe('The category of the service (e.g., "Web Development", "AI Cybersecurity").'),
-  keywords: z.array(z.string()).describe('A list of SEO keywords relevant to the service.'),
-  targetAudience: z.string().describe('A description of the target audience for this service.'),
-  keyFeatures: z.array(z.string()).describe('A list of key features and benefits of the service.'),
+  serviceName: z.string().describe("The name of the service to be described."),
+  category: z
+    .string()
+    .describe(
+      'The category of the service (e.g., "Web Development", "AI Cybersecurity").'
+    ),
+  keywords: z
+    .array(z.string())
+    .describe("A list of SEO keywords relevant to the service."),
+  targetAudience: z
+    .string()
+    .describe("A description of the target audience for this service."),
+  keyFeatures: z
+    .array(z.string())
+    .describe("A list of key features and benefits of the service."),
 });
-export type GenerateServiceDescriptionInput = z.infer<typeof GenerateServiceDescriptionInputSchema>;
+export type GenerateServiceDescriptionInput = z.infer<
+  typeof GenerateServiceDescriptionInputSchema
+>;
 
 const GenerateServiceDescriptionOutputSchema = z.object({
-  description: z.string().describe('The generated compelling and SEO-friendly service description.'),
+  description: z
+    .string()
+    .describe("The generated compelling and SEO-friendly service description."),
 });
-export type GenerateServiceDescriptionOutput = z.infer<typeof GenerateServiceDescriptionOutputSchema>;
+export type GenerateServiceDescriptionOutput = z.infer<
+  typeof GenerateServiceDescriptionOutputSchema
+>;
 
-export async function generateServiceDescription(input: GenerateServiceDescriptionInput): Promise<GenerateServiceDescriptionOutput> {
+export async function generateServiceDescription(
+  input: GenerateServiceDescriptionInput
+): Promise<GenerateServiceDescriptionOutput> {
   return generateServiceDescriptionFlow(input);
 }
 
 const prompt = ai.definePrompt({
-  name: 'generateServiceDescriptionPrompt',
+  name: "generateServiceDescriptionPrompt",
   input: { schema: GenerateServiceDescriptionInputSchema },
   output: { schema: GenerateServiceDescriptionOutputSchema },
   prompt: `You are an expert copywriter specializing in creating compelling and SEO-friendly descriptions for digital services for S-Tech Solutions based in Zimbabwe.
@@ -57,12 +76,13 @@ The description should:
 
 const generateServiceDescriptionFlow = ai.defineFlow(
   {
-    name: 'generateServiceDescriptionFlow',
+    name: "generateServiceDescriptionFlow",
     inputSchema: GenerateServiceDescriptionInputSchema,
     outputSchema: GenerateServiceDescriptionOutputSchema,
   },
   async (input) => {
+    assertGoogleAiConfig();
     const { output } = await prompt(input);
     return output!;
-  },
+  }
 );
