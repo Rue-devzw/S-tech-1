@@ -1,6 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import {
+  getPersistenceConfigurationErrorMessage,
+  isWorkersReadOnlyPreviewMode,
+} from "@/lib/server/runtime";
+import {
   requestAdminPasswordReset,
   resetAdminPassword,
 } from "@/lib/server/data-store";
@@ -15,6 +19,15 @@ const completeResetSchema = z.object({
 });
 
 export async function POST(request: NextRequest) {
+  if (isWorkersReadOnlyPreviewMode()) {
+    return NextResponse.json(
+      {
+        error: getPersistenceConfigurationErrorMessage(),
+      },
+      { status: 503 }
+    );
+  }
+
   const payload = await request.json().catch(() => null);
   const parsed = requestResetSchema.safeParse(payload);
 
@@ -34,6 +47,15 @@ export async function POST(request: NextRequest) {
 }
 
 export async function PATCH(request: NextRequest) {
+  if (isWorkersReadOnlyPreviewMode()) {
+    return NextResponse.json(
+      {
+        error: getPersistenceConfigurationErrorMessage(),
+      },
+      { status: 503 }
+    );
+  }
+
   const payload = await request.json().catch(() => null);
   const parsed = completeResetSchema.safeParse(payload);
 
