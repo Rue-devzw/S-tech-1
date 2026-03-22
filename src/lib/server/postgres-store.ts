@@ -106,7 +106,7 @@ function getPool() {
       );
     }
 
-    const postgresModule = require("pg") as {
+    const postgresModule = require("@neondatabase/serverless") as {
       Pool: new (config: { connectionString: string }) => PostgresPool;
     };
 
