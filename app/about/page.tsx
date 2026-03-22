@@ -1,24 +1,36 @@
+import type { Metadata } from "next";
 import { Globe2, Target, Users } from "lucide-react";
 import { MainNav } from "@/components/layout/main-nav";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import { createPageMetadata } from "@/lib/site-metadata";
+
+export const metadata: Metadata = createPageMetadata({
+  title: "About",
+  description:
+    "Learn how S-Tech Studios approaches digital product delivery, engineering quality, and execution with teams across Africa.",
+  path: "/about",
+});
 
 const PRINCIPLES = [
   {
     icon: Target,
     title: "Outcome-focused",
-    description: "We treat every engagement as a business performance problem, not just a code delivery task.",
+    description:
+      "We treat every engagement as a business performance problem, not just a code delivery task.",
   },
   {
     icon: Users,
     title: "Execution partners",
-    description: "Our teams collaborate deeply with clients and transfer capabilities, not dependency.",
+    description:
+      "Our teams collaborate deeply with clients and transfer capabilities, not dependency.",
   },
   {
     icon: Globe2,
     title: "African context, global quality",
-    description: "We build for real market constraints while maintaining international engineering standards.",
+    description:
+      "We build for real market constraints while maintaining international engineering standards.",
   },
 ];
 
@@ -27,15 +39,20 @@ export default function AboutPage() {
     <div className="min-h-screen bg-slate-50">
       <MainNav />
 
-      <main>
+      <main id="main-content">
         <section className="bg-white py-16 md:py-20">
           <div className="container mx-auto px-4">
-            <Badge className="border-none bg-cyan-100 text-cyan-700">About S-Tech Studios</Badge>
+            <Badge className="border-none bg-cyan-100 text-cyan-700">
+              About S-Tech Studios
+            </Badge>
             <h1 className="mt-4 max-w-3xl text-4xl font-headline font-semibold leading-tight text-slate-900 md:text-5xl">
-              We build resilient digital products for teams that care about quality and momentum.
+              We build resilient digital products for teams that care about
+              quality and momentum.
             </h1>
             <p className="mt-5 max-w-2xl text-slate-600">
-              Founded in Harare, S-Tech Studios helps organizations design and deliver modern platforms, data systems, and customer-facing products with clear execution standards and measurable outcomes.
+              Founded in Harare, S-Tech Studios helps organizations design and
+              deliver modern platforms, data systems, and customer-facing
+              products with clear execution standards and measurable outcomes.
             </p>
           </div>
         </section>
@@ -48,8 +65,12 @@ export default function AboutPage() {
                   <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-100 text-cyan-700">
                     <principle.icon className="h-5 w-5" />
                   </div>
-                  <h2 className="text-xl font-headline font-semibold text-slate-900">{principle.title}</h2>
-                  <p className="mt-2 text-sm leading-relaxed text-slate-600">{principle.description}</p>
+                  <h2 className="text-xl font-headline font-semibold text-slate-900">
+                    {principle.title}
+                  </h2>
+                  <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                    {principle.description}
+                  </p>
                 </CardContent>
               </Card>
             ))}
@@ -58,12 +79,23 @@ export default function AboutPage() {
 
         <section className="container mx-auto px-4 pb-16 md:pb-24">
           <div className="rounded-3xl border border-slate-200 bg-slate-900 p-8 text-white md:p-10">
-            <h2 className="text-3xl font-headline font-semibold">What to expect when working with us</h2>
+            <h2 className="text-3xl font-headline font-semibold">
+              What to expect when working with us
+            </h2>
             <div className="mt-6 grid gap-4 text-sm text-slate-300 md:grid-cols-2">
-              <p>1. Discovery and architecture planning tied to concrete metrics.</p>
-              <p>2. Transparent sprint delivery with weekly demos and risk logs.</p>
-              <p>3. Security and quality gates integrated into each release cycle.</p>
-              <p>4. Operational handover with documentation and team enablement.</p>
+              <p>
+                1. Discovery and architecture planning tied to concrete metrics.
+              </p>
+              <p>
+                2. Transparent sprint delivery with weekly demos and risk logs.
+              </p>
+              <p>
+                3. Security and quality gates integrated into each release
+                cycle.
+              </p>
+              <p>
+                4. Operational handover with documentation and team enablement.
+              </p>
             </div>
           </div>
         </section>

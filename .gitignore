@@ -33,6 +33,9 @@ coverage/
 
 # Temporary folders
 *.tmp
+.data/
+playwright-report/
+test-results/
 
 # IDE files
 .idea/
