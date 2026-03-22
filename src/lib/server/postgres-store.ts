@@ -126,8 +126,12 @@ async function withClient<T>(
   try {
     client = await getPool().connect();
     return await callback(client);
-  } catch (error: any) {
-    if (retries > 0 && error?.message?.includes("Connection closed")) {
+  } catch (error: unknown) {
+    if (
+      retries > 0 &&
+      error instanceof Error &&
+      error.message.includes("Connection closed")
+    ) {
       globalThis.__sTechPostgresPool = undefined;
       return withClient(callback, retries - 1);
     }
@@ -639,8 +643,12 @@ async function queryRows<Row extends QueryRow = QueryRow>(
   try {
     const result = await getPool().query<Row>(sql, params);
     return result.rows;
-  } catch (error: any) {
-    if (retries > 0 && error?.message?.includes("Connection closed")) {
+  } catch (error: unknown) {
+    if (
+      retries > 0 &&
+      error instanceof Error &&
+      error.message.includes("Connection closed")
+    ) {
       globalThis.__sTechPostgresPool = undefined;
       return queryRows(sql, params, retries - 1);
     }
