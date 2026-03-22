@@ -88,7 +88,7 @@ type PostgresPool = Queryable & {
   connect: () => Promise<PostgresClient>;
 };
 
-const require = createRequire(import.meta.url);
+import { Pool, neonConfig } from "@neondatabase/serverless";
 
 declare global {
   var __sTechPostgresPool: PostgresPool | undefined;
@@ -106,13 +106,12 @@ function getPool() {
       );
     }
 
-    const postgresModule = require("@neondatabase/serverless") as {
-      Pool: new (config: { connectionString: string }) => PostgresPool;
-    };
+    neonConfig.fetchConnectionCache = true;
+    neonConfig.poolQueryViaFetch = true;
 
-    globalThis.__sTechPostgresPool = new postgresModule.Pool({
+    globalThis.__sTechPostgresPool = new Pool({
       connectionString: databaseUrl,
-    });
+    }) as unknown as PostgresPool;
   }
 
   return globalThis.__sTechPostgresPool;
