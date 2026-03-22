@@ -1,4 +1,4 @@
-import { getDatabaseUrl } from "@/lib/env";
+import { getDatabaseUrl, getNodeEnv } from "@/lib/env";
 
 type RuntimeGlobals = typeof globalThis & {
   WebSocketPair?: unknown;
@@ -38,5 +38,8 @@ export function isCloudflareWorkersRuntime() {
 }
 
 export function isWorkersReadOnlyPreviewMode() {
-  return isCloudflareWorkersRuntime() && !getDatabaseUrl();
+  return (
+    !getDatabaseUrl() &&
+    (isCloudflareWorkersRuntime() || getNodeEnv() === "production")
+  );
 }
