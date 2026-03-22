@@ -1,9 +1,7 @@
 import "server-only";
 
 import { randomUUID } from "node:crypto";
-import { readdirSync, readFileSync } from "node:fs";
 import { createRequire } from "node:module";
-import path from "node:path";
 import {
   type AdminMfaStatus,
   type AdminPasswordResetRequest,
@@ -66,6 +64,7 @@ import {
   type Listing,
   LISTINGS,
 } from "@/lib/mock-data";
+import { POSTGRES_MIGRATIONS } from "@/lib/server/postgres-migrations";
 
 type QueryRow = Record<string, unknown>;
 
@@ -90,10 +89,6 @@ type PostgresPool = Queryable & {
 };
 
 const require = createRequire(import.meta.url);
-const DATA_DIR = path.join(process.cwd(), ".data");
-const legacyListingsPath = path.join(DATA_DIR, "listings.json");
-const legacyInquiriesPath = path.join(DATA_DIR, "inquiries.json");
-const migrationsDir = path.join(process.cwd(), "db", "postgres", "migrations");
 
 declare global {
   var __sTechPostgresPool: PostgresPool | undefined;
@@ -173,21 +168,17 @@ async function ensureMigrationsTable(queryable: Queryable) {
 }
 
 async function applyPendingMigrations(client: PostgresClient) {
-  const migrationFiles = readdirSync(migrationsDir)
-    .filter((filename) => filename.endsWith(".sql"))
-    .sort();
-
   const appliedRows = await client.query<{ filename: string }>(
     "SELECT filename FROM schema_migrations ORDER BY filename ASC"
   );
   const applied = new Set(appliedRows.rows.map((row) => row.filename));
 
-  for (const filename of migrationFiles) {
+  for (const migration of POSTGRES_MIGRATIONS) {
+    const { filename, sql } = migration;
+
     if (applied.has(filename)) {
       continue;
     }
-
-    const sql = readFileSync(path.join(migrationsDir, filename), "utf8");
 
     await client.query("BEGIN");
     try {
@@ -208,15 +199,6 @@ async function applyPendingMigrations(client: PostgresClient) {
   }
 }
 
-function readLegacyJson<T>(filePath: string, fallback: T): T {
-  try {
-    const raw = readFileSync(filePath, "utf8");
-    return JSON.parse(raw) as T;
-  } catch {
-    return fallback;
-  }
-}
-
 async function seedListings(queryable: Queryable) {
   const row = await queryOne<{ count: number }>(
     queryable,
@@ -228,7 +210,7 @@ async function seedListings(queryable: Queryable) {
     return;
   }
 
-  const listings = readLegacyJson<Listing[]>(legacyListingsPath, LISTINGS);
+  const listings = LISTINGS;
   const baseTime = Date.now();
 
   for (const [index, listing] of listings.entries()) {
@@ -284,7 +266,7 @@ async function seedInquiries(queryable: Queryable) {
     return;
   }
 
-  const inquiries = readLegacyJson<Inquiry[]>(legacyInquiriesPath, INQUIRIES);
+  const inquiries = INQUIRIES;
   const baseTime = Date.now();
 
   for (const [index, inquiry] of inquiries.entries()) {

@@ -7,6 +7,10 @@ import {
 } from "@/lib/server/admin-auth";
 import { shouldUseSecureCookies } from "@/lib/env";
 import {
+  getPersistenceConfigurationErrorMessage,
+  isWorkersReadOnlyPreviewMode,
+} from "@/lib/server/runtime";
+import {
   getRequestSubjectKey,
   getRequestFingerprint,
 } from "@/lib/server/request-guard";
@@ -133,6 +137,15 @@ async function getRateLimitResponse(input: {
 }
 
 export async function POST(request: NextRequest) {
+  if (isWorkersReadOnlyPreviewMode()) {
+    return NextResponse.json(
+      {
+        error: getPersistenceConfigurationErrorMessage(),
+      },
+      { status: 503 }
+    );
+  }
+
   const body = (await request.json().catch(() => null)) as {
     username?: string;
     password?: string;

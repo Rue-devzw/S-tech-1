@@ -3,8 +3,14 @@ import "server-only";
 import { getDatabaseUrl } from "@/lib/env";
 import * as postgresStore from "@/lib/server/postgres-store";
 import * as sqliteStore from "@/lib/server/sqlite-store";
+import * as workersFallbackStore from "@/lib/server/workers-fallback-store";
+import { isWorkersReadOnlyPreviewMode } from "@/lib/server/runtime";
 
-const store: typeof sqliteStore = getDatabaseUrl() ? postgresStore : sqliteStore;
+const store: typeof sqliteStore = getDatabaseUrl()
+  ? postgresStore
+  : isWorkersReadOnlyPreviewMode()
+    ? workersFallbackStore
+    : sqliteStore;
 
 export const getListings = store.getListings;
 export const getListingById = store.getListingById;

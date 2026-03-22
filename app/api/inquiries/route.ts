@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
+import { getPersistenceConfigurationErrorMessage, isWorkersReadOnlyPreviewMode } from "@/lib/server/runtime";
 import { enforceRequestRateLimit } from "@/lib/server/request-guard";
 import {
   createInquiry,
@@ -19,6 +20,15 @@ const createInquirySchema = z.object({
 });
 
 export async function POST(request: NextRequest) {
+  if (isWorkersReadOnlyPreviewMode()) {
+    return NextResponse.json(
+      {
+        error: getPersistenceConfigurationErrorMessage(),
+      },
+      { status: 503 }
+    );
+  }
+
   const payload = await request.json().catch(() => null);
   const rateLimit = await enforceRequestRateLimit({
     request,
