@@ -102,7 +102,8 @@ Important:
 
 - `WORKER_SELF_REFERENCE` is pinned to the Worker name `s-tech-1`, which must match the actual Worker created in Cloudflare.
 - If you deploy from Cloudflare Workers Builds, set the build command to `npm run cf:build` and the deploy command to `npm run cf:deploy` so OpenNext uses the checked-in config instead of letting `npx wrangler deploy` trigger an interactive migration.
-- When `DATABASE_URL` is not configured on Cloudflare Workers, the storefront now falls back to a read-only preview mode for catalog pages instead of crashing. Admin auth, password reset, and inquiry submission still require a managed Postgres database.
+- When `DATABASE_URL` is not configured in a production build, the storefront now falls back to a read-only preview mode for catalog pages instead of crashing. Admin auth, password reset, and inquiry submission still require a managed Postgres database.
+- Cloudflare Workers Builds must receive production values like `DATABASE_URL` and `NEXT_PUBLIC_SITE_URL` during the build itself. If those are missing, the bundle will fall back to preview-mode defaults such as `http://localhost:9002`.
 - Keep secrets in Cloudflare environment variables or secrets, not in `.dev.vars`.
 
 ## Operations

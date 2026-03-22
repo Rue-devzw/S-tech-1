@@ -1,7 +1,6 @@
 import "server-only";
 
 import { randomUUID } from "node:crypto";
-import { createRequire } from "node:module";
 import {
   type AdminMfaStatus,
   type AdminPasswordResetRequest,
@@ -106,7 +105,6 @@ function getPool() {
       );
     }
 
-    neonConfig.fetchConnectionCache = true;
     neonConfig.poolQueryViaFetch = true;
 
     globalThis.__sTechPostgresPool = new Pool({
