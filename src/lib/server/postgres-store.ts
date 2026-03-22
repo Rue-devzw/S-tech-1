@@ -118,13 +118,24 @@ function getPool() {
   return globalThis.__sTechPostgresPool;
 }
 
-async function withClient<T>(callback: (client: PostgresClient) => Promise<T>) {
-  const client = await getPool().connect();
-
+async function withClient<T>(
+  callback: (client: PostgresClient) => Promise<T>,
+  retries = 1
+): Promise<T> {
+  let client;
   try {
+    client = await getPool().connect();
     return await callback(client);
+  } catch (error: any) {
+    if (retries > 0 && error?.message?.includes("Connection closed")) {
+      globalThis.__sTechPostgresPool = undefined;
+      return withClient(callback, retries - 1);
+    }
+    throw error;
   } finally {
-    client.release();
+    if (client) {
+      client.release();
+    }
   }
 }
 
@@ -621,11 +632,20 @@ function getDefaultMfaStatus(): AdminMfaStatus {
 
 async function queryRows<Row extends QueryRow = QueryRow>(
   sql: string,
-  params: unknown[] = []
-) {
+  params: unknown[] = [],
+  retries = 1
+): Promise<Row[]> {
   await ensurePostgresReady();
-  const result = await getPool().query<Row>(sql, params);
-  return result.rows;
+  try {
+    const result = await getPool().query<Row>(sql, params);
+    return result.rows;
+  } catch (error: any) {
+    if (retries > 0 && error?.message?.includes("Connection closed")) {
+      globalThis.__sTechPostgresPool = undefined;
+      return queryRows(sql, params, retries - 1);
+    }
+    throw error;
+  }
 }
 
 async function queryOne<Row extends QueryRow = QueryRow>(
