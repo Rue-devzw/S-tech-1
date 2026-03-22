@@ -87,6 +87,23 @@ GitHub Actions runs the `ci` script on pushes and pull requests through [`.githu
 
 Environment-specific release gates can be run manually through [`.github/workflows/release-gate.yml`](/Users/Strive/Projects/S-tech-1/.github/workflows/release-gate.yml). The selected GitHub environment should provide the same variables and secrets that `ops:preflight` expects, including `DEPLOYMENT_ENV`, `NEXT_PUBLIC_SITE_URL`, `DATABASE_URL`, `ADMIN_SESSION_SECRET`, `ADMIN_PASSWORD`, and `INTERNAL_CRON_SECRET`.
 
+## Cloudflare Workers
+
+This repo now includes checked-in OpenNext Cloudflare config via [wrangler.jsonc](/Users/Strive/Projects/S-tech-1/wrangler.jsonc), [open-next.config.ts](/Users/Strive/Projects/S-tech-1/open-next.config.ts), and [public/_headers](/Users/Strive/Projects/S-tech-1/public/_headers).
+
+Use:
+
+```bash
+npm run preview
+npm run deploy
+```
+
+Important:
+
+- `WORKER_SELF_REFERENCE` is pinned to the Worker name `s-tech-1`, which must match the actual Worker created in Cloudflare.
+- If you deploy from Cloudflare Workers Builds, set the build command to `npm run cf:build` and the deploy command to `npm run cf:deploy` so OpenNext uses the checked-in config instead of letting `npx wrangler deploy` trigger an interactive migration.
+- Keep secrets in Cloudflare environment variables or secrets, not in `.dev.vars`.
+
 ## Operations
 
 Operator documentation now lives under [`docs/runbooks/README.md`](/Users/Strive/Projects/S-tech-1/docs/runbooks/README.md).
