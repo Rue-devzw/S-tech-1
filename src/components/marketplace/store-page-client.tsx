@@ -7,33 +7,37 @@ import { ListingCard } from "@/components/marketplace/listing-card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { CATEGORIES, type Listing } from "@/lib/mock-data";
 
-const BUYING_PLANS = [
+const COLLABORATION_PATHS = [
   {
-    name: "Template License",
-    price: "$540",
+    name: "Portfolio Website",
     description:
-      "Instant access to prebuilt product foundations with implementation docs.",
-    cta: "Buy License",
-    href: "mailto:hello@s-tech.africa?subject=Template%20License%20Purchase",
+      "A clean, modern site for a brand, founder, or small business that needs a stronger online presence.",
+    cta: "Start a project",
+    href: "/contact?topic=platforms",
   },
   {
-    name: "Guided Delivery",
-    price: "$2,500",
+    name: "Agency Platform",
     description:
-      "Implementation support and integration guidance from our product engineers.",
-    cta: "Request Guided Setup",
+      "A service-led website that explains what you do clearly and guides visitors toward inquiries.",
+    cta: "Start a project",
     featured: true,
-    href: "mailto:hello@s-tech.africa?subject=Guided%20Delivery%20Request",
+    href: "/contact?topic=platforms",
   },
   {
-    name: "Managed Rollout",
-    price: "Custom",
+    name: "Content Collection",
     description:
-      "End-to-end rollout, security hardening, and adoption support for enterprise teams.",
-    cta: "Talk to Delivery Team",
-    href: "mailto:hello@s-tech.africa?subject=Managed%20Rollout%20Consultation",
+      "A structured digital experience for collections, archives, or content that needs to be easier to browse.",
+    cta: "Talk about your idea",
+    href: "/contact?topic=ai",
   },
 ];
 
@@ -57,7 +61,10 @@ export function StorePageClient({
           q.length === 0 ||
           listing.name.toLowerCase().includes(q) ||
           listing.shortDescription.toLowerCase().includes(q) ||
-          listing.technologies.some((tech) => tech.toLowerCase().includes(q));
+          listing.client.toLowerCase().includes(q) ||
+          listing.industry.toLowerCase().includes(q) ||
+          listing.technologies.some((tech) => tech.toLowerCase().includes(q)) ||
+          listing.features.some((feature) => feature.toLowerCase().includes(q));
 
         return matchesCategory && matchesQuery;
       }),
@@ -70,25 +77,25 @@ export function StorePageClient({
         <div className="mb-6 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <Badge className="border-none bg-cyan-100 text-cyan-700">
-              Storefront
+              Selected Work
             </Badge>
             <h1 className="mt-3 text-3xl font-headline font-semibold text-slate-900 md:text-4xl">
-              Premium Product Catalog
+              Real projects and case studies
             </h1>
             <p className="mt-2 text-slate-600">
-              Production-grade projects, each with clear business outcomes and
-              implementation detail.
+              Browse websites, agency platforms, and digital collections that
+              reflect the kind of work we design and build.
             </p>
             <div className="mt-4 flex flex-wrap gap-3 text-sm">
               <Button
                 className="bg-slate-900 text-white hover:bg-slate-800"
                 asChild
               >
-                <a href="mailto:hello@s-tech.africa">Get recommendation</a>
+                <Link href="/contact">Start a project</Link>
               </Button>
               <Button variant="outline" className="border-slate-300" asChild>
                 <Link href="/services">
-                  Compare delivery plans
+                  View services
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
@@ -100,13 +107,28 @@ export function StorePageClient({
               aria-label="Search listings"
               value={searchQuery}
               onChange={(event) => setSearchQuery(event.target.value)}
-              placeholder="Search by name, tech, or domain"
+              placeholder="Search work by name, feature, or domain"
               className="h-10 border-slate-300 pl-9"
             />
           </div>
         </div>
 
-        <div className="flex flex-wrap gap-2">
+        <div className="md:hidden">
+          <Select value={activeCategory} onValueChange={setActiveCategory}>
+            <SelectTrigger aria-label="Filter work by category">
+              <SelectValue placeholder="Filter by category" />
+            </SelectTrigger>
+            <SelectContent>
+              {CATEGORIES.map((category) => (
+                <SelectItem key={category} value={category}>
+                  {category}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+
+        <div className="hidden flex-wrap gap-2 md:flex">
           {CATEGORIES.map((category) => (
             <Button
               key={category}
@@ -127,7 +149,7 @@ export function StorePageClient({
 
       <section className="py-8">
         <div
-          className="mb-4 flex items-center justify-between text-sm text-slate-500"
+          className="mb-4 flex flex-col items-start gap-2 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between"
           aria-live="polite"
         >
           <span>
@@ -155,8 +177,7 @@ export function StorePageClient({
               No matching projects
             </h3>
             <p className="mt-2 text-slate-500">
-              Adjust your search or switch categories to discover more
-              solutions.
+              Adjust your search or switch categories to discover more work.
             </p>
           </div>
         )}
@@ -166,15 +187,15 @@ export function StorePageClient({
         <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
           <div className="mb-6">
             <h2 className="text-2xl font-headline font-semibold text-slate-900">
-              Checkout paths by team maturity
+              Need something in this style?
             </h2>
             <p className="mt-2 text-slate-600">
-              Choose a purchase path based on your internal delivery capacity
-              and rollout speed requirements.
+              These are a few directions we can take if you want a site,
+              platform, or collection built around your own work.
             </p>
           </div>
           <div className="grid gap-4 md:grid-cols-3">
-            {BUYING_PLANS.map((plan) => (
+            {COLLABORATION_PATHS.map((plan) => (
               <div
                 key={plan.name}
                 className={
@@ -186,15 +207,12 @@ export function StorePageClient({
                 <p className="text-sm font-medium uppercase tracking-[0.12em] text-slate-500">
                   {plan.name}
                 </p>
-                <p className="mt-2 text-3xl font-headline font-semibold text-slate-900">
-                  {plan.price}
-                </p>
                 <p className="mt-2 text-sm text-slate-600">
                   {plan.description}
                 </p>
                 <p className="mt-4 inline-flex items-start gap-2 text-sm text-slate-600">
                   <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-cyan-700" />
-                  Includes architecture review before kickoff
+                  Scoped around your content, audience, and goals
                 </p>
                 <Button
                   className={
@@ -204,7 +222,7 @@ export function StorePageClient({
                   }
                   asChild
                 >
-                  <a href={plan.href}>{plan.cta}</a>
+                  <Link href={plan.href}>{plan.cta}</Link>
                 </Button>
               </div>
             ))}

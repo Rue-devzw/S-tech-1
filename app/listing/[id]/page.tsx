@@ -26,7 +26,7 @@ export async function generateMetadata({
   }
 
   const canonical = createCanonicalUrl(`/listing/${listing.id}`);
-  const description = `${listing.shortDescription} Starting from $${listing.price.toLocaleString()} with delivery timeline ${listing.deliveryTimeline}.`;
+  const description = `${listing.shortDescription} A ${listing.client} case study in ${listing.industry}.`;
 
   return {
     title: listing.name,
@@ -69,22 +69,19 @@ export default async function ListingDetailPage({
 
   const listingJsonLd = {
     "@context": "https://schema.org",
-    "@type": "Service",
-    name: listing.name,
+    "@type": "CreativeWork",
+    headline: listing.name,
     description: listing.shortDescription,
-    serviceType: listing.category,
-    provider: {
+    about: listing.category,
+    creator: {
       "@type": "Organization",
       name: "S-Tech Studios",
     },
-    areaServed: "Africa",
-    offers: {
-      "@type": "Offer",
-      priceCurrency: "USD",
-      price: listing.price,
-      availability: "https://schema.org/InStock",
-      url: createCanonicalUrl(`/listing/${listing.id}`),
+    publisher: {
+      "@type": "Organization",
+      name: "S-Tech Studios",
     },
+    url: createCanonicalUrl(`/listing/${listing.id}`),
     image: createCanonicalUrl(listing.imageUrl),
   };
 

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export function SiteFooter() {
@@ -9,22 +10,28 @@ export function SiteFooter() {
             href="/"
             className="inline-flex items-center gap-2 text-slate-900"
           >
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-900 text-sm font-headline font-bold text-white">
-              S
+            <div className="clip-hexagon relative h-9 w-9 overflow-hidden border border-slate-200 bg-slate-100">
+              <Image
+                src="/images/logo.webp"
+                alt="S-Tech Studios logo"
+                fill
+                className="object-cover"
+                sizes="36px"
+              />
             </div>
             <span className="font-headline text-lg font-semibold">
               S-Tech Studios
             </span>
           </Link>
           <p className="mt-2 text-sm text-slate-500">
-            Enterprise-grade digital products built in Zimbabwe for global
-            markets.
+            Brand websites, agency platforms, and digital collections crafted
+            in Harare.
           </p>
         </div>
 
         <div className="flex flex-wrap items-center gap-5 text-sm text-slate-600">
           <Link href="/store" className="hover:text-slate-900">
-            Store
+            Work
           </Link>
           <Link href="/services" className="hover:text-slate-900">
             Services
@@ -32,8 +39,14 @@ export function SiteFooter() {
           <Link href="/about" className="hover:text-slate-900">
             About
           </Link>
-          <a href="mailto:hello@s-tech.africa" className="hover:text-slate-900">
-            hello@s-tech.africa
+          <Link href="/contact" className="hover:text-slate-900">
+            Contact
+          </Link>
+          <a
+            href="mailto:help@s-techsolution.org"
+            className="hover:text-slate-900"
+          >
+            help@s-techsolution.org
           </a>
         </div>
       </div>

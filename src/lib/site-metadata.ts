@@ -4,8 +4,9 @@ import { getSiteUrl } from "@/lib/env";
 const siteUrl = getSiteUrl();
 const siteName = "S-Tech Studios";
 const defaultDescription =
-  "S-Tech Studios designs and delivers secure digital products, AI-powered systems, and scalable platforms for growth-focused teams.";
+  "S-Tech Studios showcases real digital work from Harare, including brand websites, agency platforms, and curated content experiences.";
 const defaultOgImage = `${siteUrl}/images/hero-image.webp`;
+const logoImage = `${siteUrl}/images/logo.webp`;
 
 export function createCanonicalUrl(path = "/") {
   return new URL(path, siteUrl).toString();
@@ -58,8 +59,14 @@ export function createOrganizationJsonLd() {
     "@type": "Organization",
     name: siteName,
     url: siteUrl,
-    logo: `${siteUrl}/images/hero-image.webp`,
-    email: "hello@s-tech.africa",
+    logo: logoImage,
+    email: "help@s-techsolution.org",
+    telephone: "+263718704505",
+    sameAs: [
+      "https://www.facebook.com/Stechsolutions",
+      "https://whatsapp.com/channel/0029VaE4TMq545v0wnXxRL0F",
+      "https://chat.whatsapp.com/HmI8N3xz1RZDwKoRztaJYe?mode=gi_t",
+    ],
     address: {
       "@type": "PostalAddress",
       addressLocality: "Harare",
@@ -89,11 +96,11 @@ export function getDefaultSiteMetadata() {
     path: "/",
     image: defaultOgImage,
     keywords: [
-      "digital product studio",
-      "product engineering",
-      "AI systems",
-      "Zimbabwe software studio",
-      "secure web platforms",
+      "portfolio website Zimbabwe",
+      "Harare web design",
+      "agency website development",
+      "digital collection platform",
+      "S-Tech Studios work",
     ],
   });
 }

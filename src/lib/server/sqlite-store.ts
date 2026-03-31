@@ -86,6 +86,15 @@ const require = createRequire(import.meta.url);
 const DATA_DIR = path.join(process.cwd(), ".data");
 const legacyListingsPath = path.join(DATA_DIR, "listings.json");
 const legacyInquiriesPath = path.join(DATA_DIR, "inquiries.json");
+const LISTING_ENRICHMENT = new Map(
+  LISTINGS.map((listing) => [
+    listing.id,
+    {
+      challenge: listing.challenge,
+      approach: listing.approach,
+    },
+  ])
+);
 
 declare global {
   var __sTechDatabase: Database | undefined;
@@ -565,6 +574,8 @@ function parseJsonObject(value: unknown): Record<string, unknown> {
 }
 
 function mapListingRow(row: Record<string, unknown>): Listing {
+  const enrichment = LISTING_ENRICHMENT.get(String(row.id));
+
   return {
     id: String(row.id),
     slug: String(row.slug),
@@ -573,6 +584,8 @@ function mapListingRow(row: Record<string, unknown>): Listing {
     price: Number(row.price),
     shortDescription: String(row.short_description),
     description: String(row.description),
+    challenge: enrichment?.challenge,
+    approach: enrichment?.approach,
     client: String(row.client),
     industry: String(row.industry),
     deliveryTimeline: String(row.delivery_timeline),

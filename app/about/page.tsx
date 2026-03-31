@@ -9,28 +9,28 @@ import { createPageMetadata } from "@/lib/site-metadata";
 export const metadata: Metadata = createPageMetadata({
   title: "About",
   description:
-    "Learn how S-Tech Studios approaches digital product delivery, engineering quality, and execution with teams across Africa.",
+    "Learn how S-Tech Studios turns real projects into clear, modern digital experiences from Harare.",
   path: "/about",
 });
 
 const PRINCIPLES = [
   {
     icon: Target,
-    title: "Outcome-focused",
+    title: "Work that feels real",
     description:
-      "We treat every engagement as a business performance problem, not just a code delivery task.",
+      "We care about whether the final site or platform actually reflects the work behind it, not just whether it looks polished in isolation.",
   },
   {
     icon: Users,
-    title: "Execution partners",
+    title: "Built with people in mind",
     description:
-      "Our teams collaborate deeply with clients and transfer capabilities, not dependency.",
+      "Every project is shaped around the audience that will use it, from first-time visitors on mobile to returning clients looking for clarity.",
   },
   {
     icon: Globe2,
-    title: "African context, global quality",
+    title: "Harare roots, modern delivery",
     description:
-      "We build for real market constraints while maintaining international engineering standards.",
+      "We build from a local context while aiming for clean execution, responsive interfaces, and maintainable handoff standards.",
   },
 ];
 
@@ -46,13 +46,13 @@ export default function AboutPage() {
               About S-Tech Studios
             </Badge>
             <h1 className="mt-4 max-w-3xl text-4xl font-headline font-semibold leading-tight text-slate-900 md:text-5xl">
-              We build resilient digital products for teams that care about
-              quality and momentum.
+              We are a Harare-based studio focused on turning real work into
+              clear digital experiences.
             </h1>
             <p className="mt-5 max-w-2xl text-slate-600">
-              Founded in Harare, S-Tech Studios helps organizations design and
-              deliver modern platforms, data systems, and customer-facing
-              products with clear execution standards and measurable outcomes.
+              S-Tech Studios helps brands, agencies, and organizations present
+              what they do with more clarity through modern websites, structured
+              content, and practical frontend builds.
             </p>
           </div>
         </section>
@@ -84,17 +84,20 @@ export default function AboutPage() {
             </h2>
             <div className="mt-6 grid gap-4 text-sm text-slate-300 md:grid-cols-2">
               <p>
-                1. Discovery and architecture planning tied to concrete metrics.
+                1. We start with the story, structure, and audience the project
+                needs to serve.
               </p>
               <p>
-                2. Transparent sprint delivery with weekly demos and risk logs.
+                2. We shape the layout and content flow before polishing the
+                final build.
               </p>
               <p>
-                3. Security and quality gates integrated into each release
-                cycle.
+                3. Responsive implementation keeps the experience usable across
+                phones, tablets, and desktop screens.
               </p>
               <p>
-                4. Operational handover with documentation and team enablement.
+                4. The finished project stays maintainable so it can keep
+                growing after launch.
               </p>
             </div>
           </div>
