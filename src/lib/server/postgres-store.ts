@@ -89,6 +89,16 @@ type PostgresPool = Queryable & {
 
 import { Pool, neonConfig } from "@neondatabase/serverless";
 
+const LISTING_ENRICHMENT = new Map(
+  LISTINGS.map((listing) => [
+    listing.id,
+    {
+      challenge: listing.challenge,
+      approach: listing.approach,
+    },
+  ])
+);
+
 declare global {
   var __sTechPostgresPool: PostgresPool | undefined;
   var __sTechPostgresReady: boolean | undefined;
@@ -425,6 +435,8 @@ function toOptionalTimestamp(value: unknown) {
 }
 
 function mapListingRow(row: QueryRow): Listing {
+  const enrichment = LISTING_ENRICHMENT.get(String(row.id));
+
   return {
     id: String(row.id),
     slug: String(row.slug),
@@ -433,6 +445,8 @@ function mapListingRow(row: QueryRow): Listing {
     price: Number(row.price),
     shortDescription: String(row.short_description),
     description: String(row.description),
+    challenge: enrichment?.challenge,
+    approach: enrichment?.approach,
     client: String(row.client),
     industry: String(row.industry),
     deliveryTimeline: String(row.delivery_timeline),

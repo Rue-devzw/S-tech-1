@@ -18,50 +18,50 @@ import { createPageMetadata } from "@/lib/site-metadata";
 export const metadata: Metadata = createPageMetadata({
   title: "Services",
   description:
-    "Explore S-Tech Studios services across product engineering, security, automation, AI, and data platforms.",
+    "Explore S-Tech Studios services across portfolio websites, agency platforms, and digital collection builds.",
   path: "/services",
 });
 
 const SERVICES = [
   {
     icon: Code2,
-    title: "Product Engineering",
+    title: "Portfolio Websites",
     description:
-      "Design and build full-stack products with robust architecture, QA, and production reliability.",
+      "Design and build polished websites for founders, brands, and growing ventures that need a stronger online presence.",
     bullets: [
-      "Architecture and tech strategy",
-      "Modern web app delivery",
-      "CI/CD and observability",
+      "Homepage and inner-page structure",
+      "Responsive frontend implementation",
+      "Reusable sections for future updates",
     ],
   },
   {
     icon: Shield,
-    title: "Security Engineering",
+    title: "Agency Platforms",
     description:
-      "Proactive security audits, app hardening, and threat-informed controls for modern products.",
+      "Create service-led sites that explain what your agency does clearly and guide visitors toward trust and inquiry.",
     bullets: [
-      "Vulnerability triage",
-      "Policy and access controls",
-      "Incident readiness playbooks",
+      "Service positioning and page hierarchy",
+      "Lead capture and inquiry flows",
+      "Professional presentation across devices",
     ],
   },
   {
     icon: Workflow,
-    title: "Automation and AI",
+    title: "Content and Mobile Collections",
     description:
-      "Deploy automation and AI workflows to remove operational bottlenecks and improve decision speed.",
+      "Organize hymns, archives, libraries, or lightweight mobile content experiences into products that are easier to browse and maintain.",
     bullets: [
-      "Workflow orchestration",
-      "Model-assisted operations",
-      "Human-in-the-loop safeguards",
+      "Structured content layouts",
+      "Readable mobile-first presentation",
+      "Foundations for search and categorization",
     ],
   },
   {
     icon: Database,
-    title: "Data Platforms",
+    title: "Ongoing Improvements",
     description:
-      "Build high-trust analytics systems that unify business data and power executive insights.",
-    bullets: ["Data modeling", "ETL pipelines", "Executive dashboarding"],
+      "Refine the experience after launch with updates, cleanup, and feature additions that fit the project as it grows.",
+    bullets: ["Content updates", "UI refinements", "Feature extensions"],
   },
 ];
 
@@ -77,12 +77,12 @@ export default function ServicesPage() {
               Services
             </Badge>
             <h1 className="mx-auto mt-5 max-w-3xl text-4xl font-headline font-semibold leading-tight md:text-5xl">
-              End-to-end services for teams shipping high-impact digital
-              products.
+              Services for people who want their real work presented clearly
+              online.
             </h1>
             <p className="mx-auto mt-4 max-w-2xl text-slate-300">
-              Our engagement model combines product thinking, technical depth,
-              and operational rigor to help businesses scale confidently.
+              We help shape websites, service platforms, and digital
+              collections that feel professional, usable, and ready to grow.
             </p>
           </div>
         </section>
@@ -116,22 +116,25 @@ export default function ServicesPage() {
 
           <div className="mt-12 rounded-3xl border border-slate-200 bg-white p-8 text-center shadow-sm md:p-10">
             <h2 className="text-3xl font-headline font-semibold text-slate-900">
-              Need a tailored delivery plan?
+              Need your own project shaped like this?
             </h2>
             <p className="mx-auto mt-3 max-w-2xl text-slate-600">
-              We can scope your project, map milestones, and provide a fixed
-              execution roadmap aligned with your team capacity.
+              We can scope the right mix of structure, design, and development
+              based on your content, audience, and the kind of experience you
+              want people to have.
             </p>
             <div className="mt-7 flex flex-wrap justify-center gap-3">
               <Button
                 asChild
                 className="bg-slate-900 text-white hover:bg-slate-800"
               >
-                <a href="mailto:hello@s-tech.africa">Book a strategy call</a>
+                <Link href="/contact">
+                  Start a project
+                </Link>
               </Button>
               <Button asChild variant="outline" className="border-slate-300">
                 <Link href="/store">
-                  Browse Store
+                  Browse recent work
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>

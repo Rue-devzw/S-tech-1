@@ -31,6 +31,11 @@ export const metadata: Metadata = {
     template: "%s | S-Tech Studios",
   },
   applicationName: "S-Tech Studios",
+  icons: {
+    icon: "/icon.png",
+    shortcut: "/icon.png",
+    apple: "/icon.png",
+  },
 };
 
 export default function RootLayout({

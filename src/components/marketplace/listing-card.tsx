@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ArrowUpRight, Clock3, ShoppingCart, Star } from "lucide-react";
+import { ArrowUpRight, Clock3 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -12,22 +12,13 @@ import {
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
-import { useToast } from "@/hooks/use-toast";
 import { type Listing } from "@/lib/mock-data";
 
 export function ListingCard({ listing }: { listing: Listing }) {
   const router = useRouter();
-  const { toast } = useToast();
 
-  function onBuy() {
+  function onView() {
     router.push(`/listing/${listing.id}`);
-  }
-
-  function onAddToCart() {
-    toast({
-      title: "Added to proposal basket",
-      description: `${listing.name} has been saved to your basket.`,
-    });
   }
 
   return (
@@ -70,10 +61,13 @@ export function ListingCard({ listing }: { listing: Listing }) {
           <h3 className="line-clamp-2 text-lg font-headline font-semibold leading-tight text-slate-900">
             {listing.name}
           </h3>
-          <span className="shrink-0 text-base font-semibold text-cyan-700">
-            ${listing.price.toLocaleString()}
+          <span className="shrink-0 rounded-full bg-cyan-50 px-2.5 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-cyan-700">
+            Case Study
           </span>
         </div>
+        <p className="text-xs font-medium uppercase tracking-[0.14em] text-slate-500">
+          {listing.client}
+        </p>
         <p className="line-clamp-2 text-sm text-slate-600">
           {listing.shortDescription}
         </p>
@@ -92,41 +86,23 @@ export function ListingCard({ listing }: { listing: Listing }) {
         </div>
       </CardContent>
 
-      <CardFooter className="flex items-center justify-between border-t border-slate-100 px-5 py-4">
-        <div className="flex items-center gap-1 text-xs text-slate-600">
-          <Star className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
-          <span className="font-semibold text-slate-800">
-            {listing.rating.toFixed(1)}
-          </span>
-          <span>({listing.salesCount} projects)</span>
-        </div>
-
-        <div className="flex items-center gap-2">
-          <Button
-            variant="outline"
-            size="sm"
-            className="h-8"
-            onClick={onAddToCart}
-          >
-            <ShoppingCart className="mr-1.5 h-3.5 w-3.5" />
-            Save
-          </Button>
-          <Button
-            size="sm"
-            className="h-8 bg-slate-900 text-white hover:bg-slate-800"
-            onClick={onBuy}
-            aria-label={`View details for ${listing.name}`}
-          >
-            View
-          </Button>
-          <Link
-            href={`/listing/${listing.id}`}
-            className="sr-only"
-            aria-label={`Open ${listing.name}`}
-          >
-            <ArrowUpRight className="h-4 w-4" />
-          </Link>
-        </div>
+      <CardFooter className="border-t border-slate-100 px-5 py-4">
+        <Button
+          size="sm"
+          className="h-9 w-full bg-slate-900 text-white hover:bg-slate-800"
+          onClick={onView}
+          aria-label={`View details for ${listing.name}`}
+        >
+          View case study
+          <ArrowUpRight className="ml-1.5 h-4 w-4" />
+        </Button>
+        <Link
+          href={`/listing/${listing.id}`}
+          className="sr-only"
+          aria-label={`Open ${listing.name}`}
+        >
+          <ArrowUpRight className="h-4 w-4" />
+        </Link>
       </CardFooter>
     </Card>
   );

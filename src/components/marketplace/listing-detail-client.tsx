@@ -8,7 +8,6 @@ import {
   CheckCircle2,
   ExternalLink,
   ShieldCheck,
-  Star,
 } from "lucide-react";
 import { MainNav } from "@/components/layout/main-nav";
 import { SiteFooter } from "@/components/layout/site-footer";
@@ -29,8 +28,68 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { type Listing } from "@/lib/mock-data";
 
+const DETAIL_COPY: Record<
+  string,
+  {
+    overviewTitle: string;
+    challengeLabel: string;
+    approachLabel: string;
+    featuresTitle: string;
+    outcomesTitle: string;
+    snapshotTitle: string;
+    tagsTitle: string;
+    previewLabel: string;
+    note: string;
+  }
+> = {
+  "st-001": {
+    overviewTitle: "Mirroring the live Valley Farm Secrets structure",
+    challengeLabel: "What the live site needs to carry",
+    approachLabel: "How the section flow is framed",
+    featuresTitle: "Live section map",
+    outcomesTitle: "What the page communicates",
+    snapshotTitle: "Freshness. Quality. Convenience.",
+    tagsTitle: "Business signals",
+    previewLabel: "Visit live site",
+    note: "Built around produce sales, wholesale access, and community partnership messaging.",
+  },
+  "st-002": {
+    overviewTitle: "Mirroring the live Mussy Consultancy journey",
+    challengeLabel: "What the consultancy story needs to hold",
+    approachLabel: "How the student journey is sequenced",
+    featuresTitle: "Live section map",
+    outcomesTitle: "What the page communicates",
+    snapshotTitle: "Design your global education journey with confidence",
+    tagsTitle: "Consultancy signals",
+    previewLabel: "Visit live site",
+    note: "Built around trust signals, milestone guidance, and consultation-led conversion.",
+  },
+  "st-003": {
+    overviewTitle: "Mirroring the live AFC Hymns Collection listing",
+    challengeLabel: "What the app listing needs to reassure",
+    approachLabel: "How the Play Store positioning is framed",
+    featuresTitle: "Live listing sections",
+    outcomesTitle: "What the app listing emphasizes",
+    snapshotTitle: "Offline hymnbooks for everyday access",
+    tagsTitle: "App signals",
+    previewLabel: "Open on Google Play",
+    note: "Built around offline access, reading clarity, update visibility, and trust.",
+  },
+};
+
 export function ListingDetailClient({ listing }: { listing: Listing }) {
   const { toast } = useToast();
+  const detailCopy = DETAIL_COPY[listing.id] ?? {
+    overviewTitle: "Project overview",
+    challengeLabel: "Challenge",
+    approachLabel: "Approach",
+    featuresTitle: "Project sections",
+    outcomesTitle: "Project highlights",
+    snapshotTitle: "Project snapshot",
+    tagsTitle: "Project tags",
+    previewLabel: "Visit project",
+    note: "Built to be clear, responsive, and easy to extend.",
+  };
   const [requestOpen, setRequestOpen] = useState(false);
   const [submittingRequest, setSubmittingRequest] = useState(false);
   const [requestForm, setRequestForm] = useState({
@@ -98,12 +157,12 @@ export function ListingDetailClient({ listing }: { listing: Listing }) {
     <div className="min-h-screen bg-slate-50 text-slate-900">
       <MainNav />
 
-      <main className="container mx-auto px-4 py-10">
+      <main id="main-content" className="container mx-auto px-4 py-10">
         <Link
           href="/store"
           className="mb-6 inline-flex items-center text-sm font-medium text-slate-600 transition hover:text-slate-900"
         >
-          <ArrowLeft className="mr-2 h-4 w-4" /> Back to store
+          <ArrowLeft className="mr-2 h-4 w-4" /> Back to work
         </Link>
 
         <div className="mb-8 max-w-3xl">
@@ -143,11 +202,35 @@ export function ListingDetailClient({ listing }: { listing: Listing }) {
             <Card className="border-slate-200">
               <CardHeader>
                 <CardTitle className="text-2xl font-headline">
-                  Project overview
+                  {detailCopy.overviewTitle}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4 text-slate-600">
                 <p>{listing.description}</p>
+                {listing.challenge || listing.approach ? (
+                  <div className="grid gap-4 md:grid-cols-2">
+                    {listing.challenge ? (
+                      <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+                        <p className="text-xs uppercase tracking-wide text-slate-500">
+                          {detailCopy.challengeLabel}
+                        </p>
+                        <p className="mt-2 text-sm leading-relaxed text-slate-700">
+                          {listing.challenge}
+                        </p>
+                      </div>
+                    ) : null}
+                    {listing.approach ? (
+                      <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">
+                        <p className="text-xs uppercase tracking-wide text-slate-500">
+                          {detailCopy.approachLabel}
+                        </p>
+                        <p className="mt-2 text-sm leading-relaxed text-slate-700">
+                          {listing.approach}
+                        </p>
+                      </div>
+                    ) : null}
+                  </div>
+                ) : null}
                 <div className="grid gap-4 md:grid-cols-2">
                   <div className="rounded-xl bg-slate-100 p-4">
                     <p className="text-xs uppercase tracking-wide text-slate-500">
@@ -167,7 +250,7 @@ export function ListingDetailClient({ listing }: { listing: Listing }) {
                   </div>
                   <div className="rounded-xl bg-slate-100 p-4">
                     <p className="text-xs uppercase tracking-wide text-slate-500">
-                      Delivery timeline
+                      Project format
                     </p>
                     <p className="mt-1 font-medium text-slate-900">
                       {listing.deliveryTimeline}
@@ -175,7 +258,7 @@ export function ListingDetailClient({ listing }: { listing: Listing }) {
                   </div>
                   <div className="rounded-xl bg-slate-100 p-4">
                     <p className="text-xs uppercase tracking-wide text-slate-500">
-                      Support window
+                      Project status
                     </p>
                     <p className="mt-1 font-medium text-slate-900">
                       {listing.supportWindow}
@@ -189,7 +272,7 @@ export function ListingDetailClient({ listing }: { listing: Listing }) {
               <Card className="border-slate-200">
                 <CardHeader>
                   <CardTitle className="font-headline text-xl">
-                    Feature set
+                    {detailCopy.featuresTitle}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3 text-sm text-slate-600">
@@ -205,7 +288,7 @@ export function ListingDetailClient({ listing }: { listing: Listing }) {
               <Card className="border-slate-200">
                 <CardHeader>
                   <CardTitle className="font-headline text-xl">
-                    Measured outcomes
+                    {detailCopy.outcomesTitle}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3 text-sm text-slate-600">
@@ -220,48 +303,38 @@ export function ListingDetailClient({ listing }: { listing: Listing }) {
             </div>
           </section>
 
-          <aside className="space-y-6 lg:col-span-4">
+          <aside className="order-first space-y-6 lg:sticky lg:top-24 lg:order-none lg:col-span-4 lg:self-start">
             <Card className="border-slate-200 bg-white shadow-sm">
               <CardHeader className="space-y-3">
-                <div className="flex items-center gap-2 text-sm text-slate-600">
-                  <Star className="h-4 w-4 fill-amber-400 text-amber-400" />
-                  <span className="font-semibold text-slate-900">
-                    {listing.rating.toFixed(1)}
-                  </span>
-                  <span>from {listing.salesCount} projects</span>
-                </div>
                 <CardTitle className="text-3xl font-headline">
-                  ${listing.price.toLocaleString()}
+                  {detailCopy.snapshotTitle}
                 </CardTitle>
                 <p className="text-sm text-slate-600">
                   {listing.shortDescription}
                 </p>
               </CardHeader>
               <CardContent className="space-y-3">
-                <div className="rounded-xl border border-cyan-200 bg-cyan-50 p-3 text-xs text-slate-700">
-                  <p className="font-medium text-slate-900">
-                    Transparent pricing starts at $
-                    {listing.price.toLocaleString()}
-                  </p>
+                <div className="rounded-xl border border-cyan-200 bg-cyan-50 p-3 text-sm text-slate-700">
+                  <p className="font-medium text-slate-900">{listing.client}</p>
                   <p className="mt-1">
-                    Final quote adjusts to integrations, security requirements,
-                    and rollout complexity.
+                    {listing.category} for the {listing.industry.toLowerCase()}{" "}
+                    space.
                   </p>
                 </div>
                 <Button
                   className="w-full bg-slate-900 text-white hover:bg-slate-800"
-                  onClick={() => setRequestOpen(true)}
+                  asChild
                 >
-                  Request this project
+                  <Link href={`/contact?listing=${listing.id}`}>
+                    Start a similar project
+                  </Link>
                 </Button>
                 <Button
                   variant="outline"
                   className="w-full border-slate-300"
-                  asChild
+                  onClick={() => setRequestOpen(true)}
                 >
-                  <a href="mailto:hello@s-tech.africa?subject=Schedule%20a%20call%20with%20S-Tech">
-                    Schedule a call
-                  </a>
+                  Ask about this project
                 </Button>
                 {listing.previewUrl && (
                   <Button
@@ -274,7 +347,7 @@ export function ListingDetailClient({ listing }: { listing: Listing }) {
                       target="_blank"
                       rel="noreferrer noopener"
                     >
-                      Live walkthrough
+                      {detailCopy.previewLabel}
                       <ExternalLink className="ml-2 h-4 w-4" />
                     </a>
                   </Button>
@@ -282,7 +355,7 @@ export function ListingDetailClient({ listing }: { listing: Listing }) {
                 <div className="rounded-xl bg-slate-100 p-3 text-xs text-slate-600">
                   <p className="inline-flex items-center gap-2 font-medium text-slate-800">
                     <ShieldCheck className="h-4 w-4 text-cyan-700" />
-                    Security and compliance review included
+                    {detailCopy.note}
                   </p>
                 </div>
               </CardContent>
@@ -291,7 +364,7 @@ export function ListingDetailClient({ listing }: { listing: Listing }) {
             <Card className="border-slate-200">
               <CardHeader>
                 <CardTitle className="font-headline text-xl">
-                  Technology stack
+                  {detailCopy.tagsTitle}
                 </CardTitle>
               </CardHeader>
               <CardContent className="flex flex-wrap gap-2">
@@ -312,16 +385,13 @@ export function ListingDetailClient({ listing }: { listing: Listing }) {
       <div className="fixed inset-x-0 bottom-0 z-40 border-t border-slate-200 bg-white/95 p-3 backdrop-blur lg:hidden">
         <div className="mx-auto flex max-w-xl items-center justify-between gap-3">
           <div>
-            <p className="text-xs text-slate-500">Starting from</p>
+            <p className="text-xs text-slate-500">Interested in something similar?</p>
             <p className="text-lg font-headline font-semibold text-slate-900">
-              ${listing.price.toLocaleString()}
+              {listing.name}
             </p>
           </div>
-          <Button
-            className="bg-slate-900 text-white hover:bg-slate-800"
-            onClick={() => setRequestOpen(true)}
-          >
-            Request Proposal
+          <Button className="bg-slate-900 text-white hover:bg-slate-800" asChild>
+            <Link href={`/contact?listing=${listing.id}`}>Start a project</Link>
           </Button>
         </div>
       </div>
@@ -330,10 +400,10 @@ export function ListingDetailClient({ listing }: { listing: Listing }) {
         <DialogContent className="sm:max-w-lg">
           <form onSubmit={submitRequest} className="space-y-4">
             <DialogHeader>
-              <DialogTitle>Request proposal for {listing.name}</DialogTitle>
+              <DialogTitle>Ask about {listing.name}</DialogTitle>
               <DialogDescription>
-                Share your project context and we will send a recommended scope,
-                timeline, and delivery estimate.
+                Share your idea and we will reply with a practical next step for
+                a similar build.
               </DialogDescription>
             </DialogHeader>
             <div className="space-y-2">
@@ -393,7 +463,7 @@ export function ListingDetailClient({ listing }: { listing: Listing }) {
                     goals: event.target.value,
                   }))
                 }
-                placeholder="What should this solution improve in your business?"
+                placeholder="What are you trying to build, improve, or organize?"
               />
             </div>
             <div className="hidden" aria-hidden="true">

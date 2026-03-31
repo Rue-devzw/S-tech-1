@@ -12,15 +12,15 @@ import { getListings } from "@/lib/server/data-store";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = createPageMetadata({
-  title: "Store",
+  title: "Work",
   description:
-    "Browse S-Tech Studios productized platforms, accelerators, and delivery-ready digital solutions with clear business outcomes and pricing anchors.",
+    "Browse selected S-Tech Studios work, including portfolio websites, agency platforms, and curated digital collections.",
   path: "/store",
   keywords: [
-    "software templates",
-    "productized services",
-    "digital accelerators",
-    "premium project catalog",
+    "S-Tech Studios work",
+    "portfolio case studies",
+    "Harare web projects",
+    "digital collection showcase",
   ],
 });
 
@@ -35,10 +35,10 @@ export default async function StorePage({
   const storeJsonLd = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    name: "S-Tech Studios Store",
+    name: "S-Tech Studios Work",
     url: createCanonicalUrl("/store"),
     description:
-      "Browse S-Tech Studios productized platforms, accelerators, and delivery-ready digital solutions with clear business outcomes and pricing anchors.",
+      "Browse selected S-Tech Studios work, including portfolio websites, agency platforms, and curated digital collections.",
     mainEntity: {
       "@type": "ItemList",
       itemListElement: listings.slice(0, 12).map((listing, index) => ({
