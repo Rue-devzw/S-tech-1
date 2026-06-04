@@ -32,9 +32,9 @@ This folder contains the production documentation pack for the OmniTech Solution
 
 Development seed accounts use the same demo password:
 
-- Super Admin: `admin@omnitech.example`
-- Technician: `tech@omnitech.example`
-- Sales/Marketing: `sales@omnitech.example`
+- Super Admin: `admin@omnitech.io`
+- Technician: `tech@omnitech.io`
+- Sales/Marketing: `sales@omnitech.io`
 - Password: `OmniTech#2026`
 
 Use seed data only in development or staging. Replace seed credentials before any production launch.

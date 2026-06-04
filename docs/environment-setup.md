@@ -16,8 +16,8 @@ The default local values are designed for Docker Compose PostgreSQL and local fi
 | --- | --- | --- | --- |
 | `DATABASE_URL` | Yes | `postgresql://postgres:postgres@localhost:5434/omnitech?schema=public` | PostgreSQL connection string. Production should use private networking and TLS. |
 | `AUTH_SECRET` | Yes | random 32+ chars | Signs session cookies. Rotating it invalidates sessions. |
-| `APP_URL` | Yes | `https://app.omnitech.example` | Used for links, health checks and notifications. |
-| `NEXT_PUBLIC_SITE_URL` | Yes | `https://app.omnitech.example` | Public canonical URL used for SEO metadata, OpenGraph, robots and sitemap output. |
+| `APP_URL` | Yes | `https://omnitech.io` | Used for links, health checks and notifications. |
+| `NEXT_PUBLIC_SITE_URL` | Yes | `https://omnitech.io` | Public canonical URL used for SEO metadata, OpenGraph, robots and sitemap output. |
 | `NODE_ENV` | Yes | `production` | Use `production` outside local development. |
 | `RATE_LIMIT_DISABLED` | No | `false` | Keep false in staging/production. |
 

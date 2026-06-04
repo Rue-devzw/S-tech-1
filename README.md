@@ -33,9 +33,9 @@ Development seed accounts:
 
 | Role | Email | Password |
 | --- | --- | --- |
-| Super Admin | `admin@omnitech.example` | `OmniTech#2026` |
-| Technician | `tech@omnitech.example` | `OmniTech#2026` |
-| Sales/Marketing | `sales@omnitech.example` | `OmniTech#2026` |
+| Super Admin | `admin@omnitech.io` | `OmniTech#2026` |
+| Technician | `tech@omnitech.io` | `OmniTech#2026` |
+| Sales/Marketing | `sales@omnitech.io` | `OmniTech#2026` |
 
 Replace seed credentials before production launch.
 

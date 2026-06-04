@@ -11,6 +11,7 @@ services:
     environment:
       DATABASE_URL: postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@postgres:5432/${POSTGRES_DB:-omnitech}?schema=public
       APP_URL: http://localhost:3000
+      NEXT_PUBLIC_SITE_URL: http://localhost:3000
       STORAGE_LOCAL_DIR: /app/storage
     ports:
       - "3000:3000"

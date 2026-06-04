@@ -29,6 +29,8 @@ function label(value: string) {
 }
 
 async function getPosts() {
+  if (!process.env.DATABASE_URL) return [];
+
   try {
     const posts = await listPublishedBlogPosts();
     if (posts.length) return posts;

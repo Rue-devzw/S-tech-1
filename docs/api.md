@@ -18,7 +18,7 @@ POST /api/auth/login
 Content-Type: application/json
 
 {
-  "email": "admin@omnitech.example",
+  "email": "admin@omnitech.io",
   "password": "OmniTech#2026"
 }
 ```

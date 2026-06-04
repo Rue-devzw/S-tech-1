@@ -736,11 +736,11 @@ async function main() {
   }
 
   const admin = await prisma.user.upsert({
-    where: { email: "admin@omnitech.example" },
+    where: { email: "admin@omnitech.io" },
     update: { role: "SUPER_ADMIN" },
     create: {
       name: "Admin Manager",
-      email: "admin@omnitech.example",
+      email: "admin@omnitech.io",
       passwordHash,
       role: "SUPER_ADMIN"
     }
@@ -748,11 +748,11 @@ async function main() {
   await assignRole(admin.id, roles.SUPER_ADMIN.id);
 
   const technician = await prisma.user.upsert({
-    where: { email: "tech@omnitech.example" },
+    where: { email: "tech@omnitech.io" },
     update: { role: "TECHNICIAN" },
     create: {
       name: "Field Technician",
-      email: "tech@omnitech.example",
+      email: "tech@omnitech.io",
       phone: "+263 77 111 1111",
       passwordHash,
       role: "TECHNICIAN"
@@ -761,11 +761,11 @@ async function main() {
   await assignRole(technician.id, roles.TECHNICIAN.id);
 
   const sales = await prisma.user.upsert({
-    where: { email: "sales@omnitech.example" },
+    where: { email: "sales@omnitech.io" },
     update: { role: "SALES_MARKETING" },
     create: {
       name: "Sales Consultant",
-      email: "sales@omnitech.example",
+      email: "sales@omnitech.io",
       passwordHash,
       role: "SALES_MARKETING"
     }
@@ -1699,8 +1699,8 @@ async function main() {
   });
 
   console.log("Seed complete.");
-  console.log(`Admin login: admin@omnitech.example / ${password}`);
-  console.log(`Technician login: tech@omnitech.example / ${password}`);
+  console.log(`Admin login: admin@omnitech.io / ${password}`);
+  console.log(`Technician login: tech@omnitech.io / ${password}`);
   console.log(`Customer login: customer@example.com / ${password}`);
 }
 

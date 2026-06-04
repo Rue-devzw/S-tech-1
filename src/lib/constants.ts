@@ -3,7 +3,7 @@ export const brand = {
   tagline: "We repair. We connect. We build. We automate.",
   phone: "+263 718 704 505",
   whatsappChannel: "https://whatsapp.com/channel/0029VaE4TMq545v0wnXxRL0F",
-  email: "hello@omnitech.example",
+  email: "hello@omnitech.io",
   location: "Harare, Zimbabwe"
 };
 

@@ -26,6 +26,8 @@ function label(value: string) {
 }
 
 async function getPortfolioContent() {
+  if (!process.env.DATABASE_URL) return { projects: [], testimonials: [] };
+
   try {
     const [projects, testimonials] = await Promise.all([listPublishedPortfolioProjects(), listPublishedTestimonials()]);
     if (projects.length) return { projects, testimonials };

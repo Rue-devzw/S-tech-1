@@ -29,6 +29,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: route.priority
   }));
 
+  if (!process.env.DATABASE_URL) return routes;
+
   try {
     const posts = await listPublishedBlogPosts();
     routes.push(
