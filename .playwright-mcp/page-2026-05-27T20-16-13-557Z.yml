@@ -1,0 +1,122 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "OmniTech Solutions We repair. We connect. We build. We automate." [ref=e4] [cursor=pointer]:
+        - /url: /
+        - img [ref=e6]
+        - generic [ref=e9]:
+          - generic [ref=e10]: OmniTech Solutions
+          - generic [ref=e11]: We repair. We connect. We build. We automate.
+      - navigation [ref=e12]:
+        - link "About" [ref=e13] [cursor=pointer]:
+          - /url: /about
+        - link "Services" [ref=e14] [cursor=pointer]:
+          - /url: /services
+        - link "Portfolio" [ref=e15] [cursor=pointer]:
+          - /url: /portfolio
+        - link "Blog" [ref=e16] [cursor=pointer]:
+          - /url: /blog
+        - link "Contact" [ref=e17] [cursor=pointer]:
+          - /url: /contact
+        - link "Track Repair" [ref=e18] [cursor=pointer]:
+          - /url: /track-repair
+      - generic [ref=e19]:
+        - link "WhatsApp" [ref=e20] [cursor=pointer]:
+          - /url: https://wa.me/263770000000?text=Hello%20OmniTech%20Solutions%2C%20I%20need%20technology%20support.
+          - img [ref=e21]
+          - text: WhatsApp
+        - link "Book service" [ref=e23] [cursor=pointer]:
+          - /url: /request-service
+  - main [ref=e24]:
+    - generic [ref=e25]:
+      - generic [ref=e26]:
+        - paragraph [ref=e27]: Blog & knowledge centre
+        - heading "Practical technology guidance before you book work" [level=2] [ref=e28]
+        - paragraph [ref=e29]: Customer-friendly articles for repairs, connectivity, websites, cybersecurity, automation and AI adoption in growing organisations.
+      - generic [ref=e30]:
+        - generic [ref=e31]: Device care
+        - generic [ref=e32]: Laptop performance
+        - generic [ref=e33]: Networking
+        - generic [ref=e34]: Starlink
+        - generic [ref=e35]: Cybersecurity basics
+        - generic [ref=e36]: Websites
+        - generic [ref=e37]: Business automation
+        - generic [ref=e38]: AI for SMEs
+      - generic [ref=e39]:
+        - article [ref=e40]:
+          - img "How to prepare for a Starlink installation" [ref=e41]
+          - generic [ref=e42]:
+            - paragraph [ref=e43]: Starlink
+            - heading "How to prepare for a Starlink installation" [level=2] [ref=e44]
+            - paragraph [ref=e45]: A practical checklist for site access, clear sky view, cable routing, router placement and power stability.
+            - generic [ref=e46]:
+              - generic [ref=e47]: Starlink
+              - generic [ref=e48]: OmniTech guide
+            - link "Read guide" [ref=e49] [cursor=pointer]:
+              - /url: /blog/prepare-for-starlink-installation
+        - article [ref=e50]:
+          - img "When to repair, upgrade or replace a laptop" [ref=e51]
+          - generic [ref=e52]:
+            - paragraph [ref=e53]: Repairs
+            - heading "When to repair, upgrade or replace a laptop" [level=2] [ref=e54]
+            - paragraph [ref=e55]: How to decide whether a repair, RAM upgrade, SSD upgrade or replacement makes better financial sense.
+            - generic [ref=e56]:
+              - generic [ref=e57]: Repairs
+              - generic [ref=e58]: OmniTech guide
+            - link "Read guide" [ref=e59] [cursor=pointer]:
+              - /url: /blog/repair-upgrade-replace-laptop
+        - article [ref=e60]:
+          - img "What small businesses should automate first" [ref=e61]
+          - generic [ref=e62]:
+            - paragraph [ref=e63]: Automation
+            - heading "What small businesses should automate first" [level=2] [ref=e64]
+            - paragraph [ref=e65]: Start with repetitive admin, customer intake, quote follow-ups, reports and document generation.
+            - generic [ref=e66]:
+              - generic [ref=e67]: Automation
+              - generic [ref=e68]: OmniTech guide
+            - link "Read guide" [ref=e69] [cursor=pointer]:
+              - /url: /blog/small-business-automation-first
+    - generic [ref=e71]:
+      - generic [ref=e72]:
+        - paragraph [ref=e73]: Ready when you are
+        - heading "Need a repair, installation or digital system?" [level=2] [ref=e74]
+        - paragraph [ref=e75]: Send the details now and OmniTech will help you move from issue to action.
+      - generic [ref=e76]:
+        - link "Request service" [ref=e77] [cursor=pointer]:
+          - /url: /request-service
+        - link "WhatsApp us" [ref=e78] [cursor=pointer]:
+          - /url: https://wa.me/263770000000?text=Hello%20OmniTech%20Solutions%2C%20I%20need%20technology%20support.
+  - contentinfo [ref=e79]:
+    - generic [ref=e80]:
+      - generic [ref=e81]:
+        - paragraph [ref=e82]: OmniTech Solutions
+        - paragraph [ref=e83]: We repair. We connect. We build. We automate.
+        - paragraph [ref=e84]: Repairs, connectivity, software, AI automation, Starlink and network infrastructure for homes and organisations.
+      - generic [ref=e85]:
+        - paragraph [ref=e86]: Contact
+        - paragraph [ref=e87]: +263 77 000 0000
+        - paragraph [ref=e88]: hello@omnitech.example
+        - paragraph [ref=e89]: Harare, Zimbabwe
+        - link "Chat on WhatsApp" [ref=e90] [cursor=pointer]:
+          - /url: https://wa.me/263770000000?text=Hello%20OmniTech%20Solutions%2C%20I%20need%20technology%20support.
+      - generic [ref=e91]:
+        - paragraph [ref=e92]: Services
+        - link "Electronics repairs" [ref=e93] [cursor=pointer]:
+          - /url: /electronics-repairs
+        - link "Starlink installations" [ref=e94] [cursor=pointer]:
+          - /url: /starlink-installations
+        - link "Software and AI" [ref=e95] [cursor=pointer]:
+          - /url: /software-ai-systems
+      - generic [ref=e96]:
+        - paragraph [ref=e97]: Company
+        - link "About" [ref=e98] [cursor=pointer]:
+          - /url: /about
+        - link "Portfolio" [ref=e99] [cursor=pointer]:
+          - /url: /portfolio
+        - link "Request service" [ref=e100] [cursor=pointer]:
+          - /url: /request-service
+        - link "Customer account" [ref=e101] [cursor=pointer]:
+          - /url: /customer/register
+  - button "Open Next.js Dev Tools" [ref=e107] [cursor=pointer]:
+    - img [ref=e108]
+  - alert [ref=e111]

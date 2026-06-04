@@ -1,126 +1,43 @@
-import { NextRequest, NextResponse } from "next/server";
-import { z } from "zod";
-import { ensureAdminRequest } from "../_utils";
-import { getNotificationDeliveryConfigError } from "@/lib/env";
-import { type PlatformSettings } from "@/lib/platform-settings";
-import {
-  getPlatformSettings,
-  listAdminUsers,
-  updatePlatformSettings,
-} from "@/lib/server/data-store";
+import { NextResponse } from "next/server";
+import { apiError, paginated, pagination, searchParams } from "@/server/api-utils";
+import { audit } from "@/server/audit";
+import { prisma } from "@/server/db";
+import { requirePermission } from "@/server/rbac";
+import { listQuerySchema, systemSettingSchema } from "@/server/validation";
 
-const generalSettingsSchema = z.object({
-  siteName: z.string().min(1),
-  siteTagline: z.string().min(1),
-  contactEmail: z.string().email(),
-  supportPhone: z.string().min(1),
-  address: z.string().min(1),
-});
-
-const notificationSettingsSchema = z.object({
-  emailOnNewInquiry: z.boolean(),
-  emailOnNewSale: z.boolean(),
-  weeklyReport: z.boolean(),
-  systemAlerts: z.boolean(),
-  adminNotificationEmail: z.string().email(),
-  autoDispatchInquiryEmails: z.boolean(),
-  deliveryMode: z.enum(["console", "resend", "disabled"]),
-});
-
-const securitySettingsSchema = z.object({
-  twoFactorAuth: z.boolean(),
-  sessionTimeout: z
-    .string()
-    .regex(/^\d+$/, "Session timeout must be a whole number of minutes."),
-  requireStrongPasswords: z.boolean(),
-});
-
-const updateSettingsSchema = z.discriminatedUnion("section", [
-  z.object({
-    section: z.literal("general"),
-    value: generalSettingsSchema,
-  }),
-  z.object({
-    section: z.literal("notifications"),
-    value: notificationSettingsSchema,
-  }),
-  z.object({
-    section: z.literal("security"),
-    value: securitySettingsSchema,
-  }),
-]);
-
-export async function GET(request: NextRequest) {
-  const { response } = await ensureAdminRequest(request, ["owner"]);
-  if (response) {
-    return response;
-  }
-
-  const settings = await getPlatformSettings();
-  return NextResponse.json({ settings });
+function mask(setting: { isSecret: boolean; value: unknown }) {
+  return setting.isSecret ? { ...setting, value: "***" } : setting;
 }
 
-export async function PUT(request: NextRequest) {
-  const { response } = await ensureAdminRequest(request, ["owner"]);
-  if (response) {
-    return response;
+export async function GET(request: Request) {
+  const actor = await requirePermission("settings:manage");
+  if (!actor) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+  const query = listQuerySchema.parse(searchParams(request));
+  const page = pagination(query);
+  const where = query.q ? { key: { contains: query.q, mode: "insensitive" as const } } : {};
+  const [items, total] = await Promise.all([
+    prisma.systemSetting.findMany({ where, skip: page.skip, take: page.take, orderBy: { updatedAt: query.order } }),
+    prisma.systemSetting.count({ where })
+  ]);
+  return NextResponse.json(paginated(items.map(mask), total, page.page, page.pageSize));
+}
+
+export async function POST(request: Request) {
+  const actor = await requirePermission("settings:manage");
+  if (!actor) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+  try {
+    const parsed = systemSettingSchema.parse(await request.json());
+    const setting = await prisma.systemSetting.upsert({
+      where: { key: parsed.key },
+      update: { value: parsed.value as never, description: parsed.description || undefined, isSecret: parsed.isSecret, updatedById: actor.id },
+      create: { key: parsed.key, value: parsed.value as never, description: parsed.description || undefined, isSecret: parsed.isSecret, updatedById: actor.id }
+    });
+    await audit("SYSTEM_SETTING_UPSERTED", "SystemSetting", setting.id, actor.id, {
+      key: setting.key,
+      isSecret: setting.isSecret
+    });
+    return NextResponse.json({ setting: mask(setting) }, { status: 201 });
+  } catch (error) {
+    return apiError(error, "Could not save setting.");
   }
-
-  const payload = await request.json().catch(() => null);
-  const parsed = updateSettingsSchema.safeParse(payload);
-
-  if (!parsed.success) {
-    return NextResponse.json(
-      { error: "Invalid settings payload." },
-      { status: 400 }
-    );
-  }
-
-  if (
-    parsed.data.section === "security" &&
-    (Number.parseInt(parsed.data.value.sessionTimeout, 10) < 5 ||
-      Number.parseInt(parsed.data.value.sessionTimeout, 10) > 60 * 24)
-  ) {
-    return NextResponse.json(
-      {
-        error:
-          "Session timeout must be between 5 minutes and 1440 minutes.",
-      },
-      { status: 400 }
-    );
-  }
-
-  if (parsed.data.section === "security" && parsed.data.value.twoFactorAuth) {
-    const users = await listAdminUsers();
-    const missingMfa = users.filter(
-      (user) => user.status === "active" && !user.mfaEnabled
-    );
-
-    if (missingMfa.length > 0) {
-      return NextResponse.json(
-        {
-          error:
-            "Every active admin must enroll in MFA before global 2FA can be required.",
-        },
-        { status: 400 }
-      );
-    }
-  }
-
-  if (parsed.data.section === "notifications") {
-    const configError = getNotificationDeliveryConfigError(
-      parsed.data.value.deliveryMode
-    );
-
-    if (configError) {
-      return NextResponse.json({ error: configError }, { status: 400 });
-    }
-  }
-
-  const settings = await updatePlatformSettings(
-    parsed.data.section as keyof PlatformSettings,
-    parsed.data.value
-  );
-
-  return NextResponse.json({ settings });
 }
