@@ -1,0 +1,77 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "OmniTech Solutions We repair. We connect. We build. We automate." [ref=e4] [cursor=pointer]:
+        - /url: /
+        - img [ref=e6]
+        - generic [ref=e9]:
+          - generic [ref=e10]: OmniTech Solutions
+          - generic [ref=e11]: We repair. We connect. We build. We automate.
+      - navigation [ref=e12]:
+        - link "About" [ref=e13] [cursor=pointer]:
+          - /url: /about
+        - link "Services" [ref=e14] [cursor=pointer]:
+          - /url: /services
+        - link "Portfolio" [ref=e15] [cursor=pointer]:
+          - /url: /portfolio
+        - link "Blog" [ref=e16] [cursor=pointer]:
+          - /url: /blog
+        - link "Contact" [ref=e17] [cursor=pointer]:
+          - /url: /contact
+        - link "Track Repair" [ref=e18] [cursor=pointer]:
+          - /url: /track-repair
+      - generic [ref=e19]:
+        - link "WhatsApp" [ref=e20] [cursor=pointer]:
+          - /url: https://wa.me/263770000000?text=Hello%20OmniTech%20Solutions%2C%20I%20need%20technology%20support.
+          - img [ref=e21]
+          - text: WhatsApp
+        - link "Book service" [ref=e23] [cursor=pointer]:
+          - /url: /request-service
+  - main [ref=e24]:
+    - generic [ref=e25]:
+      - generic [ref=e26]:
+        - heading "Sign in" [level=1] [ref=e27]
+        - paragraph [ref=e28]: Access your OmniTech customer portal or team dashboard.
+        - paragraph [ref=e29]:
+          - text: New customer?
+          - link "Create an account" [ref=e30] [cursor=pointer]:
+            - /url: /customer/register
+      - generic [ref=e31]:
+        - generic [ref=e32]:
+          - text: Email
+          - textbox "Email" [ref=e33]
+        - generic [ref=e34]:
+          - text: Password
+          - textbox "Password" [ref=e35]
+        - button "Sign in" [ref=e36] [cursor=pointer]
+  - contentinfo [ref=e37]:
+    - generic [ref=e38]:
+      - generic [ref=e39]:
+        - paragraph [ref=e40]: OmniTech Solutions
+        - paragraph [ref=e41]: We repair. We connect. We build. We automate.
+        - paragraph [ref=e42]: Repairs, connectivity, software, AI automation, Starlink and network infrastructure for homes and organisations.
+      - generic [ref=e43]:
+        - paragraph [ref=e44]: Contact
+        - paragraph [ref=e45]: +263 77 000 0000
+        - paragraph [ref=e46]: hello@omnitech.example
+        - paragraph [ref=e47]: Harare, Zimbabwe
+        - link "Chat on WhatsApp" [ref=e48] [cursor=pointer]:
+          - /url: https://wa.me/263770000000?text=Hello%20OmniTech%20Solutions%2C%20I%20need%20technology%20support.
+      - generic [ref=e49]:
+        - paragraph [ref=e50]: Services
+        - link "Electronics repairs" [ref=e51] [cursor=pointer]:
+          - /url: /electronics-repairs
+        - link "Starlink installations" [ref=e52] [cursor=pointer]:
+          - /url: /starlink-installations
+        - link "Software and AI" [ref=e53] [cursor=pointer]:
+          - /url: /software-ai-systems
+      - generic [ref=e54]:
+        - paragraph [ref=e55]: Company
+        - link "About" [ref=e56] [cursor=pointer]:
+          - /url: /about
+        - link "Portfolio" [ref=e57] [cursor=pointer]:
+          - /url: /portfolio
+        - link "Request service" [ref=e58] [cursor=pointer]:
+          - /url: /request-service
+        - link "Customer account" [ref=e59] [cursor=pointer]:
+          - /url: /customer/register

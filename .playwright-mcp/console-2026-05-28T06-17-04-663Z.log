@@ -1,0 +1,82 @@
+[    1156ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3000/:0
+[    1527ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ webpack-internal:///(pages-dir-browser)/./node_modules/react-dom/cjs/react-dom-client.development.js:28004
+[    1619ms] Error: Cannot find module './1331.js'
+Require stack:
+- /Users/Strive/Projects/S-tech-1/.next/server/webpack-runtime.js
+- /Users/Strive/Projects/S-tech-1/.next/server/app/admin/communications/page.js
+- /Users/Strive/Projects/S-tech-1/node_modules/next/dist/server/require.js
+- /Users/Strive/Projects/S-tech-1/node_modules/next/dist/server/load-components.js
+- /Users/Strive/Projects/S-tech-1/node_modules/next/dist/build/utils.js
+- /Users/Strive/Projects/S-tech-1/node_modules/next/dist/build/swc/options.js
+- /Users/Strive/Projects/S-tech-1/node_modules/next/dist/build/swc/index.js
+- /Users/Strive/Projects/S-tech-1/node_modules/next/dist/build/next-config-ts/transpile-config.js
+- /Users/Strive/Projects/S-tech-1/node_modules/next/dist/server/config.js
+- /Users/Strive/Projects/S-tech-1/node_modules/next/dist/server/next.js
+- /Users/Strive/Projects/S-tech-1/node_modules/next/dist/server/lib/start-server.js
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1476:15)
+    at <unknown> (file:///Users/Strive/Projects/S-tech-1/node_modules/next/dist/server/require-hook.js:57:36)
+    at wrapResolveFilename (node:internal/modules/cjs/loader:1049:27)
+    at defaultResolveImplForCJSLoading (node:internal/modules/cjs/loader:1073:10)
+    at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1094:12)
+    at Module._load (node:internal/modules/cjs/loader:1262:25)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1576:12)
+    at mod.require (file:///Users/Strive/Projects/S-tech-1/node_modules/next/dist/server/require-hook.js:68:28)
+    at require (node:internal/modules/helpers:153:16)
+    at __webpack_require__.f.require (file:///Users/Strive/Projects/S-tech-1/.next/server/webpack-runtime.js:190:28)
+    at <unknown> (file:///Users/Strive/Projects/S-tech-1/.next/server/webpack-runtime.js:103:40)
+    at Array.reduce (<anonymous>)
+    at __webpack_require__.e (file:///Users/Strive/Projects/S-tech-1/.next/server/webpack-runtime.js:102:67)
+    at Array.map (<anonymous>)
+    at __webpack_require__.X (file:///Users/Strive/Projects/S-tech-1/.next/server/webpack-runtime.js:154:22)
+    at <unknown> (file:///Users/Strive/Projects/S-tech-1/.next/server/app/page.js:2:7840)
+    at Object.<anonymous> (file:///Users/Strive/Projects/S-tech-1/.next/server/app/page.js:2:7902)
+    at Module._compile (node:internal/modules/cjs/loader:1830:14)
+    at Object..js (node:internal/modules/cjs/loader:1961:10)
+    at Module.load (node:internal/modules/cjs/loader:1553:32)
+    at Module._load (node:internal/modules/cjs/loader:1355:12)
+    at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1576:12)
+    at mod.require (file:///Users/Strive/Projects/S-tech-1/node_modules/next/dist/server/require-hook.js:68:28)
+    at require (node:internal/modules/helpers:153:16)
+    at requirePage (file:///Users/Strive/Projects/S-tech-1/node_modules/next/dist/server/require.js:99:80)
+    at loadComponentsImpl (file:///Users/Strive/Projects/S-tech-1/node_modules/next/dist/server/load-components.js:132:57)
+    at async DevServer.findPageComponentsImpl (file:///Users/Strive/Projects/S-tech-1/node_modules/next/dist/server/next-server.js:900:36)
+    at async DevServer.findPageComponents (file:///Users/Strive/Projects/S-tech-1/node_modules/next/dist/server/dev/next-dev-server.js:706:16)
+    at async DevServer.renderPageComponent (file:///Users/Strive/Projects/S-tech-1/node_modules/next/dist/server/base-server.js:1468:24)
+    at async DevServer.renderToResponseImpl (file:///Users/Strive/Projects/S-tech-1/node_modules/next/dist/server/base-server.js:1522:32)
+    at async DevServer.pipeImpl (file:///Users/Strive/Projects/S-tech-1/node_modules/next/dist/server/base-server.js:1026:25)
+    at async NextNodeServer.handleCatchallRenderRequest (file:///Users/Strive/Projects/S-tech-1/node_modules/next/dist/server/next-server.js:394:17)
+    at async DevServer.handleRequestImpl (file:///Users/Strive/Projects/S-tech-1/node_modules/next/dist/server/base-server.js:917:17)
+    at async (file:///Users/Strive/Projects/S-tech-1/node_modules/next/dist/server/dev/next-dev-server.js:400:20)
+    at async Span.traceAsyncFn (file:///Users/Strive/Projects/S-tech-1/node_modules/next/dist/trace/trace.js:157:20)
+    at async DevServer.handleRequest (file:///Users/Strive/Projects/S-tech-1/node_modules/next/dist/server/dev/next-dev-server.js:396:24)
+    at async invokeRender (file:///Users/Strive/Projects/S-tech-1/node_modules/next/dist/server/lib/router-server.js:240:21)
+    at async handleRequest (file:///Users/Strive/Projects/S-tech-1/node_modules/next/dist/server/lib/router-server.js:437:24)
+    at async requestHandlerImpl (file:///Users/Strive/Projects/S-tech-1/node_modules/next/dist/server/lib/router-server.js:485:13)
+    at async Server.requestListener (file:///Users/Strive/Projects/S-tech-1/node_modules/next/dist/server/lib/start-server.js:226:13)
+[    1615ms] [LOG] [HMR] connected @ webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/dev/hot-reloader/pages/websocket.js:45
+[    1619ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/favicon.ico:0
+[  157663ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/dev/hot-reloader/pages/hot-reloader-pages.js:206
+[  159365ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/dev/hot-reloader/pages/hot-reloader-pages.js:345
+[  160580ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(pages-dir-browser)/./node_modules/next/dist/client/dev/hot-reloader/pages/hot-reloader-pages.js:206
+[  161679ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:25630
+[  230804ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  231391ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/_next/static/webpack/6dac5daf6ec50052.webpack.hot-update.json:0
+[  235081ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:25630
+[  250275ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  250631ms] [LOG] [Fast Refresh] done in 356ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  271130ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  271487ms] [LOG] [Fast Refresh] done in 358ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  271511ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  271583ms] [LOG] [Fast Refresh] done in 72ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  272104ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3000/?_rsc=_mjR7ylJSLpkZcZ3:0
+[  272794ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:25630
+[  285618ms] [ERROR] WebSocket connection to 'ws://localhost:3000/_next/webpack-hmr' failed:  @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/use-websocket.js:41

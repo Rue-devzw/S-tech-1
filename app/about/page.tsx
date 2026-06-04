@@ -1,110 +1,56 @@
 import type { Metadata } from "next";
-import { Globe2, Target, Users } from "lucide-react";
-import { MainNav } from "@/components/layout/main-nav";
-import { SiteFooter } from "@/components/layout/site-footer";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent } from "@/components/ui/card";
-import { createPageMetadata } from "@/lib/site-metadata";
+import { PageShell } from "@/components/site-shell";
+import { CTASection, SectionHeader } from "@/components/public-sections";
+import { audienceSegments } from "@/lib/public-content";
+import { breadcrumbJsonLd, makeMetadata, organizationJsonLd } from "@/lib/seo";
 
-export const metadata: Metadata = createPageMetadata({
-  title: "About",
-  description:
-    "Learn how S-Tech Studios turns real projects into clear, modern digital experiences from Harare.",
+export const metadata: Metadata = makeMetadata({
+  title: "About OmniTech Solutions",
+  description: "Learn about OmniTech Solutions, a Zimbabwe technology company for electronics repairs, connectivity, Starlink, software and AI automation.",
   path: "/about",
+  keywords: ["technology company Zimbabwe", "OmniTech Harare", "ICT services Zimbabwe"]
 });
-
-const PRINCIPLES = [
-  {
-    icon: Target,
-    title: "Work that feels real",
-    description:
-      "We care about whether the final site or platform actually reflects the work behind it, not just whether it looks polished in isolation.",
-  },
-  {
-    icon: Users,
-    title: "Built with people in mind",
-    description:
-      "Every project is shaped around the audience that will use it, from first-time visitors on mobile to returning clients looking for clarity.",
-  },
-  {
-    icon: Globe2,
-    title: "Harare roots, modern delivery",
-    description:
-      "We build from a local context while aiming for clean execution, responsive interfaces, and maintainable handoff standards.",
-  },
-];
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-slate-50">
-      <MainNav />
-
-      <main id="main-content">
-        <section className="bg-white py-16 md:py-20">
-          <div className="container mx-auto px-4">
-            <Badge className="border-none bg-cyan-100 text-cyan-700">
-              About S-Tech Studios
-            </Badge>
-            <h1 className="mt-4 max-w-3xl text-4xl font-headline font-semibold leading-tight text-slate-900 md:text-5xl">
-              We are a Harare-based studio focused on turning real work into
-              clear digital experiences.
-            </h1>
-            <p className="mt-5 max-w-2xl text-slate-600">
-              S-Tech Studios helps brands, agencies, and organizations present
-              what they do with more clarity through modern websites, structured
-              content, and practical frontend builds.
-            </p>
-          </div>
-        </section>
-
-        <section className="container mx-auto px-4 py-10 md:py-14">
-          <div className="grid gap-6 md:grid-cols-3">
-            {PRINCIPLES.map((principle) => (
-              <Card key={principle.title} className="border-slate-200">
-                <CardContent className="p-6">
-                  <div className="mb-4 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-100 text-cyan-700">
-                    <principle.icon className="h-5 w-5" />
-                  </div>
-                  <h2 className="text-xl font-headline font-semibold text-slate-900">
-                    {principle.title}
-                  </h2>
-                  <p className="mt-2 text-sm leading-relaxed text-slate-600">
-                    {principle.description}
-                  </p>
-                </CardContent>
-              </Card>
+    <PageShell>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify([organizationJsonLd(), breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "About", path: "/about" }])]) }} />
+      <section className="bg-white">
+        <div className="mx-auto max-w-7xl px-4 py-14">
+          <p className="text-sm font-semibold uppercase tracking-wide text-teal">About OmniTech</p>
+          <h1 className="mt-4 max-w-4xl text-4xl font-bold leading-tight text-ink md:text-6xl">We repair. We connect. We build. We automate.</h1>
+          <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-700">
+            OmniTech Solutions brings workshop repairs, field connectivity, infrastructure installations, software engineering and AI automation into one professional technology partner.
+          </p>
+        </div>
+      </section>
+      <section className="mx-auto grid max-w-7xl gap-8 px-4 py-12 lg:grid-cols-[0.9fr_1.1fr]">
+        <SectionHeader
+          eyebrow="Mission"
+          title="Make technology dependable, useful and easier to manage"
+          body="Customers should not have to juggle separate providers for repairs, networking, Starlink, software and automation. OmniTech provides a single accountable team with structured communication and practical delivery."
+        />
+        <div className="grid gap-4 sm:grid-cols-2">
+          {["Repair devices with clear diagnostics", "Connect sites with reliable infrastructure", "Build useful digital systems", "Automate repetitive work"].map((item) => (
+            <div key={item} className="rounded-lg border border-line bg-white p-5 text-sm font-semibold text-ink">
+              {item}
+            </div>
+          ))}
+        </div>
+      </section>
+      <section className="bg-white">
+        <div className="mx-auto max-w-7xl px-4 py-12">
+          <SectionHeader eyebrow="Who we serve" title="Technology support for homes and organisations" />
+          <div className="mt-8 grid gap-3 sm:grid-cols-2 md:grid-cols-4">
+            {audienceSegments.map((segment) => (
+              <div key={segment} className="rounded-lg border border-line bg-cloud p-4 text-sm font-semibold text-slate-700">
+                {segment}
+              </div>
             ))}
           </div>
-        </section>
-
-        <section className="container mx-auto px-4 pb-16 md:pb-24">
-          <div className="rounded-3xl border border-slate-200 bg-slate-900 p-8 text-white md:p-10">
-            <h2 className="text-3xl font-headline font-semibold">
-              What to expect when working with us
-            </h2>
-            <div className="mt-6 grid gap-4 text-sm text-slate-300 md:grid-cols-2">
-              <p>
-                1. We start with the story, structure, and audience the project
-                needs to serve.
-              </p>
-              <p>
-                2. We shape the layout and content flow before polishing the
-                final build.
-              </p>
-              <p>
-                3. Responsive implementation keeps the experience usable across
-                phones, tablets, and desktop screens.
-              </p>
-              <p>
-                4. The finished project stays maintainable so it can keep
-                growing after launch.
-              </p>
-            </div>
-          </div>
-        </section>
-      </main>
-
-      <SiteFooter />
-    </div>
+        </div>
+      </section>
+      <CTASection />
+    </PageShell>
   );
 }

@@ -1,0 +1,253 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "OmniTech Solutions We repair. We connect. We build. We automate." [ref=e4] [cursor=pointer]:
+        - /url: /
+        - img [ref=e6]
+        - generic [ref=e9]:
+          - generic [ref=e10]: OmniTech Solutions
+          - generic [ref=e11]: We repair. We connect. We build. We automate.
+      - navigation [ref=e12]:
+        - link "About" [ref=e13] [cursor=pointer]:
+          - /url: /about
+        - link "Services" [ref=e14] [cursor=pointer]:
+          - /url: /services
+        - link "Portfolio" [ref=e15] [cursor=pointer]:
+          - /url: /portfolio
+        - link "Blog" [ref=e16] [cursor=pointer]:
+          - /url: /blog
+        - link "Contact" [ref=e17] [cursor=pointer]:
+          - /url: /contact
+        - link "Track Repair" [ref=e18] [cursor=pointer]:
+          - /url: /track-repair
+      - generic [ref=e19]:
+        - link "WhatsApp" [ref=e20] [cursor=pointer]:
+          - /url: https://wa.me/263770000000?text=Hello%20OmniTech%20Solutions%2C%20I%20need%20technology%20support.
+          - img [ref=e21]
+          - text: WhatsApp
+        - link "Book service" [ref=e23] [cursor=pointer]:
+          - /url: /request-service
+          - img [ref=e24]
+          - text: Book service
+  - main [ref=e26]:
+    - generic [ref=e30]:
+      - generic [ref=e31]:
+        - paragraph [ref=e32]: Modern technology services
+        - heading "OmniTech Solutions" [level=1] [ref=e33]
+        - paragraph [ref=e34]: A full-spectrum technology company for electronics repairs, ICT support, networking, Starlink installations, web development, software engineering and AI automation.
+        - generic [ref=e35]:
+          - link "Request service" [ref=e36] [cursor=pointer]:
+            - /url: /request-service
+            - text: Request service
+            - img [ref=e37]
+          - link "Chat on WhatsApp" [ref=e39] [cursor=pointer]:
+            - /url: https://wa.me/263770000000?text=Hello%20OmniTech%20Solutions%2C%20I%20need%20technology%20support.
+            - img [ref=e40]
+            - text: Chat on WhatsApp
+        - generic [ref=e42]:
+          - generic [ref=e43]: Repair lab
+          - generic [ref=e44]: Field installs
+          - generic [ref=e45]: Business systems
+          - generic [ref=e46]: AI workflows
+      - generic [ref=e47]:
+        - generic [ref=e48]:
+          - paragraph [ref=e49]: OmniTech operating promise
+          - paragraph [ref=e50]: We repair. We connect. We build. We automate.
+        - generic [ref=e51]:
+          - generic [ref=e52]: Electronics repairs
+          - generic [ref=e54]: ICT and networking
+          - generic [ref=e56]: Starlink installations
+          - generic [ref=e58]: Software and AI systems
+    - generic [ref=e61]:
+      - generic [ref=e62]:
+        - paragraph [ref=e64]: Service pillars
+        - paragraph [ref=e65]: "4"
+      - generic [ref=e66]:
+        - paragraph [ref=e68]: Core service lines
+        - paragraph [ref=e69]: "6"
+      - generic [ref=e70]:
+        - paragraph [ref=e72]: Support channels
+        - paragraph [ref=e73]: WhatsApp, web, phone
+      - generic [ref=e74]:
+        - paragraph [ref=e76]: Built for
+        - paragraph [ref=e77]: Homes and organisations
+    - generic [ref=e78]:
+      - generic [ref=e79]:
+        - paragraph [ref=e80]: Services
+        - heading "One partner for repair, connectivity, building and automation" [level=2] [ref=e81]
+        - paragraph [ref=e82]: OmniTech serves walk-in customers, homes, schools, churches, farms, lodges, clinics, SMEs and corporate teams with practical technology support.
+      - generic [ref=e83]:
+        - article [ref=e84]:
+          - generic [ref=e85]:
+            - img [ref=e87]
+            - generic [ref=e89]: We repair
+          - heading "Electronics Repairs" [level=3] [ref=e90]
+          - paragraph [ref=e91]: Phones, tablets, laptops, TVs and general electronics handled with clear diagnostics and warranty-ready records.
+          - link "Learn more" [ref=e92] [cursor=pointer]:
+            - /url: /electronics-repairs
+            - text: Learn more
+            - img [ref=e93]
+        - article [ref=e95]:
+          - generic [ref=e96]:
+            - img [ref=e98]
+            - generic [ref=e100]: We connect
+          - heading "ICT Support" [level=3] [ref=e101]
+          - paragraph [ref=e102]: Reliable support for homes, schools, churches, clinics, farms, lodges, SMEs and corporate teams.
+          - link "Learn more" [ref=e103] [cursor=pointer]:
+            - /url: /ict-support
+            - text: Learn more
+            - img [ref=e104]
+        - article [ref=e106]:
+          - generic [ref=e107]:
+            - img [ref=e109]
+            - generic [ref=e114]: We connect
+          - heading "Networking" [level=3] [ref=e115]
+          - paragraph [ref=e116]: Structured cabling, Wi-Fi, routers, switches, network maintenance and infrastructure planning.
+          - link "Learn more" [ref=e117] [cursor=pointer]:
+            - /url: /networking
+            - text: Learn more
+            - img [ref=e118]
+        - article [ref=e120]:
+          - generic [ref=e121]:
+            - img [ref=e123]
+            - generic [ref=e129]: We connect
+          - heading "Starlink Installations" [level=3] [ref=e130]
+          - paragraph [ref=e131]: Starlink kit sales support, site surveys, mounting, cable routing, router setup and commissioning.
+          - link "Learn more" [ref=e132] [cursor=pointer]:
+            - /url: /starlink-installations
+            - text: Learn more
+            - img [ref=e133]
+        - article [ref=e135]:
+          - generic [ref=e136]:
+            - img [ref=e138]
+            - generic [ref=e142]: We build
+          - heading "Web Development" [level=3] [ref=e143]
+          - paragraph [ref=e144]: Modern websites, portals and digital experiences designed to generate trust and convert visitors.
+          - link "Learn more" [ref=e145] [cursor=pointer]:
+            - /url: /web-development
+            - text: Learn more
+            - img [ref=e146]
+        - article [ref=e148]:
+          - generic [ref=e149]:
+            - img [ref=e151]
+            - generic [ref=e154]: We automate
+          - heading "Software & AI Systems" [level=3] [ref=e155]
+          - paragraph [ref=e156]: Custom software, mobile apps, AI assistants, workflow automation and digital transformation systems.
+          - link "Learn more" [ref=e157] [cursor=pointer]:
+            - /url: /software-ai-systems
+            - text: Learn more
+            - img [ref=e158]
+    - generic [ref=e161]:
+      - generic [ref=e162]:
+        - paragraph [ref=e163]: How we work
+        - heading "Structured service, clear communication" [level=2] [ref=e164]
+      - generic [ref=e165]:
+        - article [ref=e166]:
+          - generic [ref=e167]: "1"
+          - heading "Repair-first operations" [level=3] [ref=e168]
+          - paragraph [ref=e169]: Every repair request can become a documented job card with diagnosis, parts, approval and warranty.
+        - article [ref=e170]:
+          - generic [ref=e171]: "2"
+          - heading "Field-service ready" [level=3] [ref=e172]
+          - paragraph [ref=e173]: Starlink and networking work is structured around site visits, checklists and handover notes.
+        - article [ref=e174]:
+          - generic [ref=e175]: "3"
+          - heading "Software growth path" [level=3] [ref=e176]
+          - paragraph [ref=e177]: Web, software and AI work is designed to grow into subscription products and managed services.
+      - generic [ref=e178]:
+        - generic [ref=e179]: Home users
+        - generic [ref=e180]: Schools
+        - generic [ref=e181]: Churches
+        - generic [ref=e182]: Farms
+        - generic [ref=e183]: Lodges
+        - generic [ref=e184]: Clinics
+        - generic [ref=e185]: SMEs
+        - generic [ref=e186]: Corporates
+    - generic [ref=e187]:
+      - generic [ref=e188]:
+        - generic [ref=e189]:
+          - paragraph [ref=e190]: Project highlights
+          - heading "Built for real operational environments" [level=2] [ref=e191]
+        - link "View portfolio" [ref=e192] [cursor=pointer]:
+          - /url: /portfolio
+          - text: View portfolio
+          - img [ref=e193]
+      - generic [ref=e195]:
+        - article [ref=e196]:
+          - paragraph [ref=e197]: Starlink
+          - heading "Lodge Starlink Deployment" [level=3] [ref=e198]
+          - paragraph [ref=e199]: Roof-mounted Starlink installation, router placement, guest Wi-Fi support and handover documentation.
+        - article [ref=e200]:
+          - paragraph [ref=e201]: ICT Support
+          - heading "School ICT Refresh" [level=3] [ref=e202]
+          - paragraph [ref=e203]: Laptop servicing, software setup, Wi-Fi improvements and a recurring support plan for school operations.
+        - article [ref=e204]:
+          - paragraph [ref=e205]: Software & AI
+          - heading "SME Workflow Portal" [level=3] [ref=e206]
+          - paragraph [ref=e207]: Customer intake, quote approval and operations dashboard for a growing local service business.
+    - generic [ref=e209]:
+      - generic [ref=e210]:
+        - paragraph [ref=e211]: Testimonials
+        - heading "Trusted by people who need technology to work" [level=2] [ref=e212]
+      - generic [ref=e214]:
+        - blockquote [ref=e215]:
+          - paragraph [ref=e216]: "\"OmniTech handled our connectivity setup neatly and explained every step before handover.\""
+          - generic [ref=e217]:
+            - text: Operations Lead
+            - generic [ref=e218]: Green Valley Lodge
+        - blockquote [ref=e219]:
+          - paragraph [ref=e220]: "\"They repaired devices, stabilised our network and gave us clear records for future support.\""
+          - generic [ref=e221]:
+            - text: Head Teacher
+            - generic [ref=e222]: Local Academy
+        - blockquote [ref=e223]:
+          - paragraph [ref=e224]: "\"The team understands both technical work and business communication. That combination matters.\""
+          - generic [ref=e225]:
+            - text: Clinic Administrator
+            - generic [ref=e226]: Community Health Centre
+    - generic [ref=e228]:
+      - generic [ref=e229]:
+        - paragraph [ref=e230]: Ready when you are
+        - heading "Need a repair, installation or digital system?" [level=2] [ref=e231]
+        - paragraph [ref=e232]: Send the details now and OmniTech will help you move from issue to action.
+      - generic [ref=e233]:
+        - link "Request service" [ref=e234] [cursor=pointer]:
+          - /url: /request-service
+        - link "WhatsApp us" [ref=e235] [cursor=pointer]:
+          - /url: https://wa.me/263770000000?text=Hello%20OmniTech%20Solutions%2C%20I%20need%20technology%20support.
+  - contentinfo [ref=e236]:
+    - generic [ref=e237]:
+      - generic [ref=e238]:
+        - paragraph [ref=e239]:
+          - img [ref=e241]
+          - text: OmniTech Solutions
+        - paragraph [ref=e244]: We repair. We connect. We build. We automate.
+        - paragraph [ref=e245]: Repairs, connectivity, software, AI automation, Starlink and network infrastructure for homes and organisations.
+      - generic [ref=e247]:
+        - paragraph [ref=e248]: Contact
+        - paragraph [ref=e249]: +263 77 000 0000
+        - paragraph [ref=e250]: hello@omnitech.example
+        - paragraph [ref=e251]: Harare, Zimbabwe
+        - link "Chat on WhatsApp" [ref=e252] [cursor=pointer]:
+          - /url: https://wa.me/263770000000?text=Hello%20OmniTech%20Solutions%2C%20I%20need%20technology%20support.
+      - generic [ref=e253]:
+        - paragraph [ref=e254]: Services
+        - link "Electronics repairs" [ref=e255] [cursor=pointer]:
+          - /url: /electronics-repairs
+        - link "Starlink installations" [ref=e256] [cursor=pointer]:
+          - /url: /starlink-installations
+        - link "Software and AI" [ref=e257] [cursor=pointer]:
+          - /url: /software-ai-systems
+      - generic [ref=e258]:
+        - paragraph [ref=e259]: Company
+        - link "About" [ref=e260] [cursor=pointer]:
+          - /url: /about
+        - link "Portfolio" [ref=e261] [cursor=pointer]:
+          - /url: /portfolio
+        - link "Request service" [ref=e262] [cursor=pointer]:
+          - /url: /request-service
+        - link "Customer account" [ref=e263] [cursor=pointer]:
+          - /url: /customer/register
+  - button "Open Next.js Dev Tools" [ref=e269] [cursor=pointer]:
+    - img [ref=e270]
+  - alert [ref=e273]

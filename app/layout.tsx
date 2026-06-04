@@ -1,77 +1,52 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Sora } from "next/font/google";
-import { Toaster } from "@/components/ui/toaster";
-import { getSiteUrl } from "@/lib/env";
-import {
-  createOrganizationJsonLd,
-  createWebsiteJsonLd,
-  getDefaultSiteMetadata,
-} from "@/lib/site-metadata";
 import "./globals.css";
-
-const plusJakarta = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  variable: "--font-body",
-  display: "swap",
-});
-
-const sora = Sora({
-  subsets: ["latin"],
-  variable: "--font-headline",
-  display: "swap",
-});
-
-const defaultMetadata = getDefaultSiteMetadata();
+import { brand } from "@/lib/constants";
+import { absoluteUrl, seoConfig } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  ...defaultMetadata,
-  metadataBase: new URL(getSiteUrl()),
+  metadataBase: new URL(seoConfig.siteUrl),
+  applicationName: brand.name,
+  authors: [{ name: brand.name, url: seoConfig.siteUrl }],
+  creator: brand.name,
+  publisher: brand.name,
+  category: "Technology services",
   title: {
-    default: "S-Tech Studios",
-    template: "%s | S-Tech Studios",
+    default: `${brand.name} | ${brand.tagline}`,
+    template: `%s | ${brand.name}`
   },
-  applicationName: "S-Tech Studios",
+  description: seoConfig.description,
+  keywords: seoConfig.keywords,
+  alternates: {
+    canonical: "/"
+  },
   icons: {
-    icon: "/icon.png",
-    shortcut: "/icon.png",
-    apple: "/icon.png",
+    icon: [
+      { url: "/icon.png", sizes: "512x512", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" }
+    ],
+    apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }]
   },
+  openGraph: {
+    title: `${brand.name} | ${brand.tagline}`,
+    description: seoConfig.description,
+    url: seoConfig.siteUrl,
+    siteName: brand.name,
+    locale: seoConfig.locale,
+    type: "website",
+    images: [{ url: absoluteUrl("/brand/omnitech-logo.png"), width: 1280, height: 1370, alt: `${brand.name} logo` }]
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${brand.name} | ${brand.tagline}`,
+    description: seoConfig.description,
+    images: [absoluteUrl("/brand/omnitech-logo.png")]
+  }
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  const organizationJsonLd = createOrganizationJsonLd();
-  const websiteJsonLd = createWebsiteJsonLd();
-
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body
-        className={`${plusJakarta.variable} ${sora.variable} font-body antialiased`}
-      >
-        <a
-          href="#main-content"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-white focus:px-4 focus:py-2 focus:text-slate-900 focus:shadow-lg"
-        >
-          Skip to content
-        </a>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(organizationJsonLd),
-          }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(websiteJsonLd),
-          }}
-        />
-        {children}
-        <Toaster />
-      </body>
+      <body>{children}</body>
     </html>
   );
 }

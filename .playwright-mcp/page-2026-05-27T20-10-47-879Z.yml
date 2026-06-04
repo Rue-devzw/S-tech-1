@@ -1,0 +1,184 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "OmniTech Solutions We repair. We connect. We build. We automate." [ref=e4] [cursor=pointer]:
+        - /url: /
+        - img [ref=e6]
+        - generic [ref=e9]:
+          - generic [ref=e10]: OmniTech Solutions
+          - generic [ref=e11]: We repair. We connect. We build. We automate.
+      - navigation [ref=e12]:
+        - link "About" [ref=e13] [cursor=pointer]:
+          - /url: /about
+        - link "Services" [ref=e14] [cursor=pointer]:
+          - /url: /services
+        - link "Portfolio" [ref=e15] [cursor=pointer]:
+          - /url: /portfolio
+        - link "Blog" [ref=e16] [cursor=pointer]:
+          - /url: /blog
+        - link "Contact" [ref=e17] [cursor=pointer]:
+          - /url: /contact
+        - link "Track Repair" [ref=e18] [cursor=pointer]:
+          - /url: /track-repair
+      - generic [ref=e19]:
+        - link "WhatsApp" [ref=e20] [cursor=pointer]:
+          - /url: https://wa.me/263770000000?text=Hello%20OmniTech%20Solutions%2C%20I%20need%20technology%20support.
+          - img [ref=e21]
+          - text: WhatsApp
+        - link "Book service" [ref=e23] [cursor=pointer]:
+          - /url: /request-service
+  - main [ref=e24]:
+    - generic [ref=e25]:
+      - generic [ref=e26]:
+        - paragraph [ref=e27]: Portfolio
+        - heading "Proof of work across repair, connectivity, software and automation" [level=2] [ref=e28]
+        - paragraph [ref=e29]: Selected OmniTech projects are published with privacy controls, clear outcomes and practical context for customers deciding who to trust.
+      - generic [ref=e30]:
+        - article [ref=e31]:
+          - generic [ref=e32]:
+            - figure "Before" [ref=e33]:
+              - img "Lodge Starlink Deployment before" [ref=e34]
+              - generic [ref=e35]: Before
+            - figure "After" [ref=e36]:
+              - img "Lodge Starlink Deployment after" [ref=e37]
+              - generic [ref=e38]: After
+          - generic [ref=e39]:
+            - generic [ref=e40]:
+              - generic [ref=e41]: Starlink
+              - generic [ref=e42]: Hospitality
+            - heading "Lodge Starlink Deployment" [level=2] [ref=e43]
+            - paragraph [ref=e44]: Roof-mounted Starlink installation, router placement, guest Wi-Fi support and handover documentation.
+            - generic [ref=e45]:
+              - generic [ref=e46]:
+                - term [ref=e47]: Challenge
+                - definition [ref=e48]: Manual, unreliable or undocumented technology workflows were slowing the organisation down.
+              - generic [ref=e49]:
+                - term [ref=e50]: Solution
+                - definition [ref=e51]: OmniTech delivered a practical technical solution with clear communication, handover notes and support readiness.
+              - generic [ref=e52]:
+                - term [ref=e53]: Outcome
+                - definition [ref=e54]: A cleaner, more reliable technology setup that the client can understand, maintain and grow.
+            - generic [ref=e55]:
+              - generic [ref=e56]: Starlink
+              - generic [ref=e57]: Wi-Fi planning
+              - generic [ref=e58]: Installation checklist
+        - article [ref=e59]:
+          - generic [ref=e60]:
+            - figure "Before" [ref=e61]:
+              - img "School ICT Refresh before" [ref=e62]
+              - generic [ref=e63]: Before
+            - figure "After" [ref=e64]:
+              - img "School ICT Refresh after" [ref=e65]
+              - generic [ref=e66]: After
+          - generic [ref=e67]:
+            - generic [ref=e68]:
+              - generic [ref=e69]: Ict Support
+              - generic [ref=e70]: Education
+            - heading "School ICT Refresh" [level=2] [ref=e71]
+            - paragraph [ref=e72]: Laptop servicing, software setup, Wi-Fi improvements and a recurring support plan for school operations.
+            - generic [ref=e73]:
+              - generic [ref=e74]:
+                - term [ref=e75]: Challenge
+                - definition [ref=e76]: Manual, unreliable or undocumented technology workflows were slowing the organisation down.
+              - generic [ref=e77]:
+                - term [ref=e78]: Solution
+                - definition [ref=e79]: OmniTech delivered a practical technical solution with clear communication, handover notes and support readiness.
+              - generic [ref=e80]:
+                - term [ref=e81]: Outcome
+                - definition [ref=e82]: A cleaner, more reliable technology setup that the client can understand, maintain and grow.
+            - generic [ref=e83]:
+              - generic [ref=e84]: Diagnostics
+              - generic [ref=e85]: Networking
+              - generic [ref=e86]: ICT support
+        - article [ref=e87]:
+          - generic [ref=e88]:
+            - figure "Before" [ref=e89]:
+              - img "SME Workflow Portal before" [ref=e90]
+              - generic [ref=e91]: Before
+            - figure "After" [ref=e92]:
+              - img "SME Workflow Portal after" [ref=e93]
+              - generic [ref=e94]: After
+          - generic [ref=e95]:
+            - generic [ref=e96]:
+              - generic [ref=e97]: Software & Ai
+              - generic [ref=e98]: SME
+            - heading "SME Workflow Portal" [level=2] [ref=e99]
+            - paragraph [ref=e100]: Customer intake, quote approval and operations dashboard for a growing local service business.
+            - generic [ref=e101]:
+              - generic [ref=e102]:
+                - term [ref=e103]: Challenge
+                - definition [ref=e104]: Manual, unreliable or undocumented technology workflows were slowing the organisation down.
+              - generic [ref=e105]:
+                - term [ref=e106]: Solution
+                - definition [ref=e107]: OmniTech delivered a practical technical solution with clear communication, handover notes and support readiness.
+              - generic [ref=e108]:
+                - term [ref=e109]: Outcome
+                - definition [ref=e110]: A cleaner, more reliable technology setup that the client can understand, maintain and grow.
+            - generic [ref=e111]:
+              - generic [ref=e112]: Next.js
+              - generic [ref=e113]: Prisma
+              - generic [ref=e114]: Automation
+    - generic [ref=e116]:
+      - generic [ref=e117]:
+        - paragraph [ref=e118]: Testimonials
+        - heading "Customer confidence, published with consent" [level=2] [ref=e119]
+      - generic [ref=e121]:
+        - blockquote [ref=e122]:
+          - paragraph [ref=e123]: "\"OmniTech handled our connectivity setup neatly and explained every step before handover.\""
+          - generic [ref=e124]:
+            - text: Operations Lead
+            - generic [ref=e125]: Green Valley Lodge
+        - blockquote [ref=e126]:
+          - paragraph [ref=e127]: "\"They repaired devices, stabilised our network and gave us clear records for future support.\""
+          - generic [ref=e128]:
+            - text: Head Teacher
+            - generic [ref=e129]: Local Academy
+        - blockquote [ref=e130]:
+          - paragraph [ref=e131]: "\"The team understands both technical work and business communication. That combination matters.\""
+          - generic [ref=e132]:
+            - text: Clinic Administrator
+            - generic [ref=e133]: Community Health Centre
+    - generic [ref=e135]:
+      - generic [ref=e136]:
+        - paragraph [ref=e137]: Ready when you are
+        - heading "Need a repair, installation or digital system?" [level=2] [ref=e138]
+        - paragraph [ref=e139]: Send the details now and OmniTech will help you move from issue to action.
+      - generic [ref=e140]:
+        - link "Request service" [ref=e141] [cursor=pointer]:
+          - /url: /request-service
+        - link "WhatsApp us" [ref=e142] [cursor=pointer]:
+          - /url: https://wa.me/263770000000?text=Hello%20OmniTech%20Solutions%2C%20I%20need%20technology%20support.
+  - contentinfo [ref=e143]:
+    - generic [ref=e144]:
+      - generic [ref=e145]:
+        - paragraph [ref=e146]: OmniTech Solutions
+        - paragraph [ref=e147]: We repair. We connect. We build. We automate.
+        - paragraph [ref=e148]: Repairs, connectivity, software, AI automation, Starlink and network infrastructure for homes and organisations.
+      - generic [ref=e149]:
+        - paragraph [ref=e150]: Contact
+        - paragraph [ref=e151]: +263 77 000 0000
+        - paragraph [ref=e152]: hello@omnitech.example
+        - paragraph [ref=e153]: Harare, Zimbabwe
+        - link "Chat on WhatsApp" [ref=e154] [cursor=pointer]:
+          - /url: https://wa.me/263770000000?text=Hello%20OmniTech%20Solutions%2C%20I%20need%20technology%20support.
+      - generic [ref=e155]:
+        - paragraph [ref=e156]: Services
+        - link "Electronics repairs" [ref=e157] [cursor=pointer]:
+          - /url: /electronics-repairs
+        - link "Starlink installations" [ref=e158] [cursor=pointer]:
+          - /url: /starlink-installations
+        - link "Software and AI" [ref=e159] [cursor=pointer]:
+          - /url: /software-ai-systems
+      - generic [ref=e160]:
+        - paragraph [ref=e161]: Company
+        - link "About" [ref=e162] [cursor=pointer]:
+          - /url: /about
+        - link "Portfolio" [ref=e163] [cursor=pointer]:
+          - /url: /portfolio
+        - link "Request service" [ref=e164] [cursor=pointer]:
+          - /url: /request-service
+        - link "Customer account" [ref=e165] [cursor=pointer]:
+          - /url: /customer/register
+  - button "Open Next.js Dev Tools" [ref=e171] [cursor=pointer]:
+    - img [ref=e172]
+  - alert [ref=e175]

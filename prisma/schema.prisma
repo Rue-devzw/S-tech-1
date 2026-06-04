@@ -1,0 +1,1563 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum RoleName {
+  SUPER_ADMIN
+  MANAGER
+  ADMIN_ASSISTANT
+  TECHNICIAN
+  FIELD_INSTALLER
+  SALES_MARKETING
+  CUSTOMER
+  VIEWER_AUDITOR
+}
+
+enum AccountStatus {
+  INVITED
+  ACTIVE
+  SUSPENDED
+  DISABLED
+  LOCKED
+}
+
+enum CustomerType {
+  WALK_IN
+  HOME
+  SME
+  SCHOOL
+  CHURCH
+  FARM
+  LODGE
+  CLINIC
+  CORPORATE
+}
+
+enum AddressType {
+  BILLING
+  SERVICE
+  INSTALLATION
+  SHIPPING
+}
+
+enum RequestStatus {
+  NEW
+  TRIAGED
+  QUOTED
+  APPROVED
+  IN_PROGRESS
+  WAITING_PARTS
+  READY
+  COMPLETED
+  CANCELLED
+}
+
+enum Priority {
+  LOW
+  NORMAL
+  HIGH
+  URGENT
+}
+
+enum JobType {
+  BENCH_REPAIR
+  FIELD_REPAIR
+  STARLINK_INSTALLATION
+  NETWORK_INSTALLATION
+  SOFTWARE_PROJECT
+  AUTOMATION_PROJECT
+  SUPPORT_CONTRACT
+}
+
+enum JobStatus {
+  CREATED
+  ASSIGNED
+  DIAGNOSING
+  QUOTED
+  APPROVED
+  IN_PROGRESS
+  WAITING_PARTS
+  WAITING_CUSTOMER
+  QUALITY_CHECK
+  READY_FOR_COLLECTION
+  PAYMENT_PENDING
+  READY_FOR_DELIVERY
+  DELIVERED
+  WARRANTY_ACTIVE
+  COMPLETED
+  CANCELLED
+}
+
+enum DeviceType {
+  PHONE
+  TABLET
+  PC
+  LAPTOP
+  TV
+  GENERAL_ELECTRONICS
+}
+
+enum RepairFaultCategory {
+  SCREEN_DAMAGE
+  BATTERY_POWER
+  CHARGING_PORT
+  WATER_LIQUID_DAMAGE
+  NO_POWER
+  OVERHEATING
+  SOFTWARE_OS
+  STORAGE_DATA
+  NETWORK_CONNECTIVITY
+  AUDIO_VIDEO
+  KEYBOARD_INPUT
+  BOARD_COMPONENT
+  PHYSICAL_DAMAGE
+  INTERMITTENT_FAULT
+  OTHER
+}
+
+enum RepairStatus {
+  INTAKE
+  AWAITING_DEVICE
+  RECEIVED
+  DIAGNOSING
+  WAITING_QUOTE_APPROVAL
+  WAITING_PARTS
+  REPAIRING
+  TESTING
+  READY_FOR_COLLECTION
+  COLLECTED
+  WARRANTY_ACTIVE
+  CANCELLED
+}
+
+enum RepairChecklistType {
+  DIAGNOSTIC
+  TEST
+}
+
+enum DiagnosisStatus {
+  DRAFT
+  NEEDS_APPROVAL
+  APPROVED
+  REJECTED
+  FINAL
+}
+
+enum QuotationStatus {
+  DRAFT
+  SENT
+  ACCEPTED
+  DECLINED
+  EXPIRED
+  CANCELLED
+}
+
+enum InvoiceStatus {
+  DRAFT
+  SENT
+  PARTIALLY_PAID
+  PAID
+  OVERDUE
+  VOID
+}
+
+enum PaymentStatus {
+  PENDING
+  CONFIRMED
+  FAILED
+  REFUNDED
+  CANCELLED
+}
+
+enum PaymentMethod {
+  CASH
+  BANK_TRANSFER
+  ECOCASH
+  CARD
+  PAYNOW
+  STRIPE
+  OTHER
+}
+
+enum BillingItemType {
+  LABOUR
+  PART
+  SERVICE
+  DISCOUNT
+  OTHER
+}
+
+enum StockMovementType {
+  PURCHASE
+  RESERVATION
+  USED_ON_JOB
+  RETURN_FROM_JOB
+  CUSTOMER_SUPPLIED
+  ADJUSTMENT
+  WRITE_OFF
+}
+
+enum AppointmentStatus {
+  REQUESTED
+  CONFIRMED
+  RESCHEDULED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+  NO_SHOW
+}
+
+enum FieldVisitStatus {
+  PLANNED
+  TRAVELING
+  ON_SITE
+  COMPLETED
+  CANCELLED
+}
+
+enum FieldServiceType {
+  STARLINK
+  NETWORKING
+  ONSITE_COMPUTER_SUPPORT
+  CCTV_NETWORK_SUPPORT
+  BUSINESS_ICT_MAINTENANCE
+}
+
+enum FollowUpTaskStatus {
+  OPEN
+  IN_PROGRESS
+  DONE
+  CANCELLED
+}
+
+enum ChecklistType {
+  STARLINK
+  NETWORKING
+  FIELD_REPAIR
+  SOFTWARE_HANDOVER
+  AUTOMATION_HANDOVER
+}
+
+enum StarlinkEnquiryType {
+  KIT_SALES_SUPPORT
+  INSTALLATION
+  SITE_SURVEY
+  RELOCATION
+  TROUBLESHOOTING
+  WIFI_EXTENSION
+  SUPPORT
+}
+
+enum ObstructionLevel {
+  CLEAR
+  MINOR
+  MODERATE
+  SEVERE
+  UNKNOWN
+}
+
+enum MountingType {
+  ROOF
+  WALL
+  POLE
+  GROUND_POLE
+  NON_PENETRATING
+  EXISTING_STRUCTURE
+  TO_BE_CONFIRMED
+}
+
+enum StarlinkRecordType {
+  RELOCATION
+  TROUBLESHOOTING
+  SUPPORT_TICKET
+}
+
+enum SupportTicketStatus {
+  OPEN
+  IN_PROGRESS
+  RESOLVED
+  CLOSED
+  CANCELLED
+}
+
+enum WarrantyStatus {
+  ACTIVE
+  CLAIMED
+  EXPIRED
+  VOID
+}
+
+enum NotificationChannel {
+  EMAIL
+  SMS
+  WHATSAPP
+  IN_APP
+}
+
+enum NotificationStatus {
+  QUEUED
+  SENT
+  DELIVERED
+  FAILED
+  CANCELLED
+}
+
+enum NotificationTrigger {
+  REQUEST_RECEIVED
+  JOB_CREATED
+  DIAGNOSIS_COMPLETE
+  QUOTATION_SENT
+  QUOTATION_APPROVED
+  PARTS_ORDERED
+  REPAIR_IN_PROGRESS
+  READY_FOR_COLLECTION
+  INVOICE_ISSUED
+  PAYMENT_RECEIVED
+  WARRANTY_EXPIRING
+  FOLLOW_UP_REMINDER
+  MANUAL_MESSAGE
+}
+
+enum PromotionStatus {
+  DRAFT
+  ACTIVE
+  PAUSED
+  ENDED
+}
+
+enum PortfolioCategory {
+  REPAIR
+  WEBSITE
+  MOBILE_APP
+  NETWORK_INSTALLATION
+  STARLINK_INSTALLATION
+  AI_SYSTEM
+  SOFTWARE_SYSTEM
+  ICT_SUPPORT
+}
+
+enum PortfolioVisibility {
+  PUBLIC
+  ANONYMIZED
+  PRIVATE
+}
+
+enum BlogStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+enum BlogCategory {
+  DEVICE_CARE
+  LAPTOP_PERFORMANCE
+  NETWORKING
+  STARLINK
+  CYBERSECURITY_BASICS
+  WEBSITES
+  BUSINESS_AUTOMATION
+  AI_FOR_SMES
+}
+
+enum AIInteractionType {
+  DIAGNOSTICS
+  CUSTOMER_ENQUIRY
+  QUOTATION_DESCRIPTION
+  ADVERT_DRAFT
+  REPORT_GENERATION
+  FAQ_ASSISTANT
+  SUPPORT_CHAT
+  TECHNICIAN_TROUBLESHOOTING
+  SUMMARY
+  MANAGEMENT_INSIGHTS
+}
+
+enum AIApprovalStatus {
+  NOT_REQUIRED
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+model User {
+  id              String              @id @default(cuid())
+  name            String
+  email           String              @unique
+  phone           String?
+  passwordHash    String
+  role            RoleName            @default(CUSTOMER)
+  accountStatus   AccountStatus       @default(ACTIVE)
+  isActive        Boolean             @default(true)
+  emailVerifiedAt DateTime?
+  lastLoginAt     DateTime?
+  deletedAt       DateTime?
+  customer        Customer?
+  technician      Technician?
+  userRoles       UserRole[]
+  sessions        UserSession[]
+  invitationsSent UserInvitation[]     @relation("InvitationCreator")
+  passwordResets  PasswordResetToken[]
+  createdRequests ServiceRequest[]    @relation("RequestCreator")
+  assignedJobs    JobCard[]           @relation("AssignedTechnician")
+  statusChanges   JobStatusHistory[]
+  diagnoses       Diagnosis[]
+  appointments    Appointment[]       @relation("AppointmentAssignee")
+  fieldVisits     FieldVisit[]        @relation("FieldVisitTechnician")
+  followUpTasks   FollowUpTask[]      @relation("FollowUpAssignee")
+  payments        Payment[]           @relation("PaymentRecorder")
+  notifications   NotificationLog[]
+  manualMessages  ManualMessage[]      @relation("ManualMessageSender")
+  aiInteractions  AIInteraction[]
+  approvedAIInteractions AIInteraction[] @relation("AIInteractionApprover")
+  auditLogs       AuditLog[]          @relation("ActorAuditLogs")
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+
+  @@index([role])
+  @@index([accountStatus])
+  @@index([isActive, deletedAt])
+}
+
+model UserSession {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tokenHash String   @unique
+  ipAddress String?
+  userAgent String?
+  expiresAt DateTime
+  revokedAt DateTime?
+  createdAt DateTime @default(now())
+
+  @@index([userId, revokedAt])
+  @@index([expiresAt])
+}
+
+model UserInvitation {
+  id          String     @id @default(cuid())
+  email       String
+  name        String
+  role        RoleName
+  tokenHash   String     @unique
+  invitedById String?
+  invitedBy   User?      @relation("InvitationCreator", fields: [invitedById], references: [id], onDelete: SetNull)
+  acceptedAt  DateTime?
+  expiresAt   DateTime
+  createdAt   DateTime   @default(now())
+
+  @@index([email])
+  @@index([role])
+  @@index([expiresAt])
+}
+
+model PasswordResetToken {
+  id        String    @id @default(cuid())
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tokenHash String    @unique
+  usedAt    DateTime?
+  expiresAt DateTime
+  createdAt DateTime  @default(now())
+
+  @@index([userId, usedAt])
+  @@index([expiresAt])
+}
+
+model Technician {
+  id          String    @id @default(cuid())
+  userId      String    @unique
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  skills      String[]
+  serviceArea String?
+  isActive    Boolean   @default(true)
+  deletedAt   DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([isActive, deletedAt])
+}
+
+model Role {
+  id          String           @id @default(cuid())
+  name        RoleName         @unique
+  label       String
+  description String?
+  isSystem    Boolean          @default(true)
+  userRoles   UserRole[]
+  permissions RolePermission[]
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+}
+
+model Permission {
+  id          String           @id @default(cuid())
+  key         String           @unique
+  label       String
+  module      String
+  description String?
+  roles       RolePermission[]
+  createdAt   DateTime         @default(now())
+}
+
+model UserRole {
+  userId    String
+  roleId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role      Role     @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@id([userId, roleId])
+  @@index([roleId])
+}
+
+model RolePermission {
+  roleId       String
+  permissionId String
+  role         Role       @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  permission   Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+  createdAt    DateTime   @default(now())
+
+  @@id([roleId, permissionId])
+  @@index([permissionId])
+}
+
+model Customer {
+  id              String             @id @default(cuid())
+  userId          String?            @unique
+  user            User?              @relation(fields: [userId], references: [id], onDelete: SetNull)
+  type            CustomerType       @default(HOME)
+  name            String
+  email           String?
+  phone           String             @unique
+  organization    String?
+  taxNumber       String?
+  notes           String?
+  consentToNotify Boolean            @default(true)
+  deletedAt       DateTime?
+  addresses       CustomerAddress[]
+  devices         Device[]
+  requests        ServiceRequest[]
+  jobs            JobCard[]
+  quotations      Quotation[]
+  invoices        Invoice[]
+  payments        Payment[]
+  receipts        Receipt[]
+  appointments    Appointment[]
+  fieldVisits     FieldVisit[]
+  warranties      Warranty[]
+  testimonials    Testimonial[]
+  manualMessages  ManualMessage[]
+  starlinkEnquiries StarlinkEnquiry[]
+  starlinkSiteSurveys StarlinkSiteSurvey[]
+  starlinkInstallationPlans StarlinkInstallationPlan[]
+  starlinkSupportTickets StarlinkSupportTicket[]
+  starlinkServiceRecords StarlinkServiceRecord[]
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+
+  @@index([type])
+  @@index([name])
+  @@index([deletedAt])
+}
+
+model CustomerAddress {
+  id          String      @id @default(cuid())
+  customerId  String
+  customer    Customer    @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  type        AddressType @default(SERVICE)
+  label       String?
+  line1       String
+  line2       String?
+  city        String
+  province    String?
+  country     String      @default("Zimbabwe")
+  latitude    Decimal?    @db.Decimal(10, 7)
+  longitude   Decimal?    @db.Decimal(10, 7)
+  isDefault   Boolean     @default(false)
+  deletedAt   DateTime?
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  @@index([customerId, type])
+  @@index([deletedAt])
+}
+
+model ServiceCategory {
+  id          String    @id @default(cuid())
+  name        String
+  slug        String    @unique
+  description String?
+  sortOrder   Int       @default(0)
+  isActive    Boolean   @default(true)
+  deletedAt   DateTime?
+  services    Service[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([isActive, sortOrder])
+}
+
+model Service {
+  id             String           @id @default(cuid())
+  categoryId     String
+  category       ServiceCategory  @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  name           String
+  slug           String           @unique
+  summary        String
+  description    String
+  basePrice      Decimal?         @db.Decimal(12, 2)
+  estimatedHours Decimal?         @db.Decimal(8, 2)
+  isFieldService Boolean          @default(false)
+  isActive       Boolean          @default(true)
+  deletedAt      DateTime?
+  requests       ServiceRequest[]
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+
+  @@index([categoryId, isActive])
+  @@index([deletedAt])
+}
+
+model ServiceRequest {
+  id              String            @id @default(cuid())
+  requestNumber   String            @unique
+  customerId      String
+  customer        Customer          @relation(fields: [customerId], references: [id], onDelete: Restrict)
+  serviceId       String
+  service         Service           @relation(fields: [serviceId], references: [id], onDelete: Restrict)
+  deviceId        String?
+  device          Device?           @relation(fields: [deviceId], references: [id], onDelete: SetNull)
+  createdById     String?
+  createdBy       User?             @relation("RequestCreator", fields: [createdById], references: [id], onDelete: SetNull)
+  title           String
+  description     String
+  status          RequestStatus     @default(NEW)
+  priority        Priority          @default(NORMAL)
+  intakeChannel   String            @default("Website")
+  preferredDate   DateTime?
+  locationNote    String?
+  deletedAt       DateTime?
+  jobCard         JobCard?
+  notifications   NotificationLog[]
+  appointments    Appointment[]
+  starlinkEnquiries StarlinkEnquiry[]
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+
+  @@index([customerId, status])
+  @@index([serviceId])
+  @@index([status, priority])
+  @@index([createdAt])
+  @@index([deletedAt])
+}
+
+model Device {
+  id              String           @id @default(cuid())
+  customerId      String
+  customer        Customer         @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  type            String
+  make            String?
+  model           String?
+  serialNumber    String?
+  imei            String?
+  assetTag        String?
+  conditionNotes  String?
+  accessories     String?
+  deletedAt       DateTime?
+  serviceRequests ServiceRequest[]
+  jobs            JobCard[]
+  warranties      Warranty[]
+  repairIntakes   RepairIntake[]
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+
+  @@index([customerId])
+  @@index([serialNumber])
+  @@index([imei])
+  @@index([deletedAt])
+}
+
+model JobCard {
+  id             String             @id @default(cuid())
+  jobNumber      String             @unique
+  requestId      String?            @unique
+  request        ServiceRequest?    @relation(fields: [requestId], references: [id], onDelete: SetNull)
+  customerId     String
+  customer       Customer           @relation(fields: [customerId], references: [id], onDelete: Restrict)
+  deviceId       String?
+  device         Device?            @relation(fields: [deviceId], references: [id], onDelete: SetNull)
+  assignedToId   String?
+  assignedTo     User?              @relation("AssignedTechnician", fields: [assignedToId], references: [id], onDelete: SetNull)
+  type           JobType
+  status         JobStatus          @default(CREATED)
+  priority       Priority           @default(NORMAL)
+  faultReported  String
+  workDone       String?
+  customerNotes  String?
+  internalNotes  String?
+  scheduledFor   DateTime?
+  completedAt    DateTime?
+  deletedAt      DateTime?
+  statusHistory  JobStatusHistory[]
+  diagnoses      Diagnosis[]
+  quotations     Quotation[]
+  invoices       Invoice[]
+  stockMovements StockMovement[]
+  appointments   Appointment[]
+  fieldVisits    FieldVisit[]
+  warranties     Warranty[]
+  aiInteractions AIInteraction[]
+  repairIntake   RepairIntake?
+  repairChecklists RepairChecklist[]
+  repairPartNeeds RepairPartNeed[]
+  repairNotes    RepairNote[]
+  collectionConfirmation CustomerCollectionConfirmation?
+  starlinkEnquiries StarlinkEnquiry[]
+  starlinkSiteSurveys StarlinkSiteSurvey[]
+  starlinkInstallationPlans StarlinkInstallationPlan[]
+  starlinkSupportTickets StarlinkSupportTicket[]
+  starlinkServiceRecords StarlinkServiceRecord[]
+  serviceReports ServiceReport[]
+  followUpTasks FollowUpTask[]
+  createdAt      DateTime           @default(now())
+  updatedAt      DateTime           @updatedAt
+
+  @@index([customerId, status])
+  @@index([assignedToId, status])
+  @@index([type, status])
+  @@index([scheduledFor])
+  @@index([deletedAt])
+}
+
+model RepairIntake {
+  id                  String                @id @default(cuid())
+  intakeNumber        String                @unique
+  jobCardId           String                @unique
+  jobCard             JobCard               @relation(fields: [jobCardId], references: [id], onDelete: Cascade)
+  deviceId            String
+  device              Device                @relation(fields: [deviceId], references: [id], onDelete: Restrict)
+  deviceType          DeviceType
+  faultCategory       RepairFaultCategory
+  repairStatus        RepairStatus          @default(INTAKE)
+  conditionPhotos     Json?
+  accessoriesReceived String[]
+  faultDescription    String
+  customerPasswordNote String?
+  receivedById        String?
+  technicianId        String?
+  labourEstimateHours Decimal?              @db.Decimal(8, 2)
+  labourEstimateAmount Decimal?             @db.Decimal(12, 2)
+  warrantyTerms       String?
+  receivedAt          DateTime?
+  deletedAt           DateTime?
+  createdAt           DateTime              @default(now())
+  updatedAt           DateTime              @updatedAt
+
+  @@index([deviceType, faultCategory])
+  @@index([repairStatus])
+  @@index([technicianId])
+  @@index([deletedAt])
+}
+
+model RepairChecklist {
+  id          String              @id @default(cuid())
+  jobCardId   String
+  jobCard     JobCard             @relation(fields: [jobCardId], references: [id], onDelete: Cascade)
+  type        RepairChecklistType
+  title       String
+  items       Json
+  completedById String?
+  completedAt DateTime?
+  notes       String?
+  createdAt   DateTime            @default(now())
+  updatedAt   DateTime            @updatedAt
+
+  @@index([jobCardId, type])
+}
+
+model RepairPartNeed {
+  id              String         @id @default(cuid())
+  jobCardId       String
+  jobCard         JobCard        @relation(fields: [jobCardId], references: [id], onDelete: Cascade)
+  inventoryItemId String?
+  inventoryItem   InventoryItem? @relation(fields: [inventoryItemId], references: [id], onDelete: SetNull)
+  partName        String
+  quantity        Int            @default(1)
+  estimatedUnitCost Decimal?     @db.Decimal(12, 2)
+  isRequired      Boolean        @default(true)
+  notes           String?
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+
+  @@index([jobCardId])
+  @@index([inventoryItemId])
+}
+
+model RepairNote {
+  id        String   @id @default(cuid())
+  jobCardId String
+  jobCard   JobCard  @relation(fields: [jobCardId], references: [id], onDelete: Cascade)
+  authorId  String?
+  note      String
+  createdAt DateTime @default(now())
+
+  @@index([jobCardId, createdAt])
+  @@index([authorId])
+}
+
+model CustomerCollectionConfirmation {
+  id                String   @id @default(cuid())
+  jobCardId         String   @unique
+  jobCard           JobCard  @relation(fields: [jobCardId], references: [id], onDelete: Cascade)
+  customerName      String
+  customerPhone     String?
+  confirmationNote  String?
+  conditionAccepted Boolean  @default(true)
+  collectedAt       DateTime @default(now())
+  createdAt         DateTime @default(now())
+}
+
+model JobStatusHistory {
+  id          String    @id @default(cuid())
+  jobCardId   String
+  jobCard     JobCard   @relation(fields: [jobCardId], references: [id], onDelete: Cascade)
+  fromStatus  JobStatus?
+  toStatus    JobStatus
+  note        String?
+  changedById String?
+  changedBy   User?     @relation(fields: [changedById], references: [id], onDelete: SetNull)
+  createdAt   DateTime  @default(now())
+
+  @@index([jobCardId, createdAt])
+  @@index([changedById])
+}
+
+model Diagnosis {
+  id              String          @id @default(cuid())
+  jobCardId       String
+  jobCard         JobCard         @relation(fields: [jobCardId], references: [id], onDelete: Cascade)
+  technicianId    String?
+  technician      User?           @relation(fields: [technicianId], references: [id], onDelete: SetNull)
+  status          DiagnosisStatus @default(DRAFT)
+  symptoms        String
+  findings        String
+  recommendation  String
+  estimatedCost   Decimal?        @db.Decimal(12, 2)
+  estimatedHours  Decimal?        @db.Decimal(8, 2)
+  customerApprovedAt DateTime?
+  deletedAt       DateTime?
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+
+  @@index([jobCardId, status])
+  @@index([technicianId])
+  @@index([deletedAt])
+}
+
+model Quotation {
+  id              String          @id @default(cuid())
+  quotationNumber String          @unique
+  customerId      String
+  customer        Customer        @relation(fields: [customerId], references: [id], onDelete: Restrict)
+  jobCardId       String?
+  jobCard         JobCard?        @relation(fields: [jobCardId], references: [id], onDelete: SetNull)
+  status          QuotationStatus @default(DRAFT)
+  subtotal        Decimal         @db.Decimal(12, 2)
+  discount        Decimal         @default(0) @db.Decimal(12, 2)
+  tax             Decimal         @default(0) @db.Decimal(12, 2)
+  total           Decimal         @db.Decimal(12, 2)
+  validUntil      DateTime?
+  acceptedAt      DateTime?
+  declinedAt      DateTime?
+  notes           String?
+  deletedAt       DateTime?
+  items           QuotationItem[]
+  invoices        Invoice[]
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+
+  @@index([customerId, status])
+  @@index([jobCardId])
+  @@index([status, validUntil])
+  @@index([deletedAt])
+}
+
+model QuotationItem {
+  id          String    @id @default(cuid())
+  quotationId String
+  quotation   Quotation @relation(fields: [quotationId], references: [id], onDelete: Cascade)
+  itemType    BillingItemType @default(SERVICE)
+  description String
+  quantity    Decimal   @default(1) @db.Decimal(10, 2)
+  unitPrice   Decimal   @db.Decimal(12, 2)
+  total       Decimal   @db.Decimal(12, 2)
+  sortOrder   Int       @default(0)
+
+  @@index([quotationId])
+}
+
+model Invoice {
+  id            String        @id @default(cuid())
+  invoiceNumber String        @unique
+  customerId    String
+  customer      Customer      @relation(fields: [customerId], references: [id], onDelete: Restrict)
+  jobCardId     String?
+  jobCard       JobCard?      @relation(fields: [jobCardId], references: [id], onDelete: SetNull)
+  quotationId   String?
+  quotation     Quotation?    @relation(fields: [quotationId], references: [id], onDelete: SetNull)
+  status        InvoiceStatus @default(DRAFT)
+  subtotal      Decimal       @db.Decimal(12, 2)
+  discount      Decimal       @default(0) @db.Decimal(12, 2)
+  tax           Decimal       @default(0) @db.Decimal(12, 2)
+  total         Decimal       @db.Decimal(12, 2)
+  paidAmount    Decimal       @default(0) @db.Decimal(12, 2)
+  balanceDue    Decimal       @default(0) @db.Decimal(12, 2)
+  issuedAt      DateTime?
+  dueAt         DateTime?
+  deletedAt     DateTime?
+  payments      Payment[]
+  receipts      Receipt[]
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  @@index([customerId, status])
+  @@index([jobCardId])
+  @@index([quotationId])
+  @@index([status, dueAt])
+  @@index([deletedAt])
+}
+
+model Payment {
+  id                    String        @id @default(cuid())
+  paymentNumber         String        @unique
+  customerId            String
+  customer              Customer      @relation(fields: [customerId], references: [id], onDelete: Restrict)
+  invoiceId             String?
+  invoice               Invoice?      @relation(fields: [invoiceId], references: [id], onDelete: SetNull)
+  recordedById          String?
+  recordedBy            User?         @relation("PaymentRecorder", fields: [recordedById], references: [id], onDelete: SetNull)
+  method                PaymentMethod
+  status                PaymentStatus @default(PENDING)
+  amount                Decimal       @db.Decimal(12, 2)
+  currency              String        @default("USD")
+  provider              String?
+  providerReference     String?
+  providerTransactionId String?
+  paidAt                DateTime?
+  deletedAt             DateTime?
+  receipts              Receipt[]
+  createdAt             DateTime      @default(now())
+  updatedAt             DateTime      @updatedAt
+
+  @@index([customerId, status])
+  @@index([invoiceId])
+  @@index([method, status])
+  @@index([providerReference])
+  @@index([deletedAt])
+}
+
+model Receipt {
+  id            String   @id @default(cuid())
+  receiptNumber String   @unique
+  customerId    String
+  customer      Customer @relation(fields: [customerId], references: [id], onDelete: Restrict)
+  invoiceId     String?
+  invoice       Invoice? @relation(fields: [invoiceId], references: [id], onDelete: SetNull)
+  paymentId     String
+  payment       Payment  @relation(fields: [paymentId], references: [id], onDelete: Restrict)
+  amount        Decimal  @db.Decimal(12, 2)
+  issuedAt      DateTime @default(now())
+  deletedAt     DateTime?
+  createdAt     DateTime @default(now())
+
+  @@index([customerId])
+  @@index([invoiceId])
+  @@index([paymentId])
+  @@index([deletedAt])
+}
+
+model Supplier {
+  id             String          @id @default(cuid())
+  name           String
+  contactName    String?
+  email          String?
+  phone          String?
+  address        String?
+  notes          String?
+  deletedAt      DateTime?
+  inventoryItems InventoryItem[]
+  stockMovements StockMovement[]
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+
+  @@index([name])
+  @@index([deletedAt])
+}
+
+model InventoryItem {
+  id             String          @id @default(cuid())
+  supplierId     String?
+  supplier       Supplier?       @relation(fields: [supplierId], references: [id], onDelete: SetNull)
+  sku            String          @unique
+  name           String
+  category       String
+  description    String?
+  quantityOnHand Int             @default(0)
+  quantityReserved Int           @default(0)
+  reorderLevel   Int             @default(2)
+  unitCost       Decimal         @default(0) @db.Decimal(12, 2)
+  sellingPrice   Decimal?        @db.Decimal(12, 2)
+  location       String?
+  isActive       Boolean         @default(true)
+  deletedAt      DateTime?
+  movements      StockMovement[]
+  repairPartNeeds RepairPartNeed[]
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+
+  @@index([supplierId])
+  @@index([category])
+  @@index([isActive, deletedAt])
+  @@index([quantityOnHand])
+}
+
+model StockMovement {
+  id              String            @id @default(cuid())
+  inventoryItemId String
+  inventoryItem   InventoryItem     @relation(fields: [inventoryItemId], references: [id], onDelete: Restrict)
+  supplierId      String?
+  supplier        Supplier?         @relation(fields: [supplierId], references: [id], onDelete: SetNull)
+  jobCardId       String?
+  jobCard         JobCard?          @relation(fields: [jobCardId], references: [id], onDelete: SetNull)
+  type            StockMovementType
+  quantity        Int
+  unitCost        Decimal?          @db.Decimal(12, 2)
+  reference       String?
+  notes           String?
+  createdAt       DateTime          @default(now())
+
+  @@index([inventoryItemId, createdAt])
+  @@index([jobCardId])
+  @@index([supplierId])
+  @@index([type])
+}
+
+model Appointment {
+  id               String            @id @default(cuid())
+  customerId       String
+  customer         Customer          @relation(fields: [customerId], references: [id], onDelete: Restrict)
+  serviceRequestId String?
+  serviceRequest   ServiceRequest?   @relation(fields: [serviceRequestId], references: [id], onDelete: SetNull)
+  jobCardId        String?
+  jobCard          JobCard?          @relation(fields: [jobCardId], references: [id], onDelete: SetNull)
+  assignedToId     String?
+  assignedTo       User?             @relation("AppointmentAssignee", fields: [assignedToId], references: [id], onDelete: SetNull)
+  title            String
+  status           AppointmentStatus @default(REQUESTED)
+  startsAt         DateTime
+  endsAt           DateTime
+  location         String?
+  notes            String?
+  deletedAt        DateTime?
+  fieldVisit       FieldVisit?
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+
+  @@index([customerId, startsAt])
+  @@index([assignedToId, startsAt])
+  @@index([status, startsAt])
+  @@index([deletedAt])
+}
+
+model FieldVisit {
+  id             String           @id @default(cuid())
+  visitNumber    String           @unique
+  appointmentId  String?          @unique
+  appointment    Appointment?     @relation(fields: [appointmentId], references: [id], onDelete: SetNull)
+  customerId     String
+  customer       Customer         @relation(fields: [customerId], references: [id], onDelete: Restrict)
+  jobCardId      String?
+  jobCard        JobCard?         @relation(fields: [jobCardId], references: [id], onDelete: SetNull)
+  technicianId   String?
+  technician     User?            @relation("FieldVisitTechnician", fields: [technicianId], references: [id], onDelete: SetNull)
+  serviceType    FieldServiceType @default(ONSITE_COMPUTER_SUPPORT)
+  status         FieldVisitStatus @default(PLANNED)
+  siteContact    String?
+  sitePhone      String?
+  address        String
+  latitude       Decimal?         @db.Decimal(10, 7)
+  longitude      Decimal?         @db.Decimal(10, 7)
+  travelNotes    String?
+  arrivalAt      DateTime?
+  departureAt    DateTime?
+  fieldPhotos    Json?
+  customerSignatureName String?
+  customerSignatureData String?
+  customerSignedAt DateTime?
+  outcome        String?
+  notes          String?
+  deletedAt      DateTime?
+  checklists     InstallationChecklist[]
+  followUpTasks  FollowUpTask[]
+  serviceReport  ServiceReport?
+  starlinkSiteSurvey StarlinkSiteSurvey?
+  starlinkInstallationPlan StarlinkInstallationPlan?
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+
+  @@index([customerId, status])
+  @@index([serviceType, status])
+  @@index([jobCardId])
+  @@index([technicianId, status])
+  @@index([deletedAt])
+}
+
+model FollowUpTask {
+  id           String             @id @default(cuid())
+  fieldVisitId String?
+  fieldVisit   FieldVisit?        @relation(fields: [fieldVisitId], references: [id], onDelete: Cascade)
+  jobCardId    String?
+  jobCard      JobCard?           @relation(fields: [jobCardId], references: [id], onDelete: SetNull)
+  assignedToId String?
+  assignedTo   User?              @relation("FollowUpAssignee", fields: [assignedToId], references: [id], onDelete: SetNull)
+  title        String
+  description  String?
+  status       FollowUpTaskStatus @default(OPEN)
+  dueAt        DateTime?
+  createdAt    DateTime           @default(now())
+  updatedAt    DateTime           @updatedAt
+
+  @@index([fieldVisitId])
+  @@index([jobCardId])
+  @@index([assignedToId, status])
+  @@index([status, dueAt])
+}
+
+model ServiceReport {
+  id            String     @id @default(cuid())
+  reportNumber  String     @unique
+  fieldVisitId  String     @unique
+  fieldVisit    FieldVisit @relation(fields: [fieldVisitId], references: [id], onDelete: Cascade)
+  jobCardId     String?
+  jobCard       JobCard?   @relation(fields: [jobCardId], references: [id], onDelete: SetNull)
+  summary       String
+  html          String
+  generatedById String?
+  generatedAt   DateTime   @default(now())
+  createdAt     DateTime   @default(now())
+
+  @@index([jobCardId])
+  @@index([generatedAt])
+}
+
+model StarlinkEnquiry {
+  id               String              @id @default(cuid())
+  enquiryNumber    String              @unique
+  customerId       String
+  customer         Customer            @relation(fields: [customerId], references: [id], onDelete: Restrict)
+  serviceRequestId String?
+  serviceRequest   ServiceRequest?     @relation(fields: [serviceRequestId], references: [id], onDelete: SetNull)
+  jobCardId        String?
+  jobCard          JobCard?            @relation(fields: [jobCardId], references: [id], onDelete: SetNull)
+  enquiryType      StarlinkEnquiryType
+  kitStatus        String?
+  siteAddress      String
+  siteContact      String?
+  sitePhone        String?
+  usageGoal        String?
+  officialDisclaimerAccepted Boolean   @default(true)
+  notes            String?
+  createdAt        DateTime            @default(now())
+  updatedAt        DateTime            @updatedAt
+
+  @@index([customerId, enquiryType])
+  @@index([serviceRequestId])
+  @@index([jobCardId])
+}
+
+model StarlinkSiteSurvey {
+  id                  String           @id @default(cuid())
+  surveyNumber        String           @unique
+  customerId          String
+  customer            Customer         @relation(fields: [customerId], references: [id], onDelete: Restrict)
+  jobCardId           String?
+  jobCard             JobCard?         @relation(fields: [jobCardId], references: [id], onDelete: SetNull)
+  fieldVisitId        String?          @unique
+  fieldVisit          FieldVisit?      @relation(fields: [fieldVisitId], references: [id], onDelete: SetNull)
+  obstructionLevel    ObstructionLevel @default(UNKNOWN)
+  obstructionNotes    String?
+  recommendedMounting MountingType     @default(TO_BE_CONFIRMED)
+  roofAccessNotes     String?
+  cableRouteNotes     String?
+  powerLocationNotes  String?
+  photos              Json?
+  completedById       String?
+  completedAt         DateTime?
+  createdAt           DateTime         @default(now())
+  updatedAt           DateTime         @updatedAt
+
+  @@index([customerId])
+  @@index([jobCardId])
+  @@index([obstructionLevel])
+}
+
+model StarlinkInstallationPlan {
+  id                    String       @id @default(cuid())
+  planNumber            String       @unique
+  customerId            String
+  customer              Customer     @relation(fields: [customerId], references: [id], onDelete: Restrict)
+  jobCardId             String?
+  jobCard               JobCard?     @relation(fields: [jobCardId], references: [id], onDelete: SetNull)
+  fieldVisitId          String?      @unique
+  fieldVisit            FieldVisit?  @relation(fields: [fieldVisitId], references: [id], onDelete: SetNull)
+  mountingType          MountingType  @default(TO_BE_CONFIRMED)
+  accessoriesRequired   String[]
+  wifiCoveragePlan      String?
+  routerConfigNotes     String?
+  meshExtenderPlan      String?
+  setupChecklist        Json?
+  handoverNotes         String?
+  handoverAcceptedBy    String?
+  handoverAcceptedAt    DateTime?
+  createdAt             DateTime     @default(now())
+  updatedAt             DateTime     @updatedAt
+
+  @@index([customerId])
+  @@index([jobCardId])
+  @@index([mountingType])
+}
+
+model StarlinkSupportTicket {
+  id          String              @id @default(cuid())
+  ticketNumber String             @unique
+  customerId  String
+  customer    Customer            @relation(fields: [customerId], references: [id], onDelete: Restrict)
+  jobCardId   String?
+  jobCard     JobCard?            @relation(fields: [jobCardId], references: [id], onDelete: SetNull)
+  status      SupportTicketStatus @default(OPEN)
+  issue       String
+  resolution  String?
+  openedAt    DateTime            @default(now())
+  resolvedAt  DateTime?
+  createdAt   DateTime            @default(now())
+  updatedAt   DateTime            @updatedAt
+
+  @@index([customerId, status])
+  @@index([jobCardId])
+}
+
+model StarlinkServiceRecord {
+  id             String             @id @default(cuid())
+  recordNumber   String             @unique
+  customerId     String
+  customer       Customer           @relation(fields: [customerId], references: [id], onDelete: Restrict)
+  jobCardId      String?
+  jobCard        JobCard?           @relation(fields: [jobCardId], references: [id], onDelete: SetNull)
+  type           StarlinkRecordType
+  previousAddress String?
+  newAddress      String?
+  issueSummary    String?
+  actionsTaken    String
+  outcome         String?
+  createdById     String?
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
+
+  @@index([customerId, type])
+  @@index([jobCardId])
+}
+
+model InstallationChecklist {
+  id            String        @id @default(cuid())
+  fieldVisitId  String
+  fieldVisit    FieldVisit    @relation(fields: [fieldVisitId], references: [id], onDelete: Cascade)
+  type          ChecklistType
+  name          String
+  items         Json
+  completedBy   String?
+  completedAt   DateTime?
+  notes         String?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  @@index([fieldVisitId, type])
+}
+
+model Warranty {
+  id             String         @id @default(cuid())
+  warrantyNumber String         @unique
+  customerId     String
+  customer       Customer       @relation(fields: [customerId], references: [id], onDelete: Restrict)
+  jobCardId      String?
+  jobCard        JobCard?       @relation(fields: [jobCardId], references: [id], onDelete: SetNull)
+  deviceId       String?
+  device         Device?        @relation(fields: [deviceId], references: [id], onDelete: SetNull)
+  status         WarrantyStatus @default(ACTIVE)
+  coverage       String
+  terms          String?
+  startsAt       DateTime
+  endsAt         DateTime
+  claimedAt      DateTime?
+  deletedAt      DateTime?
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+
+  @@index([customerId, status])
+  @@index([jobCardId])
+  @@index([deviceId])
+  @@index([status, endsAt])
+  @@index([deletedAt])
+}
+
+model MessageTemplate {
+  id          String              @id @default(cuid())
+  key         String              @unique
+  name        String
+  channel     NotificationChannel
+  trigger     NotificationTrigger?
+  subject     String?
+  body        String
+  variables   String[]
+  isActive    Boolean             @default(true)
+  deletedAt   DateTime?
+  logs        NotificationLog[]
+  createdAt   DateTime            @default(now())
+  updatedAt   DateTime            @updatedAt
+
+  @@index([channel, isActive])
+  @@index([trigger, channel])
+  @@index([deletedAt])
+}
+
+model NotificationLog {
+  id               String              @id @default(cuid())
+  templateId       String?
+  template         MessageTemplate?     @relation(fields: [templateId], references: [id], onDelete: SetNull)
+  userId           String?
+  user             User?                @relation(fields: [userId], references: [id], onDelete: SetNull)
+  serviceRequestId String?
+  serviceRequest   ServiceRequest?      @relation(fields: [serviceRequestId], references: [id], onDelete: SetNull)
+  manualMessageId  String?
+  manualMessage    ManualMessage?        @relation(fields: [manualMessageId], references: [id], onDelete: SetNull)
+  trigger          NotificationTrigger?
+  channel          NotificationChannel
+  status           NotificationStatus   @default(QUEUED)
+  recipient        String
+  subject          String?
+  body             String
+  provider         String?
+  providerMessageId String?
+  error            String?
+  queuedAt         DateTime             @default(now())
+  sentAt           DateTime?
+  deliveredAt      DateTime?
+
+  @@index([status, queuedAt])
+  @@index([channel, status])
+  @@index([trigger, status])
+  @@index([serviceRequestId])
+  @@index([manualMessageId])
+  @@index([userId])
+}
+
+model ManualMessage {
+  id          String                @id @default(cuid())
+  customerId  String?
+  customer    Customer?             @relation(fields: [customerId], references: [id], onDelete: SetNull)
+  sentById    String?
+  sentBy      User?                 @relation("ManualMessageSender", fields: [sentById], references: [id], onDelete: SetNull)
+  channel     NotificationChannel
+  recipient   String
+  subject     String?
+  body        String
+  logs        NotificationLog[]
+  createdAt   DateTime              @default(now())
+
+  @@index([customerId, createdAt])
+  @@index([sentById, createdAt])
+  @@index([channel])
+}
+
+model Promotion {
+  id          String          @id @default(cuid())
+  title       String
+  slug        String          @unique
+  audience    String
+  offer       String
+  channelPlan String?
+  status      PromotionStatus @default(DRAFT)
+  startsAt    DateTime
+  endsAt      DateTime
+  deletedAt   DateTime?
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+
+  @@index([status, startsAt, endsAt])
+  @@index([deletedAt])
+}
+
+model PortfolioProject {
+  id                String              @id @default(cuid())
+  title             String
+  slug              String              @unique
+  category          PortfolioCategory
+  clientName        String?
+  clientSector      String
+  summary           String
+  challenge         String
+  solution          String
+  toolsUsed         String[]
+  outcome           String
+  description       String?
+  imageUrl          String?
+  beforeImageUrls   String[]
+  afterImageUrls    String[]
+  visibility        PortfolioVisibility @default(PUBLIC)
+  showClientName    Boolean             @default(false)
+  showExactLocation Boolean             @default(false)
+  featured          Boolean             @default(false)
+  sortOrder         Int                 @default(0)
+  published         Boolean             @default(false)
+  publishedAt       DateTime?
+  testimonials      Testimonial[]
+  deletedAt         DateTime?
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+
+  @@index([published, publishedAt])
+  @@index([category])
+  @@index([featured, sortOrder])
+  @@index([visibility])
+  @@index([deletedAt])
+}
+
+model Testimonial {
+  id               String            @id @default(cuid())
+  customerId       String?
+  customer         Customer?         @relation(fields: [customerId], references: [id], onDelete: SetNull)
+  projectId        String?
+  project          PortfolioProject? @relation(fields: [projectId], references: [id], onDelete: SetNull)
+  name             String
+  company          String?
+  clientSector     String?
+  quote            String
+  rating           Int               @default(5)
+  consentToPublish Boolean           @default(false)
+  privacyLabel     String?
+  published        Boolean           @default(false)
+  publishedAt      DateTime?
+  deletedAt        DateTime?
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+
+  @@index([published, publishedAt])
+  @@index([customerId])
+  @@index([projectId])
+  @@index([deletedAt])
+}
+
+model BlogPost {
+  id                 String       @id @default(cuid())
+  title              String
+  slug               String       @unique
+  excerpt            String
+  body               String
+  category           BlogCategory
+  status             BlogStatus   @default(DRAFT)
+  seoTitle           String?
+  seoDescription     String?
+  featuredImageUrl   String?
+  featuredImageAlt   String?
+  relatedServiceSlug String?
+  authorId           String?
+  tags               String[]
+  publishedAt        DateTime?
+  deletedAt          DateTime?
+  createdAt          DateTime     @default(now())
+  updatedAt          DateTime     @updatedAt
+
+  @@index([status, publishedAt])
+  @@index([category, status])
+  @@index([relatedServiceSlug])
+  @@index([deletedAt])
+}
+
+model FAQ {
+  id          String    @id @default(cuid())
+  question    String
+  answer      String
+  category    String
+  sortOrder   Int       @default(0)
+  isActive    Boolean   @default(true)
+  deletedAt   DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([category, isActive, sortOrder])
+  @@index([deletedAt])
+}
+
+model AIInteraction {
+  id             String            @id @default(cuid())
+  type           AIInteractionType
+  provider       String
+  model          String?
+  prompt         String
+  response       String?
+  finalResponse  String?
+  approvalStatus AIApprovalStatus   @default(NOT_REQUIRED)
+  approvedAt     DateTime?
+  approvedById   String?
+  approvedBy     User?              @relation("AIInteractionApprover", fields: [approvedById], references: [id], onDelete: SetNull)
+  safetyFlags    String[]
+  fallbackUsed   Boolean            @default(false)
+  metadata       Json?
+  userId         String?
+  user           User?             @relation(fields: [userId], references: [id], onDelete: SetNull)
+  jobCardId      String?
+  jobCard        JobCard?          @relation(fields: [jobCardId], references: [id], onDelete: SetNull)
+  tokensIn       Int?
+  tokensOut      Int?
+  costEstimate   Decimal?          @db.Decimal(12, 6)
+  createdAt      DateTime          @default(now())
+
+  @@index([type, createdAt])
+  @@index([approvalStatus, createdAt])
+  @@index([userId])
+  @@index([approvedById])
+  @@index([jobCardId])
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  actorId   String?
+  actor     User?    @relation("ActorAuditLogs", fields: [actorId], references: [id], onDelete: SetNull)
+  action    String
+  entity    String
+  entityId  String?
+  metadata  Json?
+  ipAddress String?
+  userAgent String?
+  createdAt DateTime @default(now())
+
+  @@index([actorId, createdAt])
+  @@index([entity, entityId])
+  @@index([action])
+  @@index([createdAt])
+}
+
+model SystemSetting {
+  id          String   @id @default(cuid())
+  key         String   @unique
+  value       Json
+  description String?
+  isSecret    Boolean  @default(false)
+  updatedById String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

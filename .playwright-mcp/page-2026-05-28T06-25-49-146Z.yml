@@ -1,0 +1,102 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "OmniTech Solutions We repair. We connect. We build. We automate." [ref=e4] [cursor=pointer]:
+        - /url: /
+        - img [ref=e6]
+        - generic [ref=e9]:
+          - generic [ref=e10]: OmniTech Solutions
+          - generic [ref=e11]: We repair. We connect. We build. We automate.
+      - link "Open request service" [ref=e12] [cursor=pointer]:
+        - /url: /request-service
+        - img [ref=e13]
+        - text: Book
+    - navigation [ref=e15]:
+      - generic [ref=e16]:
+        - link "About" [ref=e17] [cursor=pointer]:
+          - /url: /about
+        - link "Services" [ref=e18] [cursor=pointer]:
+          - /url: /services
+        - link "Portfolio" [ref=e19] [cursor=pointer]:
+          - /url: /portfolio
+        - link "Blog" [ref=e20] [cursor=pointer]:
+          - /url: /blog
+        - link "Contact" [ref=e21] [cursor=pointer]:
+          - /url: /contact
+        - link "Track Repair" [ref=e22] [cursor=pointer]:
+          - /url: /track-repair
+  - main [ref=e23]:
+    - generic [ref=e24]:
+      - generic [ref=e25]:
+        - generic [ref=e26]:
+          - paragraph [ref=e27]: Request service
+          - heading "Tell us what needs to be repaired, connected, built or automated" [level=2] [ref=e28]
+          - paragraph [ref=e29]: Submit enough detail for OmniTech to triage the work correctly. For repairs, include device model and symptoms. For field work, include the location and preferred time.
+        - generic [ref=e30]: For urgent work, submit the form and also send a WhatsApp message with photos, location and contact person.
+      - generic [ref=e31]:
+        - generic [ref=e32]:
+          - generic [ref=e33]:
+            - text: Full name
+            - textbox "Full name" [ref=e34]
+          - generic [ref=e35]:
+            - text: Phone
+            - textbox "Phone" [ref=e36]
+          - generic [ref=e37]:
+            - text: Email
+            - textbox "Email" [ref=e38]
+          - generic [ref=e39]:
+            - text: Organisation
+            - textbox "Organisation" [ref=e40]
+          - generic [ref=e41]:
+            - text: Service needed
+            - combobox "Service needed" [ref=e42]:
+              - option "Select service" [disabled]
+              - option "Loading services..." [disabled] [selected]
+          - generic [ref=e43]:
+            - text: Urgency
+            - combobox "Urgency" [ref=e44]:
+              - option "LOW"
+              - option "NORMAL" [selected]
+              - option "HIGH"
+              - option "URGENT"
+        - generic [ref=e45]:
+          - text: Location or service address
+          - textbox "Location or service address" [ref=e46]:
+            - /placeholder: Home, school, farm, lodge, office...
+        - generic [ref=e47]:
+          - text: Tell us what you need
+          - textbox "Tell us what you need" [ref=e48]
+        - button "Submit service request" [disabled] [ref=e49]
+  - contentinfo [ref=e50]:
+    - generic [ref=e51]:
+      - generic [ref=e52]:
+        - paragraph [ref=e53]:
+          - img [ref=e55]
+          - text: OmniTech Solutions
+        - paragraph [ref=e58]: We repair. We connect. We build. We automate.
+        - paragraph [ref=e59]: Repairs, connectivity, software, AI automation, Starlink and network infrastructure for homes and organisations.
+      - generic [ref=e61]:
+        - paragraph [ref=e62]: Contact
+        - paragraph [ref=e63]: +263 77 000 0000
+        - paragraph [ref=e64]: hello@omnitech.example
+        - paragraph [ref=e65]: Harare, Zimbabwe
+        - link "Chat on WhatsApp" [ref=e66] [cursor=pointer]:
+          - /url: https://wa.me/263770000000?text=Hello%20OmniTech%20Solutions%2C%20I%20need%20technology%20support.
+      - generic [ref=e67]:
+        - paragraph [ref=e68]: Services
+        - link "Electronics repairs" [ref=e69] [cursor=pointer]:
+          - /url: /electronics-repairs
+        - link "Starlink installations" [ref=e70] [cursor=pointer]:
+          - /url: /starlink-installations
+        - link "Software and AI" [ref=e71] [cursor=pointer]:
+          - /url: /software-ai-systems
+      - generic [ref=e72]:
+        - paragraph [ref=e73]: Company
+        - link "About" [ref=e74] [cursor=pointer]:
+          - /url: /about
+        - link "Portfolio" [ref=e75] [cursor=pointer]:
+          - /url: /portfolio
+        - link "Request service" [ref=e76] [cursor=pointer]:
+          - /url: /request-service
+        - link "Customer account" [ref=e77] [cursor=pointer]:
+          - /url: /customer/register

@@ -1,25 +1,32 @@
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
-import { LoginForm } from "@/components/admin/login-form";
-import {
-  ADMIN_SESSION_COOKIE,
-  resolveAdminSession,
-} from "@/lib/server/admin-auth";
+import type { Metadata } from "next";
+import Link from "next/link";
+import { PageShell } from "@/components/site-shell";
+import { LoginForm } from "@/components/login-form";
+import { makeMetadata } from "@/lib/seo";
 
-export default async function LoginPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ next?: string }>;
-}) {
-  const cookieStore = await cookies();
-  const token = cookieStore.get(ADMIN_SESSION_COOKIE)?.value;
-  const params = await searchParams;
-  const nextPath = params.next || "/admin";
-  const session = await resolveAdminSession(token);
+export const metadata: Metadata = makeMetadata({
+  title: "Sign In",
+  description: "Sign in to the OmniTech customer portal or team dashboard.",
+  path: "/login",
+  noIndex: true
+});
 
-  if (session) {
-    redirect(nextPath);
-  }
-
-  return <LoginForm nextPath={nextPath} />;
+export default function LoginPage() {
+  return (
+    <PageShell>
+      <section className="mx-auto grid max-w-5xl gap-8 px-4 py-14 md:grid-cols-[0.9fr_1.1fr]">
+        <div>
+          <h1 className="text-3xl font-bold text-ink">Sign in</h1>
+          <p className="mt-4 text-slate-600">Access your OmniTech customer portal or team dashboard.</p>
+          <p className="mt-6 text-sm text-slate-600">
+            New customer?{" "}
+            <Link href="/customer/register" className="font-semibold text-teal">
+              Create an account
+            </Link>
+          </p>
+        </div>
+        <LoginForm />
+      </section>
+    </PageShell>
+  );
 }
