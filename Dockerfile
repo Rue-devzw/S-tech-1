@@ -12,6 +12,7 @@ RUN npx prisma generate
 
 FROM tools AS builder
 WORKDIR /app
+ENV NEXT_OUTPUT_STANDALONE=true
 RUN npm run build
 
 FROM node:22-alpine AS runner
