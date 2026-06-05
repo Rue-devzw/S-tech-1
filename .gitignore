@@ -8,3 +8,5 @@ playwright-report
 test-results
 storage
 .DS_Store
+.vercel
+.env*

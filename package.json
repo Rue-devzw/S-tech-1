@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev -p 3000",
     "build": "prisma generate && next build",
+    "postinstall": "prisma generate",
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
@@ -22,10 +23,14 @@
     "docker:build": "docker build -t omnitech-solutions-platform:local .",
     "docker:up": "docker compose up --build",
     "docker:down": "docker compose down",
+    "vercel:pull": "npx vercel env pull .env.local",
+    "vercel:migrate": "prisma migrate deploy",
+    "vercel:deploy": "npm run test:qa && npx vercel --prod",
     "healthcheck": "node scripts/healthcheck.mjs"
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",
+    "@vercel/blob": "^2.4.0",
     "bcryptjs": "^2.4.3",
     "clsx": "^2.1.1",
     "date-fns": "^3.6.0",

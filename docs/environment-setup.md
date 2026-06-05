@@ -20,6 +20,7 @@ The default local values are designed for Docker Compose PostgreSQL and local fi
 | `NEXT_PUBLIC_SITE_URL` | Yes | `https://omnitech.io` | Public canonical URL used for SEO metadata, OpenGraph, robots and sitemap output. |
 | `NODE_ENV` | Yes | `production` | Use `production` outside local development. |
 | `RATE_LIMIT_DISABLED` | No | `false` | Keep false in staging/production. |
+| `BLOB_READ_WRITE_TOKEN` | Production on Vercel | Vercel Blob integration | Required for `/api/uploads/blob` and production upload storage. |
 
 ## Storage Variables
 
