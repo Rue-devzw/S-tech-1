@@ -5,7 +5,7 @@ import { requirePermission } from "@/server/rbac";
 import { accountStatusUpdateSchema } from "@/server/validation";
 
 export async function PATCH(request: Request, { params }: { params: Promise<{ id: string }> }) {
-  const actor = await requirePermission("settings:manage");
+  const actor = await requirePermission("users:manage");
   if (!actor) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
 
   try {

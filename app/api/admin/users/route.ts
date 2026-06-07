@@ -4,7 +4,7 @@ import { createManagedUser, listManagedUsers } from "@/server/auth-workflows";
 import { requirePermission } from "@/server/rbac";
 
 export async function GET() {
-  const actor = await requirePermission("settings:manage");
+  const actor = await requirePermission("users:manage");
   if (!actor) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
 
   try {
@@ -15,7 +15,7 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
-  const actor = await requirePermission("settings:manage");
+  const actor = await requirePermission("users:manage");
   if (!actor) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
 
   try {
