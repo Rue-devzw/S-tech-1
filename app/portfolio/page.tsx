@@ -4,6 +4,7 @@ import { ImageLoadingPlaceholder } from "@/components/brand-loader";
 import { CTASection, SectionHeader, TestimonialGrid } from "@/components/public-sections";
 import { projects as fallbackProjects, testimonials as fallbackTestimonials } from "@/lib/public-content";
 import { breadcrumbJsonLd, makeMetadata, organizationJsonLd } from "@/lib/seo";
+import { hasDatabaseUrl } from "@/server/env";
 import { listPublishedPortfolioProjects, listPublishedTestimonials } from "@/server/services/portfolio-module";
 
 export const dynamic = "force-dynamic";
@@ -26,7 +27,7 @@ function label(value: string) {
 }
 
 async function getPortfolioContent() {
-  if (!process.env.DATABASE_URL) return { projects: [], testimonials: [] };
+  if (!hasDatabaseUrl()) return { projects: [], testimonials: [] };
 
   try {
     const [projects, testimonials] = await Promise.all([listPublishedPortfolioProjects(), listPublishedTestimonials()]);

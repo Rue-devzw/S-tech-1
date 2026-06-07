@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { absoluteUrl } from "@/lib/seo";
 import { publicServices } from "@/lib/public-content";
+import { hasDatabaseUrl } from "@/server/env";
 import { listPublishedBlogPosts } from "@/server/services/blog-module";
 import { listPublishedPortfolioProjects } from "@/server/services/portfolio-module";
 
@@ -32,7 +33,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: route.priority
   }));
 
-  if (!process.env.DATABASE_URL) return routes;
+  if (!hasDatabaseUrl()) return routes;
 
   try {
     const posts = await listPublishedBlogPosts();

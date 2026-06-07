@@ -60,6 +60,22 @@ export const invitationSchema = z.object({
   role: roleNameSchema
 });
 
+export const managedUserCreateSchema = z.object({
+  name: z.string().min(2).max(120),
+  email: z.string().email().max(160),
+  phone: z.string().min(7).max(40).optional().or(z.literal("")),
+  password: z.string().min(12).max(128),
+  role: roleNameSchema.exclude(["CUSTOMER"]),
+  serviceArea: z.string().max(120).optional().or(z.literal("")),
+  skills: z.string().max(500).optional().or(z.literal(""))
+});
+
+export const managedUserRoleUpdateSchema = z.object({
+  role: roleNameSchema.exclude(["CUSTOMER"]),
+  serviceArea: z.string().max(120).optional().or(z.literal("")),
+  skills: z.string().max(500).optional().or(z.literal(""))
+});
+
 export const acceptInvitationSchema = z.object({
   token: z.string().min(32).max(256),
   password: z.string().min(12).max(128)
