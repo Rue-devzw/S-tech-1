@@ -16,14 +16,14 @@ export const metadata: Metadata = makeMetadata({
 });
 
 export default async function AdminUsersPage() {
-  const actor = await requirePermission("settings:manage");
+  const actor = await requirePermission("users:manage");
 
   if (!actor) {
     return (
       <PageShell>
         <section className="mx-auto max-w-4xl px-4 py-14">
           <h1 className="text-3xl font-bold text-ink">Users and roles</h1>
-          <p className="mt-4 text-slate-600">You need settings permission to manage users.</p>
+          <p className="mt-4 text-slate-600">You need user-management permission to manage users.</p>
           <Link href="/admin" className="mt-6 inline-flex rounded-md bg-ink px-4 py-2 text-sm font-semibold text-white">
             Back to admin
           </Link>

@@ -6,7 +6,7 @@ import { rateLimit } from "@/server/security";
 import { invitationSchema } from "@/server/validation";
 
 export async function POST(request: Request) {
-  const actor = await requirePermission("settings:manage");
+  const actor = await requirePermission("users:manage");
   if (!actor) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
 
   const limited = rateLimit(request, "auth:invitation-create", 20, 60 * 60 * 1000);

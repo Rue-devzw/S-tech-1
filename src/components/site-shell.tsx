@@ -3,6 +3,7 @@ import Image from "next/image";
 import { MessageCircle, Sparkles } from "lucide-react";
 import { brand } from "@/lib/constants";
 import { whatsappChannelHref, whatsappHref } from "@/lib/public-content";
+import { SessionActions } from "@/components/session-actions";
 
 const nav = [
   ["About", "/about"],
@@ -34,6 +35,7 @@ export function SiteHeader() {
           ))}
         </nav>
         <div className="hidden items-center gap-2 md:flex">
+          <SessionActions />
           <a href={whatsappHref} className="inline-flex items-center gap-2 rounded-md border border-teal/20 bg-white/90 px-4 py-2 text-sm font-semibold text-ink shadow-sm hover:border-teal/40">
             <MessageCircle size={16} />
             WhatsApp
@@ -59,6 +61,7 @@ export function SiteHeader() {
               {label}
             </Link>
           ))}
+          <SessionActions compact />
         </div>
       </nav>
     </header>

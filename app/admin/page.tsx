@@ -87,6 +87,7 @@ export default async function AdminDashboardPage({ searchParams }: PageProps) {
           </div>
           <div className="flex flex-wrap gap-2">
             <AdminLink href="/admin/field-service" label="Field service" />
+            <AdminLink href="/admin/finance" label="Finance" />
             <AdminLink href="/admin/communications" label="Communications" />
             <AdminLink href="/admin/portfolio" label="Portfolio" />
             <AdminLink href="/admin/blog" label="Blog" />

@@ -6,6 +6,7 @@ export const permissionsByRole: Record<RoleName, string[]> = {
   SUPER_ADMIN: ["*"],
   MANAGER: [
     "dashboard:view",
+    "users:manage",
     "customers:view",
     "requests:manage",
     "jobs:manage",
@@ -22,6 +23,7 @@ export const permissionsByRole: Record<RoleName, string[]> = {
   ],
   ADMIN_ASSISTANT: [
     "dashboard:view",
+    "users:manage",
     "customers:manage",
     "requests:manage",
     "jobs:manage",

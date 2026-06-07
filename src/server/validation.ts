@@ -225,6 +225,19 @@ export const paymentRecordSchema = z.object({
   providerReference: z.string().max(160).optional()
 });
 
+export const expenseCreateSchema = z.object({
+  category: z.string().min(2).max(120),
+  vendorName: z.string().max(160).optional().or(z.literal("")),
+  description: z.string().min(3).max(300),
+  amount: z.number().positive().max(999999999),
+  currency: z.string().min(3).max(3).default("USD"),
+  method: z.enum(["CASH", "BANK_TRANSFER", "ECOCASH", "CARD", "PAYNOW", "STRIPE", "OTHER"]).optional().or(z.literal("")),
+  status: z.enum(["DRAFT", "APPROVED", "PAID", "VOID"]).default("PAID"),
+  expenseDate: z.string().optional().or(z.literal("")),
+  reference: z.string().max(160).optional().or(z.literal("")),
+  notes: z.string().max(1200).optional().or(z.literal(""))
+});
+
 export const inventoryItemSchema = z.object({
   supplierId: z.string().optional(),
   sku: z.string().min(2).max(80),

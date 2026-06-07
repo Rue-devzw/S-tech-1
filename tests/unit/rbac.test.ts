@@ -10,7 +10,14 @@ test("super admin has wildcard access", () => {
 test("technician can update assigned jobs but cannot manage invoices or settings", () => {
   assert.equal(roleHasPermission("TECHNICIAN", "jobs:update_assigned"), true);
   assert.equal(roleHasPermission("TECHNICIAN", "invoices:manage"), false);
+  assert.equal(roleHasPermission("TECHNICIAN", "users:manage"), false);
   assert.equal(roleHasPermission("TECHNICIAN", "settings:manage"), false);
+});
+
+test("staff admins can manage users without global settings access", () => {
+  assert.equal(roleHasPermission("MANAGER", "users:manage"), true);
+  assert.equal(roleHasPermission("ADMIN_ASSISTANT", "users:manage"), true);
+  assert.equal(roleHasPermission("ADMIN_ASSISTANT", "settings:manage"), false);
 });
 
 test("sales and marketing can manage content campaigns and approve AI drafts", () => {
