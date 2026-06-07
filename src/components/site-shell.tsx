@@ -120,6 +120,15 @@ export function SiteFooter() {
           <Link className="block hover:text-white" href="/customer/register">
             Customer account
           </Link>
+          <Link className="block hover:text-white" href="/terms-of-service">
+            Terms
+          </Link>
+          <Link className="block hover:text-white" href="/privacy-policy">
+            Privacy
+          </Link>
+          <Link className="block hover:text-white" href="/impressum">
+            Impressum
+          </Link>
         </div>
       </div>
     </footer>

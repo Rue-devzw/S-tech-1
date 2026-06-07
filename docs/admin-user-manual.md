@@ -10,7 +10,7 @@ This manual is for Super Admins, Managers, Admin Assistants, Sales/Marketing use
 
 Development seed login:
 
-- `admin@omnitech.example`
+- `admin@omnitech.io`
 - `OmniTech#2026`
 
 Replace seed credentials before launch.

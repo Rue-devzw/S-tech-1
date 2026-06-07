@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { absoluteUrl } from "@/lib/seo";
 import { publicServices } from "@/lib/public-content";
+import { hasDatabaseUrl } from "@/server/env";
 import { listPublishedBlogPosts } from "@/server/services/blog-module";
 import { listPublishedPortfolioProjects } from "@/server/services/portfolio-module";
 
@@ -11,6 +12,9 @@ const staticRoutes = [
   { path: "/portfolio", priority: 0.75, changeFrequency: "weekly" as const },
   { path: "/blog", priority: 0.8, changeFrequency: "weekly" as const },
   { path: "/contact", priority: 0.8, changeFrequency: "monthly" as const },
+  { path: "/terms-of-service", priority: 0.35, changeFrequency: "yearly" as const },
+  { path: "/privacy-policy", priority: 0.35, changeFrequency: "yearly" as const },
+  { path: "/impressum", priority: 0.35, changeFrequency: "yearly" as const },
   { path: "/request-service", priority: 0.9, changeFrequency: "monthly" as const },
   { path: "/track-repair", priority: 0.55, changeFrequency: "monthly" as const },
   ...publicServices.map((service) => ({
@@ -28,6 +32,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     changeFrequency: route.changeFrequency,
     priority: route.priority
   }));
+
+  if (!hasDatabaseUrl()) return routes;
 
   try {
     const posts = await listPublishedBlogPosts();

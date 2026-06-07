@@ -33,9 +33,9 @@ Development seed accounts:
 
 | Role | Email | Password |
 | --- | --- | --- |
-| Super Admin | `admin@omnitech.example` | `OmniTech#2026` |
-| Technician | `tech@omnitech.example` | `OmniTech#2026` |
-| Sales/Marketing | `sales@omnitech.example` | `OmniTech#2026` |
+| Super Admin | `admin@omnitech.io` | `OmniTech#2026` |
+| Technician | `tech@omnitech.io` | `OmniTech#2026` |
+| Sales/Marketing | `sales@omnitech.io` | `OmniTech#2026` |
 
 Replace seed credentials before production launch.
 
@@ -74,6 +74,9 @@ Replace seed credentials before production launch.
 | `npm run docker:build` | Build local Docker image. |
 | `npm run docker:up` | Start Docker Compose stack. |
 | `npm run docker:down` | Stop Docker Compose stack. |
+| `npm run vercel:pull` | Pull linked Vercel project environment into `.env.local`. |
+| `npm run vercel:migrate` | Apply Prisma migrations to the configured Vercel/Postgres database. |
+| `npm run vercel:deploy` | Run QA and deploy the app to Vercel production. |
 | `npm run healthcheck` | Check `/api/health`. |
 
 ## Docker Workflow
@@ -103,6 +106,7 @@ docker compose --profile tools run --rm backup
 - [API documentation](docs/api.md)
 - [Troubleshooting guide](docs/troubleshooting.md)
 - [Deployment guide](docs/deployment.md)
+- [Vercel deployment guide](docs/vercel-deployment.md)
 - [Maintenance checklist](docs/maintenance-checklist.md)
 - [Architecture](docs/architecture.md)
 - [Security checklist](docs/security-checklist.md)
@@ -114,9 +118,9 @@ docker compose --profile tools run --rm backup
 Before launch:
 
 - Set a strong `AUTH_SECRET`.
-- Use managed PostgreSQL on private networking with TLS.
+- Use Prisma Postgres or Neon Postgres through Vercel Marketplace.
+- Use Vercel Blob for production uploads and file evidence.
 - Run `npm run db:migrate:deploy`; do not use `db push`.
-- Configure private S3-compatible file storage.
 - Connect reviewed email, SMS and WhatsApp providers.
 - Connect AI provider only after data/privacy approval.
 - Enforce production backups and restore drills.

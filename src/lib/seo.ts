@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { brand } from "@/lib/constants";
 import { publicServices } from "@/lib/public-content";
 
-const fallbackSiteUrl = "https://omnitechsolutions.co.zw";
+const fallbackSiteUrl = "https://omnitech.io";
 const siteUrl = (process.env.NEXT_PUBLIC_SITE_URL || process.env.APP_URL || fallbackSiteUrl).replace(/\/$/, "");
 
 export const seoConfig = {

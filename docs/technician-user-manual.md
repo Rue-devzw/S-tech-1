@@ -10,7 +10,7 @@ This manual is for Technicians and Field Installers using OmniTech Solutions.
 
 Development seed login:
 
-- `tech@omnitech.example`
+- `tech@omnitech.io`
 - `OmniTech#2026`
 
 ## What Technicians Can See

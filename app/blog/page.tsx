@@ -5,6 +5,7 @@ import { CTASection, SectionHeader } from "@/components/public-sections";
 import { PageShell } from "@/components/site-shell";
 import { blogPosts as fallbackPosts } from "@/lib/public-content";
 import { absoluteUrl, breadcrumbJsonLd, makeMetadata } from "@/lib/seo";
+import { hasDatabaseUrl } from "@/server/env";
 import { listPublishedBlogPosts } from "@/server/services/blog-module";
 
 export const dynamic = "force-dynamic";
@@ -29,6 +30,8 @@ function label(value: string) {
 }
 
 async function getPosts() {
+  if (!hasDatabaseUrl()) return [];
+
   try {
     const posts = await listPublishedBlogPosts();
     if (posts.length) return posts;

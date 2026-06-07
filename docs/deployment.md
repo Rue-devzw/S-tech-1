@@ -21,9 +21,10 @@ Use `.env.example` as the source template. Production secrets must come from the
 | --- | --- | --- |
 | `DATABASE_URL` | Yes | PostgreSQL connection string. Use a private host and TLS in production. |
 | `AUTH_SECRET` | Yes | At least 32 random characters. Rotate through a planned session invalidation window. |
-| `APP_URL` | Yes | Public base URL for links, health checks and notification content. |
-| `NEXT_PUBLIC_SITE_URL` | Yes | Public canonical site URL for SEO metadata, OpenGraph, robots and sitemap output. |
+| `APP_URL` | Yes | Public base URL for links, health checks and notification content. Use `https://omnitech.io` in production. |
+| `NEXT_PUBLIC_SITE_URL` | Yes | Public canonical site URL for SEO metadata, OpenGraph, robots and sitemap output. Use `https://omnitech.io` in production. |
 | `STORAGE_DRIVER` | Yes | `local` for development; `s3` or compatible implementation for production. |
+| `BLOB_READ_WRITE_TOKEN` | Vercel | Vercel Blob token for runtime uploads. |
 | `STORAGE_LOCAL_DIR` | Dev | Local attachment directory, mounted as a Docker volume. |
 | `S3_ENDPOINT`, `S3_REGION`, `S3_BUCKET`, `S3_ACCESS_KEY_ID`, `S3_SECRET_ACCESS_KEY` | Prod | Required when S3-compatible storage is enabled. |
 | `EMAIL_PROVIDER`, `EMAIL_FROM`, `EMAIL_API_KEY` | Optional | Use `log` until a real provider is connected. |
@@ -61,9 +62,9 @@ npm run dev
 
 Seed logins:
 
-- `admin@omnitech.example` / `OmniTech#2026`
-- `tech@omnitech.example` / `OmniTech#2026`
-- `sales@omnitech.example` / `OmniTech#2026`
+- `admin@omnitech.io` / `OmniTech#2026`
+- `tech@omnitech.io` / `OmniTech#2026`
+- `sales@omnitech.io` / `OmniTech#2026`
 
 ## Docker Local Workflow
 

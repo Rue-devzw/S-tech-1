@@ -47,7 +47,7 @@ export async function createServiceRequest(input: unknown) {
 
   await queueNotification({
     channel: "EMAIL",
-    recipient: customer.email ?? "admin@omnitech.example",
+    recipient: customer.email ?? "admin@omnitech.io",
     subject: `Request received: ${request.requestNumber}`,
     body: `OmniTech Solutions received your request for ${request.service.name}.`,
     serviceRequestId: request.id
