@@ -19,6 +19,9 @@ export type PublicService = {
   summary: string;
   description: string;
   icon: LucideIcon;
+  imageSrc: string;
+  imageAlt: string;
+  visualNote: string;
   outcomes: string[];
   process: string[];
   cta: string;
@@ -38,6 +41,9 @@ export const publicServices: PublicService[] = [
     description:
       "OmniTech provides structured repair intake, fault diagnosis, parts recommendations, customer approvals and after-service support for consumer and business electronics.",
     icon: Smartphone,
+    imageSrc: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80",
+    imageAlt: "Close-up of an electronics circuit board during technical repair work",
+    visualNote: "Bench diagnostics, parts and warranty records",
     outcomes: ["Phone and tablet screen or battery replacement", "PC and laptop diagnostics and upgrades", "TV and power-board servicing", "Repair notes, receipts and warranty records"],
     process: ["Book or walk in", "Device intake and condition check", "Diagnosis and quote", "Repair, quality check and handover"],
     cta: "Book a repair"
@@ -50,6 +56,9 @@ export const publicServices: PublicService[] = [
     description:
       "Get help with workstations, printers, routers, email, backups, endpoint setup, user support and recurring technology maintenance.",
     icon: Headphones,
+    imageSrc: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80",
+    imageAlt: "Laptop and support workspace for ICT service desk work",
+    visualNote: "Helpdesk, devices, backups and team support",
     outcomes: ["Helpdesk and on-site support", "Device setup and maintenance", "Backup and productivity support", "Preventive maintenance plans"],
     process: ["Log support request", "Triage urgency", "Remote or on-site response", "Resolution notes and follow-up"],
     cta: "Request ICT support"
@@ -62,6 +71,9 @@ export const publicServices: PublicService[] = [
     description:
       "OmniTech designs, installs and maintains practical network infrastructure for small offices, schools, churches, lodges, clinics and multi-building sites.",
     icon: Network,
+    imageSrc: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=80",
+    imageAlt: "Server racks and network infrastructure in a data room",
+    visualNote: "Wi-Fi coverage, cabling, routers and switches",
     outcomes: ["Wi-Fi coverage planning", "Router and switch configuration", "Structured cabling", "Network troubleshooting and maintenance"],
     process: ["Site survey", "Network design", "Installation and testing", "Documentation and support"],
     cta: "Plan a network"
@@ -74,6 +86,9 @@ export const publicServices: PublicService[] = [
     description:
       "From clear-sky checks to neat cable routing and customer handover, OmniTech makes Starlink installations tidy, documented and supportable.",
     icon: Satellite,
+    imageSrc: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80",
+    imageAlt: "Open rural sky and field setting for connectivity planning",
+    visualNote: "Clear-sky checks, mounting and handover",
     outcomes: ["Obstruction and placement advice", "Roof or pole mounting", "Router and Wi-Fi setup", "Commissioning report and after-service support"],
     process: ["Confirm kit and site", "Survey mounting location", "Install and route cable", "Run tests and handover"],
     cta: "Install Starlink"
@@ -86,6 +101,9 @@ export const publicServices: PublicService[] = [
     description:
       "OmniTech builds fast, responsive websites with content structure, SEO foundations, contact flows and maintainable technology choices.",
     icon: Code2,
+    imageSrc: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80",
+    imageAlt: "Website development workspace with code on a laptop",
+    visualNote: "Sites, portals, landing pages and SEO structure",
     outcomes: ["Business websites", "Service portals", "Landing pages and campaigns", "SEO-ready content structures"],
     process: ["Discovery", "Information architecture", "Design and build", "Launch and measure"],
     cta: "Build a website"
@@ -98,6 +116,9 @@ export const publicServices: PublicService[] = [
     description:
       "Turn manual workflows into reliable digital systems with secure apps, dashboards, integrations, AI-assisted processes and reporting.",
     icon: Bot,
+    imageSrc: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80",
+    imageAlt: "Analytics dashboard and software system interface on a screen",
+    visualNote: "Apps, dashboards, AI workflows and reporting",
     outcomes: ["Custom business applications", "Mobile app backends", "AI assistants and document automation", "Dashboards, reports and integrations"],
     process: ["Map workflow", "Define MVP", "Build secure system", "Automate and improve"],
     cta: "Automate a workflow"
@@ -108,6 +129,27 @@ export const serviceHighlights = [
   { title: "Repair-first operations", body: "Every repair request can become a documented job card with diagnosis, parts, approval and warranty." },
   { title: "Field-service ready", body: "Starlink and networking work is structured around site visits, checklists and handover notes." },
   { title: "Software growth path", body: "Web, software and AI work is designed to grow into subscription products and managed services." }
+];
+
+export const workScenes = [
+  {
+    title: "Repair bench",
+    label: "Diagnostics",
+    imageSrc: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80",
+    imageAlt: "Electronics circuit board close-up for repair diagnostics"
+  },
+  {
+    title: "Connectivity fieldwork",
+    label: "Installations",
+    imageSrc: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=80",
+    imageAlt: "Network infrastructure equipment for connectivity work"
+  },
+  {
+    title: "Digital systems",
+    label: "Builds",
+    imageSrc: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80",
+    imageAlt: "Website and software development workspace"
+  }
 ];
 
 export const testimonials = [
@@ -130,20 +172,28 @@ export const testimonials = [
 
 export const projects = [
   {
-    title: "Lodge Starlink Deployment",
-    category: "Starlink",
-    summary: "Roof-mounted Starlink installation, router placement, guest Wi-Fi support and handover documentation."
+    title: "Valley Farm Secrets",
+    category: "Website",
+    summary: "Public brand website for valleyfarmsecrets.com with a clean digital presence and customer-facing content structure.",
+    imageSrc: "/portfolio/valley-farm-secrets-services.png"
   },
   {
-    title: "School ICT Refresh",
-    category: "ICT Support",
-    summary: "Laptop servicing, software setup, Wi-Fi improvements and a recurring support plan for school operations."
+    title: "Mussy Consultancy",
+    category: "Website & App",
+    summary: "Consultancy website and application experience for mussyconsultancy.org, built around enquiries and service trust.",
+    imageSrc: "/portfolio/mussy-consultancy-home.png"
   },
   {
     title: "SME Workflow Portal",
     category: "Software & AI",
-    summary: "Customer intake, quote approval and operations dashboard for a growing local service business."
+    summary: "Customer intake, quote approval and operations dashboard for a growing local service business.",
+    imageSrc: "/portfolio/sme-workflow-portal.png"
   }
+];
+
+export const createdBrands = [
+  { name: "Valley Farm Secrets", href: "https://valleyfarmsecrets.com", domain: "valleyfarmsecrets.com", type: "Website", logoSrc: "/brand/valley-farm-secrets-logo.webp" },
+  { name: "Mussy Consultancy", href: "https://mussyconsultancy.org", domain: "mussyconsultancy.org", type: "Website & app", logoSrc: "/brand/mussy-consultancy-logo.png" }
 ];
 
 export const blogPosts = [

@@ -17,7 +17,7 @@ export default function IctSupportPage() {
   return (
     <PageShell>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify([serviceJsonLd(service.slug), breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Services", path: "/services" }, { name: service.title, path: `/${service.slug}` }])]) }} />
-      <HeroSection eyebrow={service.eyebrow} title={service.title} body={service.description} primaryLabel={service.cta} />
+      <HeroSection eyebrow={service.eyebrow} title={service.title} body={service.description} primaryLabel={service.cta} visualImage={service.imageSrc} visualAlt={service.imageAlt} visualCaption={service.visualNote} />
       <section className="mx-auto max-w-7xl px-4 py-12">
         <SectionHeader title="Support that keeps everyday technology moving" body="OmniTech helps teams reduce downtime, clean up recurring issues and maintain essential devices and systems." />
         <div className="mt-8 grid gap-4 md:grid-cols-3">

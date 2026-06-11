@@ -17,7 +17,7 @@ export default function ElectronicsRepairsPage() {
   return (
     <PageShell>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify([serviceJsonLd(service.slug), breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Services", path: "/services" }, { name: service.title, path: `/${service.slug}` }])]) }} />
-      <HeroSection eyebrow={service.eyebrow} title={service.title} body={service.description} primaryLabel={service.cta} />
+      <HeroSection eyebrow={service.eyebrow} title={service.title} body={service.description} primaryLabel={service.cta} visualImage={service.imageSrc} visualAlt={service.imageAlt} visualCaption={service.visualNote} />
       <section className="mx-auto max-w-7xl px-4 py-12">
         <SectionHeader title="Repair services with structure and accountability" body="From walk-in device intake to final handover, OmniTech keeps the process clear, documented and practical." />
         <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-4">

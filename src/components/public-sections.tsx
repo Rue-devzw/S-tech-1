@@ -19,7 +19,10 @@ export function HeroSection({
   primaryHref = "/request-service",
   primaryLabel = "Request service",
   secondaryHref = whatsappHref,
-  secondaryLabel = "Chat on WhatsApp"
+  secondaryLabel = "Chat on WhatsApp",
+  visualImage,
+  visualAlt,
+  visualCaption
 }: {
   eyebrow: string;
   title: string;
@@ -28,6 +31,9 @@ export function HeroSection({
   primaryLabel?: string;
   secondaryHref?: string;
   secondaryLabel?: string;
+  visualImage?: string;
+  visualAlt?: string;
+  visualCaption?: string;
 }) {
   return (
     <section className="relative isolate overflow-hidden bg-ink text-white">
@@ -56,31 +62,47 @@ export function HeroSection({
             ))}
           </div>
         </div>
-        <div className="hidden rounded-lg border border-white/20 bg-white/12 p-4 shadow-[0_28px_80px_rgba(0,0,0,0.22)] backdrop-blur-xl md:block">
-          <div className="rounded-lg bg-brand-band p-6 text-white shadow-lift ring-1 ring-white/12">
-            <p className="text-sm font-semibold text-teal-50">OmniTech operating promise</p>
-            <p className="mt-3 text-3xl font-bold leading-tight md:text-4xl">We repair. We connect. We build. We automate.</p>
-          </div>
-          <div className="mt-4 grid gap-3 sm:grid-cols-2">
-            {["Electronics repairs", "ICT and networking", "Starlink installations", "Software and AI systems"].map((item, index) => (
-              <div key={item} className="status-burst min-h-24 rounded-lg border border-white/70 bg-white/90 p-4 text-sm font-bold text-ink shadow-sm">
-                <span className={`mb-3 block h-1.5 w-10 rounded-full ${index === 0 ? "bg-copper" : index === 1 ? "bg-teal" : index === 2 ? "bg-sky" : "bg-violet"}`} />
-                {item}
+        <div className="hidden overflow-hidden rounded-lg border border-white/20 bg-white/12 p-4 shadow-[0_28px_80px_rgba(0,0,0,0.22)] backdrop-blur-xl md:block">
+          {visualImage ? (
+            <figure className="relative min-h-[430px] overflow-hidden rounded-lg bg-ink shadow-lift ring-1 ring-white/12">
+              <img src={visualImage} alt={visualAlt ?? ""} className="absolute inset-0 h-full w-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-ink/86 via-ink/18 to-transparent" />
+              <figcaption className="absolute bottom-0 left-0 right-0 p-6">
+                <p className="text-sm font-semibold uppercase tracking-wide text-copper">{eyebrow}</p>
+                <p className="mt-2 text-3xl font-bold leading-tight text-white">{visualCaption ?? title}</p>
+              </figcaption>
+            </figure>
+          ) : (
+            <>
+              <div className="rounded-lg bg-brand-band p-6 text-white shadow-lift ring-1 ring-white/12">
+                <p className="text-sm font-semibold text-teal-50">OmniTech operating promise</p>
+                <p className="mt-3 text-3xl font-bold leading-tight md:text-4xl">We repair. We connect. We build. We automate.</p>
               </div>
-            ))}
-          </div>
+              <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                {["Electronics repairs", "ICT and networking", "Starlink installations", "Software and AI systems"].map((item, index) => (
+                  <div key={item} className="status-burst min-h-24 rounded-lg border border-white/70 bg-white/90 p-4 text-sm font-bold text-ink shadow-sm">
+                    <span className={`mb-3 block h-1.5 w-10 rounded-full ${index === 0 ? "bg-copper" : index === 1 ? "bg-teal" : index === 2 ? "bg-sky" : "bg-violet"}`} />
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
         </div>
       </div>
     </section>
   );
 }
 
-export function SectionHeader({ eyebrow, title, body }: { eyebrow?: string; title: string; body?: string }) {
+export function SectionHeader({ eyebrow, title, body, tone = "light" }: { eyebrow?: string; title: string; body?: string; tone?: "light" | "dark" }) {
+  const titleClass = tone === "dark" ? "text-white" : "text-ink";
+  const bodyClass = tone === "dark" ? "text-slate-200" : "text-slate-600";
+  const eyebrowClass = tone === "dark" ? "text-copper" : "text-teal";
   return (
     <div className="max-w-3xl">
-      {eyebrow ? <p className="text-sm font-semibold uppercase tracking-wide text-teal">{eyebrow}</p> : null}
-      <h2 className="mt-2 text-3xl font-bold text-ink md:text-4xl">{title}</h2>
-      {body ? <p className="mt-4 text-base leading-7 text-slate-600">{body}</p> : null}
+      {eyebrow ? <p className={`text-sm font-semibold uppercase tracking-wide ${eyebrowClass}`}>{eyebrow}</p> : null}
+      <h2 className={`mt-2 text-3xl font-bold md:text-4xl ${titleClass}`}>{title}</h2>
+      {body ? <p className={`mt-4 text-base leading-7 ${bodyClass}`}>{body}</p> : null}
     </div>
   );
 }
@@ -89,19 +111,29 @@ export function ServiceCard({ service }: { service: PublicService }) {
   const Icon = service.icon;
   const tone = serviceTones[service.title.length % serviceTones.length];
   return (
-    <article className={`omni-card rounded-lg bg-gradient-to-br ${tone} p-5`}>
-      <div className="flex items-start justify-between gap-4">
-        <span className="grid size-11 place-items-center rounded-md bg-white/88 shadow-sm">
-          <Icon size={22} />
+    <article className={`omni-card group overflow-hidden rounded-lg bg-gradient-to-br ${tone}`}>
+      <div className="relative h-52 overflow-hidden bg-ink">
+        <img src={service.imageSrc} alt={service.imageAlt} className="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
+        <div className="absolute inset-0 bg-gradient-to-t from-ink/82 via-ink/18 to-transparent" />
+        <span className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 text-xs font-bold text-ink shadow-sm backdrop-blur">{service.eyebrow}</span>
+        <span className="absolute bottom-4 left-4 grid size-12 place-items-center rounded-md bg-copper text-ink shadow-lift">
+          <Icon size={23} />
         </span>
-        <span className="rounded-full bg-white/78 px-3 py-1 text-xs font-semibold text-ink shadow-sm">{service.eyebrow}</span>
+        <p className="absolute bottom-4 left-20 right-4 text-sm font-semibold leading-5 text-white">{service.visualNote}</p>
       </div>
-      <h3 className="mt-5 text-xl font-semibold text-ink">{service.title}</h3>
-      <p className="mt-3 text-sm leading-6 text-slate-600">{service.summary}</p>
-      <Link href={`/${service.slug}`} className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-teal">
-        Learn more
-        <ArrowRight size={15} />
-      </Link>
+      <div className="p-5">
+        <h3 className="text-xl font-semibold text-ink">{service.title}</h3>
+        <p className="mt-3 text-sm leading-6 text-slate-600">{service.summary}</p>
+        <div className="mt-5 flex flex-wrap gap-2">
+          {service.outcomes.slice(0, 2).map((outcome) => (
+            <span key={outcome} className="rounded-full border border-white/80 bg-white/80 px-3 py-1 text-xs font-semibold text-slate-700 shadow-sm">{outcome}</span>
+          ))}
+        </div>
+        <Link href={`/${service.slug}`} className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-teal">
+          Learn more
+          <ArrowRight size={15} />
+        </Link>
+      </div>
     </article>
   );
 }

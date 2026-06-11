@@ -53,7 +53,7 @@ export default async function PortfolioPage() {
         solution: "OmniTech delivered a practical technical solution with clear communication, handover notes and support readiness.",
         toolsUsed: index === 0 ? ["Starlink", "Wi-Fi planning", "Installation checklist"] : index === 1 ? ["Diagnostics", "Networking", "ICT support"] : ["Next.js", "Prisma", "Automation"],
         outcome: "A cleaner, more reliable technology setup that the client can understand, maintain and grow.",
-        imageUrl: fallbackImages[index % fallbackImages.length],
+        imageUrl: project.imageSrc ?? fallbackImages[index % fallbackImages.length],
         beforeImageUrls: [],
         afterImageUrls: [],
         visibility: "ANONYMIZED",
@@ -81,22 +81,32 @@ export default async function PortfolioPage() {
         <div className="mt-8 grid gap-5 lg:grid-cols-3">
           {publicProjects.map((project, index) => {
             const clientLabel = project.visibility === "PUBLIC" && project.showClientName && project.clientName ? project.clientName : project.clientSector;
+            const isRepairProject = project.category === "REPAIR";
+            const projectImage = project.imageUrl ?? project.afterImageUrls[0] ?? project.beforeImageUrls[0] ?? fallbackImages[index % fallbackImages.length];
             const beforeImage = project.beforeImageUrls[0] ?? project.imageUrl ?? fallbackImages[index % fallbackImages.length];
             const afterImage = project.afterImageUrls[0] ?? project.imageUrl ?? fallbackImages[(index + 1) % fallbackImages.length];
             return (
               <article key={project.id} className="overflow-hidden rounded-lg border border-line bg-white shadow-sm">
-                <div className="grid grid-cols-2">
-                  <figure className="relative h-40 overflow-hidden bg-cloud">
+                {isRepairProject ? (
+                  <div className="grid grid-cols-2">
+                    <figure className="relative h-40 overflow-hidden bg-cloud">
+                      <ImageLoadingPlaceholder label="Loading image" className="absolute inset-0 rounded-none" />
+                      <img src={beforeImage ?? fallbackImages[0]} alt={`${project.title} before`} className="relative h-full w-full object-cover" />
+                      <figcaption className="absolute left-3 top-3 bg-ink px-2 py-1 text-xs font-semibold text-white">Before</figcaption>
+                    </figure>
+                    <figure className="relative h-40 overflow-hidden bg-cloud">
+                      <ImageLoadingPlaceholder label="Loading image" className="absolute inset-0 rounded-none" />
+                      <img src={afterImage ?? fallbackImages[1]} alt={`${project.title} after`} className="relative h-full w-full object-cover" />
+                      <figcaption className="absolute left-3 top-3 bg-teal px-2 py-1 text-xs font-semibold text-white">After</figcaption>
+                    </figure>
+                  </div>
+                ) : (
+                  <figure className="relative h-56 overflow-hidden bg-cloud">
                     <ImageLoadingPlaceholder label="Loading image" className="absolute inset-0 rounded-none" />
-                    <img src={beforeImage ?? fallbackImages[0]} alt={`${project.title} before`} className="relative h-full w-full object-cover" />
-                    <figcaption className="absolute left-3 top-3 bg-ink px-2 py-1 text-xs font-semibold text-white">Before</figcaption>
+                    <img src={projectImage ?? fallbackImages[0]} alt={project.title} className="relative h-full w-full object-cover" />
+                    <figcaption className="absolute left-3 top-3 bg-ink px-2 py-1 text-xs font-semibold text-white">{label(project.category)}</figcaption>
                   </figure>
-                  <figure className="relative h-40 overflow-hidden bg-cloud">
-                    <ImageLoadingPlaceholder label="Loading image" className="absolute inset-0 rounded-none" />
-                    <img src={afterImage ?? fallbackImages[1]} alt={`${project.title} after`} className="relative h-full w-full object-cover" />
-                    <figcaption className="absolute left-3 top-3 bg-teal px-2 py-1 text-xs font-semibold text-white">After</figcaption>
-                  </figure>
-                </div>
+                )}
                 <div className="p-5">
                   <div className="flex flex-wrap items-center gap-2">
                     <span className="rounded-full bg-cloud px-3 py-1 text-xs font-semibold text-teal">{label(project.category)}</span>

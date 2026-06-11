@@ -17,7 +17,7 @@ export default function WebDevelopmentPage() {
   return (
     <PageShell>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify([serviceJsonLd(service.slug), breadcrumbJsonLd([{ name: "Home", path: "/" }, { name: "Services", path: "/services" }, { name: service.title, path: `/${service.slug}` }])]) }} />
-      <HeroSection eyebrow={service.eyebrow} title={service.title} body={service.description} primaryLabel={service.cta} />
+      <HeroSection eyebrow={service.eyebrow} title={service.title} body={service.description} primaryLabel={service.cta} visualImage={service.imageSrc} visualAlt={service.imageAlt} visualCaption={service.visualNote} />
       <section className="mx-auto grid max-w-7xl gap-8 px-4 py-12 md:grid-cols-2">
         <div><SectionHeader title="What we build" /><div className="mt-6"><Checklist items={service.outcomes} /></div></div>
         <div><SectionHeader title="Delivery process" /><div className="mt-6"><Checklist items={service.process} /></div></div>
