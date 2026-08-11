@@ -190,7 +190,7 @@ function productDescription(row: CataloguePhoneRow) {
   const name = productName(row);
   const note = row.note ? ` This catalogue variant includes ${row.note} support.` : "";
 
-  return `${name} smartphone with ${row.storage} storage.${note} This listing is supplied as an A+ grade refurbished device unless it is expressly labelled Brand New. Available by pre-order with an estimated fulfilment time of 3 to 14 days. A 90% deposit secures the order and the remaining 10% is due on collection. Final availability and condition are confirmed before payment.`;
+  return `${name} smartphone with ${row.storage} storage.${note} This listing is supplied as an A+ grade renewed device unless it is expressly labelled Brand New. Available by pre-order with an estimated fulfilment time of 3 to 14 days. A 90% deposit secures the order and the remaining 10% is due on collection. Final availability and condition are confirmed before payment.`;
 }
 
 const featuredModels = new Set(["Apple 17 Pro Max", "Google 10 Pro XL", "Samsung S26 Ultra"]);
@@ -208,7 +208,7 @@ export const cataloguePhoneProducts: CataloguePhoneProduct[] = catalogueRows.map
     specifications: {
       storage: row.storage,
       availability: "Pre-order",
-      condition: "A+ grade refurbished",
+      condition: "A+ grade renewed",
       shippingTime: "3-14 days",
       paymentTerms: "90% deposit, 10% on collection",
       deliveryOutsideHarare: "$5-$10 courier fee",

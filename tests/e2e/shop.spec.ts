@@ -14,7 +14,7 @@ test.describe("OmniTech Import Store E2E", () => {
 
     const cataloguePhone = page.getByRole("heading", { level: 3, name: "Samsung S26 Ultra 512GB" }).locator("..", { hasText: "$999.31" });
     await expect(cataloguePhone).toContainText("Pre-order · estimated 3-14 days");
-    await expect(cataloguePhone).toContainText(/A\+ grade refurbished/i);
+    await expect(cataloguePhone).toContainText(/A\+ grade renewed/i);
     await expect(cataloguePhone).toContainText("90% deposit · 10% on collection");
 
     const whatsappButtons = page.getByRole("link", { name: /Order .* via WhatsApp/i });

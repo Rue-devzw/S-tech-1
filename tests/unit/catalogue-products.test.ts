@@ -14,7 +14,7 @@ test("customer catalogue exposes all 120 phone variants with formal pre-order te
     assert.equal(product.depositPercentage, 90);
     assert.equal(product.stockQuantity, 0);
     assert.equal(product.specifications.shippingTime, "3-14 days");
-    assert.equal(product.specifications.condition, "A+ grade refurbished");
+    assert.equal(product.specifications.condition, "A+ grade renewed");
     assert.equal(product.specifications.deliveryOutsideHarare, "$5-$10 courier fee");
   }
 });

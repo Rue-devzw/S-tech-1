@@ -110,7 +110,7 @@ function humanize(value: string) {
 
 function productConditionLabel(condition: StorefrontProduct["condition"]) {
   if (condition === "BRAND_NEW") return "Brand New";
-  if (condition === "REFURBISHED" || condition === "SOURCED_ONLINE") return "A+ Grade Refurbished";
+  if (condition === "REFURBISHED" || condition === "SOURCED_ONLINE") return "A+ Grade Renewed";
   return humanize(condition);
 }
 
@@ -312,7 +312,7 @@ export async function StorefrontPage({ route = "home", query = "" }: { route?: "
         <aside className={styles.utilityBar} aria-label="Store benefits">
           <div>
             <span><Clock3 aria-hidden="true" size={15} />Pre-orders estimated in 3-14 days</span>
-            <span><BadgeCheck aria-hidden="true" size={15} />A+ refurbished unless labelled Brand New</span>
+            <span><BadgeCheck aria-hidden="true" size={15} />A+ renewed unless labelled Brand New</span>
             <span><BadgeCheck aria-hidden="true" size={15} />90% deposit · 10% on collection</span>
           </div>
         </aside>
@@ -385,7 +385,7 @@ export async function StorefrontPage({ route = "home", query = "" }: { route?: "
           <CircleAlert aria-hidden="true" size={26} />
           <div>
             <strong id="device-condition-disclaimer">Device condition disclosure</strong>
-            <p>Most devices are supplied as A+ grade refurbished unless the product is expressly stated and labelled <b>Brand New</b>. Please check the condition badge on each listing before placing an order.</p>
+            <p>Most devices are supplied as A+ grade renewed unless the product is expressly stated and labelled <b>Brand New</b>. Please check the condition badge on each listing before placing an order.</p>
           </div>
         </aside>
 
