@@ -27,11 +27,16 @@ if (!process.env.DATABASE_URL || isLocalDatabaseUrl(process.env.DATABASE_URL)) {
   process.exit(1);
 }
 
-for (const [command, args] of [
-  ["npx", ["prisma", "migrate", "deploy"]],
-  ["npm", ["run", "build"]]
-]) {
-  const result = spawnSync(command, args, { stdio: "inherit", env: process.env });
+const steps = [
+  { command: "npx", args: ["prisma", "migrate", "deploy"], env: process.env },
+  ...(process.env.SEED_SHOP_ON_BUILD === "true"
+    ? [{ command: "npm", args: ["run", "db:seed"], env: { ...process.env, SEED_SHOP_ONLY: "true" } }]
+    : []),
+  { command: "npm", args: ["run", "build"], env: process.env }
+];
+
+for (const { command, args, env } of steps) {
+  const result = spawnSync(command, args, { stdio: "inherit", env });
   if (result.error) throw result.error;
   if (result.status !== 0) process.exit(result.status ?? 1);
 }

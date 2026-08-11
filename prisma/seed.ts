@@ -722,6 +722,11 @@ async function seedRegionalExamples(args: { adminId: string; technicianId: strin
 }
 
 async function main() {
+  if (process.env.SEED_SHOP_ONLY === "true") {
+    await seedShopProducts();
+    return;
+  }
+
   const passwordHash = await bcrypt.hash(password, 12);
 
   const roles = {

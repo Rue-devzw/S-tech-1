@@ -112,6 +112,8 @@ DATABASE_URL="postgresql://..." npm run db:seed
 
 Replace seeded demo credentials before launch.
 
+For a production catalogue without demo users or operational records, temporarily set `SEED_SHOP_ON_BUILD=true` for one deployment. The build runs the shop-only idempotent seed after migrations. Remove this variable immediately after the successful deployment so later releases do not overwrite product changes made in the admin dashboard.
+
 ## 7. Deploy
 
 From the local repository:
