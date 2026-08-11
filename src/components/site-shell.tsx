@@ -4,22 +4,23 @@ import { MessageCircle, Sparkles } from "lucide-react";
 import { brand } from "@/lib/constants";
 import { whatsappChannelHref, whatsappHref } from "@/lib/public-content";
 import { SessionActions } from "@/components/session-actions";
+import { departmentUrl } from "@/lib/site-domains";
 
 const nav = [
-  ["Shop", "/"],
-  ["About", "/about"],
-  ["Services", "/services"],
-  ["Portfolio", "/portfolio"],
-  ["Blog", "/blog"],
-  ["Contact", "/contact"],
-  ["Track Repair", "/track-repair"]
+  ["Shop", departmentUrl("shop")],
+  ["About", departmentUrl("corporate", "/about")],
+  ["Services", departmentUrl("corporate", "/services")],
+  ["Portfolio", departmentUrl("corporate", "/portfolio")],
+  ["Blog", departmentUrl("corporate", "/blog")],
+  ["Contact", departmentUrl("corporate", "/contact")],
+  ["Track Repair", departmentUrl("corporate", "/track-repair")]
 ];
 
 export function SiteHeader() {
   return (
     <header className="sticky top-0 z-30 border-b border-white/60 bg-white/82 shadow-sm backdrop-blur-xl">
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4">
-        <Link href="/" className="flex min-w-0 items-center gap-3 font-semibold text-ink">
+        <Link href={departmentUrl("corporate")} className="flex min-w-0 items-center gap-3 font-semibold text-ink">
           <span className="grid size-14 shrink-0 place-items-center">
             <Image src="/brand/omnitech-mark.png" alt="" width={56} height={56} className="h-14 w-14 object-contain" priority />
           </span>
@@ -41,13 +42,13 @@ export function SiteHeader() {
             <MessageCircle size={16} />
             WhatsApp
           </a>
-          <Link href="/request-service" className="inline-flex items-center gap-2 rounded-md bg-copper px-4 py-2 text-sm font-semibold text-ink shadow-lift">
+          <Link href={departmentUrl("corporate", "/request-service")} className="inline-flex items-center gap-2 rounded-md bg-copper px-4 py-2 text-sm font-semibold text-ink shadow-lift">
             <Sparkles size={15} />
             Book service
           </Link>
         </div>
         <Link
-          href="/request-service"
+          href={departmentUrl("corporate", "/request-service")}
           aria-label="Open request service"
           className="inline-flex items-center gap-1.5 rounded-md bg-copper px-3 py-2 text-sm font-semibold text-ink shadow-sm md:hidden"
         >
@@ -100,37 +101,37 @@ export function SiteFooter() {
         </div>
         <div className="text-sm text-slate-300">
           <p className="font-semibold text-white">Services</p>
-          <Link className="mt-2 block hover:text-white" href="/electronics-repairs">
+          <Link className="mt-2 block hover:text-white" href={departmentUrl("corporate", "/electronics-repairs")}>
             Electronics repairs
           </Link>
-          <Link className="block hover:text-white" href="/starlink-installations">
+          <Link className="block hover:text-white" href={departmentUrl("corporate", "/starlink-installations")}>
             Starlink installations
           </Link>
-          <Link className="block hover:text-white" href="/software-ai-systems">
+          <Link className="block hover:text-white" href={departmentUrl("corporate", "/software-ai-systems")}>
             Software and AI
           </Link>
         </div>
         <div className="text-sm text-slate-300">
           <p className="font-semibold text-white">Company</p>
-          <Link className="mt-2 block hover:text-white" href="/about">
+          <Link className="mt-2 block hover:text-white" href={departmentUrl("corporate", "/about")}>
             About
           </Link>
-          <Link className="block hover:text-white" href="/portfolio">
+          <Link className="block hover:text-white" href={departmentUrl("corporate", "/portfolio")}>
             Portfolio
           </Link>
-          <Link className="block hover:text-white" href="/request-service">
+          <Link className="block hover:text-white" href={departmentUrl("corporate", "/request-service")}>
             Request service
           </Link>
-          <Link className="block hover:text-white" href="/customer/register">
+          <Link className="block hover:text-white" href={departmentUrl("portal", "/register")}>
             Customer account
           </Link>
-          <Link className="block hover:text-white" href="/terms-of-service">
+          <Link className="block hover:text-white" href={departmentUrl("corporate", "/terms-of-service")}>
             Terms
           </Link>
-          <Link className="block hover:text-white" href="/privacy-policy">
+          <Link className="block hover:text-white" href={departmentUrl("corporate", "/privacy-policy")}>
             Privacy
           </Link>
-          <Link className="block hover:text-white" href="/impressum">
+          <Link className="block hover:text-white" href={departmentUrl("corporate", "/impressum")}>
             Impressum
           </Link>
         </div>

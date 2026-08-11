@@ -5,6 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { LayoutDashboard, LogOut } from "lucide-react";
 import { useEffect, useState } from "react";
 import { LoadingButtonContent } from "@/components/brand-loader";
+import { departmentUrl } from "@/lib/site-domains";
 
 type SessionUser = {
   name: string;
@@ -12,9 +13,9 @@ type SessionUser = {
 };
 
 function dashboardPath(role: string) {
-  if (role === "CUSTOMER") return "/customer";
-  if (role === "TECHNICIAN" || role === "FIELD_INSTALLER") return "/technician";
-  return "/admin";
+  if (role === "CUSTOMER") return departmentUrl("portal");
+  if (role === "TECHNICIAN" || role === "FIELD_INSTALLER") return departmentUrl("staff", "/technician");
+  return departmentUrl("staff", "/admin");
 }
 
 export function SessionActions({ compact = false }: { compact?: boolean }) {
@@ -61,7 +62,8 @@ export function SessionActions({ compact = false }: { compact?: boolean }) {
   if (loading || !user) return null;
 
   const href = dashboardPath(user.role);
-  const onDashboard = pathname === href || pathname.startsWith(`${href}/`);
+  const dashboardPathname = new URL(href).pathname;
+  const onDashboard = pathname === dashboardPathname || pathname.startsWith(`${dashboardPathname}/`);
 
   if (compact) {
     return (

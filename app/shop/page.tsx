@@ -1,16 +1,22 @@
 import type { Metadata } from "next";
 import { StorefrontPage } from "@/components/storefront-page";
 import { makeMetadata } from "@/lib/seo";
+import { departmentUrl } from "@/lib/site-domains";
 
 export const dynamic = "force-dynamic";
 
-export const metadata: Metadata = {
-  ...makeMetadata({
+const shopUrl = departmentUrl("shop");
+const shopMetadata = makeMetadata({
     title: "Shop Phones, Laptops & PlayStation",
     description: "Browse OmniTech phones, laptops, PlayStation consoles and accessories with transparent USD prices, clear condition labels and formal pre-order terms.",
     path: "/shop",
     keywords: ["gadget shop Zimbabwe", "phones Harare", "PlayStation Zimbabwe", "laptops Zimbabwe"]
-  }),
+  });
+
+export const metadata: Metadata = {
+  ...shopMetadata,
+  alternates: { canonical: shopUrl },
+  openGraph: shopMetadata.openGraph ? { ...shopMetadata.openGraph, url: shopUrl } : undefined,
   title: { absolute: "Shop Gadgets | OmniTech Solutions" }
 };
 

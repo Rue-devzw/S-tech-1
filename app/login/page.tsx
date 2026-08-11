@@ -3,6 +3,7 @@ import Link from "next/link";
 import { PageShell } from "@/components/site-shell";
 import { LoginForm } from "@/components/login-form";
 import { makeMetadata } from "@/lib/seo";
+import { departmentUrl } from "@/lib/site-domains";
 
 export const metadata: Metadata = makeMetadata({
   title: "Sign In",
@@ -20,7 +21,7 @@ export default function LoginPage() {
           <p className="mt-4 text-slate-600">Access your OmniTech customer portal or team dashboard.</p>
           <p className="mt-6 text-sm text-slate-600">
             New customer?{" "}
-            <Link href="/customer/register" className="font-semibold text-teal">
+            <Link href={departmentUrl("portal", "/register")} className="font-semibold text-teal">
               Create an account
             </Link>
           </p>
