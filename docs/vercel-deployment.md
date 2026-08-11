@@ -18,7 +18,7 @@ This is the preferred production deployment path for OmniTech Solutions.
 3. Keep the framework preset as Next.js.
 4. Use the production branch you want to deploy from.
 
-The project includes `vercel.json`, so Vercel will use `npm ci` and `npm run build`.
+The project includes `vercel.json`, so Vercel will use `npm ci` and `npm run vercel:build`. The Vercel build first applies committed Prisma migrations using the hosted database integration, then builds the application. A localhost database URL is rejected in this environment.
 
 ## 2. Add Postgres
 

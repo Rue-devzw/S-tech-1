@@ -25,6 +25,7 @@
     "docker:down": "docker compose down",
     "vercel:pull": "npx vercel env pull .env.local",
     "vercel:migrate": "prisma migrate deploy",
+    "vercel:build": "node scripts/vercel-build.mjs",
     "vercel:deploy": "npm run test:qa && npx vercel --prod",
     "healthcheck": "node scripts/healthcheck.mjs"
   },
