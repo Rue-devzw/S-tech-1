@@ -252,6 +252,39 @@ export const inventoryItemSchema = z.object({
   isActive: z.boolean().default(true)
 });
 
+export const productCategorySchema = z.enum(["PHONE", "PLAYSTATION", "LAPTOP", "ACCESSORY"]);
+export const productConditionSchema = z.enum(["BRAND_NEW", "REFURBISHED", "OPEN_BOX"]);
+export const productFulfillmentSchema = z.enum(["IN_STOCK", "PRE_ORDER_OVERSEAS"]);
+
+const productImageSchema = z
+  .string()
+  .max(500)
+  .refine(
+    (value) =>
+      /^\/uploads\/products\/[a-zA-Z0-9][a-zA-Z0-9._-]*$/.test(value) ||
+      /^https:\/\/raw\.githubusercontent\.com\/[a-zA-Z0-9_.-]+\/[a-zA-Z0-9_.-]+\/[a-zA-Z0-9_.-]+\/public\/uploads\/products\/[a-zA-Z0-9][a-zA-Z0-9._-]*$/.test(value),
+    "Product images must use the managed local or GitHub product folder."
+  );
+
+export const productUpsertSchema = z.object({
+  slug: z.string().min(2).max(140).regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, "Use lowercase words separated by hyphens."),
+  name: z.string().min(3).max(180),
+  category: productCategorySchema,
+  brand: z.string().min(2).max(100),
+  description: z.string().min(12).max(3000),
+  specifications: z.record(z.string().min(1).max(80), z.union([z.string().max(240), z.number()])),
+  condition: productConditionSchema,
+  fulfillment: productFulfillmentSchema,
+  costPrice: z.number().min(0).max(999999999),
+  sellingPrice: z.number().positive().max(999999999),
+  depositPercentage: z.number().min(0).max(100),
+  stockQuantity: z.number().int().min(0).max(999999),
+  images: z.array(productImageSchema).max(8).transform((images) => [...new Set(images)]),
+  featured: z.boolean(),
+  isPublished: z.boolean(),
+  warrantyDays: z.number().int().min(0).max(3650)
+});
+
 export const appointmentSchema = z.object({
   customerId: z.string().min(1),
   serviceRequestId: z.string().optional(),

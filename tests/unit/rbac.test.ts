@@ -24,6 +24,7 @@ test("sales and marketing can manage content campaigns and approve AI drafts", (
   assert.equal(roleHasPermission("SALES_MARKETING", "promotions:manage"), true);
   assert.equal(roleHasPermission("SALES_MARKETING", "content:manage"), true);
   assert.equal(roleHasPermission("SALES_MARKETING", "ai:approve"), true);
+  assert.equal(roleHasPermission("SALES_MARKETING", "products:manage"), true);
 });
 
 test("customer is limited to portal and own-record operations", () => {

@@ -8,6 +8,7 @@ import {
   fieldVisitEvidenceSchema,
   invoiceConversionSchema,
   paymentRecordSchema,
+  productUpsertSchema,
   quotationDecisionSchema,
   repairIntakeSchema,
   serviceRequestSchema
@@ -99,4 +100,31 @@ test("file references reject unsafe URLs and filenames", () => {
     }).fieldPhotos[0].filename,
     "site-front.jpg"
   );
+});
+
+test("shop products accept managed local and GitHub images but reject arbitrary remote URLs", () => {
+  const product = {
+    slug: "test-laptop",
+    name: "Test Laptop 16GB/512GB",
+    category: "LAPTOP",
+    brand: "OmniTech",
+    description: "A complete product description for catalogue testing.",
+    specifications: { memory: "16GB", storage: "512GB SSD" },
+    condition: "BRAND_NEW",
+    fulfillment: "IN_STOCK",
+    costPrice: 500,
+    sellingPrice: 650,
+    depositPercentage: 50,
+    stockQuantity: 3,
+    images: ["/uploads/products/test-laptop.webp"],
+    featured: false,
+    isPublished: true,
+    warrantyDays: 90
+  };
+
+  assert.equal(productUpsertSchema.parse(product).images[0], "/uploads/products/test-laptop.webp");
+  const githubImage = "https://raw.githubusercontent.com/StriveRue/S-tech/product-media/public/uploads/products/test-laptop.webp";
+  assert.equal(productUpsertSchema.parse({ ...product, images: [githubImage] }).images[0], githubImage);
+  assert.throws(() => productUpsertSchema.parse({ ...product, condition: "SOURCED_ONLINE", fulfillment: "PRE_ORDER_OVERSEAS" }));
+  assert.throws(() => productUpsertSchema.parse({ ...product, images: ["https://example.com/product.webp"] }));
 });

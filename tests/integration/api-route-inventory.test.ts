@@ -11,6 +11,9 @@ const requiredRoutes = [
   "app/api/admin/billing/quotations/route.ts",
   "app/api/admin/billing/invoices/route.ts",
   "app/api/admin/inventory/route.ts",
+  "app/api/admin/products/route.ts",
+  "app/api/admin/products/[id]/route.ts",
+  "app/api/admin/products/images/route.ts",
   "app/api/admin/appointments/route.ts",
   "app/api/admin/communications/logs/route.ts",
   "app/api/admin/promotions/route.ts",
@@ -30,7 +33,7 @@ test("required REST API route modules exist", () => {
 
 test("API documentation covers every required platform module", () => {
   const docs = readFileSync("docs/api.md", "utf8");
-  for (const module of ["Auth", "Customers", "Services", "Requests", "Jobs", "Quotations", "Invoices", "Inventory", "Appointments", "Notifications", "Promotions", "Portfolio", "Blog", "AI", "Reports", "Settings"]) {
+  for (const module of ["Auth", "Customers", "Services", "Requests", "Jobs", "Quotations", "Invoices", "Inventory", "Products", "Appointments", "Notifications", "Promotions", "Portfolio", "Blog", "AI", "Reports", "Settings"]) {
     assert.match(docs, new RegExp(`\\| ${module} \\|`));
   }
 });

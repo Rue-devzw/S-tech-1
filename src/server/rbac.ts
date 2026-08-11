@@ -14,6 +14,7 @@ export const permissionsByRole: Record<RoleName, string[]> = {
     "invoices:manage",
     "payments:record",
     "inventory:view",
+    "products:manage",
     "field_visits:manage",
     "reports:view",
     "notifications:manage",
@@ -30,6 +31,7 @@ export const permissionsByRole: Record<RoleName, string[]> = {
     "quotes:manage",
     "invoices:manage",
     "inventory:manage",
+    "products:manage",
     "content:manage",
     "notifications:manage",
     "field_visits:manage",
@@ -37,7 +39,7 @@ export const permissionsByRole: Record<RoleName, string[]> = {
   ],
   TECHNICIAN: ["dashboard:view", "jobs:update_assigned", "inventory:view", "ai:use"],
   FIELD_INSTALLER: ["dashboard:view", "jobs:update_assigned", "field_visits:manage", "ai:use"],
-  SALES_MARKETING: ["dashboard:view", "customers:manage", "requests:manage", "quotes:manage", "promotions:manage", "content:manage", "field_visits:manage", "notifications:manage", "ai:use", "ai:approve"],
+  SALES_MARKETING: ["dashboard:view", "customers:manage", "requests:manage", "quotes:manage", "promotions:manage", "products:manage", "content:manage", "field_visits:manage", "notifications:manage", "ai:use", "ai:approve"],
   CUSTOMER: ["portal:view", "requests:create", "own_records:view"],
   VIEWER_AUDITOR: ["dashboard:view", "reports:view", "audit:view", "customers:view"]
 };

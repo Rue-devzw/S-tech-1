@@ -11,6 +11,7 @@ const staticRoutes = [
   { path: "/services", priority: 0.95, changeFrequency: "weekly" as const },
   { path: "/portfolio", priority: 0.75, changeFrequency: "weekly" as const },
   { path: "/blog", priority: 0.8, changeFrequency: "weekly" as const },
+  { path: "/shop", priority: 0.9, changeFrequency: "daily" as const },
   { path: "/contact", priority: 0.8, changeFrequency: "monthly" as const },
   { path: "/terms-of-service", priority: 0.35, changeFrequency: "yearly" as const },
   { path: "/privacy-policy", priority: 0.35, changeFrequency: "yearly" as const },

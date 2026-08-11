@@ -119,6 +119,7 @@ Most collection endpoints accept:
 | Invoices | `GET /api/admin/billing/invoices`, document routes under `/api/billing/documents` | `invoices:manage`. |
 | Payments | `POST /api/admin/billing/payments`, `POST /api/admin/payments` | `payments:record`. |
 | Inventory | `GET/POST /api/admin/inventory` | `inventory:manage`. |
+| Products | `GET/POST /api/admin/products`, `PATCH/DELETE /api/admin/products/{id}`, `POST/DELETE /api/admin/products/images` | `products:manage`. |
 | Appointments | `GET/POST /api/admin/appointments`, `/api/admin/field-service/*` | `field_visits:manage`. |
 | Technician | `/api/technician/jobs/{id}/status`, `/notes`, `/checklists` | `jobs:update_assigned`. |
 | Notifications | `/api/admin/communications/*` | `notifications:manage`. |
@@ -184,6 +185,7 @@ Important validation rules:
 
 - Passwords require strong minimum length.
 - File references require safe filenames and managed `/storage/...` or HTTPS URLs.
+- Product pictures accept validated JPEG, PNG or WebP files and are stored under `/public/uploads/products` with managed local URLs.
 - Pagination has a maximum page size of 100.
 - Customer-facing AI output requires approval where configured.
 - Workflow transitions must use known status enums.
@@ -199,5 +201,6 @@ Sensitive operations create audit logs, including:
 - Quotation/invoice/payment actions.
 - AI interactions and approvals.
 - System setting updates.
+- Product and product-picture changes.
 
 Audit metadata must not contain raw passwords, tokens or secret values.

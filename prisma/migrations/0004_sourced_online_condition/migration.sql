@@ -1,0 +1,1 @@
+ALTER TYPE "ProductCondition" ADD VALUE 'SOURCED_ONLINE';

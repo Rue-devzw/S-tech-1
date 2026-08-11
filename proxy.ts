@@ -17,7 +17,7 @@ function secret() {
   return new TextEncoder().encode(value);
 }
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   if (request.nextUrl.pathname === "/customer/register") return NextResponse.next();
 
   const rule = protectedRoutes.find((item) => request.nextUrl.pathname.startsWith(item.prefix));

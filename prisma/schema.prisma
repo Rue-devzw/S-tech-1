@@ -1594,3 +1594,99 @@ model SystemSetting {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
+
+// --- SHOP MODULE ---
+
+enum ProductCategory {
+  PHONE
+  PLAYSTATION
+  LAPTOP
+  ACCESSORY
+}
+
+enum ProductCondition {
+  BRAND_NEW
+  REFURBISHED
+  OPEN_BOX
+  SOURCED_ONLINE
+}
+
+enum FulfillmentType {
+  IN_STOCK
+  PRE_ORDER_OVERSEAS
+}
+
+enum OrderStatus {
+  PENDING_DEPOSIT
+  DEPOSIT_PAID
+  ORDERED_OVERSEAS
+  IN_TRANSIT
+  CUSTOMS_CLEARANCE
+  QUALITY_INSPECTION
+  READY_FOR_PICKUP
+  DELIVERED
+  CANCELLED
+}
+
+model Product {
+  id                String           @id @default(cuid())
+  slug              String           @unique
+  name              String
+  category          ProductCategory
+  brand             String
+  description       String           @db.Text
+  specifications    Json
+  condition         ProductCondition @default(BRAND_NEW)
+  fulfillment       FulfillmentType  @default(IN_STOCK)
+  costPrice         Float
+  sellingPrice      Float
+  depositPercentage Float            @default(50)
+  stockQuantity     Int              @default(0)
+  images            String[]
+  featured          Boolean          @default(false)
+  isPublished       Boolean          @default(true)
+  warrantyDays      Int              @default(90)
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime         @updatedAt
+  orderItems        OrderItem[]
+
+  @@index([isPublished, createdAt])
+  @@index([category, isPublished])
+  @@index([featured, isPublished])
+}
+
+model Order {
+  id                String      @id @default(cuid())
+  orderNumber       String      @unique
+  customerId        String?
+  customerName      String
+  customerPhone     String
+  customerEmail     String?
+  deliveryAddress   String?
+  status            OrderStatus @default(PENDING_DEPOSIT)
+  totalAmount       Float
+  depositPaid       Float       @default(0)
+  balanceDue        Float
+  trackingNumber    String?
+  estimatedDelivery DateTime?
+  items             OrderItem[]
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+
+  @@index([customerId, status])
+  @@index([customerPhone, createdAt])
+  @@index([status, createdAt])
+}
+
+model OrderItem {
+  id        String  @id @default(cuid())
+  orderId   String
+  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId String
+  product   Product @relation(fields: [productId], references: [id])
+  quantity  Int     @default(1)
+  unitPrice Float
+
+  @@index([orderId])
+  @@index([productId])
+}

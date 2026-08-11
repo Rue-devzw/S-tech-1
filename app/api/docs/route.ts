@@ -15,6 +15,7 @@ export async function GET() {
       quotations: ["/api/admin/billing/quotations", "/api/customer/billing/quotations/{id}/decision"],
       invoices: ["/api/admin/billing/invoices", "/api/billing/documents/{type}/{id}/pdf"],
       inventory: ["/api/admin/inventory"],
+      products: ["/api/admin/products", "/api/admin/products/{id}", "/api/admin/products/images"],
       appointments: ["/api/admin/appointments", "/api/admin/field-service/schedule"],
       notifications: ["/api/admin/communications/templates", "/api/admin/communications/triggers", "/api/admin/communications/logs"],
       promotions: ["/api/admin/promotions"],

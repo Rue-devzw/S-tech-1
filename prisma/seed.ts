@@ -1,5 +1,6 @@
 import { Prisma, PrismaClient, RoleName } from "@prisma/client";
 import bcrypt from "bcryptjs";
+import { cataloguePhoneProducts } from "../src/lib/catalogue-products";
 
 const prisma = new PrismaClient();
 
@@ -71,6 +72,54 @@ async function ensureTestimonial(name: string, quote: string, data: TestimonialS
   const existing = await prisma.testimonial.findFirst({ where: { name, quote } });
   if (existing) return prisma.testimonial.update({ where: { id: existing.id }, data });
   return prisma.testimonial.create({ data: { ...data, name, quote } });
+}
+
+async function seedShopProducts() {
+  const products = [
+    ...cataloguePhoneProducts,
+    {
+      slug: "playstation-5-slim",
+      name: "Sony PlayStation 5 Slim Disc Edition 1TB",
+      category: "PLAYSTATION" as const,
+      brand: "Sony",
+      description: "Bring home fast, immersive game nights with a compact disc-edition console, 1TB SSD storage and support for 4K gaming displays.",
+      specifications: { edition: "Disc", storage: "1TB SSD", video: "Up to 4K 120Hz" },
+      condition: "BRAND_NEW" as const,
+      fulfillment: "IN_STOCK" as const,
+      costPrice: 620,
+      sellingPrice: 749,
+      depositPercentage: 50,
+      stockQuantity: 3,
+      images: ["/uploads/products/playstation-5-slim.webp"],
+      featured: true,
+      warrantyDays: 180
+    },
+    {
+      slug: "dell-latitude-7420",
+      name: "Dell Latitude 7420 Core i7 16GB/512GB",
+      category: "LAPTOP" as const,
+      brand: "Dell",
+      description: "Stay productive across office work, study and travel with a business-class Core i7 laptop, 16GB memory and fast 512GB SSD storage.",
+      specifications: { processor: "Intel Core i7", memory: "16GB", storage: "512GB SSD", display: "14-inch FHD" },
+      condition: "REFURBISHED" as const,
+      fulfillment: "IN_STOCK" as const,
+      costPrice: 510,
+      sellingPrice: 625,
+      depositPercentage: 50,
+      stockQuantity: 5,
+      images: ["/uploads/products/dell-latitude-7420.webp"],
+      featured: true,
+      warrantyDays: 90
+    }
+  ];
+
+  for (const product of products) {
+    await prisma.product.upsert({
+      where: { slug: product.slug },
+      update: { ...product, isPublished: true },
+      create: { ...product, isPublished: true }
+    });
+  }
 }
 
 async function seedRegionalExamples(args: { adminId: string; technicianId: string; salesId: string }) {
@@ -696,6 +745,7 @@ async function main() {
     upsertPermission("invoices:manage", "Manage invoices", "billing"),
     upsertPermission("payments:record", "Record payments", "billing"),
     upsertPermission("inventory:manage", "Manage inventory", "inventory"),
+    upsertPermission("products:manage", "Manage shop products", "shop"),
     upsertPermission("field_visits:manage", "Manage field visits", "field-service"),
     upsertPermission("notifications:manage", "Manage notifications", "communications"),
     upsertPermission("content:manage", "Manage public content", "content"),
@@ -710,11 +760,11 @@ async function main() {
   for (const permission of permissions) {
     await grant(roles.SUPER_ADMIN.id, permission.id);
   }
-  for (const key of ["dashboard:view", "customers:manage", "requests:manage", "jobs:manage", "quotes:manage", "invoices:manage", "payments:record", "inventory:manage", "field_visits:manage", "content:manage", "promotions:manage", "notifications:manage", "ai:use", "ai:approve", "reports:view"]) {
+  for (const key of ["dashboard:view", "customers:manage", "requests:manage", "jobs:manage", "quotes:manage", "invoices:manage", "payments:record", "inventory:manage", "products:manage", "field_visits:manage", "content:manage", "promotions:manage", "notifications:manage", "ai:use", "ai:approve", "reports:view"]) {
     const permission = permissions.find((item) => item.key === key);
     if (permission) await grant(roles.ADMIN_ASSISTANT.id, permission.id);
   }
-  for (const key of ["dashboard:view", "reports:view", "jobs:manage", "quotes:manage", "invoices:manage", "field_visits:manage", "notifications:manage", "ai:use", "ai:approve"]) {
+  for (const key of ["dashboard:view", "reports:view", "jobs:manage", "quotes:manage", "invoices:manage", "products:manage", "field_visits:manage", "notifications:manage", "ai:use", "ai:approve"]) {
     const permission = permissions.find((item) => item.key === key);
     if (permission) await grant(roles.MANAGER.id, permission.id);
   }
@@ -726,7 +776,7 @@ async function main() {
     const permission = permissions.find((item) => item.key === key);
     if (permission) await grant(roles.FIELD_INSTALLER.id, permission.id);
   }
-  for (const key of ["dashboard:view", "customers:manage", "requests:manage", "quotes:manage", "field_visits:manage", "promotions:manage", "notifications:manage", "ai:use", "ai:approve"]) {
+  for (const key of ["dashboard:view", "customers:manage", "requests:manage", "quotes:manage", "products:manage", "field_visits:manage", "promotions:manage", "notifications:manage", "ai:use", "ai:approve"]) {
     const permission = permissions.find((item) => item.key === key);
     if (permission) await grant(roles.SALES_MARKETING.id, permission.id);
   }
@@ -849,6 +899,7 @@ async function main() {
   });
 
   await seedRegionalExamples({ adminId: admin.id, technicianId: technician.id, salesId: sales.id });
+  await seedShopProducts();
 
   const customerUser = await prisma.user.upsert({
     where: { email: "customer@example.com" },
@@ -1157,8 +1208,23 @@ async function main() {
     }
   });
 
-  const visit = await prisma.fieldVisit.create({
-    data: {
+  const visit = await prisma.fieldVisit.upsert({
+    where: { visitNumber: "VIS-2026-SEED01" },
+    update: {
+      appointmentId: appointment.id,
+      customerId: customer.id,
+      jobCardId: job.id,
+      technicianId: technician.id,
+      serviceType: "STARLINK",
+      status: "PLANNED",
+      siteContact: "Tariro Moyo",
+      sitePhone: "+263 77 222 2222",
+      address: "Green Valley Lodge, Borrowdale Road, Harare",
+      travelNotes: "Use rear service entrance; roof access from courtyard.",
+      fieldPhotos: [{ filename: "site-front.jpg", url: "/storage/seed/site-front.jpg", caption: "Reception building access" }],
+      outcome: "Pending installation visit."
+    },
+    create: {
       visitNumber: "VIS-2026-SEED01",
       appointmentId: appointment.id,
       customerId: customer.id,

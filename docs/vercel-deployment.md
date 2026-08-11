@@ -6,7 +6,8 @@ This is the preferred production deployment path for OmniTech Solutions.
 
 - App hosting: Vercel Next.js.
 - Database: Prisma Postgres from the Vercel Marketplace, or Neon Postgres connected to Vercel.
-- File storage: Vercel Blob.
+- Product image storage: the public GitHub repository's dedicated `product-media` branch.
+- Private job evidence/document storage: Vercel Blob.
 - Domain: `omnitech.io`.
 - Email identity: `OmniTech Solutions <hello@omnitech.io>`.
 
@@ -29,7 +30,13 @@ Use one of these:
 
 After connecting the integration, confirm Vercel has a production `DATABASE_URL` variable.
 
-## 3. Add Blob Storage
+## 3. Configure Storage
+
+Product images are uploaded by the authenticated admin API to GitHub's Contents API. Create a fine-grained GitHub personal access token scoped only to `StriveRue/S-tech`, with repository Contents read/write permission. Store it only in Vercel as `GITHUB_CONTENTS_TOKEN`.
+
+The `product-media` branch must exist before the first upload. Vercel should continue deploying only `main`, so media commits do not start deployments.
+
+For private job evidence and documents, add Vercel Blob:
 
 In Vercel:
 
@@ -54,6 +61,12 @@ SMS_PROVIDER=log
 WHATSAPP_PROVIDER=log
 AI_PROVIDER=log
 RATE_LIMIT_DISABLED=false
+PRODUCT_IMAGE_STORAGE=github
+GITHUB_REPOSITORY_OWNER=StriveRue
+GITHUB_REPOSITORY_NAME=S-tech
+GITHUB_REPOSITORY_BRANCH=product-media
+GITHUB_PRODUCT_IMAGES_PATH=public/uploads/products
+GITHUB_CONTENTS_TOKEN=<fine-grained repository token>
 ```
 
 The database and Blob integrations should add:
@@ -134,4 +147,5 @@ Then test:
 - Login.
 - Admin dashboard.
 - Customer portal.
-- Blob upload through authenticated workflows or `/api/uploads/blob`.
+- Product image upload and deletion from `/admin/products`, confirming the files appear on `product-media`.
+- Blob upload through authenticated private workflows or `/api/uploads/blob`.

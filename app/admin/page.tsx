@@ -91,6 +91,7 @@ export default async function AdminDashboardPage({ searchParams }: PageProps) {
             <AdminLink href="/admin/communications" label="Communications" />
             <AdminLink href="/admin/portfolio" label="Portfolio" />
             <AdminLink href="/admin/blog" label="Blog" />
+            <AdminLink href="/admin/products" label="Products" />
             <AdminLink href="/admin/ai" label="AI" />
             <AdminLink href="/admin/users" label="Users" />
           </div>

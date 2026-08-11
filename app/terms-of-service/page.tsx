@@ -44,10 +44,12 @@ const terms = [
     ]
   },
   {
-    title: "5. Payments, Deposits And Collections",
+    title: "5. Payments, Deposits, Pre-orders And Collections",
     body: [
       "Payments, deposits and balances are due as stated on the quote, invoice or receipt. Work may be paused until required payments or approvals are received.",
       "Parts, special orders, software licences, hosting, domains, subscriptions and third-party costs may require upfront payment and may be non-refundable once ordered or activated.",
+      "Unless a product listing expressly states and labels a device as Brand New, most store devices are supplied as A+ grade refurbished. The product condition shown on the listing and confirmed before payment forms part of the order terms.",
+      "A pre-order is subject to supplier availability, final condition confirmation, estimated fulfilment time and the deposit terms displayed or quoted before payment.",
       "Devices or equipment should be collected promptly after completion. Storage, follow-up or disposal rules may be stated on the job card, invoice or collection notice."
     ]
   },

@@ -15,7 +15,7 @@ test("invitation creation route does not expose invitation tokens in responses",
   assert(!source.includes("inviteToken"));
 });
 
-test("technician API routes are protected by middleware", () => {
-  const source = readFileSync(join(root, "middleware.ts"), "utf8");
+test("technician API routes are protected by the Next.js proxy", () => {
+  const source = readFileSync(join(root, "proxy.ts"), "utf8");
   assert(source.includes("/api/technician"));
 });

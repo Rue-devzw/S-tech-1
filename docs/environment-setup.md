@@ -21,6 +21,8 @@ The default local values are designed for Docker Compose PostgreSQL and local fi
 | `NODE_ENV` | Yes | `production` | Use `production` outside local development. |
 | `RATE_LIMIT_DISABLED` | No | `false` | Keep false in staging/production. |
 | `BLOB_READ_WRITE_TOKEN` | Production on Vercel | Vercel Blob integration | Required for `/api/uploads/blob` and production upload storage. |
+| `PRODUCT_IMAGE_STORAGE` | Yes | `github` | Use `local` during development and `github` on Vercel. |
+| `GITHUB_CONTENTS_TOKEN` | When product images use GitHub | Fine-grained token | Server-only token scoped to this repository with Contents read/write permission. |
 
 ## Storage Variables
 
@@ -33,6 +35,21 @@ The default local values are designed for Docker Compose PostgreSQL and local fi
 | `S3_BUCKET` | Production when S3 enabled | Private bucket for documents/photos. |
 | `S3_ACCESS_KEY_ID` | Production when S3 enabled | Store in secret manager. |
 | `S3_SECRET_ACCESS_KEY` | Production when S3 enabled | Store in secret manager. |
+
+### Product Image Storage
+
+Product pictures use a separate GitHub branch in production, keeping media commits from triggering Vercel deployments. Configure:
+
+```bash
+PRODUCT_IMAGE_STORAGE=github
+GITHUB_REPOSITORY_OWNER=StriveRue
+GITHUB_REPOSITORY_NAME=S-tech
+GITHUB_REPOSITORY_BRANCH=product-media
+GITHUB_PRODUCT_IMAGES_PATH=public/uploads/products
+GITHUB_CONTENTS_TOKEN=<fine-grained token>
+```
+
+The token must be limited to `StriveRue/S-tech` and grant repository Contents read/write permission. Never prefix it with `NEXT_PUBLIC_` or commit it. The repository must remain public for the storefront's raw image URLs to be publicly readable.
 
 ## Communication Variables
 

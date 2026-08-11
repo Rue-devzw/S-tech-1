@@ -119,7 +119,7 @@ Before launch:
 
 - Set a strong `AUTH_SECRET`.
 - Use Prisma Postgres or Neon Postgres through Vercel Marketplace.
-- Use Vercel Blob for production uploads and file evidence.
+- Use the dedicated GitHub `product-media` branch for public product pictures and Vercel Blob for private file evidence.
 - Run `npm run db:migrate:deploy`; do not use `db push`.
 - Connect reviewed email, SMS and WhatsApp providers.
 - Connect AI provider only after data/privacy approval.

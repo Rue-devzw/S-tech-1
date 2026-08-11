@@ -6,6 +6,7 @@ import { whatsappChannelHref, whatsappHref } from "@/lib/public-content";
 import { SessionActions } from "@/components/session-actions";
 
 const nav = [
+  ["Shop", "/"],
   ["About", "/about"],
   ["Services", "/services"],
   ["Portfolio", "/portfolio"],
@@ -22,9 +23,9 @@ export function SiteHeader() {
           <span className="grid size-14 shrink-0 place-items-center">
             <Image src="/brand/omnitech-mark.png" alt="" width={56} height={56} className="h-14 w-14 object-contain" priority />
           </span>
-          <span>
-            <span className="block leading-tight">{brand.name}</span>
-            <span className="block text-xs font-medium text-teal">{brand.tagline}</span>
+          <span className="min-w-0">
+            <span className="block truncate leading-tight">{brand.name}</span>
+            <span className="block max-w-44 truncate text-xs font-medium text-teal sm:max-w-none">{brand.tagline}</span>
           </span>
         </Link>
         <nav className="hidden items-center gap-5 text-sm font-medium text-slate-700 xl:flex">
