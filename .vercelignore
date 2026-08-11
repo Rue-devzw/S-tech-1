@@ -1,0 +1,7 @@
+.firecrawl/
+.vscode/
+CLAUDE.md
+DESIGN.md
+tsconfig.tsbuildinfo
+playwright-report/
+test-results/
